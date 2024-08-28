@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <p class="title">Login</p>
+    <div class="form-container">
+        <div class="logol">
+            <img src="../img/logo_peso.png" alt="Logo">
+        </div>
+        <p class="title2">Los Baños Job Portal</p>
+        <p class="subtitle">Please sign in</p>
+        <form class="form" action="../php/login.php" method="POST">
+            <div class="input-group">
+                <input type="text" name="user_input" id="" placeholder="E-mail" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="forgot">
+                    <a rel="noopener noreferrer" href="#">Forgot Password?</a>
+                </div>
+            </div>
+            <button class="sign" type="submit">Sign in</button>
+        </form>
+        <p class="signup">Don't have an account?
+            <a id="signup" href="register.html">Signup</a>
+        </p>
+    </div>
+
+    <script src="javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
+</body>
+</html>

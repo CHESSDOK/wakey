@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="../css/nav.css">
+  <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+        <div class="logo">
+            <img src="../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <p class="title">Registration</p>
+    <form class="form" action="../php/register.php" method="POST">
+        <div class="logol">
+            <img src="../img/logo_peso.png" alt="Logo">
+        </div>
+        <p class="message">Signup now and get access to our job portal. </p>
+
+        <label>
+            <input required="" placeholder="" type="email" class="input" name="email">
+            <span>Email</span>
+        </label>
+        <label>
+            <input required="" placeholder="" type="text" class="input" name="user">
+            <span>username</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="password" class="input" name="password">
+            <span>Password</span>
+        </label>
+        <button class="submit" type="submit">Submit</button>
+        <p class="signin">Already have an account? <a href="login.html">Signin</a></p>
+    </form>
+
+    <script src="../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
+</body>
+</html>
