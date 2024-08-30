@@ -26,7 +26,7 @@ function sendVerificationEmail($email, $token) {
         // Content
         $mail->isHTML(true);
         $mail->Subject = 'Email Verification';
-        $mail->Body = 'Click on the link to verify your email: <a href="http://localhost/zzzz/php/verify.php?token=' . $token . '">Verify Email</a>';
+        $mail->Body = 'Click on the link to verify your email: <a href="http://localhost/wakey/php/verify.php?token=' . $token . '">Verify Email</a>';
 
         $mail->send();
         echo 'Verification email has been sent.';
@@ -44,11 +44,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$password', '$token', 0)";
 
     if ($conn->query($sql) === TRUE) {
+        $last_id = $conn->insert_id;
+        $sql = "INSERT INTO applicant_profile (user_id) VALUES ('$last_id')";
+        
+        if ($conn->query($sql) === TRUE) {
             sendVerificationEmail($email, $token);
             echo "<script type='text/javascript'> alert('Registration successful! Please verify your email.') ;window.location.href='../html/login.html'; </script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 
     $conn->close();
 }

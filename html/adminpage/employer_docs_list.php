@@ -31,7 +31,7 @@ $result = $stmt->get_result();
                 echo "<tr>
                         <td>" . htmlspecialchars($row["document_name"]) . "</td>
                         <td><a href='" . htmlspecialchars($row["document_path"]) . "' target='_blank'>View Document</a></td>
-                        <td><a href='verify_documents.php?id=" . $row['id'] . "'>Verify</a></td>
+                        <td><a href='verify_documents.php?id=" . $row['id'] . " & user_id=". $user_id." '>Verify</a></td>
                         <td>" . ($row["is_verified"] ? 'Yes' : 'No') . "</td>
                     </tr>";
             }

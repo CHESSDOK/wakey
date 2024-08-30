@@ -30,7 +30,8 @@ body::before{
     <form action="../../php/employer/post_job_process.php" method="post">
         <label for="job_title">Job Title:</label>
         <input type="text" name="job_title" id="job_title" required><br>
-
+        <label for="vacant">Job vacant:</label>
+        <input type="num" name="vacant" id="vacant" required><br>
         <label for="job_description">Job Description:</label>
         <textarea name="job_description" id="job_description" required></textarea><br>
 

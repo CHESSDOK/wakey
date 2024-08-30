@@ -1,3 +1,33 @@
+<?php
+include '../../php/conn_db.php';
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: ../login.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+
+$userId = checkSession();
+$sql = "SELECT * FROM applicant_profile WHERE user_id = $userId";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Fetch the data as an associative array
+    $row = $result->fetch_assoc();
+} else {
+    echo "No data found for this user.";
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,31 +129,32 @@
 <body>
 <div class="container">
     
-        <form action="../php/approf.php" method="post">
+        <form action="../../php/applicant/approf.php" method="post">
             <div class="FN-group">
+            <input type="hidden" name="userid" id="userid" value="<?php echo htmlspecialchars($userId); ?> ">
             <h2>Applicant Profile</h2>
                 <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" id="first_name" required>
+                <input type="text" name="first_name" id="first_name" value="<?php echo htmlspecialchars($row['first_name'] ?? ''); ?>">
             </div>
             
             <div class="LN-group">
                 <label for="Last_Name">Last Name:</label>
-                <input type="text" name="Last_Name" id="Last_Name" required>
+                <input type="text" name="Last_Name" id="Last_Name" value="<?php echo htmlspecialchars($row['last_name'] ?? ''); ?>">
             </div>
 
             <div class="MN-group">
                 <label for="Middle_Name">Middle Name:</label>
-                <input type="text" name="Middle_Name" id="Middle_Name">
+                <input type="text" name="Middle_Name" id="Middle_Name" value="<?php echo htmlspecialchars($row['middle_name'] ?? ''); ?>">
             </div>
 
             <div class="dob-group">
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required>
+                <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($row['dob'] ?? ''); ?>">
             </div>
 
             <div class="Sex-group">
                 <label for="sex">Select Your Sex</label>
-                <select id="sex" name="sex" required>
+                <select id="sex" name="sex">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -131,8 +162,9 @@
 
             <div class="CS-group">
                 <label for="Civil_Status">Civil Status</label>
-                <select id="Civil_Status" name="Civil_Status" required>
-                    <option value="Single">Single</option>
+                <select id="Civil_Status" name="Civil_Status">
+                    <option value="<?php echo htmlspecialchars($row['civil_status'] ?? ''); ?>" selected > <?php echo htmlspecialchars($row['civil_status'] ?? ''); ?> </option>
+                    <option value="single">single</option>
                     <option value="Married">Married</option>
                     <option value="Widowed">Widowed</option>
                 </select>
@@ -140,10 +172,10 @@
 
             <div class="photo-container">
                 <div class="photo-preview" id="photoPreview">
-                    <img src="../img/user.png" alt="Default Icon">
+                    <img src="<?php echo htmlspecialchars($row['photo'] ?? ''); ?>" alt="Default Icon">
                 </div>
                 <div>
-                    <input type="file" id="photo" class="file-input" accept="image/*" onchange="previewImage(event)">
+                    <input type="file" name="photo" id="photo" class="file-input" accept="image/*" onchange="previewImage(event)">
                     <button type="button" class="upload-button" onclick="document.getElementById('photo').click()">UPLOAD PHOTO</button>
                 </div>
             </div>
