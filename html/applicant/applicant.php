@@ -71,7 +71,7 @@ if (!$row) {
 
 <form method="GET" action="">
     <input type="text" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-    <button type="submit">Search</button>
+    <button class="search" type="submit">Search</button>
     <?php if (isset($_GET['search']) && $_GET['search'] != ''): ?>
         <a href="?" class="clear-button">Clear</a>
     <?php endif; ?>
