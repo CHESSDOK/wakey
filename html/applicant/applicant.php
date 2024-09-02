@@ -48,12 +48,11 @@ if (!$row) {
         </label>
         <ul class="menu">
             <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="applicant.html">Applicant</a></li>
-            <li><a href="employer.html">Training</a></li>
-            <li><a href="html/course.html">Course</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="../../html/about.html" >About Us</a></li>
-            <li><a href="../../html/contact.html">Contact Us</a></li>
+            <li><a href="#" class="active">Applicant</a></li>
+            <li><a href="training_list.php">Training</a></li>
+            <li><a href="#">OFW</a></li>
+            <li><a href="../../html/about.php" >About Us</a></li>
+            <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
         <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
