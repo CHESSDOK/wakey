@@ -37,7 +37,7 @@ if (!$row) {
     <!-- Navigation -->
     <nav>
         <div class="logo">
-            <img src="img/logo_peso.png" alt="Logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
             <a href="#"> PESO-lb.ph</a>
         </div>
         <label class="burger" for="burger">
@@ -47,12 +47,12 @@ if (!$row) {
             <span></span>
         </label>
         <ul class="menu">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="html/about.html">About Us</a></li>
-            <li><a href="html/applicant/training_list.php">training</a></li>
-            <li><a href="html/course.html">course</a></li>
-            <li><a href="html/services.html">Services</a></li>
-            <li><a href="html/applicant/applicant.php">Applicant</a></li>
+            <li><a href="../../index(applicant).php">Home</a></li>
+            <li><a href="#" class="active">Applicant</a></li>
+            <li><a href="training_list.php">Training</a></li>
+            <li><a href="#">OFW</a></li>
+            <li><a href="../../html/about.php" >About Us</a></li>
+            <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
         <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
@@ -69,16 +69,19 @@ if (!$row) {
 
 <!-- search bar-->
 
-<form method="GET" action="">
-    <input type="text" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-    <button type="submit">Search</button>
-    <?php if (isset($_GET['search']) && $_GET['search'] != ''): ?>
-        <a href="?" class="clear-button">Clear</a>
+    <form method="GET" action="">
+        <input type="text" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+        <br>
+        <button class="search" type="submit">Search</button>
+            <div class="search-list"> 
+                <?php if (isset($_GET['search']) && $_GET['search'] != ''): ?> 
+            </div>
+            <a href="?" class="clear-btn">Clear</a>
     <?php endif; ?>
-</form>
+    </form> 
 
 <!--listing loop-->
-        <div class="container text-center">
+        <div class="container-list">
         <div class="job-list"> 
             <?php include '../../php/applicant/job_list.php'; ?>
         </div>

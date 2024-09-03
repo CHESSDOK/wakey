@@ -41,11 +41,11 @@ if (!$row) {
         </label>
         <ul class="menu">
             <li><a href="#" class="active">Home</a></li>
-            <li><a href="html/about.html">About Us</a></li>
-            <li><a href="html/applicant/training_list.php">training</a></li>
-            <li><a href="html/course.html">course</a></li>
-            <li><a href="html/services.html">Services</a></li>
             <li><a href="html/applicant/applicant.php">Applicant</a></li>
+            <li><a href="html/applicant/training_list.php">training</a></li>
+            <li><a href="#">OFW</a></li>
+            <li><a href="html/about.php">About Us</a></li>
+            <li><a href="html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
         <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
