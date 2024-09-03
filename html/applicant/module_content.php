@@ -30,6 +30,7 @@ $result = $conn->query($sql);
                         <td>" . $row["description"] . "</td>
                         <td><a href='" . $row["video"] . "' target='_blank'>View Video</a></td>
                         <td><a href='" . $row["file_path"] . "' target='_blank'>Open File</a></td>
+                        <td><a href='quiz_list.php?modules_id=" . $row["id"] ."'>take quiz</a></td>
 
                     </tr>";
             }

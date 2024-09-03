@@ -1,5 +1,5 @@
 <?php
-include '../php/conn_db.php';
+include '../../php/conn_db.php';
 
 // Fetch all employers
 $sql = "SELECT * FROM applications";

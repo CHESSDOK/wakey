@@ -28,8 +28,9 @@ $result = $conn->query($sql);
                         <td>" . $row["id"] . "</td>
                         <td>" . $row["module_name"] . "</td>
                         <td><a href='uploadfile.php?modules_id=" . $row["id"] . "'>uploadules</a></td>
-                        <td><a href='quizes.php?modules_id=" . $row["id"] . "'>quiz list</a></td>
+                        <td><a href='quiz.php?modules_id=" . $row["id"] . "'>quiz maker</a></td>
                         <td><a href='module_content.php?modules_id=" . $row["id"] . "'>content list</a></td>
+                        <td><a href='quiz_list.php?modules_id=" . $row["id"] . "'>quiz list</a></td>
                     </tr>";
             }
         } else {
