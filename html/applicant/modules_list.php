@@ -25,9 +25,9 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["id"] . "</td>
-                        <td>" . $row["module_name"] . "</td>
-                        <td><a href='module_content.php?user_id=" . $user_id . "&modules_id=" . $row["id"] . "'>view content</a></td>
+                        " . $row["id"] . "
+                        " . $row["module_name"] . "
+                        <a href='module_content.php?user_id=" . $user_id . "&modules_id=" . $row["id"] . "'>view content</a>
                     </tr>";
             }
         } else {
@@ -36,7 +36,5 @@ $result = $conn->query($sql);
         $conn->close();
         ?>
     </table>
-
-    <a href="training_list.php">back</a>
 </body>
 </html>

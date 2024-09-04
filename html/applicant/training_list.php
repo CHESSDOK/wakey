@@ -79,7 +79,7 @@ if (!$row) {
                         <div class="card-body">
                             <h5 class="card-title">' . htmlspecialchars($row['course_name']) . '</h5>
                             <p class="card-text">' . htmlspecialchars($row['description']) . '</p>
-                            <a href="modules_list.php?user_id=' . $userId . '&course_id=' . $row['id'] . '" class="btn btn-primary">Go somewhere</a>
+                            <a href="modules_list.php?user_id=' . $userId . '& course_id=' . $row['id'] . '" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 ';

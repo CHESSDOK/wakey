@@ -1,5 +1,5 @@
 <?php
-include '../php/conn_db.php';
+include '../../php/conn_db.php';
 function checkSession() {
     session_start(); // Start the session
 
@@ -37,16 +37,21 @@ $result = $stmt->get_result();
             <th>surname</th>
             <th>age</th>
             <th>num</th>
+            <th>num</th>
+            <th>num</th>
+            <th>num</th>
         </tr>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . htmlspecialchars($row["fname"]) . "</td>
-                        <td>" . htmlspecialchars($row["sname"]) . "</td>
-                        <td>" . htmlspecialchars($row["age"]) . "</td>
-                        <td>" . htmlspecialchars($row["num"]) . "</td>
-                        <td><a href='../php/application_process.php?id=" . $row['user_id'] . "'>accepted</a></td>
+                        <td>" . htmlspecialchars($row["first_name"]) . "</td>
+                        <td>" . htmlspecialchars($row["middle_name"]) . "</td>
+                        <td>" . htmlspecialchars($row["dob"]) . "</td>
+                        <td>" . htmlspecialchars($row["sex"]) . "</td>
+                        <td>" . htmlspecialchars($row["civil_status"]) . "</td>
+                        <td>" . htmlspecialchars($row["photo"]) . "</td>
+                        <td><a href='../../php/employer/application_process.php?id=" . $row['user_id'] . "'>accepted</a></td>
                     </tr>";
             }
         } else {

@@ -1,5 +1,5 @@
 <?php
-include_once "../../php/conn_db.php";
+include "../../php/conn_db.php";
 $q_id = $_GET['q_id'];
 $module_id = $_GET['module_id'];
 
@@ -18,6 +18,7 @@ $questions_result = mysqli_query($conn, $questions_query);
 <body>
     <form class="form-box" action="../../php/applicant/submit_ans.php" method="POST">
         <input type="hidden" name="q_id" value="<?php echo htmlspecialchars($q_id); ?>">
+        <input type="hidden" name="module_id" value="<?php echo htmlspecialchars($module_id); ?>">
         <?php
         $q_number = 1;
         while ($question = mysqli_fetch_assoc($questions_result)) {
