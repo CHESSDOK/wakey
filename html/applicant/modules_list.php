@@ -31,6 +31,10 @@ if (!$row) {
     <title>Module Page</title>
     <link rel="stylesheet" href="../../css/nav_float.css">
     <link rel="stylesheet" href="../../css/Module.css">
+
+<!--arrrow icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <!-- Navigation -->
@@ -69,8 +73,10 @@ if (!$row) {
                         <td class='img_cell'><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
                         <td class='num_cell'> <p> " . $row["id"] . " </td>
                         <td class='title_cell'> <p> " . $row["module_name"] . " </td>
-                        <td class='btn_cell'><a class='btn' href='module_content.php?user_id=" . $user_id . 
-                        "&modules_id=" . $row["id"] . "'>view more ></a> </td>
+                        <td class='btn_cell'>
+                            <a class='btn' href='module_content.php?user_id=". $user_id . " 
+                            &modules_id=". $row["id"] ."'>view more <i class='fas fa-chevron-right'></i></a>
+                        </td>
                     </tr>";
                 echo "</table>";
             }
@@ -80,9 +86,12 @@ if (!$row) {
         $conn->close();
         ?>
 
-    
+        <div class="btn-container">
+            <a class="btn_back" onclick="window.location.href='training_list.php'">
+                <i class="fas fa-caret-left"></i> Return
+    </a>
+        </div>
 
-    <a href="training_list.php">back</a>
     <script src="../../javascript/script.js"></script> 
 </body>
 </html>

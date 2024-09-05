@@ -59,3 +59,29 @@ table td, table th {
 tr, td {
     text-align: center;
 }
+
+.btn-container {
+    position: absolute;
+    top: 38vh;
+    left: 2.8vw;
+}
+
+.btn_back {
+    font-weight: 400;
+    font-size: 1em;
+    text-decoration: none;
+    width: 15vw;
+    color: #6c757d; /* Initial text color */
+    transition: color 0.3s ease, transform 0.3s ease; /* Add transition for transform (zoom effect) */
+    display: inline-block; /* Ensures the transform affects the text properly */
+}
+
+.btn_back:hover, .btn_back:hover {
+    color: #5a6268; /* Change text color on hover */
+    transform: scale(1.1); /* Zoom text by 10% */
+    background: none; /* Remove background color */
+    cursor: pointer;
+}
+
+
+
