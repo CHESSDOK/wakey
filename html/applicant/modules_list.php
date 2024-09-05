@@ -64,13 +64,13 @@ if (!$row) {
     <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<table>";
+                echo "<table border='1'>";
                 echo "<tr>
-                        <td><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
-                        <td> <p class='label_1'> " . $row["id"] . " </td>
-                        <td> " . $row["module_name"] . " </td>
-                        <td><a href='module_content.php?user_id=" . $user_id . 
-                        "&modules_id=" . $row["id"] . "'>view content</a> </td>
+                        <td class='img_cell'><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
+                        <td class='num_cell'> <p> " . $row["id"] . " </td>
+                        <td class='title_cell'> <p> " . $row["module_name"] . " </td>
+                        <td class='btn_cell'><a class='btn' href='module_content.php?user_id=" . $user_id . 
+                        "&modules_id=" . $row["id"] . "'>view more ></a> </td>
                     </tr>";
                 echo "</table>";
             }
