@@ -1,40 +1,88 @@
 <?php
 include '../../php/conn_db.php';
 session_start();
+$userId = $_SESSION['id'];
 $user_id = $_GET['user_id'];
 // Fetch all employers
 $module_id = $_GET['course_id'];
 $sql = "SELECT * FROM modules WHERE course_id = $module_id ";
 $result = $conn->query($sql);
 
+$sql = "SELECT * FROM register WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$res = $stmt->get_result();
+
+if (!$res) {
+    die("Invalid query: " . $conn->error); 
+}
+
+$row = $res->fetch_assoc();
+if (!$row) {
+    die("User not found.");
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>module list</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Page</title>
+    <link rel="stylesheet" href="../../css/nav_float.css">
+    <link rel="stylesheet" href="../../css/Module.css">
 </head>
 <body>
-    <h1>module list</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>name</th>
-            <th>Actions</th>
-        </tr>
-        <?php
+    <!-- Navigation -->
+<nav>
+        <div class="logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
+        </div>
+        <label class="burger" for="burger">
+            <input type="checkbox" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="menu">
+            <li><a href="../../index(applicant).php">Home</a></li>
+            <li><a href="applicant.php" >Applicant</a></li>
+            <li><a href="" class="active">Training</a></li>
+            <li><a href="#">OFW</a></li>
+            <li><a href="../../html/about.php" >About Us</a></li>
+            <li><a href="../../html/contact.php">Contact Us</a></li>
+        </ul>
+        <div class="auth">
+        <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
+        </div>
+    </nav>
+    <header>
+        <h1 class="h1">Module List</h1>
+    </header>
+    
+    <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                echo "<table>";
                 echo "<tr>
-                        " . $row["id"] . "
-                        " . $row["module_name"] . "
-                        <a href='module_content.php?user_id=" . $user_id . "&modules_id=" . $row["id"] . "'>view content</a>
+                        <td><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
+                        <td> <p class='label_1'> " . $row["id"] . " </td>
+                        <td> " . $row["module_name"] . " </td>
+                        <td><a href='module_content.php?user_id=" . $user_id . 
+                        "&modules_id=" . $row["id"] . "'>view content</a> </td>
                     </tr>";
+                echo "</table>";
             }
         } else {
             echo "<tr><td colspan='4'>No employers found</td></tr>";
         }
         $conn->close();
         ?>
-    </table>
+
+    
+
+    <a href="training_list.php">back</a>
+    <script src="../../javascript/script.js"></script> 
 </body>
 </html>
