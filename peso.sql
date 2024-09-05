@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 29, 2024 at 03:36 AM
+-- Generation Time: Sep 05, 2024 at 06:50 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin_profile` (
   `admin_level` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admin_profile`
+--
+
+INSERT INTO `admin_profile` (`id`, `username`, `password`, `email`, `admin_level`) VALUES
+(1, 'Admin', '$2y$10$szZWza9fsLiGXs4evidE7.uc3zwFoQjs/hfwGvw2Vd6lddYLzBuTW', 'mercadomarklawrence55@gmail.com', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -44,12 +51,21 @@ CREATE TABLE `admin_profile` (
 CREATE TABLE `applicant_profile` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
-  `additional_info` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `age` int DEFAULT NULL,
-  `num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `first_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `middle_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `sex` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `civil_status` enum('Single','Married','Widowed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'user.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `applicant_profile`
+--
+
+INSERT INTO `applicant_profile` (`id`, `user_id`, `first_name`, `last_name`, `middle_name`, `dob`, `sex`, `civil_status`, `photo`) VALUES
+(1, 1, 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 'male', 'Single', 'user.png');
 
 -- --------------------------------------------------------
 
@@ -66,6 +82,14 @@ CREATE TABLE `applications` (
   `job` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
+(1, 1, 1, NULL, 'accepted', 'Laborer'),
+(2, 1, 2, NULL, 'accepted', 'Programmer');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +102,15 @@ CREATE TABLE `courses` (
   `description` text COLLATE utf8mb4_unicode_ci,
   `module_count` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`) VALUES
+(1, 'Dressmaking', 'sewing', 3),
+(2, 'Programming', 'coding html, php, sql', 3),
+(3, 'new', '123', 2);
 
 -- --------------------------------------------------------
 
@@ -92,6 +125,13 @@ CREATE TABLE `employer_documents` (
   `document_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_verified` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employer_documents`
+--
+
+INSERT INTO `employer_documents` (`id`, `user_id`, `document_name`, `document_path`, `is_verified`) VALUES
+(1, 1, 'asdawdawf', 'uploads/a.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -111,6 +151,13 @@ CREATE TABLE `employer_profile` (
   `HR_mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `employer_profile`
+--
+
+INSERT INTO `employer_profile` (`id`, `user_id`, `company_name`, `company_address`, `tel_num`, `president`, `HR`, `company_mail`, `HR_mail`) VALUES
+(1, 1, 'JOLLYBOYS', 'crossing kanto', '09162602288', 'JOE BIDEN', 'DUKIN TRUMPS', 'JOLLYBOYS@gmail.com', 'DUKIN TRUMPS@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +175,13 @@ CREATE TABLE `empyers` (
   `contact` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `empyers`
+--
+
+INSERT INTO `empyers` (`id`, `username`, `password`, `email`, `Fname`, `Lname`, `Bdate`, `contact`) VALUES
+(1, 'azure', '$2y$10$uuxWdsGRfcNdTON/tfERYeeWaTngF9te5DMyjQjogMAY.xuxBZOKi', 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +198,17 @@ CREATE TABLE `job_postings` (
   `is_active` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `job_postings`
+--
+
+INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `vacant`, `date_posted`, `is_active`) VALUES
+(1, 1, 'Laborer', 'construction worker', 34, '2024-08-30', 1),
+(2, 1, 'Programmer', 'web dev', 12, '2024-08-30', 1),
+(3, 1, 'tester', 'system tester', 14, '2024-08-30', 1),
+(4, 1, 'electrician', 'fix electrical', 50, '2024-08-30', 1),
+(5, 1, 'new', 'dfasdfasecawedaew', 12, '2024-09-02', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -155,6 +220,17 @@ CREATE TABLE `modules` (
   `course_id` int DEFAULT NULL,
   `module_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `modules`
+--
+
+INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
+(1, 1, 'measurements'),
+(2, 1, 'needle & thread'),
+(3, 1, 'dresses'),
+(4, 3, 'new1'),
+(5, 3, 'new12');
 
 -- --------------------------------------------------------
 
@@ -170,17 +246,70 @@ CREATE TABLE `module_content` (
   `modules_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `module_content`
+--
+
+INSERT INTO `module_content` (`id`, `description`, `video`, `file_path`, `modules_id`) VALUES
+(1, 'learning correct measurements', 'https://www.youtube.com/watch?v=Qxo2ToDM-uE&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=9', 'uploads/1.jpg', 1),
+(2, 'correct needle and uses', 'https://www.youtube.com/watch?v=WvoAL44J42g', 'uploads/2.jpg', 2),
+(3, 'types of dress', 'https://www.youtube.com/watch?v=z-5tJblM-WQ', 'uploads/3.jpg', 3),
+(4, 'new', 'https://www.youtube.com/watch?v=ahHiepqCDK8', 'uploads/supply.pdf', 4);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quizzes`
+-- Table structure for table `question`
 --
 
-CREATE TABLE `quizzes` (
+CREATE TABLE `question` (
+  `id` int NOT NULL,
+  `quiz_id` int DEFAULT NULL,
+  `question` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option_a` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option_b` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option_c` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option_d` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `correct_answer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marks` int DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `option_c`, `option_d`, `correct_answer`, `marks`) VALUES
+(4, 4, 'what is CM', 'centimeter', 'milimeter', 'inches', 'meter', 'a', 1),
+(5, 4, 'Inches ', '1', '2', '3', '4', 'b', 1),
+(6, 4, 'Meter', '1', '2', '3', '4', 'd', 1),
+(7, 4, 'Color', '1', '2', '3', '4', 'c', 1),
+(8, 5, 'what is CM', '1', '2', '3', '4', 'c', 1),
+(9, 5, '2', '3', '4', '6', '7', 'b', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_name`
+--
+
+CREATE TABLE `quiz_name` (
   `id` int NOT NULL,
   `module_id` int DEFAULT NULL,
-  `quiz_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `correct_ans` int DEFAULT NULL,
+  `wrong_ans` int DEFAULT NULL,
+  `total` int DEFAULT NULL,
+  `tag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `quiz_name`
+--
+
+INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`, `total`, `tag`, `date`) VALUES
+(4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
+(5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41');
 
 -- --------------------------------------------------------
 
@@ -198,6 +327,62 @@ CREATE TABLE `register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `register`
+--
+
+INSERT INTO `register` (`id`, `email`, `username`, `password`, `token`, `is_verified`) VALUES
+(1, 'ict1mercado.cdlb@gmail.com', 'azure', '$2y$10$bVpbzEAFIsZkxEiyn7DxleKNe1cQZqV8e54D5oXX1v7tFM8IH2SIO', '2aa479ba9fafd3cfd86f080ece590b85232a23580a3a136d15368b20f3c38a796b6d41bf100e23f35f4fa85366c5c1f22c45', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_answers`
+--
+
+CREATE TABLE `user_answers` (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `question_id` int DEFAULT NULL,
+  `quiz_id` int DEFAULT NULL,
+  `answer` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_answers`
+--
+
+INSERT INTO `user_answers` (`id`, `user_id`, `question_id`, `quiz_id`, `answer`) VALUES
+(73, 1, 4, 4, 'a'),
+(74, 1, 5, 4, 'b'),
+(75, 1, 6, 4, 'c'),
+(76, 1, 7, 4, 'd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_score`
+--
+
+CREATE TABLE `user_score` (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `quiz_id` int DEFAULT NULL,
+  `score` int DEFAULT NULL,
+  `correct_answers` int DEFAULT NULL,
+  `wrong_answers` int DEFAULT NULL,
+  `dates` timestamp NULL DEFAULT NULL,
+  `ranks` int DEFAULT NULL,
+  `retake_count` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_score`
+--
+
+INSERT INTO `user_score` (`id`, `user_id`, `quiz_id`, `score`, `correct_answers`, `wrong_answers`, `dates`, `ranks`, `retake_count`) VALUES
+(16, 1, 4, 2, 2, 2, NULL, NULL, 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -211,8 +396,7 @@ ALTER TABLE `admin_profile`
 -- Indexes for table `applicant_profile`
 --
 ALTER TABLE `applicant_profile`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `applicantid` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `applications`
@@ -268,15 +452,33 @@ ALTER TABLE `module_content`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `quizzes`
+-- Indexes for table `question`
 --
-ALTER TABLE `quizzes`
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quiz_name`
+--
+ALTER TABLE `quiz_name`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `register`
 --
 ALTER TABLE `register`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_score`
+--
+ALTER TABLE `user_score`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -287,73 +489,91 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applicant_profile`
 --
 ALTER TABLE `applicant_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employer_documents`
 --
 ALTER TABLE `employer_documents`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employer_profile`
 --
 ALTER TABLE `employer_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `empyers`
 --
 ALTER TABLE `empyers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_postings`
 --
 ALTER TABLE `job_postings`
-  MODIFY `j_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `j_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `module_content`
 --
 ALTER TABLE `module_content`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `quizzes`
+-- AUTO_INCREMENT for table `question`
 --
-ALTER TABLE `quizzes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `question`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `quiz_name`
+--
+ALTER TABLE `quiz_name`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
+--
+-- AUTO_INCREMENT for table `user_score`
+--
+ALTER TABLE `user_score`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
