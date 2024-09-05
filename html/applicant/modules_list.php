@@ -89,7 +89,7 @@ if (!$row) {
         <div class="btn-container">
             <a class="btn_back" onclick="window.location.href='training_list.php'">
                 <i class="fas fa-caret-left"></i> Return
-    </a>
+            </a>
         </div>
 
     <script src="../../javascript/script.js"></script> 
