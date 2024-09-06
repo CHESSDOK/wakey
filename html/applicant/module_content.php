@@ -1,30 +1,49 @@
 <?php
 include '../../php/conn_db.php';
 session_start();
+$userId = $_SESSION['id'];
 $user_id = $_GET['user_id'];
-// Fetch all employers
 $module_id = $_GET['modules_id'];
-$sql = "SELECT * FROM module_content WHERE modules_id = $module_id ";
-$result = $conn->query($sql);
 
+// Fetch the current user's details
+$sql_user = "SELECT * FROM register WHERE id = ?";
+$stmt = $conn->prepare($sql_user);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result_user = $stmt->get_result();
 
+if (!$result_user) {
+    die("Invalid query: " . $conn->error); 
+}
+$row_user = $result_user->fetch_assoc();
+if (!$row_user) {
+    die("User not found.");
+}
 
+// Fetch module content
+$sql_module = "SELECT * FROM module_content WHERE modules_id = ?";
+$stmt = $conn->prepare($sql_module);
+$stmt->bind_param("i", $module_id);
+$stmt->execute();
+$result_module = $stmt->get_result();
+
+if (!$result_module) {
+    die("Invalid query: " . $conn->error);
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Employer List</title>
+    <title>Module Content</title>
     
     <link rel="stylesheet" href="../../css/nav_float.css">
     <link rel="stylesheet" href="../../css/Module.css">
-
-    <!--arrrow icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
     <!-- Navigation -->
-<nav>
+    <nav>
         <div class="logo">
             <img src="../../img/logo_peso.png" alt="Logo">
             <a href="#"> PESO-lb.ph</a>
@@ -37,42 +56,46 @@ $result = $conn->query($sql);
         </label>
         <ul class="menu">
             <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="applicant.php" >Applicant</a></li>
+            <li><a href="applicant.php">Applicant</a></li>
             <li><a href="" class="active">Training</a></li>
             <li><a href="#">OFW</a></li>
-            <li><a href="../../html/about.php" >About Us</a></li>
+            <li><a href="../../html/about.php">About Us</a></li>
             <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
-        <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
+            <button id="emprof"><?php echo htmlspecialchars($row_user['username']); ?></button>
         </div>
     </nav>
+
+    <!-- Page Content -->
     <header>
         <h1 class="h1">Content</h1>
     </header>
+    
     <table border="1">
         <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+        if ($result_module->num_rows > 0) {
+            while ($row = $result_module->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["description"] . "</td>
-                        <td><a href='" . $row["video"] . "' target='_blank'>View Video</a></td>
-                        <td><a href='" . $row["file_path"] . "' target='_blank'>Open File</a></td>
-                        <td><a href='quiz_list.php?modules_id=" . $row["id"] ."'>take quiz</a></td>
-
+                        <td>" . htmlspecialchars($row['description']) . "</td>
+                        <td><a href='" . htmlspecialchars($row['video']) . "' target='_blank'>View Video</a></td>
+                        <td><a href='" . htmlspecialchars($row['file_path']) . "' target='_blank'>Open File</a></td>
+                        <td><a href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "'>Take Quiz</a></td>
                     </tr>";
             }
         } else {
-            echo "<tr><td colspan='4'>No employers found</td></tr>";
+            echo "<tr><td colspan='4'>No module content found</td></tr>";
         }
         $conn->close();
         ?>
     </table>
-        <div class="btn-container">
-                <a class="btn_back" href="modules_list.php?user_id=<?php echo $user_id; ?>&course_id=<?php echo $module_id; ?>">
-                <i class="fas fa-caret-left"></i> Return
-            </a>
-        </div>
-    <script src="../../javascript/script.js"></script> 
+
+    <div class="btn-container">
+        <a class="btn_back" href="modules_list.php?user_id=<?php echo htmlspecialchars($user_id); ?>&course_id=<?php echo htmlspecialchars($module_id); ?>">
+            <i class="fas fa-caret-left"></i> Return
+        </a>
+    </div>
+
+    <script src="../../javascript/script.js"></script>
 </body>
 </html>
