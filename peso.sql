@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 05, 2024 at 06:50 AM
+-- Generation Time: Sep 07, 2024 at 09:37 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -89,6 +89,29 @@ CREATE TABLE `applications` (
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
 (1, 1, 1, NULL, 'accepted', 'Laborer'),
 (2, 1, 2, NULL, 'accepted', 'Programmer');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cases`
+--
+
+CREATE TABLE `cases` (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('filed','in_review','resolved') COLLATE utf8mb4_unicode_ci DEFAULT 'filed',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cases`
+--
+
+INSERT INTO `cases` (`id`, `user_id`, `title`, `description`, `file`, `status`, `created_at`) VALUES
+(3, 1, 'stalking', 'following everywhere', '../uploads/LSPU-LB CCS - Participant Certificates.pdf', 'filed', '2024-09-07 07:56:16');
 
 -- --------------------------------------------------------
 
@@ -208,6 +231,28 @@ INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description
 (3, 1, 'tester', 'system tester', 14, '2024-08-30', 1),
 (4, 1, 'electrician', 'fix electrical', 50, '2024-08-30', 1),
 (5, 1, 'new', 'dfasdfasecawedaew', 12, '2024-09-02', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_admin` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `message`, `timestamp`, `is_admin`) VALUES
+(1, 1, 'rararara', '2024-09-07 09:18:15', 0),
+(2, 1, 'asdwdwa', '2024-09-07 09:23:28', 0);
 
 -- --------------------------------------------------------
 
@@ -407,6 +452,12 @@ ALTER TABLE `applications`
   ADD KEY `job_posting_id` (`job_posting_id`);
 
 --
+-- Indexes for table `cases`
+--
+ALTER TABLE `cases`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
@@ -438,6 +489,12 @@ ALTER TABLE `empyers`
 ALTER TABLE `job_postings`
   ADD PRIMARY KEY (`j_id`),
   ADD KEY `employer_job_id` (`employer_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `modules`
@@ -504,6 +561,12 @@ ALTER TABLE `applications`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `cases`
+--
+ALTER TABLE `cases`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
@@ -532,6 +595,12 @@ ALTER TABLE `empyers`
 --
 ALTER TABLE `job_postings`
   MODIFY `j_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `modules`
