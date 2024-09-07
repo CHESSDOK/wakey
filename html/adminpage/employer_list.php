@@ -40,5 +40,6 @@ $result = $conn->query($sql);
 
     <a href="course.html?username=<?php echo $admin; ?>">Upload courses</a>
     <a href="course_list.php">course list</a>
+    <a href="ofw_case.php">ofw filed cases</a>
 </body>
 </html>
