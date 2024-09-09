@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 07, 2024 at 09:37 AM
+-- Generation Time: Sep 09, 2024 at 02:08 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -242,17 +242,15 @@ CREATE TABLE `messages` (
   `id` int NOT NULL,
   `user_id` int DEFAULT NULL,
   `message` text COLLATE utf8mb4_unicode_ci,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_admin` tinyint(1) DEFAULT '0'
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `user_id`, `message`, `timestamp`, `is_admin`) VALUES
-(1, 1, 'rararara', '2024-09-07 09:18:15', 0),
-(2, 1, 'asdwdwa', '2024-09-07 09:23:28', 0);
+INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`) VALUES
+(1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59');
 
 -- --------------------------------------------------------
 
@@ -377,6 +375,27 @@ CREATE TABLE `register` (
 
 INSERT INTO `register` (`id`, `email`, `username`, `password`, `token`, `is_verified`) VALUES
 (1, 'ict1mercado.cdlb@gmail.com', 'azure', '$2y$10$bVpbzEAFIsZkxEiyn7DxleKNe1cQZqV8e54D5oXX1v7tFM8IH2SIO', '2aa479ba9fafd3cfd86f080ece590b85232a23580a3a136d15368b20f3c38a796b6d41bf100e23f35f4fa85366c5c1f22c45', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `replies`
+--
+
+CREATE TABLE `replies` (
+  `id` int NOT NULL,
+  `message_id` int DEFAULT NULL,
+  `admin_id` int DEFAULT NULL,
+  `reply` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `replies`
+--
+
+INSERT INTO `replies` (`id`, `message_id`, `admin_id`, `reply`, `created_at`) VALUES
+(1, 1, 1, 'ok', '2024-09-09 02:20:15');
 
 -- --------------------------------------------------------
 
@@ -527,6 +546,12 @@ ALTER TABLE `register`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_answers`
 --
 ALTER TABLE `user_answers`
@@ -600,7 +625,7 @@ ALTER TABLE `job_postings`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `modules`
@@ -630,6 +655,12 @@ ALTER TABLE `quiz_name`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `replies`
+--
+ALTER TABLE `replies`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
