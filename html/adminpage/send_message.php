@@ -1,22 +1,16 @@
 <?php
-include 'conn_db.php'; // Ensure this file contains the correct DB connection
+include 'conn_db.php'; // Ensure this file contains the DB connection
 
-// Check if admin message is being posted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $adminid = $_POST['adminid'];
-    $message = $_POST['admin_message'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $admin_id = $_POST['admin_id'];
+  $message_id = $_POST['message_id'];
+  $reply = $_POST['reply'];
 
-    // Insert into database
-    $sql = "INSERT INTO messages (user_id, message, is_admin) VALUES ('$adminid', '$message', 1)";
-
-    if ($conn->query($sql) === TRUE) {
-        header('Location: ofw_chat.php');
-    } else {
-        echo "Error: " . $conn->error;
-    }
-} else {
-    echo "No message received!";
+  $sql = "INSERT INTO replies (message_id, admin_id, reply) VALUES ('$message_id', '$admin_id', '$reply')";
+  if ($conn->query($sql) === TRUE) {
+    echo "Reply sent successfully!";
+  } else {
+    echo "Error sending reply: " . $conn->error;
+  }
 }
-
-$conn->close();
 ?>

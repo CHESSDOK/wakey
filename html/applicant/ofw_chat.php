@@ -1,6 +1,9 @@
 <?php
+    include '../../php/conn_db.php';
     session_start();
-    $userId = $_SESSION['id'];
+    $user_Id = $_SESSION['id'];
+    $sql = "SELECT * FROM messages WHERE user_id = '$user_Id'";
+    $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,45 +17,38 @@
 <body>
     <div class="chat-container">
         <div class="chat-box" id="chat-box">
-            <!-- Messages will be loaded here -->
+           <?php
+           if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<h2>Message from " . $_SESSION['username'] . "</h2>";
+                echo "<p>" . $row["message"] . "</p>";
+        
+                $reply_sql = "SELECT * FROM replies WHERE message_id = '" . $row["id"] . "'";
+                $reply_result = $conn->query($reply_sql);
+        
+                if ($reply_result->num_rows > 0) {
+                while($reply_row = $reply_result->fetch_assoc()) {
+                    $admin_sql = "SELECT * FROM admins WHERE id = '" . $reply_row["admin_id"] . "'";
+                    $admin_result = $conn->query($admin_sql);
+                    $admin_row = $admin_result->fetch_assoc();
+                    echo "<h2>Reply from " . $admin_row["name"] . "</h2>";
+                    echo "<p>" . $reply_row["reply"] . "</p>";
+                }
+                } else {
+                echo "<p>No replies found.</p>";
+                }
+            }
+            } else {
+            echo "<p>No messages found.</p>";
+            }
+           ?>
         </div>
-        <form id="chat-form">
-            <input type="hidden" id="userid" name="userid" value="<?php echo $userId?>" required>
-            <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
-            <button type="submit">Send</button>
+        <form action="../../php/applicant/send_message.php" method="post">
+            <input type="hidden" name="user_id" value="<?php echo $user_Id ?>">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea><br><br>
+            <input type="submit" value="Send Message">
         </form>
     </div>
-
-    <script>
-        // Load chat messages every 2 seconds
-        function loadMessages() {
-            $.ajax({
-                url: 'load_messages.php',
-                method: 'GET',
-                success: function(data) {
-                    $('#chat-box').html(data);
-                }
-            });
-        }
-
-        // Send message via Ajax
-        $('#chat-form').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: '../../php/applicant/send_message.php',
-                method: 'POST',
-                data: $(this).serialize(),
-                success: function() {
-                    $('#message').val('');
-                    loadMessages(); // Reload chat after sending
-                }
-            });
-        });
-
-        // Initial chat load
-        loadMessages();
-        // Reload chat every 2 seconds
-        setInterval(loadMessages, 2000);
-    </script>
 </body>
 </html>

@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             if ($user['is_verified'] == 1) {
                 $_SESSION['id'] = $user['id'];
+                $_SESSION['username'] = $user_input;
                 
                 header("Location: ../index(applicant).php");
             } else {

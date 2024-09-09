@@ -39,6 +39,6 @@ $result = $conn->query($sql);
         </tr>
         <?php endwhile; ?>
     </table>
-    <a href="ofw_chat.php">chat with admin</a>
+    <a href="user_chat.php">list of inquiries</a>
 </body>
 </html>
