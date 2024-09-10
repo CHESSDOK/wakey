@@ -44,7 +44,7 @@ if (!$row) {
             <li><a href="../index(applicant).php">Home</a></li>
             <li><a href="../html/applicant/applicant.php">Applicant</a></li>
             <li><a href="applicant/training_list.php">Training</a></li>
-            <li><a href="#">OFW</a></li>
+            <li><a href="applicant/ofw_home.php">OFW</a></li>
             <li><a href="#" class="active">About Us</a></li>
             <li><a href="contact.php">Contact Us</a></li>
         </ul>

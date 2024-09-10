@@ -50,7 +50,7 @@ if (!$row) {
             <li><a href="../../index(applicant).php">Home</a></li>
             <li><a href="#" class="active">Applicant</a></li>
             <li><a href="training_list.php">Training</a></li>
-            <li><a href="#">OFW</a></li>
+            <li><a href="ofw_home.php">OFW</a></li>
             <li><a href="../../html/about.php" >About Us</a></li>
             <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
