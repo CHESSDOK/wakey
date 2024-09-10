@@ -1,7 +1,22 @@
 <?php
+include '../../php/conn_db.php';
 session_start();
 $userId = $_SESSION['id'];
 
+$sql = "SELECT * FROM register WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+    die("Invalid query: " . $conn->error); 
+}
+
+$row = $result->fetch_assoc();
+if (!$row) {
+    die("User not found.");
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +26,7 @@ $userId = $_SESSION['id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OFW Page</title>
     <link rel="stylesheet" href="../../css/nav_float.css">
-    <link rel="stylesheet" href="../../css/applicant.css">
+    <link rel="stylesheet" href="../../css/ofw.css">
 </head>
 <body>
      <!-- Navigation -->
@@ -28,9 +43,9 @@ $userId = $_SESSION['id'];
         </label>
         <ul class="menu">
             <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="#" class="active">Applicant</a></li>
+            <li><a href="applicant.php">Applicant</a></li>
             <li><a href="training_list.php">Training</a></li>
-            <li><a href="ofw_home.php">OFW</a></li>
+            <li><a href="#" class="active">OFW</a></li>
             <li><a href="../../html/about.php" >About Us</a></li>
             <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
@@ -44,7 +59,7 @@ $userId = $_SESSION['id'];
     </header>
 
     <form action="../../php/applicant/submit_case.php" method="POST" enctype="multipart/form-data">
-    <input type="number" name="userid" id="userid" value = "<?php echo $userId; ?>" ><br><br>
+    <div class="container">
         <label for="title">Case Title:</label>
         <input type="text" name="title" id="title" required><br><br>
 
@@ -55,6 +70,7 @@ $userId = $_SESSION['id'];
         <input type="file" name="file" id="file"><br><br>
 
         <button type="submit">Submit Case</button>
+    </div>
     </form>
     <a href="ofw_chat.php">chat with admin</a>
 

@@ -26,6 +26,7 @@ $result = $conn->query($sql);
 <head>
     <title>Admin - Employer List</title>
   <link rel="stylesheet" href="../../css/nav_float.css">
+  <link rel="stylesheet" href="../.../css/">
 </head>
 <body>
     <!-- Navigation -->
