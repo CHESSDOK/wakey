@@ -30,6 +30,10 @@ $result_module = $stmt->get_result();
 if (!$result_module) {
     die("Invalid query: " . $conn->error);
 }
+
+$module_id = $_GET['course_id'];
+$sql = "SELECT * FROM modules WHERE course_id = $module_id ";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +42,7 @@ if (!$result_module) {
     <title>Module Content</title>
     
     <link rel="stylesheet" href="../../css/nav_float.css">
-    <link rel="stylesheet" href="../../css/Module.css">
+    <link rel="stylesheet" href="../../css/content.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -72,23 +76,22 @@ if (!$result_module) {
         <h1 class="h1">Content</h1>
     </header>
     
-    <table border="1">
         <?php
         if ($result_module->num_rows > 0) {
             while ($row = $result_module->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . htmlspecialchars($row['description']) . "</td>
-                        <td><a href='" . htmlspecialchars($row['video']) . "' target='_blank'>View Video</a></td>
-                        <td><a href='" . htmlspecialchars($row['file_path']) . "' target='_blank'>Open File</a></td>
-                        <td><a href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "'>Take Quiz</a></td>
-                    </tr>";
+                
+                echo htmlspecialchars($row["module_name"]);
+                echo htmlspecialchars($row["description"]);
+                echo '<a href="' . htmlspecialchars($row['video']) . '" target="_blank">View Video</a>';
+                echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File</a>';
+                echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '">Take Quiz</a>';
+                
             }
         } else {
             echo "<tr><td colspan='4'>No module content found</td></tr>";
         }
         $conn->close();
-        ?>
-    </table>
+        ?> 
 
     <div class="btn-container">
         <a class="btn_back" href="modules_list.php?user_id=<?php echo htmlspecialchars($user_id); ?>&course_id=<?php echo htmlspecialchars($module_id); ?>">
