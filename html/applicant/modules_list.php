@@ -74,8 +74,8 @@ if (!$row) {
                         <td class='num_cell'> <p> " . $row["id"] . " </td>
                         <td class='title_cell'> <p> " . $row["module_name"] . " </td>
                         <td class='btn_cell'>
-                            <a class='btn' href='module_content.php?user_id=". $user_id . " 
-                            &modules_id=". $row["id"] ."'>view more <i class='fas fa-chevron-right'></i></a>
+                            <a class='btn' href='module_content.php?user_id=". $user_id ." 
+                            &modules_id=". $row["id"] ."&course_id=". $module_id ."& module_name=".$row["module_name"]."'>view more <i class='fas fa-chevron-right'></i></a>
                         </td>
                     </tr>";
                 echo "</table>";

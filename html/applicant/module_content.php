@@ -4,6 +4,7 @@ session_start();
 $userId = $_SESSION['id'];
 $user_id = $_GET['user_id'];
 $module_id = $_GET['modules_id'];
+$module_name = $_GET['module_name'];
 
 // Fetch the current user's details
 $sql_user = "SELECT * FROM register WHERE id = ?";
@@ -79,11 +80,10 @@ $result = $conn->query($sql);
         <?php
         if ($result_module->num_rows > 0) {
             while ($row = $result_module->fetch_assoc()) {
-                
-                echo htmlspecialchars($row["module_name"]);
-                echo htmlspecialchars($row["description"]);
-                echo '<a href="' . htmlspecialchars($row['video']) . '" target="_blank">View Video</a>';
-                echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File</a>';
+                echo '<br>' .htmlspecialchars($module_name). '<br>';
+                echo htmlspecialchars($row["description"]) . '<br>';
+                echo '<a href="' . htmlspecialchars($row['video']) . '" target="_blank">View Video &nbsp &nbsp </a>';
+                echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File &nbsp &nbsp</a>';
                 echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '">Take Quiz</a>';
                 
             }
