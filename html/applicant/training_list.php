@@ -30,6 +30,7 @@ if (!$row) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <title>Course Page</title>
   <link rel="stylesheet" href="../../css/nav_float.css">
+  <link rel="stylesheet" href="../../css/training.css">
   <link
       href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
       rel="stylesheet"
@@ -66,18 +67,19 @@ if (!$row) {
         <h1 class="h1">Course List</h1>
     </header>
 
+    <div class="card-container">
     <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '
-                    <div class="card" style="width: 18rem;">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <div class="card custom-card">
+                        <svg class="bd-placeholder-img card-img-top custom-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#868e96"></rect>
-                            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                            <rect width="100%" height="100%" class="custom-rect"></rect>
+                            <text x="50%" y="50%" class="custom-text" dy=".3em">Image cap</text>
                         </svg>
                         <div class="card-body">
-                            <h5 class="card-title">' . htmlspecialchars($row['course_name']) . '</h5>
+                            <h5 class="card-title">' . htmlspecialchars($row['course_name'])  . '</h5>
                             <p class="card-text">' . htmlspecialchars($row['description']) . '</p>
                             <a href="modules_list.php?user_id=' . $userId . '& course_id=' . $row['id'] . '" class="btn btn-primary">Go somewhere</a>
                         </div>
@@ -85,10 +87,12 @@ if (!$row) {
                 ';
             }
         } else {
-            echo '<tr><td colspan="4">No employers found</td></tr>';
+            echo '<div>No employers found</div>';
         }
         $conn->close();
     ?>
+</div>
+
 
     <script src="../../javascript/script.js"></script> 
 </body>
