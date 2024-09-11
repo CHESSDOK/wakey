@@ -1,6 +1,17 @@
-.container{
-    align-content: center;
+.container {
+    display: flex;
+    justify-content: center; /* Centers the container horizontally */
+    align-items: center; /* Centers the container vertically */
+    height: 100vh; /* Makes sure the container takes up the full viewport height */
 }
+form {
+    width: 50%; /* Width of the form */
+    background-color: #fff; /* Optional: To make it stand out */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
 .chat-container {
     width: 50%;
     margin: 0 auto;
@@ -23,6 +34,13 @@
     padding: 10px;
 }
 
+input, textarea {
+    width: 100%; /* Make inputs take full width of form */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
 
 input{
     font-family:inherit;
