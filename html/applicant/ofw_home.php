@@ -58,8 +58,8 @@ if (!$row) {
         <h1 class="h1">File a Case</h1>
     </header>
 
-    <form action="../../php/applicant/submit_case.php" method="POST" enctype="multipart/form-data">
     <div class="container">
+    <form action="../../php/applicant/submit_case.php" method="POST" enctype="multipart/form-data">
         <label for="title">Case Title:</label>
         <input type="text" name="title" id="title" required><br><br>
 
@@ -70,8 +70,8 @@ if (!$row) {
         <input type="file" name="file" id="file"><br><br>
 
         <button type="submit">Submit Case</button>
-    </div>
-    </form>
+     </form>
+     </div>
     <a href="ofw_chat.php">chat with admin</a>
 
     <script src="../../javascript/script.js"></script> 
