@@ -4,6 +4,7 @@ session_start();
 $userId = $_SESSION['id'];
 $user_id = $_GET['user_id'];
 $module_id = $_GET['modules_id'];
+$module_name = $_GET['module_name'];
 
 // Fetch the current user's details
 $sql_user = "SELECT * FROM register WHERE id = ?";
@@ -20,6 +21,20 @@ if (!$row_user) {
     die("User not found.");
 }
 
+// Fetch module content
+$sql_module = "SELECT * FROM module_content WHERE modules_id = ?";
+$stmt = $conn->prepare($sql_module);
+$stmt->bind_param("i", $module_id);
+$stmt->execute();
+$result_module = $stmt->get_result();
+
+if (!$result_module) {
+    die("Invalid query: " . $conn->error);
+}
+
+$module_id = $_GET['course_id'];
+$sql = "SELECT * FROM modules WHERE course_id = $module_id ";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -63,14 +78,18 @@ if (!$row_user) {
     </header>
     
         <?php
-        if ($result->num_rows > 0) {
-            while ($row =fetch_assoc()) {
-                
-                echo htmlspecialchars($row["description"]) . '<br>';
-                echo '<a href="' . htmlspecialchars($row['video']) . '" target="_blank">View Video &nbsp &nbsp </a>';
-                echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File &nbsp &nbsp</a>';
-                echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '">Take Quiz</a>';
-                
+        if ($result_module->num_rows > 0) {
+            while ($row = $result_module->fetch_assoc()) {
+                echo '<div class="container">';
+                    echo '<p class="label">' . htmlspecialchars($module_name) . '</p>' . '<div class="divider"></div>';
+                    echo '<p class="info">' . htmlspecialchars($row["description"]) . '</p>';
+                    echo '<a class="video" href="' . htmlspecialchars($row['video']) . '" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/1200px-YouTube_icon_%282013-2017%29.png" 
+                    alt="YouTube Logo" style="width: 45px; height: 30px; vertical-align: middle;">
+                    View Video</a>';
+                    echo '<img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 30px; height: 45px; vertical-align: middle;"><a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File</a>';
+                    echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '">Take Quiz</a>';
+                echo '</div>';
             }
         } else {
             echo "<tr><td colspan='4'>No module content found</td></tr>";
