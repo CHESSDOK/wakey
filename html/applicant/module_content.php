@@ -83,12 +83,16 @@ $result = $conn->query($sql);
                 echo '<div class="container">';
                     echo '<p class="label">' . htmlspecialchars($module_name) . '</p>' . '<div class="divider"></div>';
                     echo '<p class="info">' . htmlspecialchars($row["description"]) . '</p>';
-                    echo '<a class="video" href="' . htmlspecialchars($row['video']) . '" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/1200px-YouTube_icon_%282013-2017%29.png" 
-                    alt="YouTube Logo" style="width: 45px; height: 30px; vertical-align: middle;">
-                    View Video</a>';
-                    echo '<img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 30px; height: 45px; vertical-align: middle;"><a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">Open File</a>';
-                    echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '">Take Quiz</a>';
+                        echo '<a class="video" href="' . htmlspecialchars($row['video']) . '" target="_blank">
+                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/1200px-YouTube_icon_%282013-2017%29.png" 
+                              alt="YouTube Logo" style="width: 45px; height: 30px; vertical-align: middle;">
+                              View Video</a>';
+                        echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">
+                              <img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
+                              Open File</a>';
+                        echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '" target="_blank">
+                              <img class="icon" src="../../img/quiz.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
+                              Take Quiz</a>';
                 echo '</div>';
             }
         } else {
