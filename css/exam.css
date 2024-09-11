@@ -1,0 +1,10 @@
+.question{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 80vw;
+    height: auto;
+    margin-left: 20vw;
+    margin: auto;
+    box-sizing: border-box;
+}
