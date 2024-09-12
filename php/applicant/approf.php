@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $last_name = $_POST['Last_Name'];
     $middle_name = $_POST['Middle_Name'] ?? '';
     $dob = $_POST['dob'];
+    $spe = $_POST['spe'];
     $sex = $_POST['sex'];
     $civil_status = $_POST['Civil_Status']; 
     $photo = 'user.png'; // Default photo
@@ -45,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             middle_name = '$middle_name', 
             dob = '$dob', 
             sex = '$sex', 
+            specialization = '$spe',
             civil_status = '$civil_status', 
             photo = '$photo'
             WHERE id = $applicant_id";

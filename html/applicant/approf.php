@@ -152,6 +152,11 @@ if ($result->num_rows > 0) {
                 <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($row['dob'] ?? ''); ?>">
             </div>
 
+            <div class="spe-group">
+                <label for="spe">Line of expertise</label>
+                <input type="text" name="spe" id="spe" value="<?php echo htmlspecialchars($row['specialization'] ?? ''); ?>">
+            </div>
+
             <div class="Sex-group">
                 <label for="sex">Select Your Sex</label>
                 <select id="sex" name="sex">
