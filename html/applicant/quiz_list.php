@@ -41,7 +41,7 @@ $result = $conn->query($sql);
             $conn->close();
         ?>
 
-            <a href="">back</a>
+            <a href="module_content.php">back</a>
         </tbody>
     </table>
 </body>

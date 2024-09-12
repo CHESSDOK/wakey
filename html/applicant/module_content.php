@@ -32,6 +32,19 @@ if (!$result_module) {
     die("Invalid query: " . $conn->error);
 }
 
+$sql_quiz = "SELECT * FROM quiz_name WHERE module_id = ?";
+$stmt_quiz = $conn->prepare($sql_quiz);
+$stmt_quiz->bind_param("i", $module_id);
+$stmt_quiz->execute();
+$result_quiz = $stmt_quiz->get_result();
+
+if ($row_quiz = $result_quiz->fetch_assoc()) {
+    // Store quiz ID and name
+    $quiz_id = $row_quiz['id'];
+} else {
+    $quiz_id = null;
+}
+
 $module_id = $_GET['course_id'];
 $sql = "SELECT * FROM modules WHERE course_id = $module_id ";
 $result = $conn->query($sql);
@@ -90,7 +103,7 @@ $result = $conn->query($sql);
                         echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">
                               <img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
                               Open File</a>';
-                        echo '<a href="quiz_list.php?modules_id=' . htmlspecialchars($row["id"]) . '" target="_blank">
+                        echo '<a href="take_exam.php?module_id=' . htmlspecialchars($row["id"]) . '&q_id=' . htmlspecialchars($quiz_id) . '" target="_blank">
                               <img class="icon" src="../../img/quiz.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
                               Take Quiz</a>';
                 echo '</div>';
