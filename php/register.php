@@ -41,6 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $token = bin2hex(random_bytes(50));
 
+    if (strlen($password) < 8 || strlen($password) > 16) {
+        echo "<script type='text/javascript'>alert('Password must be between 8 and 16 characters.'); window.history.back();</script>";
+        exit();
+    }
+
     $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$password', '$token', 0)";
 
     if ($conn->query($sql) === TRUE) {
