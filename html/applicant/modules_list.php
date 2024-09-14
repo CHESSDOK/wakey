@@ -1,7 +1,19 @@
 <?php
 include '../../php/conn_db.php';
-session_start();
-$userId = $_SESSION['id'];
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: ../login.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+$userId = checkSession();
 $user_id = $_GET['user_id'];
 // Fetch all employers
 $module_id = $_GET['course_id'];
