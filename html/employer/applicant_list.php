@@ -1,8 +1,8 @@
 <?php
 include '../../php/conn_db.php';
-
+$jobid = $_GET['job_id'];
 // Fetch all employers
-$sql = "SELECT * FROM applications";
+$sql = "SELECT * FROM applications WHERE job_posting_id = $jobid";
 $result = $conn->query($sql);
 
 //$sql = "SELECT * FROM register WHERE id = ?";
