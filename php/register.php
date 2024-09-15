@@ -35,26 +35,42 @@ function sendVerificationEmail($email, $token) {
     }
 }
 
+if ($conn->connect_error) {
+    die('Database connection error: ' . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $conn->real_escape_string($_POST['user']);
     $email = $conn->real_escape_string($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $token = bin2hex(random_bytes(50));
+    $password = $_POST['password'];
 
-    if (strlen($password) < 8 || strlen($password) > 16) {
-        echo "<script type='text/javascript'>alert('Password must be between 8 and 16 characters.'); window.history.back();</script>";
-        exit();
+    // Validate password
+    $passwordError = validatePassword($password);
+    if ($passwordError !== "") {
+        die("<script type='text/javascript'> alert('$passwordError'); window.location.href='../html/register.html'; </script>");
     }
 
-    $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$password', '$token', 0)";
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+    // Generate a token for email verification
+    $token = bin2hex(random_bytes(50));
+
+    // Insert the new user into the register table
+    $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$hashedPassword', '$token', 0)";
 
     if ($conn->query($sql) === TRUE) {
         $last_id = $conn->insert_id;
+
+        // Insert a new row in applicant_profile table
         $sql = "INSERT INTO applicant_profile (user_id) VALUES ('$last_id')";
-        
+
         if ($conn->query($sql) === TRUE) {
+            // Send the verification email
             sendVerificationEmail($email, $token);
-            echo "<script type='text/javascript'> alert('Registration successful! Please verify your email.') ;window.location.href='../html/login.html'; </script>";
+
+            // Redirect or alert the user
+            echo "<script type='text/javascript'> alert('Registration successful! Please verify your email.'); window.location.href='../html/login.html'; </script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -63,5 +79,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
+}
+
+function validatePassword($password) {
+    if (strlen($password) < 8) {
+        return "Password must be at least 8 characters long.";
+    }
+    if (!preg_match("/[A-Z]/", $password)) {
+        return "Password must contain at least one uppercase letter.";
+    }
+    if (!preg_match("/[a-z]/", $password)) {
+        return "Password must contain at least one lowercase letter.";
+    }
+    if (!preg_match("/\d/", $password)) {
+        return "Password must contain at least one number.";
+    }
+    if (!preg_match("/[\W_]/", $password)) {
+        return "Password must contain at least one special character.";
+    }
+    return "";
 }
 ?>

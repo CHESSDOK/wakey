@@ -36,7 +36,9 @@
         </label>
 
         <label>
-            <input required="" placeholder="" type="password" class="input" name="password" minlength="8" maxlength="16">
+            <input required="" placeholder="" type="password" class="input" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
+            title="Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character." 
+            required">
             <span>Password</span>
         </label>
         <button class="submit" type="submit">Submit</button>
