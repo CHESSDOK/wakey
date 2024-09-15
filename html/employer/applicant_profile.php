@@ -14,9 +14,11 @@ function checkSession() {
     }
 }
 
-$user_id = checkSession();
+// $user_id = checkSession();
 // Get user_id from URL
 // Fetch documents for the selected employer
+$user_id = $_GET['user_id'];
+
 $sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);

@@ -1,39 +1,48 @@
 <?php
 include '../../php/conn_db.php';
 $jobid = $_GET['job_id'];
-// Fetch all employers
-$sql = "SELECT * FROM applications WHERE job_posting_id = $jobid";
+
+// SQL JOIN to fetch applicant details and their applications
+$sql = "
+    SELECT applications.applicant_id, 
+           applicant_profile.first_name, 
+           applicant_profile.middle_name, 
+           applicant_profile.last_name, 
+           applications.job
+    FROM applications
+    INNER JOIN applicant_profile ON applications.applicant_id = applicant_profile.id
+    WHERE applications.job_posting_id = $jobid
+";
 $result = $conn->query($sql);
 
-//$sql = "SELECT * FROM register WHERE id = ?";
-///$stmt = $conn->prepare($sql);
-//$stmt->bind_param("i", $userId);
-//$stmt->execute();
-//$res = $stmt->get_result();
+// $sql = "SELECT * FROM register WHERE id = ?";
+// $stmt = $conn->prepare($sql);
+// $stmt->bind_param("i", $userId);
+// $stmt->execute();
+// $res = $stmt->get_result();
 
-//if (!$res) {
+// if (!$res) {
 //    die("Invalid query: " . $conn->error); 
-//}
-//
-//$row = $res->fetch_assoc();
-//if (!$row) {
+// }
+
+// $row = $res->fetch_assoc();
+// if (!$row) {
 //    die("User not found.");
-//}
+// }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Employer List</title>
-  <link rel="stylesheet" href="../../css/nav_float.css">
-  <link rel="stylesheet" href="../.../css/">
+    <title>list of applicants</title>
+    <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
 <body>
     <!-- Navigation -->
-<nav>
+    <nav>
         <div class="logo">
             <img src="../../img/logo_peso.png" alt="Logo">
-            <a href="#"> PESO-lb.ph</a>
+            <a href="#">PESO-lb.ph</a>
         </div>
         <label class="burger" for="burger">
             <span></span>
@@ -42,14 +51,14 @@ $result = $conn->query($sql);
         </label>
         <ul class="menu">
             <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="applicant.php" >Applicant</a></li>
+            <li><a href="applicant.php">Applicant</a></li>
             <li><a href="" class="active">Training</a></li>
             <li><a href="ofw_home.php">OFW</a></li>
-            <li><a href="../../html/about.php" >About Us</a></li>
+            <li><a href="../../html/about.php">About Us</a></li>
             <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
-        <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
+            <button id="emprof"> <?php echo htmlspecialchars($row['username']); ?> </button>
         </div>
     </nav>
     <header>
@@ -58,24 +67,30 @@ $result = $conn->query($sql);
     <table border="1">
         <tr>
             <th>ID</th>
+            <th>Full Name</th>
+            <th>Job</th>
             <th>Actions</th>
         </tr>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                // Construct full name
+                $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+
                 echo "<tr>
-                        <td>" . $row["id"] . "</td>
-                        <td><a href='applicant_profile.php?user_id=" . $row["applicant_id"] . "'>View</a></td>
+                        <td>" . htmlspecialchars($row["applicant_id"]) . "</td>
+                        <td>" . htmlspecialchars($full_name) . "</td>
+                        <td>" . htmlspecialchars($row["job"]) . "</td>
+                        <td><a href='applicant_profile.php?user_id=" . htmlspecialchars($row["applicant_id"]) . "'>View</a></td>
                     </tr>";
             }
         } else {
-            echo "<tr><td colspan='4'>No employers found</td></tr>";
+            echo "<tr><td colspan='4'>No applicants found</td></tr>";
         }
         $conn->close();
         ?>
     </table>
 
-    
     <script src="../javascript/script.js"></script>
 </body>
 </html>
