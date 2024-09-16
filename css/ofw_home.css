@@ -1,0 +1,43 @@
+
+  .container-fluid {
+    display: flex;
+  }
+  .scrollspy {
+    width: 15vw;
+    position: sticky;
+    top: 10px;
+    border: 1px solid #333;
+  }
+  .form-content {
+    flex-grow: 1;
+    padding-left: 30px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .input-group {
+    padding: 30px;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+  }
+  table {
+    width: 100%;
+  }
+  .info {
+    display: block;
+    margin-top: 10px;
+  }
+  td {
+    padding: 10px;
+  }
+  .nav-link{
+    border: 1xp solid #333;
+  }
+  .nav-link.active {
+    font-weight: bold;
+    color: red;
+  }
+.outer-container {
+max-width: auto; /* Adjust this value as needed */
+margin: 0 auto;
+padding: 20px;
+}

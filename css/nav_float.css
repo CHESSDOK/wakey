@@ -3,7 +3,7 @@ body {
 	opacity: 1;
 	font-family: system-ui;   
 }
-.h1 {
+.h1, .tlt {
     width: 100%;
     background: linear-gradient(90deg, #900B0E, #2A0304);
     padding: 50px 0;
@@ -170,7 +170,7 @@ nav {
 	left: 5px;
 }
 
-button {
+button, .pfile {
 	--color: #C4C7CA;
 	font-family: inherit;
 	display: inline-block;
@@ -189,7 +189,7 @@ button {
 	background-color: #3D93D3;
 }
 
-button::before {
+button::before, .pfile::before {
 	position: absolute;
 	content: "";
 	background: #2C7AB4;
@@ -199,17 +199,17 @@ button::before {
 	border-radius: 50%;
 }
 
-button:hover {
+button:hover, .pfile:hover {
 	color: white;
 }
 
-button:before {
+button:before, .pfile:before {
 	top: 100%;
 	left: 100%;
 	transition: 0.3s all;
 }
 
-button:hover::before {
+button:hover::before, .pfile::before {
 	top: -50px;
 	left: -18px;
 }

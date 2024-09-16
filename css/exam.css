@@ -1,10 +1,28 @@
-.question{
+/* Limit the width of the form */
+.form-box {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    width: 80vw;
-    height: auto;
-    margin-left: 20vw;
+    position: relative;
+    width: 60vw;  /* Adjust as needed */
+    max-width: 600px;
     margin: auto;
-    box-sizing: border-box;
+    background-color: #faf7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center and control width of individual questions */
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 100%;  /* Make questions fill the form width */
+    margin: 10px 0;
+    margin-left: 2rem;
+}
+
+.submit_btn{
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right */
+    margin-right: -2rem;
 }

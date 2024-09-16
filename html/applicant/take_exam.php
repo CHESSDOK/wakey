@@ -79,9 +79,10 @@ if (!$row) {
             $q_number++;
         }
         ?>
-        <button  class="action" type="submit" name="submit">Submit</button>
+        <div class="submit_btn">
+        <button class="action" type="submit" name="submit">Submit</button>
+    </div>
     </form>
-
     <script src="../../javascript/script.js"></script> 
 </body>
 </html>

@@ -2,14 +2,15 @@
     display: flex;
     justify-content: center; /* Centers the container horizontally */
     align-items: center; /* Centers the container vertically */
-    height: 100vh; /* Makes sure the container takes up the full viewport height */
+    height: auto; /* Makes sure the container takes up the full viewport height */
+    margin-top: 10vh;
 }
 form {
     width: 50%; /* Width of the form */
-    background-color: #fff; /* Optional: To make it stand out */
+    background-color: #f9f9f9; /* Optional: To make it stand out */
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chat-container {
@@ -35,7 +36,7 @@ form {
 }
 
 input, textarea {
-    width: 100%; /* Make inputs take full width of form */
+    width: 90%; /* Make inputs take full width of form */
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
