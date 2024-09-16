@@ -3,7 +3,7 @@ body {
 	opacity: 1;
 	font-family: system-ui;   
 }
-.h1, .tlt {
+.h1, .ofw-h1 {
     width: 100%;
     background: linear-gradient(90deg, #900B0E, #2A0304);
     padding: 50px 0;
@@ -11,7 +11,7 @@ body {
     color: white;
     margin-top:-1vh;
 }
-nav {
+nav, .ofw-nav {
 	position: relative;
 	background-color: #EBEEF1;
 	color: #333;
@@ -170,7 +170,7 @@ nav {
 	left: 5px;
 }
 
-button, .pfile {
+button, .ofw-btn {
 	--color: #C4C7CA;
 	font-family: inherit;
 	display: inline-block;
@@ -189,7 +189,7 @@ button, .pfile {
 	background-color: #3D93D3;
 }
 
-button::before, .pfile::before {
+button::before, .ofw-btn::before {
 	position: absolute;
 	content: "";
 	background: #2C7AB4;
@@ -199,17 +199,17 @@ button::before, .pfile::before {
 	border-radius: 50%;
 }
 
-button:hover, .pfile:hover {
+button:hover, .ofw-btn:hover {
 	color: white;
 }
 
-button:before, .pfile:before {
+button:before, .ofw-btn:before {
 	top: 100%;
 	left: 100%;
 	transition: 0.3s all;
 }
 
-button:hover::before, .pfile::before {
+button:hover::before, .ofw-btn::before {
 	top: -50px;
 	left: -18px;
 }

@@ -46,7 +46,7 @@ if (!$row) {
 <body data-bs-spy="scroll" data-bs-target="#scrollspy-menu" data-bs-offset="10" tabindex="0">
 
  <!-- Navigation -->
- <nav>
+ <nav class="ofw-nav">
         <div class="logo">
             <img src="../../img/logo_peso.png" alt="Logo">
             <a href="#"> PESO-lb.ph</a>
@@ -66,12 +66,12 @@ if (!$row) {
             <li><a href="../../html/contact.php">Contact Us</a></li>
         </ul>
         <div class="auth">
-        <button class="pfile" id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
+        <button class="ofw-btn" id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
         </div>
     </nav>
   
     <header>
-        <h1 class="tlt">File a Case</h1>
+        <h1 class="ofw-h1">File a Case</h1>
     </header>
 
 
