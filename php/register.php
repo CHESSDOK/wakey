@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $last_id = $conn->insert_id;
 
         // Insert a new row in applicant_profile table
-        $sql = "INSERT INTO applicant_profile (user_id) VALUES ('$last_id')";
+        $sql = "INSERT INTO applicant_profile (user_id, email) VALUES ('$last_id','$email')";
 
         if ($conn->query($sql) === TRUE) {
             // Send the verification email
