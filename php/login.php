@@ -6,11 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_input = $conn->real_escape_string($_POST['user_input']);
     $password = $conn->real_escape_string($_POST['password']);
 
-    // Check if the user_input is an email or username
+    // Check if the user_input is an email or username (case-sensitive using BINARY)
     if (filter_var($user_input, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT * FROM register WHERE email='$user_input'";
+        $sql = "SELECT * FROM register WHERE BINARY email='$user_input'";
     } else {
-        $sql = "SELECT * FROM register WHERE username='$user_input'";
+        $sql = "SELECT * FROM register WHERE BINARY username='$user_input'";
     }
 
     $result = $conn->query($sql);
@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
+        // Password verification (already case-sensitive)
         if (password_verify($password, $user['password'])) {
             if ($user['is_verified'] == 1) {
                 $_SESSION['id'] = $user['id'];

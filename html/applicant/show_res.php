@@ -1,8 +1,20 @@
 <?php
-session_start();
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: ../login.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
 include_once "../../php/conn_db.php";
 
-$user_id = $_SESSION['id'];
+$user_id = checkSession();
 $eid = $_GET['q_id'];
 $module_id = $_GET['module_id'];
 
