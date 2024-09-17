@@ -44,12 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $conn->real_escape_string($_POST['email']);
     $password = $_POST['password'];
 
-    // Validate password
-    $passwordError = validatePassword($password);
-    if ($passwordError !== "") {
-        die("<script type='text/javascript'> alert('$passwordError'); window.location.href='../html/register.html'; </script>");
-    }
-
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
@@ -79,24 +73,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
-}
-
-function validatePassword($password) {
-    if (strlen($password) < 8) {
-        return "Password must be at least 8 characters long.";
-    }
-    if (!preg_match("/[A-Z]/", $password)) {
-        return "Password must contain at least one uppercase letter.";
-    }
-    if (!preg_match("/[a-z]/", $password)) {
-        return "Password must contain at least one lowercase letter.";
-    }
-    if (!preg_match("/\d/", $password)) {
-        return "Password must contain at least one number.";
-    }
-    if (!preg_match("/[\W_]/", $password)) {
-        return "Password must contain at least one special character.";
-    }
-    return "";
 }
 ?>
