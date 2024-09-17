@@ -1,36 +1,36 @@
 <?php
 include '../../php/conn_db.php';
 
-//function checkSession() {
-//    session_start(); // Start the session
-//
-//    // Check if the session variable 'id' is set
-//    if (!isset($_SESSION['id'])) {
-//        // Redirect to login page if session not found
-//        header("Location: ../login.html");
-//        exit();
-//    } else {
-//        // If session exists, store the session data in a variable
-//        return $_SESSION['id'];
-//    }
-//}
-//$userId = checkSession();
+function checkSession() {
+   session_start(); // Start the session
 
-// Fetch data from applicant_profile table
-//$sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
-//$stmt = $conn->prepare($sql);
-//$stmt->bind_param("i", $userId);
-//$stmt->execute();
-//$result = $stmt->get_result();
-//
-//if (!$result) {
-//    die("Invalid query: " . $conn->error); 
-//}
-//
-//$row = $result->fetch_assoc();
-//if (!$row) {
-//    die("User not found in applicant_profile.");
-//}
+   // Check if the session variable 'id' is set
+   if (!isset($_SESSION['id'])) {
+       // Redirect to login page if session not found
+       header("Location: ../login.html");
+       exit();
+   } else {
+       // If session exists, store the session data in a variable
+       return $_SESSION['id'];
+   }
+}
+$userId = checkSession();
+
+//Fetch data from applicant_profile table
+$sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+   die("Invalid query: " . $conn->error); 
+}
+
+$row = $result->fetch_assoc();
+if (!$row) {
+   die("User not found in applicant_profile.");
+}
 
 // Fetch data from register table using new approach
 $sql_new = "SELECT * FROM register WHERE id = ?";
@@ -105,7 +105,7 @@ $conn->close();
 
     <!-- Form Content -->
     <div class="form-content">
-      <form action="../../php/applicant/of.php" method="POST">
+      <form action="../../php/applicant/ofw_details.php" method="POST">
         
         <!-- Personal Information -->
         <div id="section1" class="input-group">
@@ -126,8 +126,8 @@ $conn->close();
               </td>
               <td>
                 <label for="Prefix" class="info">Prefix</label>
-                <select class="form-select" id="Prefix" name="Prefix" class="form-control" required>
-                  <option value="">Optional</option>
+                <select class="form-select" id="Prefix" name="Prefix" class="form-control">
+                  <option value="">None</option>
                   <option value="Sr." <?php echo (isset($row['prefix']) && $row['prefix'] == 'Sr.') ? 'selected' : ''; ?>>Sr.</option>
                   <option value="Jr." <?php echo (isset($row['prefix']) && $row['prefix'] == 'Jr.') ? 'selected' : ''; ?>>Jr.</option>
                   <option value="II" <?php echo (isset($row['prefix']) && $row['prefix'] == 'II') ? 'selected' : ''; ?>>II</option>
@@ -393,7 +393,7 @@ $conn->close();
   <tr>
     <td>
       <label for="departureDate" class="info">Date of Departure from the Philippines</label>
-      <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['departure_date']) ? htmlspecialchars($row['departure_date']) : ''; ?>" required>
+      <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['departure_date']) ? htmlspecialchars($row['dept_date']) : ''; ?>" required>
     </td>
     <td>
       <label for="arrivalDate" class="info">Date of Arrival (If Applicable)</label>
