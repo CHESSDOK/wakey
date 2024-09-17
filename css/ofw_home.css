@@ -6,9 +6,10 @@
     width: 15vw;
     position: sticky;
     top: 10px;
-    border: 1px solid #333;
+    border-radius: 15px;
   }
   .form-content {
+    display: flex;
     flex-grow: 1;
     padding-left: 30px;
     max-height: 80vh;
@@ -17,6 +18,7 @@
   .input-group {
     padding: 30px;
     border: 1px solid #ccc;
+    border-radius: 15px;
     margin-bottom: 30px;
   }
   table {
@@ -24,13 +26,20 @@
   }
   .info {
     display: block;
-    margin-top: 10px;
+    margin: 0;
+    font-weight:600;
+    font-size: 1.2em;
+    color: #6b6969;
   }
+  
   td {
     padding: 10px;
   }
   .nav-link{
-    border: 1xp solid #333;
+    font-size: 2em;
+    font-weight: 600;
+    padding: 10px;
+    
   }
   .nav-link.active {
     font-weight: bold;
@@ -41,3 +50,5 @@ max-width: auto; /* Adjust this value as needed */
 margin: 0 auto;
 padding: 20px;
 }
+
+
