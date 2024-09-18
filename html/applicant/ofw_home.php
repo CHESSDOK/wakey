@@ -373,7 +373,7 @@ $conn->close();
   <tr>
     <td>
       <label for="departureDate" class="info">Date of Departure from the Philippines</label>
-      <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['departure_date']) ? htmlspecialchars($row['dept_date']) : ''; ?>" required>
+      <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['dept_date']) ? htmlspecialchars($row['dept_date']) : ''; ?>" required>
     </td>
     <td>
       <label for="arrivalDate" class="info">Date of Arrival (If Applicable)</label>
@@ -385,6 +385,7 @@ $conn->close();
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="ofw_form.php">Next</a>
       </form>
     </div>
   </div>
