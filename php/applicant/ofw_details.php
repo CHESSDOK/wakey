@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Execute the query
         if ($stmt->execute()) {
             echo "Record updated successfully!";
-            header("Location: ../../html/applicant/ofw_home.php"); // Redirect to a success page
+            header("Location: ../../html/applicant/ofw_form.php"); // Redirect to a success page
         } else {
             echo "Error updating record: " . $stmt->error;
         }
