@@ -68,19 +68,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         passport_no = ?, immigration_status = ?, spouse_name = ?, spouse_contact = ?, fathers_name = ?, fathers_address = ?, mothers_name = ?, 
         mothers_address = ?,emergency_contact_name = ?, emergency_contact_num = ?, next_of_kin_relationship = ?, next_of_kin_contact = ?, education_level = ?, occupation = ?, 
         income = ?, employment_type = ?, employment_form = ?, employer_name = ?, contact_number = ?, employer_address = ?, local_agency_name = ?,
-        local_agency_address = ?, arrival_date = ?, dept_date = ? 
+        local_agency_address = ?, arrival_date = ?, dept_date = ?, country = ?
         WHERE user_id = ?";
 
     // Prepare the statement
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters to the query
-        $stmt->bind_param("sssisssssssiiiissssssssisississsisssssi",
+        $stmt->bind_param("sssisssssssiiiissssssssisississsissssssi",
             $firstName, $middleName, $lastName, $age, $prefix, $dob, $contactNo,
             $sex, $civilStatus, $email, $houseNo, $sssNo, $pagibigNo, $philhealthNo, 
             $passportNo, $immigrationStatus, $spouseName, $spouseContact, $fathersName, $fathersAddress, $mothersName, 
             $mothersAddress,$emergencyContactName, $emergencyContact, $nextOfKinRelationship, $nextOfKinContact, $educationLevel, $occupation, 
             $income, $employmentType, $employmentform, $employername, $contactnumber, $employeraddress, $gencyname,
-            $agencyaddress, $arrival, $departure,
+            $agencyaddress, $arrival, $departure, $destination,
             $userId
         );
 

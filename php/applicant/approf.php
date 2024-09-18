@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE id = $applicant_id";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Profile updated successfully!";
+        header("Location: ../../html/applicant/approf.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
