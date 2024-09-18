@@ -36,23 +36,25 @@ $result = $stmt->get_result();
     <table border="1">
         <tr>
             <th>Name</th>
-            <th>surname</th>
-            <th>age</th>
-            <th>num</th>
-            <th>num</th>
-            <th>num</th>
-            <th>num</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Contact number</th>
+            <th>address</th>
+            <th>specialization</th>
         </tr>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
+                $fullname = $row['last_name'] . ", " . $row['first_name'] . " " . $row['middle_name'];
                 echo "<tr>
-                        <td>" . htmlspecialchars($row["first_name"]) . "</td>
-                        <td>" . htmlspecialchars($row["middle_name"]) . "</td>
-                        <td>" . htmlspecialchars($row["dob"]) . "</td>
+                        <td>" . $fullname . "</td>
+                        <td>" . htmlspecialchars($row["email"]) . "</td>
+                        <td>" . htmlspecialchars($row["age"]) . "</td>
                         <td>" . htmlspecialchars($row["sex"]) . "</td>
-                        <td>" . htmlspecialchars($row["civil_status"]) . "</td>
-                        <td>" . htmlspecialchars($row["photo"]) . "</td>
+                        <td>" . htmlspecialchars($row["contact_no"]) . "</td>
+                        <td>" . htmlspecialchars($row["house_no"]) . "</td>
+                        <td>" . htmlspecialchars($row["specialization"]) . "</td>
                         <td><a href='../../php/employer/application_process.php?id=" . $row['user_id'] . "'>accepted</a></td>
                     </tr>";
             }

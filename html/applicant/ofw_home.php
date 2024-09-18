@@ -2,17 +2,17 @@
 include '../../php/conn_db.php';
 
 function checkSession() {
-    session_start(); // Start the session
+   session_start(); // Start the session
 
-    // Check if the session variable 'id' is set
-    if (!isset($_SESSION['id'])) {
-        // Redirect to login page if session not found
-        header("Location: ../login.html");
-        exit();
-    } else {
-        // If session exists, store the session data in a variable
-        return $_SESSION['id'];
-    }
+   // Check if the session variable 'id' is set
+   if (!isset($_SESSION['id'])) {
+       // Redirect to login page if session not found
+       header("Location: ../login.html");
+       exit();
+   } else {
+       // If session exists, store the session data in a variable
+       return $_SESSION['id'];
+   }
 }
 $userId = checkSession();
 
@@ -24,12 +24,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if (!$result) {
-    die("Invalid query: " . $conn->error); 
+   die("Invalid query: " . $conn->error); 
 }
 
 $row = $result->fetch_assoc();
 if (!$row) {
-    die("User not found in applicant_profile.");
+   die("User not found in applicant_profile.");
 }
 
 // Fetch data from register table using new approach
@@ -101,10 +101,9 @@ $conn->close();
             <a class="nav-link" href="#section3">Employment Details</a>
         </nav>
 
-        <!-- Form Content -->
-        <div class="form-content">
-            <form action="../../php/applicant/of.php" method="POST">
-
+    <!-- Form Content -->
+    <div class="form-content">
+      <form action="../../php/applicant/ofw_details.php" method="POST">
         
         <!-- Personal Information -->
 <div id="section1" class="input-group">
@@ -383,13 +382,11 @@ $conn->close();
     </tr>
   </table>
 </div>
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-primary">Save & Next</button>
 </form>
 </div>
 </div>
 </div>
-
-
 <script src="../../javascript/script.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -56,11 +56,4 @@ document.getElementById("signup").addEventListener("click", function (event) {
     // Adding the class to initiate the fade-in and slide-up animation
     document.body.classList.add('fade-in');
 });
-//ofw_home scrollspy
-document.body.scrollspy = new bootstrap.ScrollSpy(document.body, {
-    target: '#scrollspy-menu',
-  });
-  
-
-
 
