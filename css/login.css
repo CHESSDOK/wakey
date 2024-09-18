@@ -5,16 +5,15 @@
 }
 
 .logol img {
-		width: 100px;
-		height: 100px;
+	width: 100px;
+	height: 100px;
 }
+
 .form-container {
 	position: fixed;
 	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 320px;
-	height: 400px;
 	border-radius: 40px;
 	background-color: #fff;
 	padding: 2rem;
@@ -22,146 +21,103 @@
 }
 
 .title {
-  margin-top:6vh;
-  text-align: center;
-  font-size: 40px;
-  line-height: 2rem;
-  font-weight: 600;
+	text-align: center;
+	font-size: 3rem;
+	line-height: 2rem;
+	font-weight: 700;
+	padding-top: 15px;
 }
-.title2 {
+
+.title2, .subtitle {
 	font-family: inherit;
 	color: rgba(51, 51, 51, 0.8);
+	text-align: left;
+}
+
+.title2 {
 	text-align: center;
 	font-size: 14px;
 	line-height: 0.1rem;
 }
 
 .subtitle {
-	font-family: inherit;
-	color: rgba(51, 51, 51, 0.8);
-	text-align: left;
 	font-size: 15px;
-	margin-top:4vh;
-	margin-bottom:-2vh;
+	margin: 0;
+	margin-bottom: -100vh;
 	font-weight: 700;
 }
 
 .form {
-  margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 .input-group {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+	width: 100%;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
 }
 
 .input-group label {
-  display: block;
-  color: rgba(156, 163, 175, 1);
-  margin-bottom: 4px;
+	display: block;
+	color: rgba(156, 163, 175, 1);
+	margin-bottom: 4px;
 }
 
 .input-group input {
-  font-family:inherit;
-  font-size:16px;
-  width: 90%;
-  margin-bottom: 2vh;
-  border-radius: 10px;
-  border: 1px solid rgba(105, 105, 105, 0.397);
-  background-color: #EBEEF1;
-  outline: 0;
-  padding: 0.75rem 1rem;
-  color: rgba(51, 51, 51, 1);
+	font-family: inherit;
+	font-size: 16px;
+	width: 100%;
+	margin-bottom: 2vh;
+	border-radius: 10px;
+	border: 1px solid rgba(105, 105, 105, 0.397);
+	background-color: #EBEEF1;
+	outline: 0;
+	padding: 0.75rem 1rem;
+	color: rgba(51, 51, 51, 1);
 }
 
 .input-group input:focus {
-  border-color: rgba(61, 147, 211, 1);
+	border-color: rgba(61, 147, 211, 1);
 }
 
-.forgot {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: rgba(61, 147, 211, 1);
-  margin-top:-1vh;
-  margin-bottom:3vh;
-}
-
-.forgot a,.signup a {
-  color: royalblue;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot a:hover, .signup a:hover {
-  text-decoration: underline royalblue;
-}
-
-button {
-	--color: #3D93D3;
-	font-family: inherit;
-	display: inline-block;
-	width: 100%;
-	height: auto;
-	line-height: normal;
-	overflow: hidden;
-	cursor: pointer;
-	font-size: 15px;
-	margin-right: 0;
-	z-index: 1;
-	color: #EBEEF1;
-	border: none;
-	border-radius: 0.375rem;
-	position: relative;
-	background-color: rgba(61, 147, 211, 1);
-	padding: 0.75rem;
-	font-weight: 600;
+.forgot, .signup, .signin {
 	text-align: center;
-}
-
-	button::before {
-		position: absolute;
-		content: "";
-		background: #2C7AB4;
-		width: 500px;
-		height: 150px;
-		z-index: -1;
-		border-radius: 50%;
-	}
-
-	button:hover {
-		color: white;
-	}
-
-	button:before {
-		top: 100%;
-		left: 100%;
-		transition: 0.3s all;
-	}
-
-	button:hover::before {
-		top: -50px;
-		left: -18px;
-	}
-
-
-.message, .signup {
-	text-align: center;
-	color: rgba(88, 87, 87, 0.822);
 	font-size: 14px;
+	color: rgba(88, 87, 87, 0.822);
+}
+.signin a{
+	text-decoration: none;
+}
+.forgot {
+	display: flex;
+	justify-content: flex-end;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	color: rgba(61, 147, 211, 1);
+	margin: -1vh 0 3vh;
 }
 
-.signin {
-	text-align: center;
-}
-
-.signup a {
+.forgot a, .signup a {
 	color: royalblue;
+	text-decoration: none;
 }
 
-	.signup a:hover {
-		text-decoration: underline royalblue;
-	}
+.signup{
+	margin: 0;
+}
 
+table {
+	border-collapse: collapse;
+	border-radius: 15px;
+	margin: 0 auto;
+	background-color: #EBEEF1;
+	margin-top: 30px;
+}
+table td {
+	border: 0px solid #333;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.sign{
+	width: 100%;
+}
