@@ -1,54 +1,88 @@
-
-  .container-fluid {
-    display: flex;
-  }
-  .scrollspy {
-    width: 15vw;
-    position: sticky;
-    top: 10px;
-    border-radius: 15px;
-  }
-  .form-content {
-    display: flex;
-    flex-grow: 1;
-    padding-left: 30px;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  .input-group {
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    margin-bottom: 30px;
-  }
-  table {
-    width: 100%;
-  }
-  .info {
-    display: block;
-    margin: 0;
-    font-weight:600;
-    font-size: 1.2em;
-    color: #6b6969;
-  }
-  
-  td {
-    padding: 10px;
-  }
-  .nav-link{
-    font-size: 2em;
-    font-weight: 600;
-    padding: 10px;
-    
-  }
-  .nav-link.active {
-    font-weight: bold;
-    color: red;
-  }
 .outer-container {
-max-width: auto; /* Adjust this value as needed */
-margin: 0 auto;
-padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
+.container-fluid {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
 
+.form-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-left: 30px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.info {
+  display: block;
+  font-weight: 600;
+  font-size: 1.2em;
+  color: #6b6969;
+}
+
+.h1ouse-info {
+  width: 100%;
+}
+
+td .form-control.h1ouse-info {
+  width: 100%;
+}
+
+.form-content input {
+  flex-grow: 1;
+  width: 100%;
+}
+
+td {
+  padding: 10px;
+}
+
+.scrollspy {
+  width: 250px;
+  position: sticky;
+  top: 10px;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  text-align: center;
+  padding: 20px;
+  margin: 5px;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #007bff;
+  background-color: #fff;
+  transform: scale(1.05);
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #0b53a0;
+}
