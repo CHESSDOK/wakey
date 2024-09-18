@@ -286,106 +286,108 @@ $conn->close();
   </table>
 </div>
         <!-- Employment Details -->
-<div id="section3" class="input-group">
-  <h4>Employment Details</h4>
-  <table>
-    <tr>
-      <td>
-        <label for="occupation" class="info">Occupation Abroad</label>
-        <select id="occupation" name="occupation" class="form-select" required>
-          <option value="">-- Select Occupation --</option>
-          <option value="Administrative Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Administrative Work') ? 'selected' : ''; ?>>Administrative Work</option>
-          <option value="Medical Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Medical Work') ? 'selected' : ''; ?>>Medical Work</option>
-          <option value="Factory/Manufacturing" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Factory/Manufacturing') ? 'selected' : ''; ?>>Factory/Manufacturing</option>
-          <option value="Farmers (Agriculture)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Farmers (Agriculture)') ? 'selected' : ''; ?>>Farmers (Agriculture)</option>
-          <option value="Teaching" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Teaching') ? 'selected' : ''; ?>>Teaching</option>
-          <option value="Information Technology" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Information Technology') ? 'selected' : ''; ?>>Information Technology</option>
-          <option value="Engineering" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Engineering') ? 'selected' : ''; ?>>Engineering</option>
-          <option value="Restaurant Jobs (F&B)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Restaurant Jobs (F&B)') ? 'selected' : ''; ?>>Restaurant Jobs (F&B)</option>
-          <option value="Seaman (Sea-Based)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Seaman (Sea-Based)') ? 'selected' : ''; ?>>Seaman (Sea-Based)</option>
-          <option value="Household Service Worker (Domestic Helper)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Household Service Worker (Domestic Helper)') ? 'selected' : ''; ?>>Household Service Worker (Domestic Helper)</option>
-          <option value="Construction Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Construction Work') ? 'selected' : ''; ?>>Construction Work</option>
-          <option value="Entertainment" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Entertainment') ? 'selected' : ''; ?>>Entertainment</option>
-          <option value="Tourism Sector" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Tourism Sector') ? 'selected' : ''; ?>>Tourism Sector</option>
-          <option value="Hospitality Sector" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Hospitality Sector') ? 'selected' : ''; ?>>Hospitality Sector</option>
-          <option value="Others" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Others') ? 'selected' : ''; ?>>Others</option>
-        </select>
-      </td>
-      <td>
-        <label for="income" class="info">Average Income Per Month</label>
-        <input type="number" id="income" name="income" class="form-control" placeholder="Enter average income" value="<?php echo isset($row['income']) ? htmlspecialchars($row['income']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="employmentType" class="info">Land-Based or Sea-Based</label>
-        <select id="employmentType" name="employment_type" class="form-select" required>
-          <option value="">-- Select Employment Type --</option>
-          <option value="Land-Based" <?php echo (isset($row['employment_type']) && $row['employment_type'] == 'Land-Based') ? 'selected' : ''; ?>>Land-Based</option>
-          <option value="Sea-Based" <?php echo (isset($row['employment_type']) && $row['employment_type'] == 'Sea-Based') ? 'selected' : ''; ?>>Sea-Based</option>
-        </select>
-      </td>
-      <td>
-        <label for="country" class="info">Country of Destination</label>
-        <input type="text" id="country" name="country" class="form-control" placeholder="Enter country" value="<?php echo isset($row['country']) ? htmlspecialchars($row['country']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <label for="employmentForm" class="info">Forms of Employment</label>
-        <select id="employmentForm" name="employment_form" class="form-select" required>
-          <option value="">-- Select Form of Employment --</option>
-          <option value="Recruitment Agency" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Recruitment Agency') ? 'selected' : ''; ?>>Recruitment Agency</option>
-          <option value="Government Hire" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Government Hire') ? 'selected' : ''; ?>>Government Hire</option>
-          <option value="Name Hire" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Name Hire') ? 'selected' : ''; ?>>Name Hire</option>
-          <option value="Referral" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Referral') ? 'selected' : ''; ?>>Referral</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="employerName" class="info">Name of Employer/Company</label>
-        <input type="text" id="employerName" name="employer_name" class="form-control" placeholder="Enter employer/company name" value="<?php echo isset($row['employer_name']) ? htmlspecialchars($row['employer_name']) : ''; ?>" required>
-      </td>
-      <td>
-        <label for="contactNumber" class="info">Contact Number</label>
-        <input type="text" id="contactNumber" name="contact_number" class="form-control" placeholder="Enter contact number" value="<?php echo isset($row['contact_number']) ? htmlspecialchars($row['contact_number']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <label for="employerAddress" class="info">Address of Employer/Company</label>
-        <input type="text" id="employerAddress" name="employer_address" class="form-control" placeholder="Enter employer/company address" value="<?php echo isset($row['employer_address']) ? htmlspecialchars($row['employer_address']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <label for="localAgencyName" class="info">Name of Local Agency</label>
-        <input type="text" id="localAgencyName" name="local_agency_name" class="form-control" placeholder="Enter local agency name" value="<?php echo isset($row['local_agency_name']) ? htmlspecialchars($row['local_agency_name']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <label for="localAgencyAddress" class="info">Address of Local Agency</label>
-        <input type="text" id="localAgencyAddress" name="local_agency_address" class="form-control" placeholder="Enter local agency address" value="<?php echo isset($row['local_agency_address']) ? htmlspecialchars($row['local_agency_address']) : ''; ?>" required>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="departureDate" class="info">Date of Departure from the Philippines</label>
-        <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['departure_date']) ? htmlspecialchars($row['departure_date']) : ''; ?>" required>
-      </td>
-      <td>
-        <label for="arrivalDate" class="info">Date of Arrival (If Applicable)</label>
-        <input type="date" id="arrivalDate" name="arrival_date" class="form-control" value="<?php echo isset($row['arrival_date']) ? htmlspecialchars($row['arrival_date']) : ''; ?>">
-      </td>
-    </tr>
-  </table>
-</div>
-<button type="submit" class="btn btn-primary">Save & Next</button>
-</form>
-</div>
-</div>
+        <div id="section4" class="input-group">
+          <h4>Employment Details</h4>
+          <table>
+            <tr>
+            <td>
+              <label for="occupation" class="info">Occupation Abroad</label>
+              <select id="occupation" name="occupation" class="form-control" required>
+                <option value="">-- Select Occupation --</option>
+                <option value="Administrative Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Administrative Work') ? 'selected' : ''; ?>>Administrative Work</option>
+                <option value="Medical Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Medical Work') ? 'selected' : ''; ?>>Medical Work</option>
+                <option value="Factory/Manufacturing" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Factory/Manufacturing') ? 'selected' : ''; ?>>Factory/Manufacturing</option>
+                <option value="Farmers (Agriculture)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Farmers (Agriculture)') ? 'selected' : ''; ?>>Farmers (Agriculture)</option>
+                <option value="Teaching" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Teaching') ? 'selected' : ''; ?>>Teaching</option>
+                <option value="Information Technology" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Information Technology') ? 'selected' : ''; ?>>Information Technology</option>
+                <option value="Engineering" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Engineering') ? 'selected' : ''; ?>>Engineering</option>
+                <option value="Restaurant Jobs (F&B)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Restaurant Jobs (F&B)') ? 'selected' : ''; ?>>Restaurant Jobs (F&B)</option>
+                <option value="Seaman (Sea-Based)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Seaman (Sea-Based)') ? 'selected' : ''; ?>>Seaman (Sea-Based)</option>
+                <option value="Household Service Worker (Domestic Helper)" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Household Service Worker (Domestic Helper)') ? 'selected' : ''; ?>>Household Service Worker (Domestic Helper)</option>
+                <option value="Construction Work" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Construction Work') ? 'selected' : ''; ?>>Construction Work</option>
+                <option value="Entertainment" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Entertainment') ? 'selected' : ''; ?>>Entertainment</option>
+                <option value="Tourism Sector" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Tourism Sector') ? 'selected' : ''; ?>>Tourism Sector</option>
+                <option value="Hospitality Sector" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Hospitality Sector') ? 'selected' : ''; ?>>Hospitality Sector</option>
+                <option value="Others" <?php echo (isset($row['occupation']) && $row['occupation'] == 'Others') ? 'selected' : ''; ?>>Others</option>
+              </select>
+            </td>
+    <td>
+      <label for="income" class="info">Average Income Per Month</label>
+      <input type="number" id="income" name="income" class="form-control" placeholder="Enter average income" value="<?php echo isset($row['income']) ? htmlspecialchars($row['income']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="employmentType" class="info">Land-Based or Sea-Based</label>
+      <select id="employmentType" name="employment_type" class="form-control" required>
+        <option value="">-- Select Employment Type --</option>
+        <option value="Land-Based" <?php echo (isset($row['employment_type']) && $row['employment_type'] == 'Land-Based') ? 'selected' : ''; ?>>Land-Based</option>
+        <option value="Sea-Based" <?php echo (isset($row['employment_type']) && $row['employment_type'] == 'Sea-Based') ? 'selected' : ''; ?>>Sea-Based</option>
+      </select>
+    </td>
+    <td>
+      <label for="country" class="info">Country of Destination</label>
+      <input type="text" id="country" name="country" class="form-control" placeholder="Enter country" value="<?php echo isset($row['country']) ? htmlspecialchars($row['country']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="employmentForm" class="info">Forms of Employment</label>
+      <select id="employmentForm" name="employment_form" class="form-control" required>
+        <option value="">-- Select Form of Employment --</option>
+        <option value="Recruitment Agency" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Recruitment Agency') ? 'selected' : ''; ?>>Recruitment Agency</option>
+        <option value="Government Hire" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Government Hire') ? 'selected' : ''; ?>>Government Hire</option>
+        <option value="Name Hire" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Name Hire') ? 'selected' : ''; ?>>Name Hire</option>
+        <option value="Referral" <?php echo (isset($row['employment_form']) && $row['employment_form'] == 'Referral') ? 'selected' : ''; ?>>Referral</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="employerName" class="info">Name of Employer/Company</label>
+      <input type="text" id="employerName" name="employer_name" class="form-control" placeholder="Enter employer/company name" value="<?php echo isset($row['employer_name']) ? htmlspecialchars($row['employer_name']) : ''; ?>" required>
+    </td>
+    <td>
+      <label for="contactNumber" class="info">Contact Number</label>
+      <input type="text" id="contactNumber" name="contact_number" class="form-control" placeholder="Enter contact number" value="<?php echo isset($row['contact_number']) ? htmlspecialchars($row['contact_number']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="employerAddress" class="info">Address of Employer/Company</label>
+      <input type="text" id="employerAddress" name="employer_address" class="form-control" placeholder="Enter employer/company address" value="<?php echo isset($row['employer_address']) ? htmlspecialchars($row['employer_address']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="localAgencyName" class="info">Name of Local Agency</label>
+      <input type="text" id="localAgencyName" name="local_agency_name" class="form-control" placeholder="Enter local agency name" value="<?php echo isset($row['local_agency_name']) ? htmlspecialchars($row['local_agency_name']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="localAgencyAddress" class="info">Address of Local Agency</label>
+      <input type="text" id="localAgencyAddress" name="local_agency_address" class="form-control" placeholder="Enter local agency address" value="<?php echo isset($row['local_agency_address']) ? htmlspecialchars($row['local_agency_address']) : ''; ?>" required>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <label for="departureDate" class="info">Date of Departure from the Philippines</label>
+      <input type="date" id="departureDate" name="departure_date" class="form-control" value="<?php echo isset($row['departure_date']) ? htmlspecialchars($row['dept_date']) : ''; ?>" required>
+    </td>
+    <td>
+      <label for="arrivalDate" class="info">Date of Arrival (If Applicable)</label>
+      <input type="date" id="arrivalDate" name="arrival_date" class="form-control" value="<?php echo isset($row['arrival_date']) ? htmlspecialchars($row['arrival_date']) : ''; ?>">
+    </td>
+  </tr>
+            </tr>
+        </table>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
 <script src="../../javascript/script.js"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
