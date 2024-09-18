@@ -25,6 +25,8 @@ if (!$row) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OFW Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/nav_float.css">
     <link rel="stylesheet" href="../../css/ofw_form.css">
 </head>
@@ -58,22 +60,93 @@ if (!$row) {
         <h1 class="h1">File a Case</h1>
     </header>
 
-    <div class="container">
+    <div class="container input-group"  class="">
     <form action="../../php/applicant/submit_case.php" method="POST" enctype="multipart/form-data">
-        <label for="title">Case Title:</label>
-        <input type="text" name="title" id="title" required><br><br>
+        <table border="0">
+            <tr>
+                <td>
+                    <label class="info" for="title">Case Title:</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control"  type="text" name="title" id="title" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-floating">
+                      <textarea class="form-control text-comment" placeholder="" id="floatingTextarea"></textarea>
+                      <label for="floatingTextarea">Case Description:</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="info" for="file">Upload Supporting File:</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control"  type="file" name="file" id="file">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Submit Case</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 
-        <label for="description">Case Description:</label><br>
-        <textarea name="description" id="description" rows="5" required></textarea><br><br>
 
-        <label for="file">Upload Supporting File:</label>
-        <input type="file" name="file" id="file"><br><br>
+<!-- Offcanvas Component -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="chatOffcanvas" aria-labelledby="chatOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 id="chatOffcanvasLabel">Chat with Admin</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+           <?php
+           if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<h2>Message from " . $_SESSION['username'] . "</h2>";
+                echo "<p>" . $row["message"] . "</p>";
+        
+                $reply_sql = "SELECT * FROM replies WHERE message_id = '" . $row["id"] . "'";
+                $reply_result = $conn->query($reply_sql);
+        
+                if ($reply_result->num_rows > 0) {
+                while($reply_row = $reply_result->fetch_assoc()) {
+                    $admin_sql = "SELECT * FROM admin_profile WHERE id = '" . $reply_row["admin_id"] . "'";
+                    $admin_result = $conn->query($admin_sql);
+                    $admin_row = $admin_result->fetch_assoc();
+                    echo "<h2>Reply from " . $admin_row["username"] . "</h2>";
+                    echo "<p>" . $reply_row["reply"] . "</p>";
+                }
+                } else {
+                echo "<p>No replies found.</p>";
+                }
+            }
+            } else {
+            echo "<p>No messages found.</p>";
+            }
+           ?>
+        <form action="../../php/applicant/send_message.php" method="post">
+            <input type="hidden" name="user_id" value="<?php echo $user_Id ?>">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea><br><br>
+            <input type="submit" value="Send Message">
+        </form>
+</div>
+<div class="chat-conainer">
+<a class="chat-admin" data-bs-toggle="offcanvas" data-bs-target="#chatOffcanvas">
+    <i class="bi bi-chat-dots"></i> Chat with Admin
+</a>
+</div>
 
-        <button type="submit">Submit Case</button>
-     </form>
-     </div>
-    <a href="ofw_chat.php">chat with admin</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>     
+<script src="../../javascript/script.js"></script> 
 
-    <script src="../../javascript/script.js"></script> 
 </body>
 </html>
