@@ -89,7 +89,7 @@ $conn->close();
 </nav>
 
 <header>
-    <h1 class="ofw-h1">File a Case</h1>
+    <h1 class="ofw-h1">Update Information</h1>
 </header>
 
 <div class="outer-container">
@@ -136,7 +136,7 @@ $conn->close();
       </td>
     </tr>
     <tr>
-      <td class="house">
+      <td class="house" colspan="3">
         <label for="houseadd" class="info">House Address</label>
         <input type="text" id="houseadd" name="houseadd" class="form-control h1ouse-info"
         placeholder="House no. / Street / Subdivision / Barangay / City or Municipality / Province"
@@ -144,14 +144,14 @@ $conn->close();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="1">
         <label for="sex" class="info">Sex</label>
         <select class="form-select" id="sex" name="sex" required>
           <option value="Male" <?php echo (isset($row['sex']) && $row['sex'] == 'Male') ? 'selected' : ''; ?>>Male</option>
           <option value="Female" <?php echo (isset($row['sex']) && $row['sex'] == 'Female') ? 'selected' : ''; ?>>Female</option>
         </select>
       </td>
-      <td>
+      <td colspan="2">
         <label for="civilStatus" class="info">Civil Status</label>
         <select class="form-select" id="civilStatus" name="civilStatus" required>
           <option value="Single" <?php echo (isset($row['civil_status']) && $row['civil_status'] == 'Single') ? 'selected' : ''; ?>>Single</option>
@@ -194,7 +194,7 @@ $conn->close();
         <label for="passportNo" class="info">Passport Number</label>
         <input type="text" id="passportNo" name="passportNo" class="form-control" value="<?php echo isset($row['passport_no']) ? htmlspecialchars($row['passport_no']) : ''; ?>">
       </td>
-      <td>
+      <td colspan="2">
         <label for="email" class="info">Email</label>
         <input type="email" id="email" name="email" class="form-control" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>" required>
       </td>
@@ -209,7 +209,7 @@ $conn->close();
           <option value="Repatriated" <?php echo (isset($row['immigration_status']) && $row['immigration_status'] == 'Repatriated') ? 'selected' : ''; ?>>Repatriated</option>
         </select>
       </td>
-      <td>
+      <td colspan="2">
         <label for="educationLevel" class="info">Educational Attainment</label>
         <select id="educationLevel" name="education_level" class="form-select" required>
           <option value="">-- Select Educational Attainment --</option>
@@ -272,13 +272,13 @@ $conn->close();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="nextOfKinRelationship" class="info">Relationship to Next of Kin</label>
         <input type="text" id="nextOfKinRelationship" name="nextOfKinRelationship" class="form-control" placeholder="Relationship" value="<?php echo isset($row['next_of_kin_relationship']) ? htmlspecialchars($row['next_of_kin_relationship']) : ''; ?>">
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="nextOfKinContact" class="info">Next of Kin's Contact Number</label>
         <input type="text" id="nextOfKinContact" name="nextOfKinContact" class="form-control" placeholder="Contact Number" value="<?php echo isset($row['next_of_kin_contact']) ? htmlspecialchars($row['next_of_kin_contact']) : ''; ?>">
       </td>
@@ -331,7 +331,7 @@ $conn->close();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="employmentForm" class="info">Forms of Employment</label>
         <select id="employmentForm" name="employment_form" class="form-select" required>
           <option value="">-- Select Form of Employment --</option>
@@ -353,19 +353,19 @@ $conn->close();
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="employerAddress" class="info">Address of Employer/Company</label>
         <input type="text" id="employerAddress" name="employer_address" class="form-control" placeholder="Enter employer/company address" value="<?php echo isset($row['employer_address']) ? htmlspecialchars($row['employer_address']) : ''; ?>" required>
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="localAgencyName" class="info">Name of Local Agency</label>
         <input type="text" id="localAgencyName" name="local_agency_name" class="form-control" placeholder="Enter local agency name" value="<?php echo isset($row['local_agency_name']) ? htmlspecialchars($row['local_agency_name']) : ''; ?>" required>
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <label for="localAgencyAddress" class="info">Address of Local Agency</label>
         <input type="text" id="localAgencyAddress" name="local_agency_address" class="form-control" placeholder="Enter local agency address" value="<?php echo isset($row['local_agency_address']) ? htmlspecialchars($row['local_agency_address']) : ''; ?>" required>
       </td>
