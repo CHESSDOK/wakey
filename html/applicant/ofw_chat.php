@@ -28,10 +28,10 @@
         
                 if ($reply_result->num_rows > 0) {
                 while($reply_row = $reply_result->fetch_assoc()) {
-                    $admin_sql = "SELECT * FROM admins WHERE id = '" . $reply_row["admin_id"] . "'";
+                    $admin_sql = "SELECT * FROM admins_profile WHERE id = '" . $reply_row["admin_id"] . "'";
                     $admin_result = $conn->query($admin_sql);
                     $admin_row = $admin_result->fetch_assoc();
-                    echo "<h2>Reply from " . $admin_row["name"] . "</h2>";
+                    echo "<h2>Reply from " . $admin_row["username"] . "</h2>";
                     echo "<p>" . $reply_row["reply"] . "</p>";
                 }
                 } else {
