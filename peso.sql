@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2024 at 12:23 PM
+-- Generation Time: Sep 20, 2024 at 06:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -77,12 +77,12 @@ CREATE TABLE `applicant_profile` (
   `emergency_contact_name` varchar(100) DEFAULT NULL,
   `next_of_kin_relationship` varchar(50) DEFAULT NULL,
   `next_of_kin_contact` varchar(15) DEFAULT NULL,
-  `education_level` enum('Elementary Undergraduate','Elementary Graduate','High School Undergradutae','High School Graduate','Collage Undergraduate','Collage Graduate','Vocational') DEFAULT NULL,
+  `education_level` enum('Elementary Undergraduate','Elementary Graduate','High School Undergraduate','High School Graduate','College Undergraduate','College Graduate','Vocational') DEFAULT NULL,
   `occupation` enum('Administrative Work','Medical Work','Factory/Manufacturing','Farmers (Agriculture)','Teaching','Information Technology','Engineering','Restaurant Jobs (F&B)','Seaman (Sea-Based)','Household Service Worker (Domestic Helper)','Construction Work','Entertainment','Tourism Sector','Hospitality Sector','Others') DEFAULT NULL,
   `prefix` enum('Sr.','Jr.','II','III','IV','V','VI','VII') NOT NULL,
   `emergency_contact_num` int(100) NOT NULL,
   `income` int(100) NOT NULL,
-  `Land-Based` varchar(100) NOT NULL,
+  `country` varchar(100) NOT NULL,
   `employment_type` varchar(100) NOT NULL,
   `employment_form` enum('Recruitment Agency','Government Hire','Name Hire','Referral') NOT NULL,
   `employer_name` varchar(100) NOT NULL,
@@ -90,16 +90,18 @@ CREATE TABLE `applicant_profile` (
   `employer_address` varchar(100) NOT NULL,
   `local_agency_name` varchar(100) NOT NULL,
   `local_agency_address` varchar(100) NOT NULL,
-  `arrival_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `dept_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `arrival_date` date NOT NULL,
+  `dept_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `applicant_profile`
 --
 
-INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `Land-Based`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
-(1, 1, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, 'Information and technology', 'male', 'Single', 2147483647, 'user.png', '384', '0', '0', '0', '0', 'Documented', '', '', '', 'Leonardo', 'Julieta', 'malinta 394', '', '', '', '', '', '', 0, 0, '', '', 'Recruitment Agency', '', 0, '', '', '', '2024-09-17 10:22:46', '2024-09-17 10:22:46');
+INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `country`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
+(1, 13, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, '', 'male', 'Single', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', 'Adaw', '435323423', 'mama', '323543425', 'fafa', '5345345345', 'fama', 'child', '2232435432', 'College Undergraduate', 'Engineering', 'II', 21435364, 14000, 'Philippines', 'Land-Based', 'Government Hire', 'wsefrews', 2147483647, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-12-18', '2024-10-09'),
+(2, 14, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, '', 'female', 'Widowed', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', '', '', '', '', '', '', NULL, NULL, NULL, 'Vocational', 'Factory/Manufacturing', '', 0, 0, 'Philippines', 'Sea-Based', 'Recruitment Agency', 'wsefrews', 0, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-10-12', '2024-10-01'),
+(3, 15, 'marklawrencemercado8@gmail.com', 'Batbat', 'mercado', 'aranda', '2002-06-11', 22, '', 'male', 'Single', 0, 'user.png', '9783 baysdgdfgser', '0', '0', '0', '0', 'Documented', '', '', '', '', '', '', NULL, NULL, NULL, 'High School Graduate', 'Medical Work', 'Sr.', 0, 0, 'Philippines', 'Land-Based', 'Name Hire', 'fdgsd', 0, 'gtry45gdfg4e', 'Batbat aranda mercado', 'e4tdfge5t4e', '2024-11-21', '2024-10-10');
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,8 @@ CREATE TABLE `applications` (
 
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
 (1, 1, 1, NULL, 'accepted', 'Laborer'),
-(2, 1, 2, NULL, 'accepted', 'Programmer');
+(2, 1, 2, NULL, 'accepted', 'Programmer'),
+(3, 1, 1, NULL, 'pending', 'Laborer');
 
 -- --------------------------------------------------------
 
@@ -157,17 +160,17 @@ CREATE TABLE `courses` (
   `id` int(11) NOT NULL,
   `course_name` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
-  `module_count` int(11) NOT NULL,
-  `course_img` varchar(100) NOT NULL
+  `module_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`, `course_img`) VALUES
-(1, 'Dressmaking', 'sewing', 3, ''),
-(2, 'Dressmaking', 'sewing', 3, '');
+INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`) VALUES
+(1, 'Dressmaking', 'sewing', 3),
+(2, 'Programming', 'coding html, php, sql', 3),
+(3, 'new', '123', 2);
 
 -- --------------------------------------------------------
 
@@ -250,6 +253,7 @@ CREATE TABLE `job_postings` (
   `employer_id` int(11) NOT NULL,
   `job_title` varchar(100) NOT NULL,
   `job_description` text NOT NULL,
+  `specialization` varchar(255) NOT NULL,
   `vacant` int(11) NOT NULL,
   `date_posted` date NOT NULL,
   `is_active` tinyint(1) DEFAULT 1
@@ -259,10 +263,10 @@ CREATE TABLE `job_postings` (
 -- Dumping data for table `job_postings`
 --
 
-INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `vacant`, `date_posted`, `is_active`) VALUES
-(1, 1, 'Data Analyst', 'Responsible for collecting, processing, and analyzing data to help businesses make informed decisions. They create reports and visualizations to present data trends and insights.', 10, '2024-08-01', 1),
-(2, 2, 'Software Developer', 'Designs, codes, tests, and maintains software applications. They work closely with other developers and stakeholders to build software solutions that meet user needs.', 5, '2024-08-03', 1),
-(3, 3, 'Marketing Manager', 'Oversees marketing strategies and campaigns to promote a company\'s products or services. They analyze market trends, develop marketing plans, and manage budgets.', 5, '2024-08-16', 1);
+INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `date_posted`, `is_active`) VALUES
+(1, 1, 'Laborer', 'construction worker', '', 12, '2024-09-15', 0),
+(4, 1, 'electrician', 'fix electrical', '', 50, '2024-08-30', 1),
+(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 11, '2024-09-12', 1);
 
 -- --------------------------------------------------------
 
@@ -283,9 +287,12 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`) VALUES
 (1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59'),
-(1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59'),
-(1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59'),
-(1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59');
+(2, 0, 'Hi', '2024-09-18 13:05:27'),
+(3, 0, 'Hi', '2024-09-18 13:05:37'),
+(4, 0, 'hi', '2024-09-18 13:12:48'),
+(5, 14, 'hi', '2024-09-18 13:40:32'),
+(6, 14, 'joke', '2024-09-18 13:43:32'),
+(7, 14, 'bnye', '2024-09-19 06:24:09');
 
 -- --------------------------------------------------------
 
@@ -306,7 +313,9 @@ CREATE TABLE `modules` (
 INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
 (1, 1, 'measurements'),
 (2, 1, 'needle & thread'),
-(3, 1, 'dresses');
+(3, 1, 'dresses'),
+(4, 3, 'new1'),
+(5, 3, 'new12');
 
 -- --------------------------------------------------------
 
@@ -316,7 +325,7 @@ INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
 
 CREATE TABLE `module_content` (
   `id` int(11) NOT NULL,
-  `description` mediumtext NOT NULL,
+  `description` varchar(255) NOT NULL,
   `video` varchar(255) NOT NULL,
   `file_path` varchar(255) NOT NULL,
   `modules_id` int(11) NOT NULL
@@ -327,9 +336,10 @@ CREATE TABLE `module_content` (
 --
 
 INSERT INTO `module_content` (`id`, `description`, `video`, `file_path`, `modules_id`) VALUES
-(1, 'Learning correct measurements involves a few key aspects. First, it’s essential to understand different measurement units. The metric system uses units like millimeters, centimeters, meters, and kilometers, which are based on powers of ten, making calculations relatively straightforward. The imperial system, on the other hand, includes units like inches, feet, yards, and miles, and while it can be less intuitive, it remains widely used, especially in the United States.', 'https://www.youtube.com/watch?v=Qxo2ToDM-uE&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=9', 'uploads/1.jpg', 1),
+(1, 'learning correct measurements', 'https://www.youtube.com/watch?v=Qxo2ToDM-uE&list=RDCLAK5uy_kmPRjHDECIcuVwnKsx2Ng7fyNgFKWNJFs&index=9', 'uploads/1.jpg', 1),
 (2, 'correct needle and uses', 'https://www.youtube.com/watch?v=WvoAL44J42g', 'uploads/2.jpg', 2),
-(3, 'types of dress', 'https://www.youtube.com/watch?v=z-5tJblM-WQ', 'uploads/3.jpg', 3);
+(3, 'types of dress', 'https://www.youtube.com/watch?v=z-5tJblM-WQ', 'uploads/3.jpg', 3),
+(4, 'new', 'https://www.youtube.com/watch?v=ahHiepqCDK8', 'uploads/supply.pdf', 4);
 
 -- --------------------------------------------------------
 
@@ -359,37 +369,7 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (6, 4, 'Meter', '1', '2', '3', '4', 'd', 1),
 (7, 4, 'Color', '1', '2', '3', '4', 'c', 1),
 (8, 5, 'what is CM', '1', '2', '3', '4', 'c', 1),
-(9, 5, '2', '3', '4', '6', '7', 'b', 1),
-(4, 4, 'what is CM', 'centimeter', 'milimeter', 'inches', 'meter', 'a', 1),
-(5, 4, 'Inches ', '1', '2', '3', '4', 'b', 1),
-(6, 4, 'Meter', '1', '2', '3', '4', 'd', 1),
-(7, 4, 'Color', '1', '2', '3', '4', 'c', 1),
-(8, 5, 'what is CM', '1', '2', '3', '4', 'c', 1),
-(9, 5, '2', '3', '4', '6', '7', 'b', 1),
-(4, 4, 'what is CM', 'centimeter', 'milimeter', 'inches', 'meter', 'a', 1),
-(5, 4, 'Inches ', '1', '2', '3', '4', 'b', 1),
-(6, 4, 'Meter', '1', '2', '3', '4', 'd', 1),
-(7, 4, 'Color', '1', '2', '3', '4', 'c', 1),
-(8, 5, 'what is CM', '1', '2', '3', '4', 'c', 1),
-(9, 5, '2', '3', '4', '6', '7', 'b', 1),
-(4, 4, 'what is CM', 'centimeter', 'milimeter', 'inches', 'meter', 'a', 1),
-(5, 4, 'Inches ', '1', '2', '3', '4', 'b', 1),
-(6, 4, 'Meter', '1', '2', '3', '4', 'd', 1),
-(7, 4, 'Color', '1', '2', '3', '4', 'c', 1),
-(8, 5, 'what is CM', '1', '2', '3', '4', 'c', 1),
 (9, 5, '2', '3', '4', '6', '7', 'b', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `quizzes`
---
-
-CREATE TABLE `quizzes` (
-  `id` int(11) NOT NULL,
-  `module_id` int(11) DEFAULT NULL,
-  `quiz_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -414,12 +394,6 @@ CREATE TABLE `quiz_name` (
 
 INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`, `total`, `tag`, `date`) VALUES
 (4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
-(5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41'),
-(4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
-(5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41'),
-(4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
-(5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41'),
-(4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
 (5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41');
 
 -- --------------------------------------------------------
@@ -442,12 +416,9 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`id`, `email`, `username`, `password`, `token`, `is_verified`) VALUES
-(1, 'ict1mercado.cdlb@gmail.com', 'Azure', '$2y$10$oXAwN9M.tcAENtOYzMsL9Ojwo7WUSLnvr8FzwXfVJ7R9BDx2aihMi', '311f3b106f78c81e2e87cbfcc7d22ddd1d14cf8b3436f5927b00f187587d5c8139b8e41135039274192bb4945e7be9f81590', 1),
-(3, 'mharkcastillocastalone@gmail.com', 'mhark', '$2y$10$SDK/OqSfEswzh1VzxN8NCusuWbgJBMNrJqZtlYwudFnVPjNrHU3.W', '6edeb33f004b70c0f41f89b7ed451a2d42f2f33ec9265e3ad1d397547b9ab49703f5cfe9184147822a3aca48955d32b75205', 1),
-(4, 'mharkcastillocastalone@gmail.com', 'mhark', '$2y$10$2drO0wgWO6REoghxBkpDpeLmvieNRUI8gC2wcH4slTiuW.EBTxscS', 'd96a801b5b4576be6af958c83f25b5833feb34e711cdde8aa3114c7589266845d5a393cee4131866855bf403daa77ea7ca09', 1),
-(5, 'mharkcastillocastalone@gmail.com', 'mharkcastillocastalone', '$2y$10$nH0Hhk/yYNCy7XE3WItBmeO9rHnxm.KlTLIQrtKDnpEheKH0VYseG', '73c3cfe3d3636eb190b2a5d70a5f121936925b35e19c2928b9123c16babb4ad5037ed0cdb5e0f8276bcf961bced62138e767', 0),
-(6, 'mhark@gmail.com', 'mharkcastillocastalone', '$2y$10$GL16LYeYTDnkOYWahihWpO6BjwLqAwSrhc.wzlY3tYqhh55O66IJ2', '998547370fc292c47c712ee0940b2839f93a7b995ad4a12c1f55c3dfd87ea26268e509a040f83abbc43adf5be0f734272b81', 0),
-(7, 'mhark@gmail.com', 'mhark1', '$2y$10$kZXoFwDfVso48pBmxjFUQOittkE6SmZvCLEGRoOKSr5kvlPpTVBKu', 'f56b2050fa26c4a2dec5bd02625e5957895572aaa9e8dcb5236ba3ee7f1a9101a8cef311a4e3e36c36b1c40bdf4b06d3da8c', 0);
+(13, 'marklawrencemercado8@gmail.com', 'Azure', '$2y$10$8EpYIZYPSYNGChcXfsMpTOhZ82mEeh6ZqUK4t9UszJCyDzfgmKgSS', '3b17bee68feeb18350a947d3ced7247b6461ae8fc07101635e552f2af00b6a405b24e4831a950f4207bfc36bdfb0f8aa5c35', 1),
+(14, 'marklawrencemercado8@gmail.com', 'mark', '$2y$10$aGuDjBWRMUEnTw0O8/evlusGclWGzc6unMr1Qbh.uz1oOgAZDJ5rK', 'e887e669be437912dcbed8d38cd2b7392a7281a5ffcba9c497cae823146d838bdca443a11ef31a9ddd91878e4235ffa0c4e5', 1),
+(15, 'marklawrencemercado8@gmail.com', 'Azure1', '$2y$10$YVy4hWWcCXqjGI1Uns6HG.XtP76PBlQu9Ai540OBIC4Rh2B28s.ea', '47733609259b9248acd3466506d91358ab4bc33618933aa38fdbc4971ca05cb49d6a8b8e21a42cffabd2593e09fc4cb2f6f1', 1);
 
 -- --------------------------------------------------------
 
@@ -468,10 +439,49 @@ CREATE TABLE `replies` (
 --
 
 INSERT INTO `replies` (`id`, `message_id`, `admin_id`, `reply`, `created_at`) VALUES
-(1, 1, 1, 'ok', '2024-09-09 02:20:15'),
-(1, 1, 1, 'ok', '2024-09-09 02:20:15'),
-(1, 1, 1, 'ok', '2024-09-09 02:20:15'),
 (1, 1, 1, 'ok', '2024-09-09 02:20:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_form`
+--
+
+CREATE TABLE `survey_form` (
+  `id` int(11) NOT NULL,
+  `question` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `survey_form`
+--
+
+INSERT INTO `survey_form` (`id`, `question`) VALUES
+(1, 'workerssssss'),
+(2, 'nerver');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_reponse`
+--
+
+CREATE TABLE `survey_reponse` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `survey_id` int(11) DEFAULT NULL,
+  `reponse` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `survey_reponse`
+--
+
+INSERT INTO `survey_reponse` (`id`, `user_id`, `survey_id`, `reponse`) VALUES
+(12, 14, 1, 'Never'),
+(13, 14, 2, 'Sometimes'),
+(14, 15, 1, 'Never'),
+(15, 15, 2, 'Sometimes');
 
 -- --------------------------------------------------------
 
@@ -492,22 +502,6 @@ CREATE TABLE `user_answers` (
 --
 
 INSERT INTO `user_answers` (`id`, `user_id`, `question_id`, `quiz_id`, `answer`) VALUES
-(73, 1, 4, 4, 'a'),
-(74, 1, 5, 4, 'b'),
-(75, 1, 6, 4, 'c'),
-(76, 1, 7, 4, 'd'),
-(0, 3, 4, 4, ''),
-(0, 3, 5, 4, ''),
-(0, 3, 6, 4, ''),
-(0, 3, 7, 4, ''),
-(73, 1, 4, 4, 'a'),
-(74, 1, 5, 4, 'b'),
-(75, 1, 6, 4, 'c'),
-(76, 1, 7, 4, 'd'),
-(73, 1, 4, 4, 'a'),
-(74, 1, 5, 4, 'b'),
-(75, 1, 6, 4, 'c'),
-(76, 1, 7, 4, 'd'),
 (73, 1, 4, 4, 'a'),
 (74, 1, 5, 4, 'b'),
 (75, 1, 6, 4, 'c'),
@@ -536,10 +530,6 @@ CREATE TABLE `user_score` (
 --
 
 INSERT INTO `user_score` (`id`, `user_id`, `quiz_id`, `score`, `correct_answers`, `wrong_answers`, `dates`, `ranks`, `retake_count`) VALUES
-(16, 1, 4, 2, 2, 2, NULL, NULL, 0),
-(0, 3, 4, 0, 0, 4, NULL, NULL, 0),
-(16, 1, 4, 2, 2, 2, NULL, NULL, 0),
-(16, 1, 4, 2, 2, 2, NULL, NULL, 0),
 (16, 1, 4, 2, 2, 2, NULL, NULL, 0);
 
 --
@@ -606,6 +596,12 @@ ALTER TABLE `job_postings`
   ADD KEY `employer_job_id` (`employer_id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `modules`
 --
 ALTER TABLE `modules`
@@ -618,9 +614,15 @@ ALTER TABLE `module_content`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `quizzes`
+-- Indexes for table `question`
 --
-ALTER TABLE `quizzes`
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quiz_name`
+--
+ALTER TABLE `quiz_name`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -630,20 +632,68 @@ ALTER TABLE `register`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `replies`
+--
+ALTER TABLE `replies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_form`
+--
+ALTER TABLE `survey_form`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_reponse`
+--
+ALTER TABLE `survey_reponse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_score`
+--
+ALTER TABLE `user_score`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin_profile`
+--
+ALTER TABLE `admin_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `applicant_profile`
+--
+ALTER TABLE `applicant_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `cases`
+--
+ALTER TABLE `cases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employer_documents`
@@ -667,31 +717,73 @@ ALTER TABLE `empyers`
 -- AUTO_INCREMENT for table `job_postings`
 --
 ALTER TABLE `job_postings`
-  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `module_content`
 --
 ALTER TABLE `module_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `quizzes`
+-- AUTO_INCREMENT for table `question`
 --
-ALTER TABLE `quizzes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `quiz_name`
+--
+ALTER TABLE `quiz_name`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `replies`
+--
+ALTER TABLE `replies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `survey_form`
+--
+ALTER TABLE `survey_form`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `survey_reponse`
+--
+ALTER TABLE `survey_reponse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `user_answers`
+--
+ALTER TABLE `user_answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
+--
+-- AUTO_INCREMENT for table `user_score`
+--
+ALTER TABLE `user_score`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
