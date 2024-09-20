@@ -1,7 +1,19 @@
 <?php
     include '../../php/conn_db.php';
-    session_start();
-    $user_Id = $_SESSION['id'];
+    function checkSession() {
+        session_start(); // Start the session
+    
+        // Check if the session variable 'id' is set
+        if (!isset($_SESSION['id'])) {
+            // Redirect to login page if session not found
+            header("Location: ../login.html");
+            exit();
+        } else {
+            // If session exists, store the session data in a variable
+            return $_SESSION['id'];
+        }
+    }
+    $user_Id = checkSession();
     $sql = "SELECT * FROM messages WHERE user_id = '$user_Id'";
     $result = $conn->query($sql);
 ?>
@@ -28,7 +40,11 @@
         
                 if ($reply_result->num_rows > 0) {
                 while($reply_row = $reply_result->fetch_assoc()) {
+<<<<<<< HEAD
                     $admin_sql = "SELECT * FROM admins_profile WHERE id = '" . $reply_row["admin_id"] . "'";
+=======
+                    $admin_sql = "SELECT * FROM admin_profile WHERE id = '" . $reply_row["admin_id"] . "'";
+>>>>>>> 6d4ed446a2f10b7af951a9aef7e071aadc7c636c
                     $admin_result = $conn->query($admin_sql);
                     $admin_row = $admin_result->fetch_assoc();
                     echo "<h2>Reply from " . $admin_row["username"] . "</h2>";

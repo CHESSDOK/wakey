@@ -20,14 +20,14 @@
 
     <!-- Body -->
     <p class="title">Registration</p>
-    <form class="form" action="../php/register.php" method="POST">
+    <form class="form" action="../php/register.php" method="POST" id="registrationForm">
         <div class="logol">
             <img src="../img/logo_peso.png" alt="Logo">
         </div>
         <p class="message">Signup now and get access to our job portal. </p>
 
         <label>
-            <input required="" placeholder="" type="email" class="input" name="email">
+            <input required="" type="email" class="input" name="email" id="emailInput">
             <span>Email</span>
         </label>
         <label>
@@ -36,7 +36,7 @@
         </label>
 
         <label>
-            <input required="" placeholder="" type="password" class="input" name="password">
+            <input required="" placeholder="" type="password" class="input" name="password" minlength="8" maxlength="16" id="passwordInput">
             <span>Password</span>
         </label>
         <button class="submit" type="submit">Submit</button>
@@ -44,5 +44,32 @@
     </form>
 
     <script src="../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('passwordInput').value;
+            const email = document.getElementById('emailInput').value;
+
+            // Define the patterns for required conditions
+            const hasUpperCase = /[A-Z]/.test(password); // Must have at least one uppercase letter
+            const hasLowerCase = /[a-z]/.test(password); // Must have at least one lowercase letter
+            const hasDigit = /\d/.test(password);        // Must have at least one digit
+            const hasSpecialChar = /[\W_]/.test(password); // Special character is optional
+            
+            // Email regex for validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                event.preventDefault(); // Prevent form submission
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Ensure all required conditions are met (uppercase, lowercase, digit)
+            if (!hasUpperCase || !hasLowerCase || !hasDigit) {
+                event.preventDefault(); // Prevent form submission
+                alert('Password must contain at least one uppercase letter, one lowercase letter, and one digit.');
+            }
+        });
+    </script>
+    
 </body>
 </html>

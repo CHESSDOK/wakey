@@ -1,7 +1,19 @@
 <?php
 include '../../php/conn_db.php';
-session_start();
-$userId = $_SESSION['id'];
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: ../login.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+$userId = checkSession();
 $user_id = $_GET['user_id'];
 // Fetch all employers
 $module_id = $_GET['course_id'];
@@ -74,8 +86,8 @@ if (!$row) {
                         <td class='num_cell'> <p> " . $row["id"] . " </td>
                         <td class='title_cell'> <p> " . $row["module_name"] . " </td>
                         <td class='btn_cell'>
-                            <a class='btn' href='module_content.php?user_id=". $user_id . " 
-                            &modules_id=". $row["id"] ."'>view more <i class='fas fa-chevron-right'></i></a>
+                            <a class='btn' href='module_content.php?user_id=". $user_id ." 
+                            &modules_id=". $row["id"] ."&course_id=". $module_id ."& module_name=".$row["module_name"]."'>view more <i class='fas fa-chevron-right'></i></a>
                         </td>
                     </tr>";
                 echo "</table>";

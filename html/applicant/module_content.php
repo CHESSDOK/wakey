@@ -1,9 +1,22 @@
 <?php
 include '../../php/conn_db.php';
-session_start();
-$userId = $_SESSION['id'];
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: ../login.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+$userId = checkSession();
 $user_id = $_GET['user_id'];
 $module_id = $_GET['modules_id'];
+$module_name = $_GET['module_name'];
 
 // Fetch the current user's details
 $sql_user = "SELECT * FROM register WHERE id = ?";
@@ -30,6 +43,23 @@ $result_module = $stmt->get_result();
 if (!$result_module) {
     die("Invalid query: " . $conn->error);
 }
+
+$sql_quiz = "SELECT * FROM quiz_name WHERE module_id = ?";
+$stmt_quiz = $conn->prepare($sql_quiz);
+$stmt_quiz->bind_param("i", $module_id);
+$stmt_quiz->execute();
+$result_quiz = $stmt_quiz->get_result();
+
+if ($row_quiz = $result_quiz->fetch_assoc()) {
+    // Store quiz ID and name
+    $quiz_id = $row_quiz['id'];
+} else {
+    $quiz_id = null;
+}
+
+$module_id = $_GET['course_id'];
+$sql = "SELECT * FROM modules WHERE course_id = $module_id ";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +68,7 @@ if (!$result_module) {
     <title>Module Content</title>
     
     <link rel="stylesheet" href="../../css/nav_float.css">
-    <link rel="stylesheet" href="../../css/Module.css">
+    <link rel="stylesheet" href="../../css/content.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -72,23 +102,29 @@ if (!$result_module) {
         <h1 class="h1">Content</h1>
     </header>
     
-    <table border="1">
         <?php
         if ($result_module->num_rows > 0) {
             while ($row = $result_module->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . htmlspecialchars($row['description']) . "</td>
-                        <td><a href='" . htmlspecialchars($row['video']) . "' target='_blank'>View Video</a></td>
-                        <td><a href='" . htmlspecialchars($row['file_path']) . "' target='_blank'>Open File</a></td>
-                        <td><a href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "'>Take Quiz</a></td>
-                    </tr>";
+                echo '<div class="container">';
+                    echo '<p class="label">' . htmlspecialchars($module_name) . '</p>' . '<div class="divider"></div>';
+                    echo '<p class="info">' . htmlspecialchars($row["description"]) . '</p>';
+                        echo '<a class="video" href="' . htmlspecialchars($row['video']) . '" target="_blank">
+                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/1200px-YouTube_icon_%282013-2017%29.png" 
+                              alt="YouTube Logo" style="width: 45px; height: 30px; vertical-align: middle;">
+                              View Video</a>';
+                        echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">
+                              <img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
+                              Open File</a>';
+                        echo '<a href="take_exam.php?module_id=' . htmlspecialchars($row["id"]) . '&q_id=' . htmlspecialchars($quiz_id) . '" target="_blank">
+                              <img class="icon" src="../../img/quiz.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
+                              Take Quiz</a>';
+                echo '</div>';
             }
         } else {
             echo "<tr><td colspan='4'>No module content found</td></tr>";
         }
         $conn->close();
-        ?>
-    </table>
+        ?> 
 
     <div class="btn-container">
         <a class="btn_back" href="modules_list.php?user_id=<?php echo htmlspecialchars($user_id); ?>&course_id=<?php echo htmlspecialchars($module_id); ?>">

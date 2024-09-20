@@ -14,11 +14,13 @@ if ($row['count'] > 0) {
     $job_title = $_POST['job_title'];
     $job_description = $_POST['job_description'];
     $vacant = $_POST['vacant'];
+    $spe = $_POST['spe'];
     $date_posted = date('Y-m-d');
 
+
     // Prepare and execute the insertion query
-    $stmt = $conn->prepare("INSERT INTO job_postings (employer_id, job_title, job_description, date_posted, vacant) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issss", $user_id, $job_title, $job_description, $date_posted, $vacant);
+    $stmt = $conn->prepare("INSERT INTO job_postings (employer_id, job_title, job_description, specialization, date_posted, vacant) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssss", $user_id, $job_title, $job_description, $spe, $date_posted, $vacant);
 
     if ($stmt->execute()) {
         // Get the ID of the newly inserted job

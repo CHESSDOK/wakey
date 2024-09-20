@@ -35,21 +35,36 @@ function sendVerificationEmail($email, $token) {
     }
 }
 
+if ($conn->connect_error) {
+    die('Database connection error: ' . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $conn->real_escape_string($_POST['user']);
     $email = $conn->real_escape_string($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+    // Generate a token for email verification
     $token = bin2hex(random_bytes(50));
 
-    $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$password', '$token', 0)";
+    // Insert the new user into the register table
+    $sql = "INSERT INTO register (email, username, password, token, is_verified) VALUES ('$email', '$username', '$hashedPassword', '$token', 0)";
 
     if ($conn->query($sql) === TRUE) {
         $last_id = $conn->insert_id;
-        $sql = "INSERT INTO applicant_profile (user_id) VALUES ('$last_id')";
-        
+
+        // Insert a new row in applicant_profile table
+        $sql = "INSERT INTO applicant_profile (user_id, email) VALUES ('$last_id','$email')";
+
         if ($conn->query($sql) === TRUE) {
+            // Send the verification email
             sendVerificationEmail($email, $token);
-            echo "<script type='text/javascript'> alert('Registration successful! Please verify your email.') ;window.location.href='../html/login.html'; </script>";
+
+            // Redirect or alert the user
+            echo "<script type='text/javascript'> alert('Registration successful! Please verify your email.'); window.location.href='../html/login.html'; </script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

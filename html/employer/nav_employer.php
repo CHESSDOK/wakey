@@ -68,7 +68,7 @@ if (!$row) {
       <li><a href="../../html/employer/employer_docs.html">Documents</a></li>
       <li><a href="../../html/about.html">About Us</a></li>
       <li><a href="../../html/employer/job_creat.php">Employer</a></li>
-      <li><a href="../../html/employer/applicant_list.php">Services</a></li>
+      <li><a href="../../html/employer/job_list.php">joblist</a></li>
       <li><a href="../../html/contact.html">Contact</a></li>
     </ul>
     <div class="auth">

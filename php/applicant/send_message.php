@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     $sql = "INSERT INTO messages (user_id, message) VALUES ('$user_id', '$message')";
     if ($conn->query($sql) === TRUE) {
-      echo "Message sent successfully!";
+      header("Location: ../../html/applicant/ofw_form.php");
     } else {
       echo "Error sending message: " . $conn->error;
     }
