@@ -1,19 +1,79 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Employer Registration</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="../../css/nav.css">
+  <link rel="stylesheet" href="../../css/register.css">
 </head>
 <body>
-    <h2>Employer Registration</h2>
-    <form action="../../php/employer/register_employer.php" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br><br>
-        <input type="submit" value="Register">
+
+    <!-- Navigation -->
+
+    <nav>
+        <div class="logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <p class="title">Registration</p>
+    <form class="form" action="../../php/employer/register_employer.php" method="POST" id="registrationForm">
+        <div class="logol">
+            <img src="../../img/logo_peso.png" alt="Logo">
+        </div>
+        <p class="message">Signup now and get access to our job portal. </p>
+
+        <label>
+            <input required="" type="email" class="input" name="email" id="emailInput">
+            <span>Email</span>
+        </label>
+        <label>
+            <input required="" placeholder="" type="text" class="input" name="user">
+            <span>username</span>
+        </label>
+
+        <label>
+            <input required="" placeholder="" type="password" class="input" name="password" minlength="8" maxlength="16" id="passwordInput">
+            <span>Password</span>
+        </label>
+        <button class="submit" type="submit">Submit</button>
+        <p class="signin">Already have an account? <a href="login_employer.html">Signin</a></p>
     </form>
-    <a href="login_employer.html">sign_in</a>
+
+    <script src="../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('passwordInput').value;
+            const email = document.getElementById('emailInput').value;
+
+            // Define the patterns for required conditions
+            const hasUpperCase = /[A-Z]/.test(password); // Must have at least one uppercase letter
+            const hasLowerCase = /[a-z]/.test(password); // Must have at least one lowercase letter
+            const hasDigit = /\d/.test(password);        // Must have at least one digit
+            const hasSpecialChar = /[\W_]/.test(password); // Special character is optional
+            
+            // Email regex for validation
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                event.preventDefault(); // Prevent form submission
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Ensure all required conditions are met (uppercase, lowercase, digit)
+            if (!hasUpperCase || !hasLowerCase || !hasDigit) {
+                event.preventDefault(); // Prevent form submission
+                alert('Password must contain at least one uppercase letter, one lowercase letter, and one digit.');
+            }
+        });
+    </script>
+    
 </body>
 </html>
+
+
