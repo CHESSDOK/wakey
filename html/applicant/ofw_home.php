@@ -123,7 +123,7 @@ $conn->close();
         <input type="text" id="lastName" name="lastName" class="form-control" value="<?php echo isset($row['last_name']) ? htmlspecialchars($row['last_name']) : ''; ?>" required>
       </td>
       <td>
-        <label for="Prefix" class="info">Prefix</label>
+        <label for="Prefix" class="info">Suffix</label>
         <select class="form-select" id="Prefix" name="Prefix">
           <option value="">Optional</option>
           <?php
@@ -286,7 +286,7 @@ $conn->close();
   </table>
 </div>
         <!-- Employment Details -->
-        <div id="section4" class="input-group">
+        <div id="section3" class="input-group">
           <h4>Employment Details</h4>
           <table>
             <tr>
@@ -385,7 +385,7 @@ $conn->close();
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="ofw_form.php">Next</a>
+        <a class="btn btn-primary nxt" href="ofw_form.php">Next</a>
       </form>
     </div>
   </div>

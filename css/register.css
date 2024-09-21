@@ -23,9 +23,8 @@
 .title {
 	text-align: center;
 	font-size: 3rem;
-	line-height: 2rem;
+	line-height: 0.9rem;
 	font-weight: 700;
-	padding-top: 15px;
 }
 
 .title2, .subtitle {
@@ -35,9 +34,11 @@
 }
 
 .title2 {
+	padding-top: 15px;
 	text-align: center;
-	font-size: 14px;
-	line-height: 0.1rem;
+	font-size: 2rem;
+	font-weight: 600;
+	line-height: 2rem;
 }
 
 .subtitle {

@@ -70,7 +70,7 @@ if (!$row) {
 
       // Change the URL after the transition ends
       setTimeout(function () {
-        window.location.href = "html/applicant/approf.php";
+        window.location.href = "html/applicant/a_profile.php";
       }, 300); // Adjust the delay according to your transition duration
 
       // Adding the class to initiate the fade-in and slide-up animation
