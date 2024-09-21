@@ -82,11 +82,48 @@ const disabilitySelect = document.getElementById('pwd');
            }
          });
 
+
+         // Handling 'Are you a 4Ps beneficiary?'
+  const fourPsSelect = document.getElementById('four-ps-beneficiary');
+  const householdIdInput = document.getElementById('household-id-input');
+
+  fourPsSelect.addEventListener('change', function() {
+    const value = this.value;
+    if (value === 'Yes') {
+      householdIdInput.style.display = 'block'; // Show input for Household ID
+    } else {
+      householdIdInput.style.display = 'none'; // Hide input for Household ID
+    }
+  });
+  
+  // Get references to select element and both input divs
+  const pwlSelect = document.getElementById('pwl');
+  const localInput = document.getElementById('local-input');
+  const overseasInput = document.getElementById('overseas-input');
+
+  // Add event listener for changes in the dropdown
+  pwlSelect.addEventListener('change', function() {
+    const value = this.value;
+
+    if (value === 'local') {
+      localInput.style.display = 'block';   // Show local input fields
+      overseasInput.style.display = 'none'; // Hide overseas input fields
+    } else if (value === 'overseas') {
+      localInput.style.display = 'none';    // Hide local input fields
+      overseasInput.style.display = 'block'; // Show overseas input fields
+    } else {
+      localInput.style.display = 'none';    // Hide both if no selection
+      overseasInput.style.display = 'none';
+    }
+  });
         // Hide sub-dropdown on page load if no selection
         window.onload = function() {
             subDropdown.style.display = 'none';
-            additionalInput.style.display = 'none'; // Hide additional 
-            disabilityInput.style.display = 'none'; // Hide disability input
+            additionalInput.style.display = 'none';
+            disabilityInput.style.display = 'none';
             activelyLookingInput.style.display = 'none';
             willingToWorkInput.style.display = 'none';
+            householdIdInput.style.display = 'none';
+            localInput.style.display = 'none';
+            overseasInput.style.display = 'none';
         };
