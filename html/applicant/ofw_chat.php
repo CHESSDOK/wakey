@@ -40,11 +40,8 @@
         
                 if ($reply_result->num_rows > 0) {
                 while($reply_row = $reply_result->fetch_assoc()) {
-<<<<<<< HEAD
                     $admin_sql = "SELECT * FROM admins_profile WHERE id = '" . $reply_row["admin_id"] . "'";
-=======
                     $admin_sql = "SELECT * FROM admin_profile WHERE id = '" . $reply_row["admin_id"] . "'";
->>>>>>> 6d4ed446a2f10b7af951a9aef7e071aadc7c636c
                     $admin_result = $conn->query($admin_sql);
                     $admin_row = $admin_result->fetch_assoc();
                     echo "<h2>Reply from " . $admin_row["username"] . "</h2>";

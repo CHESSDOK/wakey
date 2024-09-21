@@ -1,35 +1,3 @@
-<?php
-include '../php/conn_db.php';
-function checkSession() {
-  session_start(); // Start the session
-
-  // Check if the session variable 'id' is set
-  if (!isset($_SESSION['id'])) {
-      // Redirect to login page if session not found
-      header("Location: login.html");
-      exit();
-  } else {
-      // If session exists, store the session data in a variable
-      return $_SESSION['id'];
-  }
-}
-$userId = checkSession();
-
-$sql = "SELECT * FROM register WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if (!$result) {
-    die("Invalid query: " . $conn->error); 
-}
-
-$row = $result->fetch_assoc();
-if (!$row) {
-    die("User not found.");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +74,7 @@ body::before{
       <h2>Message Us!</h2>
     </div>
     <div class="contact-form">
-      <form action="submit_form.php" method="post">
+      <form action="../php/contact_form.php" method="post">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" required>
           
