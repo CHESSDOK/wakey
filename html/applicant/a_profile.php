@@ -59,6 +59,7 @@ $conn->close();
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../css/profile.css">
   <link rel="stylesheet" href="../../css/nav_float.css">
+
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#scrollspy-menu" data-bs-offset="175">
@@ -109,11 +110,11 @@ $conn->close();
     <div class="form-content">
     <form action="../../php/#/#" method="POST">
         <!-- Personal Information -->
-<div id="section1" class="input-group">
+        <div id="section1" class="input-group">
   <h4>Personal Information</h4>
   <table>
     <tr>
-    <td>
+      <td>
         <label for="lastName" class="info">Surname</label>
         <input type="text" id="lastName" name="lastName" class="form-control" value="<?php echo isset($row['last_name']) ? htmlspecialchars($row['last_name']) : ''; ?>" required>
       </td>
@@ -130,30 +131,30 @@ $conn->close();
         <select class="form-select" id="Prefix" name="Prefix">
           <option value="">Optional</option>
           <?php
-            $prefixes = ['none','Sr.', 'Jr.', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+            $prefixes = ['none', 'Sr.', 'Jr.', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
             foreach ($prefixes as $prefix) {
-                echo "<option value='$prefix'" . (isset($row['prefix']) && $row['prefix'] == $prefix ? ' selected' : '') . ">$prefix</option>";
+              echo "<option value='$prefix'" . (isset($row['prefix']) && $row['prefix'] == $prefix ? ' selected' : '') . ">$prefix</option>";
             }
           ?>
         </select>
       </td>
     </tr>
     <tr>
-    <td>
+      <td>
         <label for="dob" class="info">Date of Birth</label>
         <input type="date" id="dob" name="dob" class="form-control" value="<?php echo isset($row['dob']) ? htmlspecialchars($row['dob']) : ''; ?>" required>
       </td>
       <td colspan="2">
-      <label for="pob" class="info">Place of Birth</label>
-      <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <label for="pob" class="info">Place of Birth</label>
+        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
       </td>
     </tr>
     <tr>
-        <td>
-    <label for="religion" class="info">Religion</label>
-    <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
-        </td>  
-        <td colspan="2">
+      <td>
+        <label for="religion" class="info">Religion</label>
+        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+      </td>
+      <td colspan="2">
         <label for="civilStatus" class="info">Civil Status</label>
         <select class="form-select" id="civilStatus" name="civilStatus" required>
           <option value="Single" <?php echo (isset($row['civil_status']) && $row['civil_status'] == 'Single') ? 'selected' : ''; ?>>Single</option>
@@ -162,10 +163,10 @@ $conn->close();
           <option value="Separated" <?php echo (isset($row['civil_status']) && $row['civil_status'] == 'Separated') ? 'selected' : ''; ?>>Separated</option>
           <option value="Live-in" <?php echo (isset($row['civil_status']) && $row['civil_status'] == 'Live-in') ? 'selected' : ''; ?>>Live-in</option>
         </select>
-      </td>  
-</tr>
+      </td>
+    </tr>
     <tr>
-    <td colspan="1">
+      <td colspan="1">
         <label for="sex" class="info">Sex</label>
         <select class="form-select" id="sex" name="sex" required>
           <option value="Male" <?php echo (isset($row['sex']) && $row['sex'] == 'Male') ? 'selected' : ''; ?>>Male</option>
@@ -174,24 +175,21 @@ $conn->close();
       </td>
       <td class="house" colspan="2">
         <label for="houseadd" class="info">Present Address</label>
-        <input type="text" id="houseadd" name="houseadd" class="form-control h1ouse-info"
-        placeholder="House no. / Street / Subdivision / Barangay / City or Municipality / Province"
-        value="<?php echo isset($row['house_address']) ? htmlspecialchars($row['house_address']) : ''; ?>" required>
+        <input type="text" id="houseadd" name="houseadd" class="form-control h1ouse-info" placeholder="House no. / Street / Subdivision / Barangay / City or Municipality / Province" value="<?php echo isset($row['house_address']) ? htmlspecialchars($row['house_address']) : ''; ?>" required>
       </td>
     </tr>
     <tr>
-    <td>
-    <label for="tin" class="info">TIN</label>
-    <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
-</td>
-<td>
-<label for="height" class="info">Height</label>
-<input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
-</td>
-      
+      <td>
+        <label for="tin" class="info">TIN</label>
+        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+      </td>
+      <td>
+        <label for="height" class="info">Height</label>
+        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+      </td>
     </tr>
     <tr>
-    <td>
+      <td>
         <label for="sssNo" class="info">GSIS/SSS No.</label>
         <input type="text" id="sssNo" name="sssNo" class="form-control" value="<?php echo isset($row['sss_no']) ? htmlspecialchars($row['sss_no']) : ''; ?>">
       </td>
@@ -203,10 +201,9 @@ $conn->close();
         <label for="philhealthNo" class="info">PhilHealth No.</label>
         <input type="text" id="philhealthNo" name="philhealthNo" class="form-control" value="<?php echo isset($row['philhealth_no']) ? htmlspecialchars($row['philhealth_no']) : ''; ?>">
       </td>
-      
     </tr>
     <tr>
-    <td>
+      <td>
         <label for="email" class="info">Email</label>
         <input type="email" id="email" name="email" class="form-control" value="<?php echo isset($row['email']) ? htmlspecialchars($row['email']) : ''; ?>" required>
       </td>
@@ -218,44 +215,93 @@ $conn->close();
         <label for="landline" class="info">Landline No.</label>
         <input type="tel" id="Landline" name="Landline" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>" required>
       </td>
-      
     </tr>
     <tr>
-    <td>
-<label for="pwd" class="info">Disability</label>
-<select class="form-select" id="pwd" name="pwd" required>
+      <td>
+        <label for="pwd" class="info">Disability</label>
+        <select class="form-select" id="pwd" name="pwd" required>
           <option value="Visual" <?php echo (isset($row['#']) && $row['#'] == 'Visual') ? 'selected' : ''; ?>>Visual</option>
           <option value="Hearing" <?php echo (isset($row['#']) && $row['#'] == 'Hearing') ? 'selected' : ''; ?>>Hearing</option>
           <option value="Speech" <?php echo (isset($row['#']) && $row['#'] == 'Speech') ? 'selected' : ''; ?>>Speech</option>
           <option value="Physical" <?php echo (isset($row['#']) && $row['#'] == 'Physical') ? 'selected' : ''; ?>>Physical</option>
           <option value="Others" <?php echo (isset($row['#']) && $row['#'] == 'Others') ? 'selected' : ''; ?>>Others</option>
         </select>
-</td>
+      </td>
+      <td>
+        <div id="disability-input" class="additional-input">
+          <label for="disability-other" class="info">Please specify:</label>
+          <input type="text" id="disability-other" class="form-control" placeholder="Enter details here">
+        </div>
+      </td>
     </tr>
     <tr>
-    <td>
-    <label for="employment-status">Employment Status:</label>
-    <select id="employment-status">
-        <option value="">Select</option>
-        <option value="employed">Employed</option>
-        <option value="unemployed">Unemployed</option>
-    </select>
-
-    <div id="sub-dropdown" class="sub-dropdown">
-        <label for="employment-type">Employment Type:</label>
-        <select id="employment-type">
+      <td>
+        <label for="employment-status" class="info">Employment Status:</label>
+        <select class="form-select" id="employment-status" required>
+          <option value="">Select</option>
+          <option value="employed">Employed</option>
+          <option value="unemployed">Unemployed</option>
+        </select>
+      </td>
+      <td>
+        <div id="sub-dropdown" class="sub-dropdown">
+          <label for="employment-type" class="info">Employment Type:</label>
+          <select class="form-select" id="employment-type" required>
             <option value="">Select</option>
             <option value="wage">Wage Employed</option>
             <option value="self">Self Employed</option>
+            <option value="fresh_grad" class="unemployed-option">New Entrant/Fresh Graduate</option>
+            <option value="f_contract" class="unemployed-option">Finished Contract</option>
             <option value="resigned" class="unemployed-option">Resigned</option>
             <option value="retired" class="unemployed-option">Retired</option>
+            <option value="local" class="unemployed-option">Terminated/Laidoff(local)</option>
+            <option value="abroad" class="unemployed-option">Terminated/Laidoff(abroad)</option>
+            <option value="others" class="unemployed-option">Others, specify</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <div id="additional-input" class="info">
+          <label for="other-reason">Please specify country, others:</label>
+          <input type="text" id="other-reason" class="form-control" placeholder="Enter details here">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="actively-looking" class="info">Are you actively looking for work?</label>
+        <select class="form-select" id="actively-looking" name="actively-looking" required>
+          <option value="">Select</option>
+          <option value="Yes" <?php echo (isset($row['actively-looking']) && $row['actively-looking'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
+          <option value="No" <?php echo (isset($row['actively-looking']) && $row['actively-looking'] == 'No') ? 'selected' : ''; ?>>No</option>
         </select>
-    </div>
-        </td>
-      
+      </td>
+      <td colspan="2">
+        <div id="actively-looking-input" class="additional-input">
+          <label for="actively-looking-details" class="info">Please specify:</label>
+          <input type="text" id="actively-looking-details" class="form-control" placeholder="How long have you been looking for work?">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="willing-to-work" class="info">Willing to work immediately?</label>
+        <select class="form-select" id="willing-to-work" name="willing-to-work" required>
+          <option value="">Select</option>
+          <option value="Yes" <?php echo (isset($row['willing-to-work']) && $row['willing-to-work'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
+          <option value="No" <?php echo (isset($row['willing-to-work']) && $row['willing-to-work'] == 'No') ? 'selected' : ''; ?>>No</option>
+        </select>
+      </td>
+      <td colspan="2">
+        <div id="willing-to-work-input" class="additional-input">
+          <label for="willing-to-work-details" class="info">Please specify:</label>
+          <input type="text" id="willing-to-work-details" class="form-control" placeholder="If no, when?">
+        </div>
+      </td>
     </tr>
   </table>
 </div>
+
 
 <div id="section2" class="input-group">
   <h4>Job Preference</h4>
@@ -301,5 +347,6 @@ $conn->close();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../javascript/script.js"></script> 
+<script src="../../javascript/a_profile.js"></script> 
 </body>
 </html>
