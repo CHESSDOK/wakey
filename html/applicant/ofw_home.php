@@ -286,7 +286,7 @@ $conn->close();
   </table>
 </div>
         <!-- Employment Details -->
-        <div id="section4" class="input-group">
+        <div id="section3" class="input-group">
           <h4>Employment Details</h4>
           <table>
             <tr>
