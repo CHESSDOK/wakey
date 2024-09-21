@@ -373,9 +373,82 @@ $conn->close();
   </table>
 </div>
 
+<!--Language Proficiency-->
 <div id="section3" class="input-group">
-  <h4>Language-Dialect Proficiency</h4>
+  <h4>Language/Dialect Proficiency</h4>
   <table>
+    <tr>
+      <td>
+        <label class="info">(check if applicable)</label>
+      </td>
+      <td>
+        <label class="info lguages">Read</label>
+      </td>
+      <td>
+        <label class="info lguages">Write</label>
+      </td>
+      <td>
+        <label class="info lguages">Speak</label>
+      </td>
+      <td>
+        <label class="info lguages">Understand</label>
+      </td>
+    </tr>
+    
+    <tr>
+       <td>
+         <label class="info">English</label>
+      </td>
+      <td>
+        <input class="form-check-input lguages" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
+
+    <tr>
+       <td>
+        <label class="info">Filipino</label>
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
+
+    <tr>
+       <td>
+        <label class="info">Others</label>
+        <input type="text" id="language_others" class="form-control">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
   </table>
 </div>
 

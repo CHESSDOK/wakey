@@ -85,3 +85,12 @@
   .ocu_input, .pwl_input{
     margin-top: 15px;
   }
+
+  .lguages th, .lguages td {
+    border: 1px solid #333;
+    width: 150px; /* Set a fixed width for each cell */
+    height: 50px; /* Set a fixed height for each cell */
+    overflow: hidden; /* Hide overflow if the content is too large */
+    text-overflow: ellipsis; /* Optional: To show "..." for overflow text */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
