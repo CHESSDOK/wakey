@@ -57,3 +57,35 @@ document.getElementById("signup").addEventListener("click", function (event) {
     document.body.classList.add('fade-in');
 });
 
+//a_profile
+const employmentStatus = document.getElementById('employment-status');
+        const subDropdown = document.getElementById('sub-dropdown');
+        const employmentType = document.getElementById('employment-type');
+
+        employmentStatus.addEventListener('change', function() {
+            const value = this.value;
+
+            if (value === 'employed') {
+                subDropdown.style.display = 'block';
+                employmentType.innerHTML = `
+                    <option value="">Select</option>
+                    <option value="wage">Wage Employed</option>
+                    <option value="self">Self Employed</option>
+                `;
+            } else if (value === 'unemployed') {
+                subDropdown.style.display = 'block';
+                employmentType.innerHTML = `
+                    <option value="">Select</option>
+                    <option value="resigned">Resigned</option>
+                    <option value="retired">Retired</option>
+                `;
+            } else {
+                subDropdown.style.display = 'none';
+                employmentType.innerHTML = '<option value="">Select</option>'; // Reset sub-dropdown
+            }
+        });
+
+        // Hide sub-dropdown on page load if no selection
+        window.onload = function() {
+            subDropdown.style.display = 'none';
+        };
