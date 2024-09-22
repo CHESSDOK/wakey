@@ -181,11 +181,11 @@ $conn->close();
     <tr>
       <td>
         <label for="tin" class="info">TIN</label>
-        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <input type="text" id="tin" name="tin" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
       </td>
       <td>
         <label for="height" class="info">Height</label>
-        <input type="text" id="#" name="#" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <input type="text" id="height" name="height" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
       </td>
     </tr>
     <tr>
@@ -230,17 +230,17 @@ $conn->close();
       <td>
         <div id="disability-input" class="additional-input">
           <label for="disability-other" class="info">Please specify:</label>
-          <input type="text" id="disability-other" class="form-control" placeholder="Enter details here">
+          <input type="text" id="disability-other" name="pwd2" class="form-control" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
         </div>
       </td>
     </tr>
     <tr>
       <td>
         <label for="employment-status" class="info">Employment Status:</label>
-        <select class="form-select" id="employment-status" required>
+        <select class="form-select" id="employment-status" name="employent_status" required>
           <option value="">Select</option>
-          <option value="employed">Employed</option>
-          <option value="unemployed">Unemployed</option>
+          <option value="employed" <?php echo (isset($row['#']) && $row['#'] == 'employed') ? 'selected' : ''; ?> >Employed</option>
+          <option value="unemployed" <?php echo (isset($row['#']) && $row['#'] == 'unemployed') ? 'selected' : ''; ?> >Unemployed</option>
         </select>
       </td>
       <td>
