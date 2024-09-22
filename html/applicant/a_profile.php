@@ -57,7 +57,7 @@ $conn->close();
   <title>Form Submission</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../css/profile.css">
+  <link rel="stylesheet" href="../../css/a_profile.css">
   <link rel="stylesheet" href="../../css/nav_float.css">
 
 </head>
@@ -110,7 +110,7 @@ $conn->close();
     <div class="form-content">
     <form action="../../php/#/#" method="POST">
         <!-- Personal Information -->
-        <div id="section1" class="input-group">
+<div id="section1" class="input-group">
   <h4>Personal Information</h4>
   <table>
     <tr>
@@ -299,19 +299,156 @@ $conn->close();
         </div>
       </td>
     </tr>
+    <tr>
+      <td colspan="2">
+        <label for="four-ps-beneficiary" class="info">Are you a 4Ps beneficiary?</label>
+        <select class="form-select" id="four-ps-beneficiary" name="four-ps-beneficiary" required>
+          <option value="">Select</option>
+          <option value="Yes" <?php echo (isset($row['four-ps-beneficiary']) && $row['four-ps-beneficiary'] == 'Yes') ? 'selected' : ''; ?>>Yes</option>
+          <option value="No" <?php echo (isset($row['four-ps-beneficiary']) && $row['four-ps-beneficiary'] == 'No') ? 'selected' : ''; ?>>No</option>
+        </select>
+      </td>
+      <td colspan="2">
+        <div id="household-id-input" class="additional-input">
+          <label for="household-id" class="info">If yes, Household ID No.</label>
+          <input type="text" id="household-id" class="form-control" placeholder="Household ID">
+        </div>
+      </td>
+    </tr>
   </table>
 </div>
 
-
+    <!--Job Preference Section 2-->
 <div id="section2" class="input-group">
   <h4>Job Preference</h4>
   <table>
+    <tr>
+      <td>
+        <label for="occupation" class="info">Preferred Occupation</label>
+        <input type="text" id="occupation_1" name="#" class="form-control ocu_input" placeholder="1 - Occupation" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <input type="text" id="occupation_2" name="#" class="form-control ocu_input" placeholder="2 - Occupation" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <input type="text" id="occupation_3" name="#" class="form-control ocu_input" placeholder="3 - Occupation" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+        <input type="text" id="occupation_4" name="#" class="form-control ocu_input" placeholder="4 - Occupation" value="<?php echo isset($row['#']) ? htmlspecialchars($row['#']) : ''; ?>">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="pwl" class="info">Preferred Work Location</label>
+        <select class="form-select" id="pwl" name="pwl" required>
+          <option value="">Select</option>
+          <option value="local" <?php echo (isset($row['pwl']) && $row['pwl'] == 'local') ? 'selected' : ''; ?>>Local, specify cities/municipalities</option>
+          <option value="overseas" <?php echo (isset($row['pwl']) && $row['pwl'] == 'overseas') ? 'selected' : ''; ?>>Overseas, specify countries</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="local-input" class="location-input">
+          <input type="text" name="local" class="form-control pwl_input" placeholder="1 - City/Municipality" value="<?php echo isset($row['local-city1']) ? htmlspecialchars($row['local-city1']) : ''; ?>">
+          <input type="text" name="local" class="form-control pwl_input" placeholder="2 - City/Municipality" value="<?php echo isset($row['local-city2']) ? htmlspecialchars($row['local-city2']) : ''; ?>">
+          <input type="text" name="local" class="form-control pwl_input" placeholder="3 - City/Municipality" value="<?php echo isset($row['local-city3']) ? htmlspecialchars($row['local-city3']) : ''; ?>">
+        </div>
+            
+        <div id="overseas-input" class="location-input">
+          <input type="text" name="overseas-country1" class="form-control overseas-option pwl_input" placeholder="1 - Country" value="<?php echo isset($row['overseas-country1']) ? htmlspecialchars($row['overseas-country1']) : ''; ?>">
+          <input type="text" name="overseas-country2" class="form-control overseas-option pwl_input" placeholder="2 - Country" value="<?php echo isset($row['overseas-country2']) ? htmlspecialchars($row['overseas-country2']) : ''; ?>">
+          <input type="text" name="overseas-country3" class="form-control overseas-option pwl_input" placeholder="3 - Country" value="<?php echo isset($row['overseas-country3']) ? htmlspecialchars($row['overseas-country3']) : ''; ?>">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <label for="salary" class="info">Expected Salary</label>
+          <input type="text" id="salary" class="form-control" placeholder="Input Range" require>
+      </td>
+      <td>
+          <label for="passport" class="info">Passport No.</label>
+          <input type="text" id="passport" class="form-control" placeholder="Input Passport Number" require>
+      </td>
+      <td>
+          <label for="passport_expiry" class="info">Expiry date</label>
+          <input type="date" id="passport_expiry" class="form-control" placeholder="Input Range" require>
+      </td>
+    </tr>
   </table>
 </div>
 
+<!--Language Proficiency-->
 <div id="section3" class="input-group">
-  <h4>Language-Dialect Proficiency</h4>
+  <h4>Language/Dialect Proficiency</h4>
   <table>
+    <tr>
+      <td>
+        <label class="info">(check if applicable)</label>
+      </td>
+      <td>
+        <label class="info lguages">Read</label>
+      </td>
+      <td>
+        <label class="info lguages">Write</label>
+      </td>
+      <td>
+        <label class="info lguages">Speak</label>
+      </td>
+      <td>
+        <label class="info lguages">Understand</label>
+      </td>
+    </tr>
+    
+    <tr>
+       <td>
+         <label class="info">English</label>
+      </td>
+      <td>
+        <input class="form-check-input lguages" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
+
+    <tr>
+       <td>
+        <label class="info">Filipino</label>
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
+
+    <tr>
+       <td>
+        <label class="info">Others</label>
+        <input type="text" id="language_others" class="form-control">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+      <td>
+        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      </td>
+    </tr> 
   </table>
 </div>
 
@@ -346,7 +483,8 @@ $conn->close();
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../javascript/script.js"></script> 
+
 <script src="../../javascript/a_profile.js"></script> 
+<script src="../../javascript/script.js"></script> 
 </body>
 </html>
