@@ -19,6 +19,7 @@ $row = $result->fetch_assoc();
 if (!$row) {
     die("User not found.");
 }
+
 ?>
 
 <head>
@@ -26,6 +27,7 @@ if (!$row) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing Page</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/notif.css">
 </head>
 <body>
 <nav>
@@ -59,11 +61,13 @@ if (!$row) {
             <span class="label4"> JOB PORTAL &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><br>
             <span class="label5">YOUR <span style="color: #3D93D3; font-weight: bold">NEW CAREER </span> STARTS HERE!</span></p>
             <button class="label6">Find Job</button>
+            <a href="html/applicant/sched_list.php">Interview</a>
             <p><span class="label7"> Available in one roof the various employment promotion, manpower programs, and services of the DOLE </span><br>
                 <span class="label8">and other government agencies to enable all types of clientele to know more about them and seek </span> <br>
                 <span class="label9"></span>specific assistance they require.</span></p>
         </div>
     </div>
+
     <script>
     document.getElementById("emprof").addEventListener("click", function (event) {
       event.preventDefault(); // Prevent default link behavior

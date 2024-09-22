@@ -29,10 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<script>alert('Please verify your email before logging in.');</script>";
             }
         } else {
-            echo "<script>alert('Invalid username/email or password.');</script>";
+            echo "<script> alert('Invalid username/email or password.');
+                    window.location.href = '../html/login.html';</script>";
         }
     } else {
-        echo "<script>alert('No account found with this username/email.');</script>";
+        echo "<script>alert('No account found with this username/email.');
+                window.location.href = '../html/login.html';</script>";
     }
 }
 ?>

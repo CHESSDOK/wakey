@@ -1,34 +1,47 @@
 <?php
 include '../../php/conn_db.php';
+function checkSession() {
+    session_start(); // Start the session
+
+    // Check if the session variable 'id' is set
+    if (!isset($_SESSION['id'])) {
+        // Redirect to login page if session not found
+        header("Location: html/login_employer.html");
+        exit();
+    } else {
+        // If session exists, store the session data in a variable
+        return $_SESSION['id'];
+    }
+}
+
+$userId = checkSession();
+// Get user_id from URL
+// Fetch documents for the selected employer
+
 $jobid = $_GET['job_id'];
 
 // SQL JOIN to fetch applicant details and their applications
-$sql = "
-    SELECT applications.applicant_id, 
-           applicant_profile.first_name, 
-           applicant_profile.middle_name, 
-           applicant_profile.last_name, 
-           applications.job
-    FROM applications
-    INNER JOIN applicant_profile ON applications.applicant_id = applicant_profile.id
-    WHERE applications.job_posting_id = $jobid
+$sql = "SELECT ap.*, a.* 
+            FROM applicant_profile ap
+            JOIN applications a ON ap.user_id = a.applicant_id
+            WHERE a.job_posting_id = $jobid
 ";
 $result = $conn->query($sql);
 
-// $sql = "SELECT * FROM register WHERE id = ?";
-// $stmt = $conn->prepare($sql);
-// $stmt->bind_param("i", $userId);
-// $stmt->execute();
-// $res = $stmt->get_result();
+$sql = "SELECT * FROM empyers WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$res = $stmt->get_result();
 
-// if (!$res) {
-//    die("Invalid query: " . $conn->error); 
-// }
+if (!$res) {
+   die("Invalid query: " . $conn->error); 
+}
 
-// $row = $res->fetch_assoc();
-// if (!$row) {
-//    die("User not found.");
-// }
+$row = $res->fetch_assoc();
+if (!$row) {
+   die("User not found.");
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +94,7 @@ $result = $conn->query($sql);
                         <td>" . htmlspecialchars($row["applicant_id"]) . "</td>
                         <td>" . htmlspecialchars($full_name) . "</td>
                         <td>" . htmlspecialchars($row["job"]) . "</td>
-                        <td><a href='applicant_profile.php?user_id=" . htmlspecialchars($row["applicant_id"]) . "'>View</a></td>
+                        <td><a href='applicant_profile.php?user_id=" . htmlspecialchars($row["applicant_id"]) . " &job_id=" . htmlspecialchars($row["job_posting_id"]) . "'>View</a></td>
                     </tr>";
             }
         } else {
