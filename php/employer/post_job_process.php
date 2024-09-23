@@ -16,11 +16,13 @@ if ($row['count'] > 0) {
     $vacant = $_POST['vacant'];
     $spe = $_POST['spe'];
     $date_posted = date('Y-m-d');
+    $requirment = $_POST['req'];
+    $location = $_POST['loc'];
+    $remarks = $_POST['rem'];
 
-
-    // Prepare and execute the insertion query
-    $stmt = $conn->prepare("INSERT INTO job_postings (employer_id, job_title, job_description, specialization, date_posted, vacant) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssss", $user_id, $job_title, $job_description, $spe, $date_posted, $vacant);
+    // Corrected SQL syntax: added the missing closing parenthesis
+    $stmt = $conn->prepare("INSERT INTO job_postings (employer_id, job_title, job_description, specialization, requirment, work_location, remarks, date_posted, vacant) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssssss", $user_id, $job_title, $job_description, $spe, $requirment, $location, $remarks, $date_posted, $vacant);
 
     if ($stmt->execute()) {
         // Get the ID of the newly inserted job

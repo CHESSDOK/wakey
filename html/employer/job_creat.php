@@ -51,6 +51,13 @@ body::before{
             </div>
         <label for="job_description">Job Description:</label>
         <textarea name="job_description" id="job_description" required></textarea><br>
+        <label for="Q/R">Qualification/Requirements</label>
+        <textarea name="req" id="req" ></textarea> <br>
+        <label for="WL">Work Location</label>
+        <input type="text" name="loc" id="loc"> <br>
+        <label for="">Remarks</label>
+        <input type="text" name="rem" id="rem"><br>
+
 
         <input type="submit" value="Post Job">
     </form>

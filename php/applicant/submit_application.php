@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute the statement
     if ($stmt->execute()) {
-        echo "<h1>Application Submitted</h1>";
-        echo "<p>Thank you for applying for the $job position. We will review your application and get back to you.</p>";
+        header("Location: ../../html/applicant/applicant.php");
     } else {
         echo "Error: " . $stmt->error;
     }
