@@ -381,16 +381,16 @@ $conn->close();
       <td>
         <label class="info">(check if applicable)</label>
       </td>
-      <td>
+      <td class="center-checkbox">
         <label class="info lguages">Read</label>
       </td>
-      <td>
+      <td class="center-checkbox">
         <label class="info lguages">Write</label>
       </td>
-      <td>
+      <td class="center-checkbox">
         <label class="info lguages">Speak</label>
       </td>
-      <td>
+      <td class="center-checkbox">
         <label class="info lguages">Understand</label>
       </td>
     </tr>
@@ -399,17 +399,17 @@ $conn->close();
        <td>
          <label class="info">English</label>
       </td>
-      <td>
-        <input class="form-check-input lguages" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
     </tr> 
 
@@ -417,36 +417,35 @@ $conn->close();
        <td>
         <label class="info">Filipino</label>
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
     </tr> 
 
     <tr>
-       <td>
-        <label class="info">Others</label>
-        <input type="text" id="language_others" class="form-control">
+       <td class="label_checkbox">
+        <input type="text" id="language_others" class="form-control" placeholder="Others">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
-      <td>
-        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+      <td class="center-checkbox">
+        <input class="form-check-input check" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
       </td>
     </tr> 
   </table>
@@ -455,6 +454,159 @@ $conn->close();
 <div id="section4" class="input-group">
   <h4>Educational Background</h4>
   <table>
+  <tr>
+      <td>
+      </td>
+      <td class="info_center">
+        <label class="info">School</label>
+      </td>
+      <td class="info_center">
+        <label class="info">Course</label>
+      </td>
+      <td class="info_center">
+        <label class="info">Year Graduated</label>
+      </td>
+      <td class="info_center">
+        <label class="info">If Undergraduate</label>
+          <table>
+            <tr>
+              <td class="info_center">
+                <label class="info_sub">What level?</label>
+              </td>
+              <td class="info_center">
+                <label class="info_sub">Year last attended</label>
+              </td>
+            </tr>
+          </table>
+      </td>
+      <td class="info_center">
+        <label class="info">Awards Received</label>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <label class="info">Elementary</label>    
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <label class="info">Secondary</label>    
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <label class="info">Tertiary</label>    
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        <label class="info">Graduate Studies</label>    
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+      <td>
+        <table>
+          <tr>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+            <td>
+              <input type="text" id="language_others" class="form-control info_sub" placeholder="">
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td>
+        <input type="text" id="language_others" class="form-control" placeholder="">
+      </td>
+    </tr>
   </table>
 </div>
 

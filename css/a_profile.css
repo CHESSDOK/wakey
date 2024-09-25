@@ -30,7 +30,19 @@
     font-size: 1.2em;
     color: #6b6969;
   }
+
+  .info_sub {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #6b6969;
+  }
   
+  .info_center {
+    text-align: center; /* Centers horizontally */
+    vertical-align: middle; /* Centers vertically */
+  }
+
   .h1ouse-info {
     width: 100%;
   }
@@ -47,7 +59,18 @@
   td {
     padding: 10px;
   }
+
+  .center-checkbox {
+    width: 5%;
+    text-align: center; /* Centers horizontally */
+    vertical-align: middle; /* Centers vertically */
+  }
+
+  .label_checkbox {
+    width: 20%;
+  }
   
+
   .scrollspy {
     width: 250px;
     position: sticky;
@@ -94,3 +117,12 @@
     text-overflow: ellipsis; /* Optional: To show "..." for overflow text */
     white-space: nowrap; /* Prevent text from wrapping */
   }
+
+  table .check{
+    align-items: center;
+    width: 20px; /* Adjust the size as needed */
+    height: 20px;
+    transform: scale(1.5); /* Increase the size proportionally */
+    margin: 0 5px; /* Optional: Adjust spacing */
+  }
+  
