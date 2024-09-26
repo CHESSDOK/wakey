@@ -106,8 +106,8 @@ body::before{
       <div class="offcanvas-body">
           <table class="menu">
               <tr><td><a href="../index(applicant).php" class="nav-link">Home</a></td></tr>
-              <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
-              <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
+              <tr><td><a href="html/applicant.php" class="nav-link">Applicant</a></td></tr>
+              <tr><td><a href="htmltraining_list.php" class="nav-link">Training</a></td></tr>
               <tr><td><a href="../html/ofw_home.php#" class="nav-link">OFW</a></td></tr>
               <tr><td><a href="../html/about.php" class="nav-link">About Us</a></td></tr>
               <tr><td><a href="#" class="active nav-link">Contact Us</a></td></tr>

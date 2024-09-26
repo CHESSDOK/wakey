@@ -1,3 +1,4 @@
+
 <?php
 include '../../php/conn_db.php';
 $userId = $_SESSION['id']; // Assuming you have the logged-in user's ID available
@@ -46,17 +47,38 @@ if (!$result) {
 
 // Display the jobs
 while ($job = $result->fetch_assoc()) {
-    echo '<div class="job">';
-    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["company_name"]) . '</p>';
-    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["job_title"]) . '</p>';
-    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["company_address"]) . '</p>';
-    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["tel_num"]) . '</p>';
-    echo '<a class="vacant"> No. Vacant </a>'  . '<p>' . htmlspecialchars($job["company_mail"]) . '</p>';
-    
-    echo '<h2>' . htmlspecialchars($job["job_title"]) . '</h2>'. '<h3 class="vacant-num">' . htmlspecialchars($job["vacant"]) . '</h3>';
-    echo '<a class="button-img" href="../../html/applicant/apply.php?job=' . urlencode($job["job_title"]) . '"><img src="../../img/document.png" alt="Logo"></a>';
-    echo '</div>';
+    echo '
+    <table class="table table-striped table-hover">
+    <tr>
+    <td>
+        <img src="../../img/logo.png" alt="Logo"></ alt="Company Logo" class="img-fluid" style="max-width: 50px; height: auto;">
+    </td>
+
+    <td>
+        <strong>' . htmlspecialchars($job["company_name"]) . '</strong><br>
+        ' . htmlspecialchars($job["company_address"]) . '<br>
+        <a href="mailto:' . htmlspecialchars($job["company_mail"]) . '">' . htmlspecialchars($job["company_mail"]) . '</a><br>
+        ' . htmlspecialchars($job["tel_num"]) . '
+    </td>
+
+    <!-- Vacant Display -->
+    <td>
+        <span class="badge ' . ($job["vacant"] === "Yes" ? "bg-success" : "bg-danger") . '">
+            ' . ($job['vacant'] === 'Yes' ? 'Vacant' : 'Not Vacant') . '
+        </span>
+    </td>
+
+    <!-- Apply Icon with Link -->
+    <td>
+        <a href="../../html/applicant/apply.php?job=' . urlencode($job["job_title"]) . '" class="btn btn-primary">
+            Apply <i class="fa fa-arrow-right"></i>
+        </a>
+    </td>
+  </tr>
+  </table>';
+  
 }
+
 
 // Close the connection
 $conn->close();

@@ -73,3 +73,19 @@ document.getElementById("signup").addEventListener("click", function (event) {
     // Adding the class to initiate the fade-in and slide-up animation
     document.body.classList.add('fade-in');
 });
+
+//applicant search
+const searchInput = document.getElementById('search-input');
+const clearBtn = document.getElementById('clear-btn');
+
+// Show the clear button when there's input
+searchInput.addEventListener('input', function() {
+  clearBtn.style.display = this.value ? 'block' : 'none';
+});
+
+// Clear the input when the clear button is clicked
+clearBtn.addEventListener('click', function() {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  searchInput.focus();
+});

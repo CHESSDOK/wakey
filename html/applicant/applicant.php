@@ -106,30 +106,49 @@ if (!$row) {
   
     
     <div class="container">
-        <div class="label">
-            <h2>Job Listings</h2>
-        </div>
+       
 
 <!-- search bar-->
 
-    <form method="GET" action="">
-        <input type="text" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-        <br>
-        <button class="search" type="submit">Search</button>
-            <div class="search-list"> 
-                <?php if (isset($_GET['search']) && $_GET['search'] != ''): ?> 
-            </div>
-            <a href="?" class="clear-btn">Clear</a>
-    <?php endif; ?>
-    </form> 
+   
 
 <!--listing loop-->
-        <div class="container-list">
-        <div class="job-list"> 
-            <?php include '../../php/applicant/job_list.php'; ?>
-        </div>
-    </div>
+        
 
+
+    <table class="list">
+      <tr>
+        <td colspan="2">
+          <div class="label">
+              <h2>Job Listings</h2>
+          </div>            
+        </td>
+        <td>
+        <form method="GET" action="" class="my-4">
+          <div class="input-group mb-3 position-relative">
+            <input type="text" id="search-input" class="form-control" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+            <button class="btn btn-primary" type="submit">Search</button>
+
+            <!-- Clear button inside input -->
+            <span id="clear-btn" class="position-absolute top-50 translate-middle-y" style="right: 45px; cursor: pointer; display: none;">&times;</span>
+          </div>
+        </form>
+        </td>
+      </tr>
+
+      <tr>
+      <td>
+      <div class="container-list">
+        <?php 
+          error_reporting(E_ALL);
+          ini_set('display_errors', 1);
+          include '../../php/applicant/job_list.php'; 
+        ?>
+      </div>
+    </td>
+
+      </tr>
+    </table>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
    <script src="../../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
