@@ -17,7 +17,7 @@ $userId = checkSession();
 $q_id = $_GET['q_id'];
 $module_id = $_GET['module_id'];
 
-$questions_query = "SELECT * FROM question WHERE quiz_id='$q_id'";
+$questions_query = "SELECT * FROM question WHERE quiz_id='$q_id' ORDER BY RAND() LIMIT 20";
 $questions_result = mysqli_query($conn, $questions_query);
 
 $sql = "SELECT * FROM register WHERE id = ?";
