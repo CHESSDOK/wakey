@@ -85,7 +85,9 @@ $conn->close();
             <li><a href="contact.php">Contact Us</a></li>
         </ul>
     <div class="auth">
-        <button class="ofw-btn" id="emprof"><?php echo htmlspecialchars($row_new['username']); ?></button>
+      <div class="circular--portrait">
+        <img class="circular--square" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image">
+      </div>
     </div>
 </nav>
 
@@ -108,11 +110,21 @@ $conn->close();
         </nav>
          <!-- Form Content -->
     <div class="form-content">
-    <form action="../../php/#/#" method="POST">
+    <form action="../../php/applicant/approf.php" method="POST" enctype="multipart/form-data">
         <!-- Personal Information -->
 <div id="section1" class="input-group">
   <h4>Personal Information</h4>
+  
   <table>
+    <tr>
+    <td> <input type="hidden" id="id" name="id" class="form-control" value="<?php echo isset($row['user_id']) ? htmlspecialchars($row['user_id']) : ''; ?>"></td>
+    <td>
+        <label for="profile_image">Select Profile Image:</label>
+      <input type="file" name="profile_image" id="profile_image" accept="image/*" required>
+    </td>
+    <td></td>
+
+    </tr>
     <tr>
       <td>
         <label for="lastName" class="info">Surname</label>
@@ -633,7 +645,8 @@ $conn->close();
   <table>
   </table>
 </div>
-
+  <input type="submit" value="submit">
+    </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="../../javascript/a_profile.js"></script> 

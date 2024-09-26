@@ -37,14 +37,14 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    $currentDate = date("Y-m-d");
     // Ensure no previous scores are stored for this exam to avoid duplicate entries
     $delete_previous_score = "DELETE FROM user_score WHERE user_id='$user_id' AND quiz_id='$q_id'";
-    mysqli_query($conn, $delete_previous_score);
-
+    mysqli_query($conn, $delete_previous_score); 
     // Insert or update the user's score and increment retake count if retaking
-    $insert_score_query = "INSERT INTO user_score (user_id, quiz_id, score, correct_answers, wrong_answers, retake_count) 
-                           VALUES ('$user_id', '$q_id', '$score', '$correct_answers', '$wrong_answers', 0)
-                           ON DUPLICATE KEY UPDATE score='$score', correct_answers='$correct_answers', wrong_answers='$wrong_answers', retake_count=retake_count + 1";
+    $insert_score_query = "INSERT INTO user_score (user_id, quiz_id, score, correct_answers, wrong_answers, dates) 
+                           VALUES ('$user_id', '$q_id', '$score', '$correct_answers', '$wrong_answers', '$currentDate')
+                           ON DUPLICATE KEY UPDATE score='$score', correct_answers='$correct_answers', wrong_answers='$wrong_answers', dates='$currentDate'";
     mysqli_query($conn, $insert_score_query);
 
     header("Location: ../../html/applicant/show_res.php?user_id=$user_id&q_id=$q_id&module_id=$module_id");
