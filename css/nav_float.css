@@ -21,11 +21,6 @@ body {
 	margin-right: 3vw;
 }
 
-.notif-icon img,.profile-icon img {
-	width: 100%;
-	height: auto;
-}
-
 .profile-icon, .profile-index, .notif-icon{
 	width: 35px;  /* Adjust the width as needed */
 	height: 35px; /* Adjust the height as needed */
@@ -34,6 +29,11 @@ body {
 	position: relative;
 	margin-right: 15px;
 }
+.notif-icon img,.profile-icon img {
+	width: 100%;
+	height: auto;
+}
+
 
 /* Custom popover size */
 .popover {
@@ -75,7 +75,7 @@ td{
 }
 nav {
 	position: relative;
-	background-color: #ebede6;
+	background-color: #EBEEF1;
 	color: #333;
 	display: flex;
 	justify-content: space-between;
@@ -144,30 +144,15 @@ nav {
     background-color: #333; /* Color of the underline */
 }
 
+
 .content {
 	text-align: center;
 	padding: 50px;
 }
-
 .burger {
 	cursor: pointer;
 	margin-left: 5vw;
 }
-
-.auth a {
-	color: #333;
-	text-decoration: none;
-	padding: 8px 16px;
-	border: 1px solid #333;
-	border-radius: 5px;
-	margin-right:5vw;
-}
-
-.content {
-	text-align: center;
-	padding: 50px;
-}
-
 .burger {
 	position: absolute; 
 	top: 50%;

@@ -43,34 +43,60 @@ if (!$row) {
     <link rel="stylesheet" href="../../css/ofw_form.css">
 </head>
 <body>
-     <!-- Navigation -->
-     <nav>
-        <div class="logo">
-            <img src="../../img/logo_peso.png" alt="Logo">
-            <a href="#"> PESO-lb.ph</a>
-        </div>
-        <label class="burger" for="burger">
-            <input type="checkbox" id="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <ul class="menu">
-            <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="applicant.php">Applicant</a></li>
-            <li><a href="training_list.php">Training</a></li>
-            <li><a href="#" class="active">OFW</a></li>
-            <li><a href="../../html/about.php" >About Us</a></li>
-            <li><a href="../../html/contact.php">Contact Us</a></li>
-        </ul>
-        <div class="auth">
-        <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
-        </div>
-    </nav>
-  
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="../../img/logo_peso.png" alt="Logo">
+        <a href="#"> PESO-lb.ph</a>
+    </div>
+
     <header>
         <h1 class="h1">File a Case</h1>
     </header>
+
+    <div class="profile-icons">
+        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        </div>
+        
+        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+    <?php if (!empty($row['photo'])): ?>
+        <img id="preview" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+    <?php else: ?>
+        <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+    <?php endif; ?>
+    </div>
+
+    </div>
+
+    <!-- Burger icon -->
+    <div class="burger" id="burgerToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</td>
+</tr>
+</table>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <table class="menu">
+                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
+                <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
+                <tr><td><a href="#" class="active nav-link">OFW</a></td></tr>
+                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
+                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
+            </table>
+        </div>
+    </div>
+</nav> 
 
     <div class="container input-group"  class="">
     <form action="../../php/applicant/submit_case.php" method="POST" enctype="multipart/form-data">
@@ -211,7 +237,9 @@ if (!$row) {
 </div>
 
      
-<script src="../../javascript/script.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../../javascript/script.js"></script> 
 </body>
 </html>

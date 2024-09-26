@@ -124,9 +124,9 @@ $conn->close();
     <div class="container-fluid">
         <!-- Scrollspy Menu -->
         <nav id="scrollspy-menu" class="scrollspy flex-column">
-            <a class="nav-links" href="#section1">Personal Information</a>
-            <a class="nav-links" href="#section2">Family Information</a>
-            <a class="nav-links" href="#section3">Employment Details</a>
+            <a class="nav-float" href="#section1">Personal Information</a>
+            <a class="nav-float" href="#section2">Family Information</a>
+            <a class="nav-float" href="#section3">Employment Details</a>
         </nav>
 
     <!-- Form Content -->

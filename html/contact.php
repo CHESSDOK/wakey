@@ -1,3 +1,53 @@
+<?php
+include '../php/conn_db.php';
+
+function checkSession() {
+   session_start(); // Start the session
+
+   // Check if the session variable 'id' is set
+   if (!isset($_SESSION['id'])) {
+       // Redirect to login page if session not found
+       header("Location: ../login.html");
+       exit();
+   } else {
+       // If session exists, store the session data in a variable
+       return $_SESSION['id'];
+   }
+}
+$userId = checkSession();
+
+//Fetch data from applicant_profile table
+$sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+   die("Invalid query: " . $conn->error); 
+}
+
+$row = $result->fetch_assoc();
+if (!$row) {
+   die("User not found in applicant_profile.");
+}
+
+// Fetch data from register table using new approach
+$sql_new = "SELECT * FROM register WHERE id = ?";
+$stmt_new = $conn->prepare($sql_new);
+$stmt_new->bind_param("i", $userId);
+$stmt_new->execute();
+$result_new = $stmt_new->get_result();
+
+if ($result_new->num_rows > 0) {
+    $row_new = $result_new->fetch_assoc(); // Fetch the data into a separate variable
+} else {
+    $row_new = array(); // If no data found, initialize as an empty array
+}
+
+// Close the connection
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,57 +70,52 @@ body::before{
 <body>
 <!-- Navigation -->
 <nav>
-    <div class="logo">
-        <img src="../img/logo_peso.png" alt="Logo">
-        <a href="#"> PESO-lb.ph</a>
-    </div>
-    <header>
-        <h1 class="h1">Contact Us</h1>
-    </header>
+  <div class="logo">
+      <img src="../img/logo_peso.png" alt="Logo">
+      <a href="#"> PESO-lb.ph</a>
+  </div>
+  <header>
+      <h1 class="h1">Contact Us</h1>
+  </header>
 
-    <div class="profile-icons">
-        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
-            <img id="#" src="../img/notif.png" alt="Profile Picture" class="rounded-circle">
-        </div>
+  <div class="profile-icons">
+    <div class="notif-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+        <img src="../img/notif.png" alt="Profile Picture" class="rounded-circle">
+    </div>
         
-        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
-    <?php if (!empty($row['photo'])): ?>
-        <img id="preview" src="../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
-    <?php else: ?>
-        <img src="../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
-    <?php endif; ?>
+    <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+      <?php if (!empty($row['photo'])): ?>
+          <img id="preview" src="../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+      <?php else: ?>
+          <img src="../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+      <?php endif; ?>
     </div>
+  </div>
 
-    </div>
+  <div class="burger" id="burgerToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
 
-    <!-- Burger icon -->
-    <div class="burger" id="burgerToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</td>
-</tr>
-</table>
-
-    <!-- Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <table class="menu">
-                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
-                <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
-                <tr><td><a href="../html/ofw_home.php#" class="nav-link">OFW</a></td></tr>
-                <tr><td><a href="../html/about.php" class="nav-link">About Us</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Contact Us</a></td></tr>
-            </table>
-        </div>
-    </div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+      <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+          <table class="menu">
+              <tr><td><a href="../index(applicant).php" class="nav-link">Home</a></td></tr>
+              <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
+              <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
+              <tr><td><a href="../html/ofw_home.php#" class="nav-link">OFW</a></td></tr>
+              <tr><td><a href="../html/about.php" class="nav-link">About Us</a></td></tr>
+              <tr><td><a href="#" class="active nav-link">Contact Us</a></td></tr>
+          </table>
+      </div>
+  </div>
 </nav>
+
 
     <!-- Body -->
 <!-- Address Section -->
