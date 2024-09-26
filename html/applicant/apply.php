@@ -50,6 +50,11 @@ if (!$user || !$job) {
             <input type="hidden" name="job" value="<?php echo htmlspecialchars($jobTitle); ?>">
             <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($user['user_id']); ?>">
             <input type="hidden" name="job_id" value="<?php echo htmlspecialchars($job['j_id']); ?>">
+            <h4><?php echo htmlspecialchars($job['job_description']); ?> </h4><br>
+            <h4><?php echo htmlspecialchars($job['requirment']); ?> </h4> <br>
+            <h4><?php echo htmlspecialchars($job['work_location']); ?> </h4> <br>
+            <h4><?php echo htmlspecialchars($job['remarks']); ?> </h4> <br>
+            <h4><?php echo htmlspecialchars($job['date_posted']); ?> </h4> <br>
             <input type="submit" value="Submit Application">
         </form>
     </div>

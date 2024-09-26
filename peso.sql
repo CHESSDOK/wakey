@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2024 at 06:50 AM
+-- Generation Time: Sep 23, 2024 at 10:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -100,7 +100,7 @@ CREATE TABLE `applicant_profile` (
 
 INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `country`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
 (1, 13, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, '', 'male', 'Single', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', 'Adaw', '435323423', 'mama', '323543425', 'fafa', '5345345345', 'fama', 'child', '2232435432', 'College Undergraduate', 'Engineering', 'II', 21435364, 14000, 'Philippines', 'Land-Based', 'Government Hire', 'wsefrews', 2147483647, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-12-18', '2024-10-09'),
-(2, 14, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, '', 'female', 'Widowed', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', '', '', '', '', '', '', NULL, NULL, NULL, 'Vocational', 'Factory/Manufacturing', '', 0, 0, 'Philippines', 'Sea-Based', 'Recruitment Agency', 'wsefrews', 0, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-10-12', '2024-10-01'),
+(2, 14, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, 'Information and Technology', 'female', 'Widowed', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', '', '', '', '', '', '', NULL, NULL, NULL, 'Vocational', 'Factory/Manufacturing', '', 0, 0, 'Philippines', 'Sea-Based', 'Recruitment Agency', 'wsefrews', 0, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-10-12', '2024-10-01'),
 (3, 15, 'marklawrencemercado8@gmail.com', 'Batbat', 'mercado', 'aranda', '2002-06-11', 22, '', 'male', 'Single', 0, 'user.png', '9783 baysdgdfgser', '0', '0', '0', '0', 'Documented', '', '', '', '', '', '', NULL, NULL, NULL, 'High School Graduate', 'Medical Work', 'Sr.', 0, 0, 'Philippines', 'Land-Based', 'Name Hire', 'fdgsd', 0, 'gtry45gdfg4e', 'Batbat aranda mercado', 'e4tdfge5t4e', '2024-11-21', '2024-10-10');
 
 -- --------------------------------------------------------
@@ -123,9 +123,9 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
-(1, 1, 1, NULL, 'accepted', 'Laborer'),
-(2, 1, 2, NULL, 'accepted', 'Programmer'),
-(3, 1, 1, NULL, 'pending', 'Laborer');
+(4, 14, 8, NULL, 'pending', 'backend dev'),
+(5, 14, 9, NULL, 'pending', 'front end'),
+(6, 14, 10, NULL, 'pending', 'system Administration');
 
 -- --------------------------------------------------------
 
@@ -149,6 +149,31 @@ CREATE TABLE `cases` (
 
 INSERT INTO `cases` (`id`, `user_id`, `title`, `description`, `file`, `status`, `created_at`) VALUES
 (3, 1, 'stalking', 'following everywhere', '../uploads/LSPU-LB CCS - Participant Certificates.pdf', 'filed', '2024-09-07 07:56:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_us`
+--
+
+CREATE TABLE `contact_us` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `messages` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact_us`
+--
+
+INSERT INTO `contact_us` (`id`, `email`, `name`, `subject`, `messages`) VALUES
+(1, 'meyekop757@buzblox.com', 'meyokop', 'Trying', 'try lng to <./.>'),
+(2, 'mercadomarklawrence55@gmail.com', 'nezuko', 'Trying', 'b**bies'),
+(3, 'ict1mercado.cdlb@gmail.com', 'nezuko', 'Trying', '2143rfsg5rdhg5dr6u5r67uftyhjft'),
+(4, 'marklawrencemercado8@gmail.com', 'meyokop', 'Trying', 'yhtgnyrthnbnbytdrh5rtd54etyegwe4tf3wrfsdf34wtdfgfhbhthbrty54'),
+(5, 'marklawrencemercado8@gmail.com', 'meyokop', 'Trying', 'spam');
 
 -- --------------------------------------------------------
 
@@ -245,6 +270,32 @@ INSERT INTO `empyers` (`id`, `username`, `password`, `email`, `Fname`, `Lname`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `interview`
+--
+
+CREATE TABLE `interview` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `Job_id` int(11) DEFAULT NULL,
+  `sched_date` date DEFAULT NULL,
+  `sched_time` time DEFAULT NULL,
+  `interview` varchar(200) DEFAULT NULL,
+  `meeting` varchar(200) DEFAULT NULL,
+  `is_read` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `interview`
+--
+
+INSERT INTO `interview` (`id`, `user_id`, `Job_id`, `sched_date`, `sched_time`, `interview`, `meeting`, `is_read`) VALUES
+(1, 14, 9, '2024-10-03', '08:00:00', 'FacetoFace', '123sdfd3aws4fsewrf3w4', 1),
+(2, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0),
+(3, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `job_postings`
 --
 
@@ -255,6 +306,9 @@ CREATE TABLE `job_postings` (
   `job_description` text NOT NULL,
   `specialization` varchar(255) NOT NULL,
   `vacant` int(11) NOT NULL,
+  `requirment` varchar(255) NOT NULL,
+  `work_location` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
   `date_posted` date NOT NULL,
   `is_active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -263,10 +317,12 @@ CREATE TABLE `job_postings` (
 -- Dumping data for table `job_postings`
 --
 
-INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `date_posted`, `is_active`) VALUES
-(1, 1, 'Laborer', 'construction worker', '', 12, '2024-09-15', 0),
-(4, 1, 'electrician', 'fix electrical', '', 50, '2024-08-30', 1),
-(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 11, '2024-09-12', 1);
+INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `requirment`, `work_location`, `remarks`, `date_posted`, `is_active`) VALUES
+(1, 1, 'Laborer', 'construction worker', '', 12, '', '', '', '2024-09-22', 1),
+(4, 1, 'electrician', 'fix electrical', '', 50, '', '', '', '2024-08-30', 1),
+(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 11, '', '', '', '2024-09-12', 1),
+(9, 1, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 11, '', '', '', '2024-09-21', 1),
+(10, 1, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 2, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 1);
 
 -- --------------------------------------------------------
 
@@ -292,7 +348,8 @@ INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`) VALUES
 (4, 0, 'hi', '2024-09-18 13:12:48'),
 (5, 14, 'hi', '2024-09-18 13:40:32'),
 (6, 14, 'joke', '2024-09-18 13:43:32'),
-(7, 14, 'bnye', '2024-09-19 06:24:09');
+(7, 14, 'bnye', '2024-09-19 06:24:09'),
+(8, 14, 'sdasdsfgsefs', '2024-09-21 04:00:41');
 
 -- --------------------------------------------------------
 
@@ -439,7 +496,8 @@ CREATE TABLE `replies` (
 --
 
 INSERT INTO `replies` (`id`, `message_id`, `admin_id`, `reply`, `created_at`) VALUES
-(1, 1, 1, 'ok', '2024-09-09 02:20:15');
+(1, 1, 1, 'ok', '2024-09-09 02:20:15'),
+(2, 8, 1, 'reply', '2024-09-21 04:01:34');
 
 -- --------------------------------------------------------
 
@@ -505,7 +563,11 @@ INSERT INTO `user_answers` (`id`, `user_id`, `question_id`, `quiz_id`, `answer`)
 (73, 1, 4, 4, 'a'),
 (74, 1, 5, 4, 'b'),
 (75, 1, 6, 4, 'c'),
-(76, 1, 7, 4, 'd');
+(76, 1, 7, 4, 'd'),
+(77, 14, 4, 4, 'a'),
+(78, 14, 5, 4, ''),
+(79, 14, 6, 4, 'a'),
+(80, 14, 7, 4, 'a');
 
 -- --------------------------------------------------------
 
@@ -530,7 +592,8 @@ CREATE TABLE `user_score` (
 --
 
 INSERT INTO `user_score` (`id`, `user_id`, `quiz_id`, `score`, `correct_answers`, `wrong_answers`, `dates`, `ranks`, `retake_count`) VALUES
-(16, 1, 4, 2, 2, 2, NULL, NULL, 0);
+(16, 1, 4, 2, 2, 2, NULL, NULL, 0),
+(17, 14, 4, 1, 1, 3, NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -563,6 +626,12 @@ ALTER TABLE `cases`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
@@ -586,6 +655,12 @@ ALTER TABLE `employer_profile`
 -- Indexes for table `empyers`
 --
 ALTER TABLE `empyers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `interview`
+--
+ALTER TABLE `interview`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -681,13 +756,19 @@ ALTER TABLE `applicant_profile`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `contact_us`
+--
+ALTER TABLE `contact_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -714,16 +795,22 @@ ALTER TABLE `empyers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `interview`
+--
+ALTER TABLE `interview`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `job_postings`
 --
 ALTER TABLE `job_postings`
-  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `modules`
@@ -759,7 +846,7 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `replies`
 --
 ALTER TABLE `replies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `survey_form`
@@ -777,13 +864,13 @@ ALTER TABLE `survey_reponse`
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `user_score`
 --
 ALTER TABLE `user_score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

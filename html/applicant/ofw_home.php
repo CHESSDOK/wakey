@@ -57,6 +57,8 @@ $conn->close();
   <title>Form Submission</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="../../css/ofw_home.css">
   <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
@@ -64,41 +66,67 @@ $conn->close();
 <body data-bs-spy="scroll" data-bs-target="#scrollspy-menu" data-bs-offset="175">
 
 <!-- Navigation -->
-<nav class="ofw-nav">
+<nav>
     <div class="logo">
         <img src="../../img/logo_peso.png" alt="Logo">
-        <a href="#">PESO-lb.ph</a>
+        <a href="#"> PESO-lb.ph</a>
     </div>
-    <label class="burger" for="burger">
-        <input type="checkbox" id="burger">
+
+    <header>
+        <h1 class="h1">Update Information</h1>
+    </header>
+
+    <div class="profile-icons">
+        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        </div>
+        
+        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+    <?php if (!empty($row['photo'])): ?>
+        <img id="preview" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+    <?php else: ?>
+        <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+    <?php endif; ?>
+    </div>
+
+    </div>
+
+    <!-- Burger icon -->
+    <div class="burger" id="burgerToggle">
         <span></span>
         <span></span>
         <span></span>
-    </label>
-    <ul class="menu">
-        <li><a href="../../index(applicant).php">Home</a></li>
-        <li><a href="applicant.php">Applicant</a></li>
-        <li><a href="training_list.php">Training</a></li>
-        <li><a href="#" class="active">OFW</a></li>
-        <li><a href="../../html/about.php">About Us</a></li>
-        <li><a href="../../html/contact.php">Contact Us</a></li>
-    </ul>
-    <div class="auth">
-        <button class="ofw-btn" id="emprof"><?php echo htmlspecialchars($row_new['username']); ?></button>
+    </div>
+</td>
+</tr>
+</table>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <table class="menu">
+                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
+                <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
+                <tr><td><a href="#" class="active nav-link">OFW</a></td></tr>
+                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
+                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
+            </table>
+        </div>
     </div>
 </nav>
-
-<header>
-    <h1 class="ofw-h1">Update Information</h1>
-</header>
 
 <div class="outer-container">
     <div class="container-fluid">
         <!-- Scrollspy Menu -->
         <nav id="scrollspy-menu" class="scrollspy flex-column">
-            <a class="nav-link" href="#section1">Personal Information</a>
-            <a class="nav-link" href="#section2">Family Information</a>
-            <a class="nav-link" href="#section3">Employment Details</a>
+            <a class="nav-links" href="#section1">Personal Information</a>
+            <a class="nav-links" href="#section2">Family Information</a>
+            <a class="nav-links" href="#section3">Employment Details</a>
         </nav>
 
     <!-- Form Content -->
@@ -390,7 +418,9 @@ $conn->close();
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="../../javascript/script.js"></script> 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

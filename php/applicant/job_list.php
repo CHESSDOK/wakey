@@ -14,7 +14,12 @@ $user = $resultUser->fetch_assoc();
 $searchQuery = isset($_GET['search']) ? '%' . $_GET['search'] . '%' : '%';
 
 // Base SQL for fetching jobs
-$sql = "SELECT * FROM job_postings WHERE is_active = 1 AND job_title LIKE ?";
+
+$sql = "SELECT jp.*, em.*
+                FROM employer_profile em
+                JOIN job_postings jp ON em.user_id = jp.employer_id
+                WHERE jp.is_active AND jp.job_title LIKE ?";
+//$sql = "SELECT * FROM job_postings WHERE is_active = 1 AND job_title LIKE ?";
 
 // Modify SQL if the user has a specialization
 if ($user['specialization']) {
@@ -42,7 +47,12 @@ if (!$result) {
 // Display the jobs
 while ($job = $result->fetch_assoc()) {
     echo '<div class="job">';
-    echo '<a class="vacant"> No. Vacant </a>'  . '<p>' . htmlspecialchars($job["job_title"]) . '</p>';
+    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["company_name"]) . '</p>';
+    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["job_title"]) . '</p>';
+    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["company_address"]) . '</p>';
+    echo '<a class="vacant"> </a>'  . '<p>' . htmlspecialchars($job["tel_num"]) . '</p>';
+    echo '<a class="vacant"> No. Vacant </a>'  . '<p>' . htmlspecialchars($job["company_mail"]) . '</p>';
+    
     echo '<h2>' . htmlspecialchars($job["job_title"]) . '</h2>'. '<h3 class="vacant-num">' . htmlspecialchars($job["vacant"]) . '</h3>';
     echo '<a class="button-img" href="../../html/applicant/apply.php?job=' . urlencode($job["job_title"]) . '"><img src="../../img/document.png" alt="Logo"></a>';
     echo '</div>';

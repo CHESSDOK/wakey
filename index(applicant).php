@@ -27,6 +27,8 @@ if (!$row) {
   <title>Landing Page</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/notif.css">
 </head>
@@ -43,8 +45,13 @@ if (!$row) {
         </div>
         
         <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
-            <img id="preview" src="img/user-placeholder.png<?php echo !empty($row['photo']) ? $row['photo'] : 'img/user-placeholder.png'; ?>" alt="Profile Image" class="circular--square">
-        </div>
+    <?php if (!empty($row['photo'])): ?>
+        <img id="preview" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+    <?php else: ?>
+        <img src="img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+    <?php endif; ?>
+    </div>
+
 
 
     </div>
@@ -77,9 +84,7 @@ if (!$row) {
         </div>
     </div>
 </nav>
-<table>
- <td class="whole">
-    <table >
+    <table>
     <tr>
       <td class="container_whole" colspan="2">
         <label class="lbl_1">PESO</label>
@@ -105,7 +110,8 @@ if (!$row) {
     </tr>
     <tr>
       <td class="container_whole">
-        <button class="btn btn-primary lbl_8">Find Job</button>
+      <button class="btn btn-primary lbl_8" onclick="window.location.href='html/applicant/applicant.php';">Find Job</button>
+
       </td>
     </tr>
     <tr>
@@ -118,8 +124,6 @@ if (!$row) {
       </td>
     </tr>
     </table>
- </td>
-</table>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
