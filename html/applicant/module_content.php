@@ -115,7 +115,7 @@ $result = $conn->query($sql);
                         echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank">
                               <img class="icon" src="../../img/file_icon.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
                               Open File</a>';
-                        echo '<a href="take_exam.php?module_id=' . htmlspecialchars($row["id"]) . '&q_id=' . htmlspecialchars($quiz_id) . '" target="_blank">
+                        echo '<a href="take_exam.php?module_id=' . htmlspecialchars($row["modules_id"]) . '&q_id=' . htmlspecialchars($quiz_id) . '" target="_blank">
                               <img class="icon" src="../../img/quiz.png" alt="Logo" style="width: 32.5px; height: 35px; vertical-align: middle;">
                               Take Quiz</a>';
                 echo '</div>';
