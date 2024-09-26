@@ -12,21 +12,25 @@ function checkSession() {
         return $_SESSION['id'];
     }
 }
+
 include_once "../../php/conn_db.php";
 
 $user_id = checkSession();
 $eid = $_GET['q_id'];
-$module_id = $_GET['module_id'];
 
-$question_sql = "SELECT * FROM question WHERE quiz_id = $eid";
+// Fetch questions and user answers
+$question_sql = "
+    SELECT q.id AS question_id, q.question, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_answer, ua.answer 
+    FROM question q
+    INNER JOIN user_answers ua ON q.id = ua.question_id 
+    WHERE ua.answer IS NOT NULL AND ua.answer != ''
+    AND ua.user_id = $user_id AND ua.quiz_id = $eid
+";
+
 $question_result = $conn->query($question_sql);
-
-$answer_sql = "SELECT answer FROM user_answers WHERE user_id = $user_id AND quiz_id = $eid";
-$answer_result = $conn->query($answer_sql);
 
 $score_sql = "SELECT * FROM user_score WHERE user_id = $user_id AND quiz_id = $eid";
 $score_result = $conn->query($score_sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -47,29 +51,28 @@ $score_result = $conn->query($score_sql);
             <p>Correct Answers: " . $score_data['correct_answers'] . "</p>
             <p>Wrong Answers: " . $score_data['wrong_answers'] . "</p>
             <h2>Question Details:</h2>
-            <button onclick='window.close()'>back</button>";
+            <button onclick='window.close()'>Back</button>";
     
+        // Loop through the questions
         while ($question_row = $question_result->fetch_assoc()) {
-            $correct_answer = $question_row['correct_answer'];
-    
-            if ($answer_result->num_rows > 0) {
-                $user_answer_row = $answer_result->fetch_assoc();
-                $user_answer = $user_answer_row['answer'];
-            } else {
-                $user_answer = 'No answer provided';
-            }
-    
-            $result = ($user_answer == $correct_answer) ? 'Correct' : 'Incorrect';
-    
+            $question_id = $question_row['question_id'];
+            $correct_answer = $question_row['correct_answer']; // Ensure this is fetched correctly from your questions table
+
             // Display the question and result
-            echo "<p>Question: " . htmlspecialchars($question_row['question'] ?? 'N/A') . "</p>";
-            echo "<p>Your Answer: " . htmlspecialchars($user_answer ?? 'N/A') . "</p>";
-            echo "<p>Correct Answer: " . htmlspecialchars($correct_answer ?? 'N/A') . "</p>";
-            echo "<p>Result: " . $result . "</p>";
+            $user_answer = $question_row['answer'];
+            $result = ($user_answer == $correct_answer) ? 'Correct' : 'Incorrect';
+
+            echo "<div class='question-result'>";
+            echo "<p><strong>Question:</strong> " . htmlspecialchars($question_row['question'] ?? 'N/A') . "</p>";
+            echo "<p><strong>Your Answer:</strong> " . htmlspecialchars($user_answer ?? 'N/A') . "</p>";
+            echo "<p><strong>Correct Answer:</strong> " . htmlspecialchars($correct_answer ?? 'N/A') . "</p>";
+            echo "<p><strong>Result:</strong> " . $result . "</p>";
+            echo "<hr>";
+            echo "</div>";
         }
     
     } else {
-        echo "No score data found.";
+        echo "<p>No score data found.</p>";
     }
     ?>
 </body>
