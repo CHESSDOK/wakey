@@ -1,38 +1,55 @@
+// Get elements
+const burgerToggle = document.getElementById('burgerToggle');
+const offcanvasMenu = new bootstrap.Offcanvas(document.getElementById('offcanvasMenu'));
 
-document.addEventListener('DOMContentLoaded', function () {
-    const burger = document.getElementById('burger');
-    const menu = document.querySelector('.menu');
+// Toggle burger class and offcanvas menu
+burgerToggle.addEventListener('click', function() {
+    // Toggle burger active class for animation
+    burgerToggle.classList.toggle('active');
 
-    burger.addEventListener('change', function () {
-        if (this.checked) {
-            menu.classList.add('active');
-        } else {
-            menu.classList.remove('active');
+    // Open or close the offcanvas menu
+    if (offcanvasMenu._isShown) {
+        offcanvasMenu.hide();
+    } else {
+        offcanvasMenu.show();
+    }
+});
+
+$(document).ready(function(){
+    // Initialize popover with multiple links in the content
+    $('.profile-icon').popover({
+        trigger: 'click', 
+        html: true, // Allow HTML content
+        animation: true, // Enable animation
+        content: function() {
+            return `
+                <a class="link" href="html/applicant/a_profile.php"  id="emprof">Profile</a><br>
+                <a class="link" href="index.html">Logout</a>
+            `;
         }
     });
-
-    const links = document.querySelectorAll('.menu li a');
-
-    links.forEach(link => {
-        link.addEventListener('click', function (event) {
-            // Remove 'active' class from all links
-            links.forEach(otherLink => {
-                otherLink.classList.remove('active');
-            });
-
-            // Add 'active' class to the clicked link
-            link.classList.add('active');
-
-            // Navigate to the href of the clicked link
-            const href = link.getAttribute('href');
-            if (href && href !== '#') {
-                event.preventDefault(); // Prevent default link behavior
-                // Navigate to the href
-                window.location.href = href;
-            }
-        });
-    });
+// Close popover when clicking outside
+$(document).on('click', function (e) {
+    const target = $(e.target);
+    if (!target.closest('.profile-icon').length) {
+        $('.profile-icon').popover('hide');
+    }
 });
+});
+
+
+document.getElementById("emprof").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+
+    // Change the URL after the transition ends
+    setTimeout(function () {
+      window.location.href = "html/applicant/a_profile.php";
+    }, 300); // Adjust the delay according to your transition duration
+
+    // Adding the class to initiate the fade-in and slide-up animation
+    document.body.classList.add('fade-in');
+  });
+
 document.getElementById("loginButton").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default link behavior
 
@@ -55,4 +72,20 @@ document.getElementById("signup").addEventListener("click", function (event) {
 
     // Adding the class to initiate the fade-in and slide-up animation
     document.body.classList.add('fade-in');
+});
+
+//applicant search
+const searchInput = document.getElementById('search-input');
+const clearBtn = document.getElementById('clear-btn');
+
+// Show the clear button when there's input
+searchInput.addEventListener('input', function() {
+  clearBtn.style.display = this.value ? 'block' : 'none';
+});
+
+// Clear the input when the clear button is clicked
+clearBtn.addEventListener('click', function() {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  searchInput.focus();
 });

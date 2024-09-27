@@ -23,7 +23,64 @@ body::before {
 	filter: blur(4px); 
 	z-index: -1; 
 }
+.profile-icons, .profile-index {
+    display: flex;            /* Use flexbox for layout */
+    align-items: center;     /* Center items vertically */
+	margin-right: 3vw;
+}
 
+.profile-icon, .profile-index, .notif-icon{
+	width: 35px;  /* Adjust the width as needed */
+	height: 35px; /* Adjust the height as needed */
+	border-radius:50%;
+	overflow: hidden;
+	position: relative;
+	margin-right: 15px;
+}
+.notif-icon img,.profile-icon img {
+	width: 100%;
+	height: auto;
+}
+
+
+/* Custom popover size */
+.popover {
+	max-width: 100px; /* Set your desired maximum width */
+	
+}
+
+/* Custom popover styles */
+.popover-header {
+	background-color: #007bff; /* Bootstrap primary color or any color you choose */
+	color: white; /* Text color for header */
+}
+
+.popover-body {
+	background-color: #f8f9fa; /* Background color for body */
+	color: #0a56a3; /* Text color for body */
+	font-size: 0.8rem; /* Adjust font size */
+	padding: 6px;
+	border-radius: 50%;
+}
+.link {
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 15px;
+    transition: font-size 0.2s; /* Smooth transition for the font size change */
+}
+
+.link:hover {
+    font-size: 1.1rem; /* Increase the font size on hover */
+}
+
+.popover-arrow {
+	display: none; /* Optional: hide the arrow if not needed */
+}
+
+td{
+	width: -120vw;
+	height: auto;
+}
 nav {
 	position: relative;
 	background-color: #EBEEF1;
@@ -52,75 +109,58 @@ nav {
 	width: 50px;
 	height: 50px;
 }
-
-.menu {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	transform: translateX(0);
-	opacity: 0;
-	transition: transform 0.3s ease, opacity 0.5s ease;
+#offcanvasMenu.offcanvas-end {
+    width: auto; 
 }
 
+#offcanvasMenuLabel.offcanvas-title{
+	text-align: left;
+}
 .menu.active {
 	transform: translateX(0);
 	opacity: 1;
 }
 
-.menu li {
-	margin-left: 40px;
-}
-
-.menu li a {
-	color: #333;
-	text-decoration: none;
-	font-size: 20px;
-	font-weight: 500;
+.menu td a {
+	font-size: 1.5rem;
+	padding: 10px;
 	position: relative; /* Position relative for the link */
+	transition: font-size 0.3s ease;
 }
-
-/* Hover effect */
-.menu li a:hover::after {
-	content: ''; /* Add content for the underline */
-	position: absolute;
-	left: 0;
-	bottom: -3px; /* Adjust the position to your preference */
-	width: 100%;
-	height: 2px;
-	background-color: #C4C7CA; /* Color of the underline */
+.menu td a:hover {
+    font-size: calc(1.2em + 0.5em); /* Increase font size by 0.5em */
+}
+/* Underline on hover */
+.menu td a:hover::after {
+    content: ''; /* Add content for the underline */
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjust the position to your preference */
+    width: 100%;
+    height: 2px;
+    background-color: #C4C7CA; /* Color of the underline */
 }
 
 /* Active link effect */
-.menu li a.active::after {
-	content: ''; /* Add content for the underline */
-	position: absolute;
-	left: 0;
-	bottom: -3px; /* Adjust the position to your preference */
-	width: 100%;
-	height: 2px;
-	background-color: #333; /* Color of the underline */
+.menu td a.active::after {
+    content: ''; /* Add content for the underline */
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjust the position to your preference */
+    width: 100%;
+    height: 2px;
+    background-color: #333; /* Color of the underline */
 }
 
-.burger {
-	cursor: pointer;
-	margin-left: 5vw;
-}
-
-.auth a {
-	color: #333;
-	text-decoration: none;
-	padding: 8px 16px;
-	border: 1px solid #333;
-	border-radius: 5px;
-	margin-right:5vw;
-}
 
 .content {
 	text-align: center;
 	padding: 50px;
 }
-
+.burger {
+	cursor: pointer;
+	margin-left: 5vw;
+}
 .burger {
 	position: absolute; 
 	top: 50%;
@@ -166,164 +206,109 @@ nav {
 	transform: translateY(-100%);
 }
 
-.burger input:checked ~ span:nth-of-type(1) {
-	transform: rotate(45deg);
-	top: 0px;
-	left: 5px;
-}
-
-.burger input:checked ~ span:nth-of-type(2) {
-	width: 0%;
-	opacity: 0;
-}
-
-.burger input:checked ~ span:nth-of-type(3) {
-	transform: rotate(-45deg);
-	top: 28px;
-	left: 5px;
-}
-
-button {
-	--color: #C4C7CA;
-	font-family: inherit;
-	display: inline-block;
-	width: 10em;
-	height: 3em;
-	line-height: 2.5em;
-	overflow: hidden;
-	cursor: pointer;
-	font-size: 15px;
-	margin-right: 5vw;
-	z-index: 1;
-	color: #EBEEF1;
-	border: 2px solid var(--color);
-	border-radius: 6px;
-	position: relative;
-	background-color: #3D93D3;
-}
-
-button::before {
-	position: absolute;
-	content: "";
-	background: #2C7AB4;
-	width: 250px;
-	height: 200px;
-	z-index: -1;
-	border-radius: 50%;
-}
-
-button:hover {
-	color: white;
-}
-
-button:before {
-	top: 100%;
-	left: 100%;
-	transition: 0.3s all;
-}
-
-button:hover::before {
-	top: -50px;
-	left: -18px;
-}
 
 /* body */
-.container {
+table {
+	width: 100%;
+	max-width: 100vw;
+	margin-top: 4%;
+}
+
+td {
 	background-color: rgba(255, 255, 255, 0.8);
-	width: auto;
-	height: 70vh;
-	border: 1px solid #ccc;
-	margin-top: 10vh;
-	position: center;
+    position: relative;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.content {
-	margin-top: -5vh;
-	max-height: 460px;
-	overflow: hidden;
-}
-
-/* Define CSS variables for reused values */
-:root {
-	--shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* Common styles */
-.label-common {
-	text-shadow: var(--shadow);
-}
-
-/* Individual classes */
-.label1 {
-	font-size: 96px;
-	margin-left: -11vw;
+.lbl_1{
 	color: #0027CB;
-	text-shadow: var(--shadow);
 	font-weight: 700;
-	line-height: 2rem;
+	font-size: 5.5rem;
+	line-height: auto;
 }
 
-.label2 {
-	font-weight: 500;
-	color: #333;
-	font-size: 40px;
-	margin-left: 0.5vw;
-	line-height: 2rem;
+.lbl_2{
+    color: #6b6969;
+    font-weight: 600;
+    font-size: 2.5em;
 }
 
-.label3 {
-	font-weight: 400;
-	color: #333;
-	font-size: 20px;
-	margin-left: -8vw;
+.lbl_3{
+    color: #6b6969;
+
+    font-weight: 600;
+    font-size: 1em;
 	letter-spacing: 5px;
-	line-height: 1rem;
 }
 
-.label4 {
-	line-height: 5rem;
-	color: #333;
-	font-size: 85px;
-	margin-left: 6.9vw;
-	text-decoration: underline;
-	text-decoration-color: #900B0E;
-	text-underline-offset: 0.2em;
-	text-decoration-thickness: 0.05em;
-	font-weight: 700;
+.lbl_4{
+	display: inline-block;
+    position: relative;
+    color: #333333;
+    font-weight: 600;
+    font-size: 5rem;
+	top: -3vh;
+	letter-spacing: -1px;
 }
 
-.label5 {
-	line-height: 5rem;
-	font-weight: 600;
-	color: #333;
-	font-size: 40px;
-	margin-left: 5vw;
+.lbl_4::after {
+    content: '';
+    position: absolute;
+    left: -10px;           /* Adjust for extra space before the text */
+    right: -10vw;          /* Adjust for extra space after the text */
+    bottom: 0;
+    height: 5px;           /* Thickness of the underline */
+    background-color: #900B0E; /* Color of the underline */
+}
+.lbl_5, .lbl_6, .lbl_7, .lbl_8, textarea{
+	top: -4vh;
+	position: relative;
+}
+.lbl_5{
+	margin-left: 8%;
+}
+.lbl_5, .lbl_7{
+    color: #333333;
+    font-weight: 600;
+    font-size: 2.5rem;
+	letter-spacing: -1px;
 }
 
-.label6 {
-	font-size: 15px;
-	margin-left: -31vw;
-	margin-top:-20vh;
-	width: 7vw;
-	border-radius: 25px;
+.lbl_6{
+    color: #3D93D3;
+    font-weight: 600;
+    font-size: 2.5rem;
+	letter-spacing: -1px;
 }
 
-.label7 {
-	font-weight: 400;
-	font-size: 14px;
-	margin-left: 15vw;
-	letter-spacing: 1px;
+.lbl_8{
+    font-weight: 600;
+    font-size: 1.2rem;
+	letter-spacing: 2px;
+	margin-left: -25%;
 }
 
-.label8 {
-	font-weight: 400;
-	font-size: 14px;
-	margin-left: 13vw;
-	letter-spacing: 1px;
+textarea {
+	text-align: center;
+	white-space: pre-wrap;
+    border: none;              
+    background: transparent;       
+    outline: none;                 
+    resize: none;                  
+    overflow: hidden;            
+    width: 100%;               
+    height: 100px;                 
+    color: #000;                    
+    font-size:  0.9rem;                
+    padding: 10px;   
+	margin-bottom: -7vh;               
+	line-height: 1.3;
 }
-.label9 {
-	font-weight: 400;
-	font-size: 14px;
-	margin-left: -22vw;
-	letter-spacing: 1px;
+
+@media (min-width: 1920px) and (min-height: 1080px) {
+    .lbl_8 {
+        margin-left: -50%;
+    }
 }
