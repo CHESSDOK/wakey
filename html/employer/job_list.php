@@ -29,6 +29,7 @@ $result = $conn->query($sql);
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/nav_float.css">
+  <link rel="stylesheet" href="../../css/employer.css">
 </head>
 <body>
 
@@ -85,40 +86,47 @@ $result = $conn->query($sql);
     </div>
 </nav>
 
-
-    <table border="1">
+<div class="jl-container">
+<table class="table table-borderless table-hover">
+    <thead class="thead-light">
         <tr>
             <th>Title</th>
-            <th>job description</th>
-            <th>specialization</th>
-            <th> vacant </th>
-            <th>status</th>
+            <th>Job Description</th>
+            <th>Specialization</th>
+            <th>Vacant</th>
+            <th>Status</th>
+            <th colspan="2">Actions</th>
         </tr>
+    </thead>
+    <tbody class="table-group-divider">
         <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <form action='../../php/employer/update_jobs.php' method='post'>
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                        <form action='../../php/employer/update_jobs.php' method='post'>
                             <input type='hidden' name='job_id' value='" . $row['j_id'] . "'>
-                            <td><input type='text' name='jtitle' value='" . $row['job_title'] . "'></td>
-                            <td><input type='text' name='desc' value='" . $row['job_description'] . "'></td>
-                            <td><input type='text' name='spe' value='" . $row['specialization'] . "'></td>
-                            <td><input type='number' name='vacant' value='" . $row['vacant'] . "'></td>
-                            <td><input type='number' name='act' value='" . $row['is_active'] . "'></td>
-                            <td><input type='submit' value='update'></td>
-                            </form>
-                            <td><a href='applicant_list.php?job_id=" . $row['j_id']  ."'>applicant list</a></td>
-                        </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>No employers found</td></tr>";
+                            <td><input type='text' class='form-control' name='jtitle' value='" . $row['job_title'] . "'></td>
+                            <td><input type='text' class='form-control' name='desc' value='" . $row['job_description'] . "'></td>
+                            <td><input type='text' class='form-control' name='spe' value='" . $row['specialization'] . "'></td>
+                            <td><input type='number' class='form-control value-display' name='vacant' value='" . $row['vacant'] . "'></td>
+                            <td><input type='number' class='form-control value-display' name='act' value='" . $row['is_active'] . "'></td>
+                            <td>
+                                <button type='submit' class='btn btn-primary'>Update</button>
+                            </td>
+                        </form>
+                        <td>
+                            <a href='applicant_list.php?job_id=" . $row['j_id'] . "' class='btn btn-secondary'>Applicant List</a>
+                        </td>
+                    </tr>";
             }
-            $conn->close();
+        } else {
+            echo "<tr><td colspan='7' class='text-center'>No employers found</td></tr>";
+        }
+        $conn->close();
         ?>
-    </table>
-
-    <a href="nav_employer.php">back</a>
-
+    </tbody>
+</table>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

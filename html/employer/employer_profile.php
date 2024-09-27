@@ -46,6 +46,7 @@ if (!$row) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/nav_float.css">
+  <link rel="stylesheet" href="../../css/employer.css">
   </head>
 <body>
 <nav>
@@ -93,7 +94,7 @@ if (!$row) {
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-                <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
+                <tr><td><a href="../../html/employer/employer_home.php" class="nav-link">Home</a></td></tr>
                 <tr><td><a href="../../html/employer/job_creat.php" class="nav-link">Post Job</a></td></tr>
                 <tr><td><a href="../../html/employer/job_list.php" class="nav-link">Job List</a></td></tr>
                 <tr><td><a href="../../html/about.html" class="nav-link">About Us</a></td></tr>
@@ -103,47 +104,92 @@ if (!$row) {
     </div>
 </nav>
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
+
+<div class="ep-container">
+<form action="../../php/employer/employer_prof_process.php" method="post">
+<table> 
+<h1 class="h1">Company Info</h1>
+ <tr>
+   <td colspan="2">
+    <label for="profile_image" class="form-label">Select Profile Image:</label>
+    <input type="file"  class="form-control" name="profile_image" id="profile_image" accept="image/*" required>   
+   </td>
+ </tr>
+ <tr>
+   <td>
+    <label for="company_name" class="form-label">Company Name:</label>
+    <input type="text" class="form-control" name="company_name" id="company_name" value="<?php echo htmlspecialchars($row['company_name'] ?? ''); ?>">
+   </td>
+   <td>
+    <label for="president" class="form-label">Company President:</label>
+    <input type="text" class="form-control" name="president" id="president" value="<?php echo htmlspecialchars($row['president'] ?? ''); ?>">
+   </td>
+ </tr>
+ <tr>
+   <td colspan="2">
+    <label for="company_add" class="form-label">Company Address:</label>
+    <input type="text" class="form-control" name="company_add" id="company_add" value="<?php echo htmlspecialchars($row['company_address'] ?? ''); ?>">
+   </td>
+ </tr>
+ <tr>
+   <td>
+    <label for="HR" class="form-label">HR Manager:</label>
+    <input type="text" class="form-control" name="HR" id="HR" value="<?php echo htmlspecialchars($row['HR'] ?? ''); ?>">
+   </td>
+   <td>
+    <label for="HR_mail" class="form-label">HR Official Email:</label>
+    <input type="text" class="form-control" name="HR_mail" id="HR_mail" value="<?php echo htmlspecialchars($row['HR_mail'] ?? ''); ?>">
+   </td>
+ </tr>
+ <tr>
+   
+   <td>
+    <label for="tel_num" class="form-label">Company Telephone Number:</label>
+    <input type="text" class="form-control" name="tel_num" id="tel_num" value="<?php echo htmlspecialchars($row['tel_num'] ?? ''); ?>">
+   </td>
+   <td>
+    <label for="company_mail" class="form-label">Company Email:</label>
+    <input type="text" class="form-control" name="company_mail" id="company_mail" value="<?php echo htmlspecialchars($row['company_mail'] ?? ''); ?>">
+   </td>
+ </tr>
+ <tr>
+   <td>
+    <input class="btn btn-primary" type="submit" value="Update">
+   </td>
+ </tr>
+</table>
+</form>
+</div>
+
+<div class="ep-container">
 <form action="../../php/employer/documents_process.php" method="post" enctype="multipart/form-data">
-        <label for="document_name">Document Name:</label>
-        <input type="text" name="document_name" id="document_name" required><br>
+<table>
+<h1 class="h1">Company Documents</h1>
+ <tr>
+   <td>
+    <label for="document_name" class="form-label">Document Name:</label>
+    <input type="text" class="form-control" name="document_name" id="document_name" >
+   </td>
+   <td>
+    <label for="document" class="form-label">Upload Document:</label>
+    <input type="file" class="form-control" name="document" id="document" >
+   </td>
+ </tr>
+ <tr>
+   <td>
+    <input class="btn btn-primary" type="submit" value="Upload">
+   </td>
+ </tr>
+</table>
+</form>
+</div>
 
-        <label for="document">Upload Document:</label>
-        <input type="file" name="document" id="document" required><br>
-
-        <input type="submit" value="Upload">
-    </form>
-
-    <form action="../../php/employer/employer_prof_process.php" method="post">
-        <div id="companyField">
-            <label for="company_name">ID:</label>
-
-            <label for="profile_image">Select Profile Image:</label>
-            <input type="file" name="profile_image" id="profile_image" accept="image/*" required> <br>
-
-            <label for="company_name">Company Name:</label>
-            <input type="text" name="company_name" id="company_name" value="<?php echo htmlspecialchars($row['company_name'] ?? ''); ?>"><br>
-
-            <label for="company_add">Company Address:</label>
-            <input type="text" name="company_add" id="company_add" value="<?php echo htmlspecialchars($row['company_address'] ?? ''); ?>"><br>
-
-            <label for="tel_num">Company Telephone Number:</label>
-            <input type="text" name="tel_num" id="tel_num" value="<?php echo htmlspecialchars($row['tel_num'] ?? ''); ?>"><br>
-
-            <label for="president">Company President:</label>
-            <input type="text" name="president" id="president" value="<?php echo htmlspecialchars($row['president'] ?? ''); ?>"><br>
-
-            <label for="HR">HR Manager:</label>
-            <input type="text" name="HR" id="HR" value="<?php echo htmlspecialchars($row['HR'] ?? ''); ?>"><br>
-
-            <label for="company_mail">Company Email:</label>
-            <input type="text" name="company_mail" id="company_mail" value="<?php echo htmlspecialchars($row['company_mail'] ?? ''); ?>"><br>
-
-            <label for="HR_mail">HR Official Email:</label>
-            <input type="text" name="HR_mail" id="HR_mail" value="<?php echo htmlspecialchars($row['HR_mail'] ?? ''); ?>"><br>
-        </div>
-
-        <input type="submit" value="Update">
-    </form>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>

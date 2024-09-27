@@ -130,7 +130,7 @@ if (!$row) {
     </tr>
     <tr>
       <td class="container_whole">
-      <button class="btn btn-primary lbl_8" onclick="window.location.href='html/applicant/applicant.php';">Find Applicant</button>
+      <button class="btn btn-primary lbl_8" onclick="window.location.href='../../html/employer/job_list.php';">Find Applicant</button>
 
       </td>
     </tr>
