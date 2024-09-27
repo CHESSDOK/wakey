@@ -55,8 +55,8 @@ while ($job = $result->fetch_assoc()) {
     </td>
 
     <td>
-        <strong>' . htmlspecialchars($job["company_name"]) . '</strong><br>
-        ' . htmlspecialchars($job["company_address"]) . '<br>
+        <strong>' . htmlspecialchars($job["job_title"]) . '</strong><br>
+        ' . htmlspecialchars($job["company_name"]) . '<br> ' . htmlspecialchars($job["company_address"]) . ' <br>
         <a href="mailto:' . htmlspecialchars($job["company_mail"]) . '">' . htmlspecialchars($job["company_mail"]) . '</a><br>
         ' . htmlspecialchars($job["tel_num"]) . '
     </td>
