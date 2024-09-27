@@ -141,7 +141,7 @@ input{
 }
 
 .list{
-  background: #ffffff;
+  background: transparent;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 15%;
 }

@@ -128,16 +128,13 @@ if (!$row) {
           <div class="input-group mb-3 position-relative">
             <input type="text" id="search-input" class="form-control" name="search" placeholder="Search for a job..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
             <button class="btn btn-primary" type="submit">Search</button>
-
-            <!-- Clear button inside input -->
-            <span id="clear-btn" class="position-absolute top-50 translate-middle-y" style="right: 45px; cursor: pointer; display: none;">&times;</span>
+            
           </div>
         </form>
         </td>
       </tr>
 
       <tr>
-      <td>
       <div class="container-list">
         <?php 
           error_reporting(E_ALL);
@@ -145,7 +142,6 @@ if (!$row) {
           include '../../php/applicant/job_list.php'; 
         ?>
       </div>
-    </td>
 
       </tr>
     </table>
