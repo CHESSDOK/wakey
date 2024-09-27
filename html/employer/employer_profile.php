@@ -38,6 +38,10 @@ if ($result->num_rows > 0) {
     <form action="../../php/employer/employer_prof_process.php" method="post">
         <div id="companyField">
             <label for="company_name">ID:</label>
+
+            <label for="profile_image">Select Profile Image:</label>
+            <input type="file" name="profile_image" id="profile_image" accept="image/*" required> <br>
+
             <label for="company_name">Company Name:</label>
             <input type="text" name="company_name" id="company_name" value="<?php echo htmlspecialchars($row['company_name'] ?? ''); ?>"><br>
 

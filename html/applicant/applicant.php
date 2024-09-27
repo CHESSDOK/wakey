@@ -15,7 +15,7 @@ function checkSession() {
 }
 $userId = checkSession();
 
-$sql = "SELECT * FROM register WHERE id = ?";
+$sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
