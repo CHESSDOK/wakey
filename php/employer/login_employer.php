@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $row['id'];
-            header("Location: ../../html/employer/nav_employer.php");
+            header("Location: ../../html/employer/employer_home.php");
         } else {
             echo "Invalid password.";
         }
