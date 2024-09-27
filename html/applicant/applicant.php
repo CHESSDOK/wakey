@@ -15,7 +15,7 @@ function checkSession() {
 }
 $userId = checkSession();
 
-$sql = "SELECT * FROM register WHERE id = ?";
+$sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -147,6 +147,8 @@ if (!$row) {
     </table>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
    <script src="../../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
 </body>
 </html>

@@ -37,18 +37,27 @@ $(document).on('click', function (e) {
 });
 });
 
-
-document.getElementById("emprof").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default link behavior
-
-    // Change the URL after the transition ends
-    setTimeout(function () {
-      window.location.href = "html/applicant/a_profile.php";
-    }, 300); // Adjust the delay according to your transition duration
-
-    // Adding the class to initiate the fade-in and slide-up animation
-    document.body.classList.add('fade-in');
-  });
+$(document).ready(function(){
+    // Initialize popover with multiple links in the content
+    $('.profile-icon-employer').popover({
+        trigger: 'click', 
+        html: true, // Allow HTML content
+        animation: true, // Enable animation
+        content: function() {
+            return `
+                <a class="link" href="employer_profile.php"  id="emprof">Profile</a><br>
+                <a class="link" href="login_employer.html">Logout</a>
+            `;
+        }
+    });
+// Close popover when clicking outside
+$(document).on('click', function (e) {
+    const target = $(e.target);
+    if (!target.closest('.profile-icon-employer').length) {
+        $('.profile-icon-employer').popover('hide');
+    }
+});
+});
 
 document.getElementById("loginButton").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default link behavior
