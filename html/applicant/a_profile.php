@@ -110,12 +110,12 @@ $conn->close();
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-                <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
-                <tr><td><a href="html/applicant/applicant.php" class="nav-link">Applicant</a></td></tr>
-                <tr><td><a href="html/applicant/training_list.php" class="nav-link">Training</a></td></tr>
-                <tr><td><a href="html/applicant/ofw_home.php" class="nav-link">OFW</a></td></tr>
-                <tr><td><a href="html/about.php" class="nav-link">About Us</a></td></tr>
-                <tr><td><a href="html/contact.php" class="nav-link">Contact Us</a></td></tr>
+                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
+                <tr><td><a href="training_list.php" class="nav-link">Training</a></td></tr>
+                <tr><td><a href="ofw_home.php" class="nav-link">OFW</a></td></tr>
+                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
+                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
             </table>
         </div>
     </div>
@@ -675,7 +675,7 @@ $conn->close();
 </div>
   <input type="submit" value="submit">
     </form>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
