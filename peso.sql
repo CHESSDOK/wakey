@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 27, 2024 at 09:50 AM
+-- Generation Time: Sep 28, 2024 at 06:09 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -59,17 +59,17 @@ CREATE TABLE `applicant_profile` (
   `middle_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `age` int DEFAULT NULL,
-  `specialization` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `specialization` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `sex` enum('male','female') COLLATE utf8mb4_general_ci DEFAULT NULL,
   `civil_status` enum('Single','Married','Widowed') COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contact_no` int NOT NULL,
+  `contact_no` int DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8mb4_general_ci DEFAULT 'user.png',
-  `house_address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `house_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `sss_no` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pagibig_no` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `philhealth_no` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `passport_no` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `immigration_status` enum('Documented','Undocumented','Returning','Repatriated') COLLATE utf8mb4_general_ci NOT NULL,
+  `immigration_status` enum('Documented','Undocumented','Returning','Repatriated') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `spouse_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `spouse_contact` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `fathers_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -81,19 +81,19 @@ CREATE TABLE `applicant_profile` (
   `next_of_kin_contact` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `education_level` enum('Elementary Undergraduate','Elementary Graduate','High School Undergraduate','High School Graduate','College Undergraduate','College Graduate','Vocational') COLLATE utf8mb4_general_ci DEFAULT NULL,
   `occupation` enum('Administrative Work','Medical Work','Factory/Manufacturing','Farmers (Agriculture)','Teaching','Information Technology','Engineering','Restaurant Jobs (F&B)','Seaman (Sea-Based)','Household Service Worker (Domestic Helper)','Construction Work','Entertainment','Tourism Sector','Hospitality Sector','Others') COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `prefix` enum('Sr.','Jr.','II','III','IV','V','VI','VII') COLLATE utf8mb4_general_ci NOT NULL,
-  `emergency_contact_num` int NOT NULL,
-  `income` int NOT NULL,
-  `country` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `employment_type` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `employment_form` enum('Recruitment Agency','Government Hire','Name Hire','Referral') COLLATE utf8mb4_general_ci NOT NULL,
-  `employer_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `contact_number` int NOT NULL,
-  `employer_address` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `local_agency_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `local_agency_address` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `arrival_date` date NOT NULL,
-  `dept_date` date NOT NULL
+  `prefix` enum('Sr.','Jr.','II','III','IV','V','VI','VII') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `emergency_contact_num` int DEFAULT NULL,
+  `income` int DEFAULT NULL,
+  `country` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `employment_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `employment_form` enum('Recruitment Agency','Government Hire','Name Hire','Referral') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `employer_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contact_number` int DEFAULT NULL,
+  `employer_address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `local_agency_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `local_agency_address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `arrival_date` date DEFAULT NULL,
+  `dept_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -104,7 +104,9 @@ INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_n
 (1, 13, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, '', 'male', 'Single', 2147483647, 'user.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', 'Adaw', '435323423', 'mama', '323543425', 'fafa', '5345345345', 'fama', 'child', '2232435432', 'College Undergraduate', 'Engineering', 'II', 21435364, 14000, 'Philippines', 'Land-Based', 'Government Hire', 'wsefrews', 2147483647, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-12-18', '2024-10-09'),
 (2, 14, 'marklawrencemercado8@gmail.com', 'Mark Lawrence', 'Mercado', 'Aranda', '2002-07-23', 22, 'Information and Technology', 'female', 'Widowed', 2147483647, '66f2a88a36579.png', '398, Malinta Los Banos, Laguna', '0', '0', '0', '0', 'Undocumented', '', '', '', '', '', '', NULL, NULL, NULL, 'Vocational', 'Factory/Manufacturing', '', 0, 0, 'Philippines', 'Sea-Based', 'Recruitment Agency', 'wsefrews', 0, '342sdcdfgs Streets', 'asfdgdfgdf', 'sdawdsdfsd', '2024-10-12', '2024-10-01'),
 (3, 15, 'marklawrencemercado8@gmail.com', 'Batbat', 'mercado', 'aranda', '2002-06-11', 22, '', 'male', 'Single', 0, 'user.png', '9783 baysdgdfgser', '0', '0', '0', '0', 'Documented', '', '', '', '', '', '', NULL, NULL, NULL, 'High School Graduate', 'Medical Work', 'Sr.', 0, 0, 'Philippines', 'Land-Based', 'Name Hire', 'fdgsd', 0, 'gtry45gdfg4e', 'Batbat aranda mercado', 'e4tdfge5t4e', '2024-11-21', '2024-10-10'),
-(4, 16, 'jervinguevarra123@gmail.com', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, 0, 'user.png', '', NULL, NULL, NULL, NULL, 'Documented', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sr.', 0, 0, '', '', 'Recruitment Agency', '', 0, '', '', '', '0000-00-00', '0000-00-00');
+(4, 16, 'jervinguevarra123@gmail.com', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, 0, 'user.png', '', NULL, NULL, NULL, NULL, 'Documented', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sr.', 0, 0, '', '', 'Recruitment Agency', '', 0, '', '', '', '0000-00-00', '0000-00-00'),
+(5, 22, 'ict1mercado.cdlb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 23, 'ict1mercado.cdlb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f77a02318a6.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,9 +128,9 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
-(4, 14, 8, NULL, 'pending', 'backend dev'),
-(5, 14, 9, NULL, 'pending', 'front end'),
-(6, 14, 10, NULL, 'pending', 'system Administration'),
+(4, 14, 8, NULL, 'accepted', 'backend dev'),
+(5, 14, 9, NULL, 'accepted', 'front end'),
+(6, 14, 10, NULL, 'accepted', 'system Administration'),
 (7, 16, 1, NULL, 'pending', 'Laborer');
 
 -- --------------------------------------------------------
@@ -212,17 +214,19 @@ INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`) VALUE
 CREATE TABLE `employer_documents` (
   `id` int NOT NULL,
   `user_id` int NOT NULL,
-  `document_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `document_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_verified` tinyint(1) DEFAULT '0'
+  `document_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `document_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_verified` tinyint(1) DEFAULT '0',
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employer_documents`
 --
 
-INSERT INTO `employer_documents` (`id`, `user_id`, `document_name`, `document_path`, `is_verified`) VALUES
-(1, 1, 'asdawdawf', 'uploads/a.jpg', 1);
+INSERT INTO `employer_documents` (`id`, `user_id`, `document_name`, `document_path`, `is_verified`, `comment`) VALUES
+(1, 1, 'asdawdawf', 'uploads/a.jpg', 1, NULL),
+(2, 1, 'Widowed', 'uploads/supply.pdf', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -240,7 +244,7 @@ CREATE TABLE `employer_profile` (
   `HR` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `company_mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `HR_mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -248,7 +252,7 @@ CREATE TABLE `employer_profile` (
 --
 
 INSERT INTO `employer_profile` (`id`, `user_id`, `company_name`, `company_address`, `tel_num`, `president`, `HR`, `company_mail`, `HR_mail`, `photo`) VALUES
-(1, 1, 'JOLLYBOYS', 'crossing kanto', '09162602288', 'JOE BIDEN', 'DUKIN TRUMPS', 'JOLLYBOYS@gmail.com', 'DUKIN TRUMPS@gmail.com', '');
+(1, 1, 'JOLLYBOYS', 'crossing kanto', '09162602288', 'JOE BIDEN', 'DUKIN TRUMPS', 'JOLLYBOYS@gmail.com', 'DUKIN TRUMPS@gmail.com', '66f686ecbd255.png');
 
 -- --------------------------------------------------------
 
@@ -327,7 +331,7 @@ CREATE TABLE `job_postings` (
 INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `requirment`, `work_location`, `remarks`, `date_posted`, `is_active`) VALUES
 (1, 1, 'Laborer', 'construction worker', '', 12, '', '', '', '2024-09-22', 1),
 (4, 1, 'electrician', 'fix electrical', '', 50, '', '', '', '2024-08-30', 1),
-(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 11, '', '', '', '2024-09-12', 1),
+(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 8, '', '', '', '2024-09-12', 1),
 (9, 1, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 11, '', '', '', '2024-09-21', 1),
 (10, 1, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 2, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 1);
 
@@ -625,7 +629,8 @@ INSERT INTO `register` (`id`, `email`, `username`, `password`, `token`, `is_veri
 (13, 'marklawrencemercado8@gmail.com', 'Azure', '$2y$10$8EpYIZYPSYNGChcXfsMpTOhZ82mEeh6ZqUK4t9UszJCyDzfgmKgSS', '3b17bee68feeb18350a947d3ced7247b6461ae8fc07101635e552f2af00b6a405b24e4831a950f4207bfc36bdfb0f8aa5c35', 1),
 (14, 'marklawrencemercado8@gmail.com', 'mark', '$2y$10$aGuDjBWRMUEnTw0O8/evlusGclWGzc6unMr1Qbh.uz1oOgAZDJ5rK', 'e887e669be437912dcbed8d38cd2b7392a7281a5ffcba9c497cae823146d838bdca443a11ef31a9ddd91878e4235ffa0c4e5', 1),
 (15, 'marklawrencemercado8@gmail.com', 'Azure1', '$2y$10$YVy4hWWcCXqjGI1Uns6HG.XtP76PBlQu9Ai540OBIC4Rh2B28s.ea', '47733609259b9248acd3466506d91358ab4bc33618933aa38fdbc4971ca05cb49d6a8b8e21a42cffabd2593e09fc4cb2f6f1', 1),
-(16, 'jervinguevarra123@gmail.com', 'jervin123', '$2y$10$6./p3k3siOiK8P0vaA1AFOH3lR0NRfczIFEUNNDLEOBg4QVNUH5bK', '2addf21b0f58aaaef6b864b5aef3f914679c542fff530dfe95a2ac9acb7cd8b4d0ea05a04ace38cfbfe68bad13d57755061f', 1);
+(16, 'jervinguevarra123@gmail.com', 'jervin123', '$2y$10$6./p3k3siOiK8P0vaA1AFOH3lR0NRfczIFEUNNDLEOBg4QVNUH5bK', '2addf21b0f58aaaef6b864b5aef3f914679c542fff530dfe95a2ac9acb7cd8b4d0ea05a04ace38cfbfe68bad13d57755061f', 1),
+(23, 'ict1mercado.cdlb@gmail.com', 'Lawrence', '$2y$10$nSV7vPZd5JryWvi.AeTU8.OzQ5SbHVi7whpabIIsDTKOavhCSJFWK', 'd8ec8807a932f6cde174d3e1df7776dd691d3acf28b683bd0b7d099b9248a8478fca57a2a18e1b0c76019a57d476a13cc055', 1);
 
 -- --------------------------------------------------------
 
@@ -666,7 +671,8 @@ CREATE TABLE `survey_form` (
 
 INSERT INTO `survey_form` (`id`, `question`) VALUES
 (1, 'workerssssss'),
-(2, 'nerver');
+(2, 'nerver'),
+(3, 'Enter survey Questions');
 
 -- --------------------------------------------------------
 
@@ -953,7 +959,7 @@ ALTER TABLE `admin_profile`
 -- AUTO_INCREMENT for table `applicant_profile`
 --
 ALTER TABLE `applicant_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `applications`
@@ -983,7 +989,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `employer_documents`
 --
 ALTER TABLE `employer_documents`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `employer_profile`
@@ -1043,7 +1049,7 @@ ALTER TABLE `quiz_name`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `replies`
@@ -1055,7 +1061,7 @@ ALTER TABLE `replies`
 -- AUTO_INCREMENT for table `survey_form`
 --
 ALTER TABLE `survey_form`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `survey_reponse`
