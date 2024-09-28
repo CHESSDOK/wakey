@@ -52,6 +52,23 @@
 }
 
 /* all */
+.bcrumb-container{
+  position: relative;
+	top: 0;
+	background-color: transparent;
+	color: #333;
+	display: flex;
+	justify-content:flex-start;
+	align-items: left;
+	padding: 20px 20px;
+	margin: auto;
+  margin-bottom: -8vh;
+	max-width: auto;
+	box-shadow: none;
+	border-radius: 0;
+	z-index: 1; 
+}
+
 /* Custom styles for the breadcrumb navigation */
 .breadcrumb {
   background-color: transparent; /* Remove default background */
@@ -60,7 +77,6 @@
 
 /* Style for breadcrumb items */
 .breadcrumb-item {
-  font-size: 16px; /* Adjust the text size */
   color: #007bff; /* Link color */
   font-weight: bold; /* Make the text bold */
 }

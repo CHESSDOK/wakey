@@ -104,7 +104,7 @@ if (!$row) {
     </div>
 </nav>
 
-<nav aria-label="breadcrumb">
+<nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>

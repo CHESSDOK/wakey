@@ -10,6 +10,8 @@ if (!isset($_SESSION['username'])) {
 $sql = "SELECT * FROM applicant_profile";
 $result = $conn->query($sql);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,6 +85,13 @@ body::before{
             </table>
         </div>
     </div>
+</nav>
+
+<nav class="bcrumb-container" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Post Job</li>
+  </ol>
 </nav>
 
 <div class="jc-container">
