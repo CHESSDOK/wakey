@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
     <title>Register</title>
 </head>
 <body>
-    <form action="../../php/employer/employer_prof_process.php" method="post">
+    <form action="../../php/employer/employer_prof_process.php" method="post" enctype="multipart/form-data">
         <div id="companyField">
             <label for="company_name">ID:</label>
 

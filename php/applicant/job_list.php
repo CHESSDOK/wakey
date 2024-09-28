@@ -51,7 +51,7 @@ while ($job = $result->fetch_assoc()) {
     <table class="table table-striped table-hover">
     <tr>
     <td>
-        <img src="../../img/logo.png" alt="Logo"></ alt="Company Logo" class="img-fluid" style="max-width: 50px; height: auto;">
+        <img src="../../php/employer/uploads/'. $job["photo"].'" alt="Logo"></ alt="Company Logo" class="img-fluid" style="max-width: 50px; height: auto;">
     </td>
 
     <td>
