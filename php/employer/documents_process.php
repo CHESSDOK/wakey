@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
         $sql = "INSERT INTO employer_documents (user_id, document_name, document_path) VALUES ('$employer_id', '$document_name', '$document_path')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Document uploaded successfully!";
+            header("Location: ../../html/employer/employer_profile.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

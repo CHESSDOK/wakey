@@ -19,7 +19,7 @@ $userId = checkSession(); // Call the function and store the returned user ID
 // Assuming $conn is your valid database connection
 include '../../php/conn_db.php'; // Include your database connection script
 
-$sql = "SELECT * FROM empyers WHERE id = ?";
+$sql = "SELECT * FROM employer_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -44,22 +44,21 @@ if (!$row) {
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/modal-form.css">
 
   <link rel="stylesheet" href="../../css/nav_float.css">
   <link rel="stylesheet" href="../../css/employer.css">
   </head>
 <body>
-<<<<<<< HEAD
-    <form action="../../php/employer/employer_prof_process.php" method="post" enctype="multipart/form-data">
-        <div id="companyField">
-            <label for="company_name">ID:</label>
-=======
+
+   
+
 <nav>
     <div class="logo">
         <img src="../../img/logo_peso.png" alt="Logo">
         <a href="#"> PESO-lb.ph</a>
     </div>
->>>>>>> 138d102436fed8e7277b1d09b30b23ad86f28769
+
 
     <header>
         <h1 class="h1">Profile</h1>
@@ -72,7 +71,7 @@ if (!$row) {
         
         <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
     <?php if (!empty($row['photo'])): ?>
-        <img id="preview" src="php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+        <img id="preview" src="../../php/employer/uploads/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
     <?php else: ?>
         <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
     <?php endif; ?>
@@ -118,7 +117,7 @@ if (!$row) {
 </nav>
 
 <div class="ep-container">
-<form action="../../php/employer/employer_prof_process.php" method="post">
+<form action="../../php/employer/employer_prof_process.php" method="post" enctype="multipart/form-data">
 <table> 
 <h1 class="h1">Company Info</h1>
  <tr>
@@ -179,8 +178,15 @@ if (!$row) {
 <h1 class="h1">Company Documents</h1>
  <tr>
    <td>
-    <label for="document_name" class="form-label">Document Name:</label>
-    <input type="text" class="form-control" name="document_name" id="document_name" >
+    <label for="document_name" class="form-label">Document type:</label>
+        <select class="form-select" id="document_name" name="document_name" required>
+          <option value="Single">SEC Certificate</option>
+          <option value="Married">Business Permit</option>
+          <option value="Widowed">BIR Certificate of Registration (Form 2303)</option>
+          <option value="Separated">POEA license</option>
+          <option value="Live-in">Private  Employment Agency (PEA) License</option>
+          <option value="Live-in">D.O. 174 Series of 2017 (Contractor/ Sub - Contractor) Certicate</option>
+        </select>
    </td>
    <td>
     <label for="document" class="form-label">Upload Document:</label>
@@ -188,18 +194,99 @@ if (!$row) {
    </td>
  </tr>
  <tr>
+  <td>
+  
+  </td>
    <td>
     <input class="btn btn-primary" type="submit" value="Upload">
+   </td>
+   <td>
+   
    </td>
  </tr>
 </table>
 </form>
 </div>
 
+<button id='openFormBtn' class="btn btn-primary" >File list</button>
+<!-- modal form -->
+
+            <div id="formModal" class="modal">
+                <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <h2>file list</h2>
+                <table>
+
+                <tr>
+                  <th scope="col">type</th>
+                  <th scope="col">status</th>
+                  <th scope="col">comment</th>
+                </tr>
+                <?php
+                  $docu_sql = "SELECT * FROM employer_documents WHERE user_id = $userId";
+                  $docu_result = $conn->query($docu_sql);
+
+                  if ($docu_result->num_rows > 0) {
+                      while ($row = $docu_result->fetch_assoc()) {
+                          echo '
+                              
+                                  <tr>
+                                  <td>' . $row['document_name'] . '</td>
+                                  <td>';
+                          
+                          if ($row['is_verified'] == 1) {
+                              echo 'Verified';
+                          } else {
+                              echo 'Not Verified ';
+                          }
+                          
+                          echo '</td>
+                                <td> '.$row['comment'].' </td>
+                                </tr>
+                                </table>
+                                ';
+                      }
+                  } else {
+                      echo "<tr><td colspan='4'>No employers found</td></tr>";
+                  }
+
+                  $conn->close();
+                  ?>
+
+
+                </form>
+                </div>
+            </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+  // Get modal and button elements
+const modal = document.getElementById('formModal');
+const openBtn = document.getElementById('openFormBtn');
+const closeBtn = document.querySelector('.closeBtn');
+
+// Open modal and set applicant_id in hidden field
+openBtn.addEventListener('click', function() {
+  
+  // Open the modal
+  modal.style.display = 'flex';
+});
+
+// Close modal when 'x' is clicked
+closeBtn.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
+
+// Close modal when clicked outside of the modal content
+window.addEventListener('click', function(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+</script>
 
 <script src="../../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
 

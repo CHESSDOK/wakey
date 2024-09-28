@@ -68,12 +68,13 @@ $result = $conn->query($sql_new);
     <?php
     // Fetch unique user response data (grouped by user_id)
     $sql_new1 = "SELECT survey_reponse.user_id, 
-                        applicant_profile.first_name, 
-                        applicant_profile.middle_name, 
-                        applicant_profile.last_name
-                 FROM survey_reponse
-                 INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
-                 GROUP BY survey_reponse.user_id";  // Ensures only unique user_id
+                    MAX(applicant_profile.first_name) AS first_name, 
+                    MAX(applicant_profile.middle_name) AS middle_name, 
+                    MAX(applicant_profile.last_name) AS last_name
+             FROM survey_reponse
+             INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
+             GROUP BY survey_reponse.user_id";
+              // Ensures only unique user_id
 
     $result_new = $conn->query($sql_new1);
 
