@@ -51,7 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $otp = mt_rand(100000, 999999);
 
     // Set the OTP expiration time (current time + 10 minutes)
-    $otp_expiry = date("Y-m-d H:i:s", strtotime('+10 minutes'));
+    date_default_timezone_set('Asia/Manila');
+    $otp_expiry = date("Y-m-d H:i:s", strtotime('+5 minutes'));
 
     // Insert the new user into the register table
     $sql = "INSERT INTO register (email, username, password, otp, otp_expiry, is_verified) 
