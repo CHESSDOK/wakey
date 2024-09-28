@@ -16,8 +16,7 @@ function checkSession() {
 
 $userId = checkSession();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Capture form data
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $company_name = $_POST['company_name'];
     $company_add = $_POST['company_add'];
     $tel_num = $_POST['tel_num'];
@@ -25,25 +24,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $HR = $_POST['HR'];
     $company_mail = $_POST['company_mail'];
     $HR_mail = $_POST['HR_mail'];
+    
+    // Check if a file was uploaded
+    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
+        $image_name = $_FILES['profile_image']['name'];
+        $image_tmp = $_FILES['profile_image']['tmp_name'];
+        $image_size = $_FILES['profile_image']['size'];
+        $image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
 
+        // Allow only specific image formats
+        $allowed_extensions = array("jpg", "jpeg", "png", "gif");
 
-    // Create the SQL query to update the employer profile
-    $sql = "UPDATE `employer_profile`
-            SET company_name='$company_name', company_address='$company_add', tel_num='$tel_num', 
-                president='$president', HR='$HR', company_mail='$company_mail', HR_mail='$HR_mail'
-            WHERE user_id ='$userId'";
+        if (in_array($image_ext, $allowed_extensions)) {
+            // Rename the image to prevent conflicts
+            $new_image_name = uniqid() . '.' . $image_ext;
 
-    // Execute the query and check for success
-    if ($conn->query($sql) === TRUE) {
-        // Redirect to job creation page on success
-        header("Location: ../../html/employer/job_creat.php");
-        exit();
+            // Upload directory
+            $upload_dir = 'uploads/';
+            
+            // Move the file to the uploads directory
+            if (move_uploaded_file($image_tmp, $upload_dir . $new_image_name)) {
+                // Check if the user exists
+                $check_user_sql = "SELECT * FROM employer_profile WHERE user_id='$userId'";
+                $result = $conn->query($check_user_sql);
+
+                if ($result->num_rows > 0) {
+                    // Update the user's profile image
+                    $sql = "UPDATE `employer_profile`
+                            SET company_name='$company_name', company_address='$company_add', tel_num='$tel_num', 
+                                president='$president', HR='$HR', company_mail='$company_mail', HR_mail='$HR_mail',
+                                photo ='$new_image_name'
+                            WHERE user_id ='$userId'";
+                    if ($conn->query($sql)) {
+                        header("Location: ../../html/employer/employer_profile.php");
+                    } else {
+                        echo "Error updating profile image: " . $conn->error;
+                    }
+                } else {
+                    echo "User not found.";
+                }
+            } else {
+                echo "Failed to upload the image.";
+            }
+        } else {
+            echo "Invalid image format. Only JPG, JPEG, PNG, and GIF are allowed.";
+        }
     } else {
-        // Output error message on failure
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "No image uploaded.";
     }
-
-    // Close the database connection
-    $conn->close();
 }
+
+$conn->close();
 ?>
