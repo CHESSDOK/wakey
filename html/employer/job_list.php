@@ -86,6 +86,13 @@ $result = $conn->query($sql);
     </div>
 </nav>
 
+<nav class="bcrumb-container" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Job List</li>
+  </ol>
+</nav>
+
 <div class="jl-container">
 <table class="table table-borderless table-hover">
     <thead class="thead-light">

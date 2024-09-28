@@ -50,15 +50,21 @@ if (!$row) {
   <link rel="stylesheet" href="../../css/employer.css">
   </head>
 <body>
+<<<<<<< HEAD
 
    
 
+=======
+>>>>>>> d457e2cd28c2e95e419253f788843c4edf27e1b3
 <nav>
     <div class="logo">
         <img src="../../img/logo_peso.png" alt="Logo">
         <a href="#"> PESO-lb.ph</a>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> d457e2cd28c2e95e419253f788843c4edf27e1b3
 
     <header>
         <h1 class="h1">Profile</h1>
@@ -109,7 +115,7 @@ if (!$row) {
     </div>
 </nav>
 
-<nav aria-label="breadcrumb">
+<nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Profile</li>
