@@ -23,13 +23,13 @@ body::before {
 	filter: blur(4px); 
 	z-index: -1; 
 }
-.profile-icons, .profile-index {
+.profile-icons, .profile-icon-employer, .profile-index {
     display: flex;            /* Use flexbox for layout */
     align-items: center;     /* Center items vertically */
 	margin-right: 3vw;
 }
 
-.profile-icon, .profile-index, .notif-icon{
+.profile-icon, .profile-icon-employer, .profile-index, .notif-icon{
 	width: 35px;  /* Adjust the width as needed */
 	height: 35px; /* Adjust the height as needed */
 	border-radius:50%;
@@ -37,7 +37,7 @@ body::before {
 	position: relative;
 	margin-right: 15px;
 }
-.notif-icon img,.profile-icon img {
+.notif-icon img,.profile-icon img, .profile-icon-employer img {
 	width: 100%;
 	height: auto;
 }
@@ -45,31 +45,32 @@ body::before {
 
 /* Custom popover size */
 .popover {
-	max-width: 100px; /* Set your desired maximum width */
-	
+	max-width: 8vw; /* Set your desired maximum width */
 }
 
 /* Custom popover styles */
 .popover-header {
 	background-color: #007bff; /* Bootstrap primary color or any color you choose */
 	color: white; /* Text color for header */
+	
 }
 
 .popover-body {
-	background-color: #f8f9fa; /* Background color for body */
+	background-color: white; /* Background color for body */
 	color: #0a56a3; /* Text color for body */
-	font-size: 0.8rem; /* Adjust font size */
-	padding: 6px;
 	border-radius: 50%;
 }
 .link {
     text-decoration: none;
     font-size: 0.9rem;
-    padding: 15px;
+	padding: 4.7px;
+	line-height: 2.1em;
+	letter-spacing: 0.1em;
     transition: font-size 0.2s; /* Smooth transition for the font size change */
 }
 
 .link:hover {
+	letter-spacing: 0;
     font-size: 1.1rem; /* Increase the font size on hover */
 }
 
@@ -87,7 +88,7 @@ nav {
 	color: #333;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: left;
 	padding: 10px 20px;
 }
 

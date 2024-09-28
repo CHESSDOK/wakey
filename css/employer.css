@@ -1,0 +1,82 @@
+/* job_creat.php */
+.jc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+    max-width: 800px;
+    width: 100%;
+    margin: 2% auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+/* job_list.php */
+.jl-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+  max-width: 90vw;
+  width: 100%;
+  margin: 2% auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.value-display{
+  min-width: 8vw;
+}
+
+.btn{
+  width: 9vw;
+}
+
+/* employer_profile.php */
+.ep-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: auto;
+  max-width: 45vw;
+  width: 100%;
+  margin: 2% auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* all */
+/* Custom styles for the breadcrumb navigation */
+.breadcrumb {
+  background-color: transparent; /* Remove default background */
+  list-style: none; /* Remove default list styles */
+}
+
+/* Style for breadcrumb items */
+.breadcrumb-item {
+  font-size: 16px; /* Adjust the text size */
+  color: #007bff; /* Link color */
+  font-weight: bold; /* Make the text bold */
+}
+
+/* Styling for active breadcrumb item */
+.breadcrumb-item.active {
+  color: #6c757d; /* Color for the active item */
+}
+
+/* Custom hover state for breadcrumb links */
+.breadcrumb-item a {
+  text-decoration: none; /* Remove underline */
+  color: #0056b3; /* Custom link color on hover */
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline; /* Add underline on hover */
+  color: #003865; /* Darker shade of link color */
+}

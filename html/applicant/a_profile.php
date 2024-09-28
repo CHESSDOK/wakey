@@ -99,8 +99,6 @@ $conn->close();
         <span></span>
     </div>
 </td>
-</tr>
-</table>
 
     <!-- Offcanvas Menu -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
@@ -120,9 +118,6 @@ $conn->close();
         </div>
     </div>
 </nav>
-
-
-
 
 <div class="outer-container">
     <div class="container-fluid">

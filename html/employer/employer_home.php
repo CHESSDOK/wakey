@@ -1,4 +1,3 @@
-<!-- Navigation -->
 <?php
 // Start the session and check if the user is logged in
 function checkSession() {
@@ -42,6 +41,10 @@ if (!$row) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Landing Page</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="../../css/style.css">
   <style>
     a.disabled {
@@ -52,60 +55,101 @@ if (!$row) {
   </style>
 </head>
 <body>
-  <nav>
+<nav>
     <div class="logo">
-      <img src="../../img/logo_peso.png" alt="Logo">
-      <a href="#"> PESO-lb.ph</a>
+        <img src="../../img/logo_peso.png" alt="Logo">
+        <a href="#"> PESO-lb.ph</a>
     </div>
-    <label class="burger" for="burger">
-      <input type="checkbox" id="burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
-    <ul class="menu">
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="../../html/employer/employer_docs.html">Documents</a></li>
-      <li><a href="../../html/about.html">About Us</a></li>
-      <li><a href="../../html/employer/job_creat.php">Employer</a></li>
-      <li><a href="../../html/employer/job_list.php">joblist</a></li>
-      <li><a href="../../html/contact.html">Contact</a></li>
-    </ul>
-    <div class="auth">
-      <button id="emprof">  <?php echo htmlspecialchars($_SESSION['username']); ?> </button>
-    </div>
-  </nav>
 
-  <div class="container">
-    <div class="content">
-      <p>
-        <span class="label1">PESO</span><span class="label2">Los Baños</span><br />
-        <span class="label3">Public Employment Service Office</span><br>
-        <span class="label4"> JOB PORTAL &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><br>
-        <span class="label5">YOUR <span style="color: #3D93D3; font-weight: bold">NEW CAREER </span> STARTS HERE!</span>
-      </p>
-      <p>
-        <span class="label7"> Available in one roof the various employment promotion, manpower programs, and services of the DOLE </span><br>
-        <span class="label8">and other government agencies to enable all types of clientele to know more about them and seek </span> <br>
-        <span class="label9"></span>specific assistance they require.
-      </p>
+    <div class="profile-icons">
+        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        </div>
+        
+        <div class="profile-icon-employer" data-bs-toggle="popover" data-bs-placement="bottom">
+          <?php if (!empty($row['photo'])): ?>
+              <img id="preview" src="php/employer/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+          <?php else: ?>
+              <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+          <?php endif; ?>
+        </div>
+
     </div>
-  </div>
+
+    <!-- Burger icon -->
+    <div class="burger" id="burgerToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</td>
+</tr>
+</table>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <table class="menu">
+                <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
+                <tr><td><a href="../../html/employer/job_creat.php" class="nav-link">Post Job</a></td></tr>
+                <tr><td><a href="../../html/employer/job_list.php" class="nav-link">Job List</a></td></tr>
+                <tr><td><a href="../../html/about.html" class="nav-link">About Us</a></td></tr>
+                <tr><td><a href="../../html/contact.html" class="nav-link">Contact Us</a></td></tr>
+            </table>
+        </div>
+    </div>
+</nav>
+
+<table>
+    <tr>
+      <td class="container_whole" colspan="2">
+        <label class="lbl_1">PESO</label>
+        <label class="lbl_2">Los Baños</label>
+      </td>
+    </tr>
+    <tr>
+      <td class="container_whole" colspan="2">
+        <label class="lbl_3">Public Employment Service Office</label>
+      </td>
+    </tr>
+    <tr>
+      <td class="container_whole" colspan="2">
+        <label class="lbl_4">JOB PORTAL</label>
+      </td>
+    </tr>
+    <tr>
+      <td class="container_whole" colspan="2">
+        <label class="lbl_5">YOUR</label>
+        <label class="lbl_6">NEW APPLICANT</label>
+        <label class="lbl_7">STARTS HERE!</label>
+      </td>
+    </tr>
+    <tr>
+      <td class="container_whole">
+      <button class="btn btn-primary lbl_8" onclick="window.location.href='../../html/employer/job_list.php';">Find Applicant</button>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="container_whole" colspan="2">
+        <textarea readonly>
+            Available in one roof the various employment promotion, manpower programs, 
+            and services of the DOLE and other government agencies to enable all types 
+            of clientele to know more about them and seek specific assistance they require.
+        </textarea>
+      </td>
+    </tr>
+    </table>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script src="../../javascript/script.js"></script> <!-- You can link your JavaScript file here if needed -->
-
-  <script>
-    document.getElementById("emprof").addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default link behavior
-
-      // Change the URL after the transition ends
-      setTimeout(function () {
-        window.location.href = "../../html/employer/employer_profile.php";
-      }, 300); // Adjust the delay according to your transition duration
-
-      // Adding the class to initiate the fade-in and slide-up animation
-      document.body.classList.add('fade-in');
-    });
-  </script> 
 </body>
 </html>
