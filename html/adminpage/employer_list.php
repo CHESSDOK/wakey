@@ -42,5 +42,6 @@ $result = $conn->query($sql);
     <a href="course_list.php">course list</a>
     <a href="ofw_case.php">ofw filed cases</a>
     <a href="create_survey.php">survey</a>
+    <a href="user_master_list.php">users list</a>
 </body>
 </html>
