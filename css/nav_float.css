@@ -207,3 +207,48 @@ nav {
 	transform: translateY(-100%);
 }
 
+/* all */
+.bcrumb-container{
+	position: relative;
+	  top: 0;
+	  background-color: transparent;
+	  color: #333;
+	  display: flex;
+	  justify-content:flex-start;
+	  align-items: left;
+	  padding: 20px 20px;
+	  margin: auto;
+	  margin-bottom: -5vh;
+	  max-width: auto;
+	  box-shadow: none;
+	  border-radius: 0;
+	  z-index: 1; 
+  }
+  
+  /* Custom styles for the breadcrumb navigation */
+  .breadcrumb {
+	background-color: transparent; /* Remove default background */
+	list-style: none; /* Remove default list styles */
+  }
+  
+  /* Style for breadcrumb items */
+  .breadcrumb-item {
+	color: #007bff; /* Link color */
+	font-weight: bold; /* Make the text bold */
+  }
+  
+  /* Styling for active breadcrumb item */
+  .breadcrumb-item.active {
+	color: #6c757d; /* Color for the active item */
+  }
+  
+  /* Custom hover state for breadcrumb links */
+  .breadcrumb-item a {
+	text-decoration: none; /* Remove underline */
+	color: #0056b3; /* Custom link color on hover */
+  }
+  
+  .breadcrumb-item a:hover {
+	text-decoration: underline; /* Add underline on hover */
+	color: #003865; /* Darker shade of link color */
+  }
