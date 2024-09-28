@@ -113,5 +113,6 @@ $result = $conn->query($sql);
     <script src="../../javascript/a_profile.js"></script> 
     
     <script src="../../javascript/script.js"></script> 
+    <a href="user_master_list.php">users list</a>
 </body>
 </html>

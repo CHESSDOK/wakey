@@ -1,5 +1,42 @@
 <?php
 include 'conn_db.php';
+<?php
+include 'conn_db.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require '../mailer/vendor/autoload.php';
+
+function sendOtpEmail($email, $otp) {
+    $mail = new PHPMailer(true);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+        $mail->SMTPAuth = true;
+        $mail->Username = 'jervinguevarra123@gmail.com'; // SMTP username
+        $mail->Password = 'wdul asom bddj yhfd'; // SMTP password (Use app-specific password for Gmail)
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('jervinguevarra123@gmail.com', 'PESO-lb.ph');
+        $mail->addAddress($email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'OTP Verification';
+        $mail->Body = 'Your OTP for email verification is: <b>' . $otp . '</b>. It will expire in 10 minutes.';
+
+        $mail->send();
+        echo 'OTP email has been sent.';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['user'];

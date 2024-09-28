@@ -15,8 +15,8 @@ if ($conn->query($sql) === TRUE) {
         $row = $result->fetch_assoc();
         $job_id = $row['job_posting_id'];
 
-        // Subtract 1 from the vacant column in the job_posting table
-        $update_vacant_sql = "UPDATE job_postings SET vacant = vacant - 1 WHERE j_id = '$job_id'";
+        // Subtract 1 from the vacant column in the job_posting table, and ensure vacant is positive
+        $update_vacant_sql = "UPDATE job_postings SET vacant = GREATEST(vacant - 1, 0) WHERE j_id = '$job_id'";
 
         if ($conn->query($update_vacant_sql) === TRUE) {
             echo "Application accepted and vacant position updated.";
@@ -28,7 +28,7 @@ if ($conn->query($sql) === TRUE) {
     }
 
     // Redirect to the applicant list
-    header("Location: ../../html/employer/applicant_list.php? job_id=".$job_id);
+    header("Location: ../../html/employer/applicant_list.php?job_id=".$job_id);
     exit(); // Ensure to stop further script execution
 } else {
     // Display an error message if the query fails
