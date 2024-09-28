@@ -49,17 +49,11 @@ if (!$row) {
   <link rel="stylesheet" href="../../css/employer.css">
   </head>
 <body>
-<<<<<<< HEAD
-    <form action="../../php/employer/employer_prof_process.php" method="post" enctype="multipart/form-data">
-        <div id="companyField">
-            <label for="company_name">ID:</label>
-=======
 <nav>
     <div class="logo">
         <img src="../../img/logo_peso.png" alt="Logo">
         <a href="#"> PESO-lb.ph</a>
     </div>
->>>>>>> 138d102436fed8e7277b1d09b30b23ad86f28769
 
     <header>
         <h1 class="h1">Profile</h1>
