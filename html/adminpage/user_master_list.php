@@ -4,16 +4,19 @@ include 'conn_db.php';
 // Query to get total users and accepted users
 $sql = "SELECT 
             (SELECT COUNT(*) FROM applicant_profile) AS total_users,
-            (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'accepted') AS accepted_users";
+            (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'accepted') AS accepted_users,
+            (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'pending') AS pending_users";
 
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
 $total_users = $row['total_users'];
 $accepted_users = $row['accepted_users'];
+$pending_users = $row['pending_users'];
 
 // Calculate percentages
 $accepted_percentage = $accepted_users;
+$pending_percentage = $pending_users;
 $other_percentage =  $total_users - $accepted_users;
 
 // Query to get the accepted users details
@@ -41,11 +44,11 @@ $result = $conn->query($sql);
         var userPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Accepted Users', 'Other Users'],
+                labels: ['Hired Applicant', 'inactive Applicant', 'Pending Applicant'],
                 datasets: [{
-                    label: 'User Acceptance',
-                    data: [<?php echo $accepted_percentage; ?>, <?php echo $other_percentage; ?>],
-                    backgroundColor: ['#4CAF50', '#FF6347'],
+                    label: 'Nummber of applicant',
+                    data: [<?php echo $accepted_percentage; ?>, <?php echo $other_percentage; ?>, <?php echo $pending_percentage; ?>],
+                    backgroundColor: ['#4CAF50', '#FF6347','#fff'],
                     borderWidth: 1
                 }]
             },

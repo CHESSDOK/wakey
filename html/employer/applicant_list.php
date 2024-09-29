@@ -15,19 +15,19 @@ function checkSession() {
 }
 
 $userId = checkSession();
-// Get user_id from URL
-// Fetch documents for the selected employer
-
 $jobid = $_GET['job_id'];
 
 // SQL JOIN to fetch applicant details and their applications
 $sql = "SELECT ap.*, a.* 
-            FROM applicant_profile ap
-            JOIN applications a ON ap.user_id = a.applicant_id
-            WHERE a.job_posting_id = $jobid
-";
-$result = $conn->query($sql);
+        FROM applicant_profile ap
+        JOIN applications a ON ap.user_id = a.applicant_id
+        WHERE a.job_posting_id = ? AND a.status != 'accepted'";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $jobid);
+$stmt->execute();
+$result = $stmt->get_result();
 
+// Fetch employer profile
 $sql = "SELECT * FROM empyers WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
@@ -35,12 +35,12 @@ $stmt->execute();
 $res = $stmt->get_result();
 
 if (!$res) {
-   die("Invalid query: " . $conn->error); 
+    die("Invalid query: " . $conn->error); 
 }
 
 $row = $res->fetch_assoc();
 if (!$row) {
-   die("User not found.");
+    die("User not found.");
 }
 ?>
 
@@ -51,7 +51,7 @@ if (!$row) {
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
     <link rel="stylesheet" href="../../css/employer.css">
 </head>
@@ -141,7 +141,12 @@ if (!$row) {
                         <td class='form-label'>" . htmlspecialchars($row["applicant_id"]) . "</td>
                         <td class='form-label'>" . htmlspecialchars($full_name) . "</td>
                         <td class='form-label'>" . htmlspecialchars($row["job"]) . "</td>
-                        <td class='form-label'><a href='applicant_profile.php?user_id=" . htmlspecialchars($row["applicant_id"]) . " &job_id=" . htmlspecialchars($row["job_posting_id"]) . "'>View</a></td>
+                        <td><a href='../../php/employer/application_process.php?id=" . $row['user_id'] . "'>accepted</a></td>
+                        <td><button id='openFormBtn' 
+                                    data-applicant-id=" . htmlspecialchars($row["applicant_id"]) ." 
+                                    data-job-id=" . htmlspecialchars($row["job_posting_id"]) .">interview</button></td>
+                        <td><button id='profileFormBtn'  class='openProfileBtn'
+                                    data-applicant-id='" . htmlspecialchars($row["applicant_id"]) . "'>view profile</button></td>
                     </tr>";
             }
         } else {
@@ -152,9 +157,58 @@ if (!$row) {
     </table>
     </div>
 
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <h2>Interview</h2>
+            <form action="../../php/employer/interview.php" method="post">
+                <input type="hidden" id="applicantId" name="applicant_id">
+                <input type="hidden" id="jobid" name="jobid">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required><br><br>
+                <label for="interview">Interview Type:</label>
+                <select name="interview" id="interview">
+                    <option value="online">Online</option>
+                    <option value="FacetoFace">Face to Face</option>
+                </select>
+                <label for="link">Link:</label>
+                <input type="text" id="link" name="link"><br><br>
+                <label for="address">Physical Address:</label>
+                <input type="text" id="address" name="address"><br><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+<!-- Modal for Viewing Applicant Profile -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <h2>Applicant Profile</h2>
+        <div id="applicantProfileContent">
+            <!-- Profile details will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="../../javascript/popup-modal.js"></script>
+    <script>
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+    const yyyy = today.getFullYear();
+    const currentDate = `${yyyy}-${mm}-${dd}`;
+
+    // Set the min attribute to today's date
+    document.getElementById('date').setAttribute('min', currentDate);
+    </script>
 
     <script src="../../javascript/script.js"></script>
 </body>
