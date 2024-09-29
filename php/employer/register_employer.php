@@ -1,7 +1,5 @@
 <?php
-include 'conn_db.php';
-<?php
-include 'conn_db.php';
+include '../conn_db.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -39,45 +37,39 @@ function sendOtpEmail($email, $otp) {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['user'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $email = $_POST['email'];
+    $username = $conn->real_escape_string($_POST['user']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $password = $_POST['password'];
 
-    // Start a transaction
-    $conn->begin_transaction();
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $otp = mt_rand(100000, 999999);
 
-    try {
-        // Insert into empyers table
-        $sql = "INSERT INTO empyers (username, password, email) VALUES ('$username', '$password', '$email')";
-        
-        if ($conn->query($sql) === TRUE) {
-            // Get the last inserted ID
-            $employer_id = $conn->insert_id;
+    date_default_timezone_set('Asia/Manila');
+    $otp_expiry = date("Y-m-d H:i:s", strtotime('+5 minutes'));
+    $sql = "INSERT INTO empyers (email, username, password, otp, otp_expiry, is_verified) 
+            VALUES ('$email', '$username', '$hashedPassword', '$otp', '$otp_expiry', 0)";
 
-            // Insert into employer_profile table
-            $sql = "INSERT INTO employer_profile (user_id, company_name, company_address) VALUES ('$employer_id', '', '')";
-            
-            if ($conn->query($sql) === TRUE) {
-                // Commit the transaction
-                $conn->commit();
-                echo "New record and profile created successfully";
-            } else {
-                // Rollback the transaction if there's an error with the profile insert
-                $conn->rollback();
+    if ($conn->query($sql) === TRUE) {
+        $last_id = $conn->insert_id;
+
+    $sql = "INSERT INTO employer_profile (user_id, company_name, company_address) 
+            VALUES ('$last_id', '', '')";
+    if ($conn->query($sql) === TRUE) {
+        // Send the OTP email
+        sendOtpEmail($email, $otp);
+
+        // Redirect or alert the user
+        echo "<script type='text/javascript'> 
+                alert('Registration successful! Please verify your email using the OTP sent.');
+                window.location.href='../../html/employer/otp_verification.html'; 
+              </script>";
+        } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         } else {
-            // Rollback the transaction if there's an error with the registration insert
-            $conn->rollback();
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
-    } catch (Exception $e) {
-        // Rollback the transaction in case of any exception
-        $conn->rollback();
-        echo "Transaction failed: " . $e->getMessage();
-    }
-
-    // Close the connection
-    $conn->close();
+        $conn->close();
+            
 }
 ?>
