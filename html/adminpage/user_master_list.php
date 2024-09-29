@@ -93,7 +93,7 @@ $result = $conn->query($sql);
         $conn->close();
         ?>
     </table>
-
+    <a href="rank_cases.php">ofw</a>
     <a href="employer_list.php">Back</a>
 </body>
 </html>
