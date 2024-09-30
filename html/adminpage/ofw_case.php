@@ -68,10 +68,10 @@ $result = $conn->query($sql);
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-            <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Employer List</a></td></tr>
+                <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
-                <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
+                <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
             </table>
         </div>
@@ -81,10 +81,12 @@ $result = $conn->query($sql);
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Employer List</li>
+    <li class="breadcrumb-item active" aria-current="page">OFW Cases</li>
   </ol>
 </nav>
 
+<div class="table-container">
+<a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
 <div class="table-container">
     <table class="table table-borderless table-hover">
         <thead>
@@ -104,8 +106,8 @@ $result = $conn->query($sql);
         </tr>
         <?php endwhile; ?>
     </table>
-    <a href="user_chat.php">list of inquiries</a>
-</div>
+    
+    </div></div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

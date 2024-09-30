@@ -13,3 +13,12 @@
     padding: 0.5rem; /* Adjust padding to make cells smaller */
     text-align: center;
 }
+
+.docu{
+    text-decoration: none;
+  }
+  
+  .docu:hover{
+    color: blue;
+    text-decoration: underline;
+  }

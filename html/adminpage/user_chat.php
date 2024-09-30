@@ -9,16 +9,83 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ist</title>
+    <title>Chat logs</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+ 
+    <link rel="stylesheet" href="../../css/admin_ofw.css">
+    <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
 <body>
-<table border="1">
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="../../img/logo_peso.png" alt="Logo">
+        <a href="#"> PESO-lb.ph</a>
+    </div>
+
+    <header>
+      <h1 class="ofw-h1">OFW Inquiries</h1>
+    </header>
+
+    <div class="profile-icons">
+        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        </div>
+        
+        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+    <?php if (!empty($row['photo'])): ?>
+        <img id="preview" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+    <?php else: ?>
+        <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+    <?php endif; ?>
+    </div>
+
+
+    </div>
+
+    <!-- Burger icon -->
+    <div class="burger" id="burgerToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <table class="menu">
+                <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
+                <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
+                <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
+            </table>
+        </div>
+    </div>
+</nav>
+
+<nav class="bcrumb-container" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+    <li class="breadcrumb-item"><a href="ofw_case.php" >OFW Cases</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Chat Logs</li>
+  </ol>
+</nav>
+
+<div class="table-container">
+<table class="table table-borderless table-hover">
         <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">user_info</th>
-            <th scope="col">message</th>
-            <th scope="col">date</th>
+            <th>id</th>
+            <th>user_info</th>
+            <th>message</th>
+            <th>date</th>
+            <th>Action</th>
         </tr>
         </thead>
          <tbody>
@@ -30,7 +97,7 @@ $result = $conn->query($sql);
                         <td>" . $row["user_id"] . "</td>
                         <td>" . $row["message"] . "</td>
                         <td>" . $row["created_at"] . "</td>
-                        <td><a href='ofw_chat.php?message_id=" . $row["id"] . "'>quiz list</a></td>
+                        <td><a class='docu' href='ofw_chat.php?message_id=" . $row["id"] . "'>View Chat</a></td>
                     </tr>";
             }
         } else {
@@ -42,5 +109,12 @@ $result = $conn->query($sql);
 
         </tbody>
     </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="../../javascript/a_profile.js"></script> 
+    
+    <script src="../../javascript/script.js"></script> 
 </body>
 </html>
