@@ -94,6 +94,8 @@ $result = $conn->query($sql);
         ?>
     </table>
     <a href="rank_cases.php">ofw</a>
+    <a href="job_hiring_rate.php">hiring rate</a>
+    <a href="job_count.php">Job_count</a>
     <a href="employer_list.php">Back</a>
 </body>
 </html>
