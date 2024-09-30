@@ -14,13 +14,20 @@ if ($result->num_rows > 0) {
     $module_count = $row["module_count"];
     for ($i = 1; $i <= $module_count; $i++){
         echo "<form  method='POST' action='save_modules.php' enctype='multipart/form-data'>
+            <table class='table table-borderless table-hover tbl_module'>
+            <tr>
                 <input type='hidden' name='course_id' value='$course_id'>
                 <input type='hidden' name='module_count' value='$module_count'>
-
-                <input class='form-control upl-input' type='text' id='module_name_'.$i'' 
-                            name='module_name_'.$i'' placeholder='Module'.$i' required> <br>
-                <input class='btn btn-primary mt-3' type='submit' value='Save Modules'>
+            <td>
+                <input class='form-control' type='text' id='module_name_'.$i'' 
+                            name='module_name_'.$i'' placeholder='Module'.$i' required>
+            </td>
+            <td> 
+                <input class='btn btn-primary mt-2' type='submit' value='Update'>
                 </form>
+            <td>
+            <tr>
+            </table>
              ";
     }
     
