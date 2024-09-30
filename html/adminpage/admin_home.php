@@ -55,7 +55,6 @@
             <table class="menu">
                 <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
-                <tr><td><a href="course.phpl?username=<?php echo $admin; ?>" class="nav-link">Course Maker</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
