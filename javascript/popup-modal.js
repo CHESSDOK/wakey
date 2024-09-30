@@ -29,3 +29,35 @@ window.addEventListener('click', function(event) {
     modal.style.display = 'none';
   }
 });
+
+    // Get modal and button elements for viewing profile
+    const profileModal = document.getElementById('profileModal');
+    const closeProfileBtn = document.querySelector('.closeBtn');
+
+    // Open profile modal and load data via AJAX
+    $(document).on('click', '.openProfileBtn', function(e) {
+        e.preventDefault();
+        const applicantId = $(this).data('applicant-id');
+        
+        $.ajax({
+            url: 'fetch_applicant_profile.php',
+            method: 'GET',
+            data: { applicant_id: applicantId },
+            success: function(response) {
+                $('#applicantProfileContent').html(response);
+                profileModal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Close profile modal when 'x' is clicked
+    closeProfileBtn.addEventListener('click', function() {
+        profileModal.style.display = 'none';
+    });
+
+    // Close profile modal when clicking outside the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === profileModal) {
+            profileModal.style.display = 'none';
+        }
+    });

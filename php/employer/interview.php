@@ -1,7 +1,6 @@
 <?php
 
 include '../conn_db.php'; // Include your MySQLi connection
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_POST['applicant_id'];
     $job_id = $_POST['jobid'];
@@ -10,27 +9,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $type = $_POST['interview'];
     $meeting = $_POST['link'];
 
-    // Prepare the SQL statement
-    $sql = "INSERT INTO interview (user_id, job_id, sched_date, sched_time, interview, meeting) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+    // Step 1: Update the status in applications table
+    $sqlUpdateStatus = "UPDATE applications SET status = 'accepted' WHERE applicant_id = ? AND job_posting_id = ?";
+    $stmtStatus = $conn->prepare($sqlUpdateStatus);
+    $stmtStatus->bind_param("ii", $user_id, $job_id);
     
-    // Prepare the statement with MySQLi
-    $stmt = $conn->prepare($sql);
+    if ($stmtStatus->execute()) {
+        // Step 2: Insert into interview table
+        $sqlInsertInterview = "INSERT INTO interview (user_id, job_id, sched_date, sched_time, interview, meeting) 
+                               VALUES (?, ?, ?, ?, ?, ?)";
+        $stmtInterview = $conn->prepare($sqlInsertInterview);
+        $stmtInterview->bind_param("iissss", $user_id, $job_id, $date, $time, $type, $meeting);
+        
+        if ($stmtInterview->execute()) {
+            // Step 3: Update the vacant count in job_postings table
+            $sqlVacant = "UPDATE job_postings SET vacant = vacant - 1 WHERE j_id = ?";
+            $stmtVacant = $conn->prepare($sqlVacant);
+            $stmtVacant->bind_param("i", $job_id);
+            $stmtVacant->execute();
+            $stmtVacant->close();
 
-    // Bind parameters (i for integer, s for string)
-    $stmt->bind_param("iissss", $user_id, $job_id, $date, $time, $type, $meeting);
+            header("Location: ../../html/employer/job_list.php");
+        } else {
+            echo "Error inserting interview: " . $stmtInterview->error;
+        }
 
-    // Execute the statement
-    if ($stmt->execute()) {
-        header("Location: ../../html/employer/job_list.php");
+        $stmtInterview->close();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error updating status: " . $stmtStatus->error;
     }
 
-    // Close the statement and connection
-    $stmt->close();
+    $stmtStatus->close();
     $conn->close();
-} else {
-    echo "Invalid request method.";
 }
+
 ?>

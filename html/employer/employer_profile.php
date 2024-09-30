@@ -50,22 +50,11 @@ if (!$row) {
   <link rel="stylesheet" href="../../css/employer.css">
   </head>
 <body>
-<<<<<<< HEAD
-
-   
-
-=======
->>>>>>> d457e2cd28c2e95e419253f788843c4edf27e1b3
 <nav>
     <div class="logo">
         <img src="../../img/logo_peso.png" alt="Logo">
         <a href="#"> PESO-lb.ph</a>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> d457e2cd28c2e95e419253f788843c4edf27e1b3
-
     <header>
         <h1 class="h1">Profile</h1>
     </header>
