@@ -83,14 +83,14 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
-    <table>
+    <table class="table table-borderless table-hover">
         <thead>
         <tr>
             <th></th><th></th>
-            <th scope="col">title</th>
-            <th scope="col">tag</th>
-            <th scope="col">total</th>
-            <th scope="col">date</th>
+            <th scope="col">Title</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Total</th>
+            <th colspan="2" scope="col">Actions</th>
         </tr>
         </thead>
          <tbody>
@@ -98,15 +98,15 @@ $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
-                            <form class='form' action='quiz_update.php' method='post'>
+                            <form action='quiz_update.php' method='post'>
                             <td><input type='hidden' name='id' value='" . $row['id'] . "'>
                             <td><input type='hidden' name='module_id' value='" . $row['module_id'] . "'>
-                            <td><input type='text' name='name' value='" . $row['title'] . "'></td>
-                            <td><input type='text' name='tag' value='" . $row['tag'] . "'></td>
-                            <td><input type='text' name='total' value='" . $row['total'] . "'></td>
-                            <td><input type='submit' value='update'></td>
+                            <td><input class='form-control' type='text' name='name' value='" . $row['title'] . "'></td>
+                            <td><input class='form-control' type='text' name='tag' value='" . $row['tag'] . "'></td>
+                            <td><input class='form-control' type='text' name='total' value='" . $row['total'] . "'></td>
+                            <td><input class='btn btn-primary' type='submit' value='Update'></td>
                             </form>
-                            <td><a href='view_question.php?module_id=" . $m_id . "&q_id=" . $row['id'] . "'>quiz list</a></td>
+                            <td><a class='btn btn-primary' href='view_question.php?module_id=" . $m_id . "&q_id=" . $row['id'] . "'>View Quiz</a></td>
                         </tr>";
                 }
             } else {
@@ -117,5 +117,12 @@ $result = $conn->query($sql);
         </tbody>
     </table>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="../../javascript/a_profile.js"></script> 
+    
+    <script src="../../javascript/popup-modal.js"></script>
+    <script src="../../javascript/script.js"></script> 
 </body>
 </html>
