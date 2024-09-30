@@ -11,10 +11,11 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Admin - course List</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
 
@@ -95,8 +96,8 @@ $result = $conn->query($sql);
                 echo "<tr>
                         <td>" . $row["course_name"] . "</td>
                         <td>" . $row["description"] . "</td>
-                        
-                        <td><a class='docu' href='upload_modules.php?user_id=" . $row["id"] . "'>Edit Label</a></td>
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn'
+                                    data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?module_id=" . $row["id"] . "'>Edit Items</a></td>
                     </tr>";
             }
@@ -108,34 +109,15 @@ $result = $conn->query($sql);
     </table>
     </div>
 
-    <div class="modal fade" id="moduleModal" tabindex="-1" aria-labelledby="moduleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="moduleModalLabel">List of Modules</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="your-action-url"> 
-                    <label>List of Modules</label>
-                    <?php for ($i = 1; $i <= $module_count; $i++): ?>
-                        <input class="form-control upl-input" type="text" id="module_name_<?php echo $i; ?>" 
-                        name="module_name_<?php echo $i; ?>" placeholder="Module <?php echo $i; ?>" required>
-                    <?php endfor; ?>
-                    <input class="btn btn-primary mt-3" type="submit" value="Save Modules">
-                </form>
-                <a class="docu mt-3" href='upload_modules.php?user_id=<?php echo $row["id"]; ?>'>Edit Label</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../javascript/admin_modal.js"></script>
     <script src="../../javascript/a_profile.js"></script> 
-    
-    <script src="../../javascript/popup-modal.js"></script>
     <script src="../../javascript/script.js"></script> 
+
+    <script>
+
+    </script>
 </body>
 </html>
