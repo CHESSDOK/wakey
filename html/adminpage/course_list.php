@@ -15,7 +15,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../admin_course.css">
+    <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
 
 </head>
@@ -64,10 +64,9 @@ $result = $conn->query($sql);
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-                <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
+                <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
-                <tr><td><a href="course.phpl?username=<?php echo $admin; ?>" class="nav-link">Course Maker</a></td></tr>
-                <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
+                <tr><td><a href="#" class="active nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
             </table>
@@ -75,24 +74,30 @@ $result = $conn->query($sql);
     </div>
 </nav>
 
-<div>
-    <table class="table">
+<nav class="bcrumb-container" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Courses</li>
+  </ol>
+</nav>
+
+<div class="table-container">
+    <table class="table table-borderless table-hover">
         <tr>
-            <th>ID</th>
-            <th>course</th>
-            <th>desc</th>
-            <th>Actions</th>
-            <th>Actions</th>
+            <th>Course</th>
+            <th>Course Description</th>
+            <th>Module Label</th>
+            <th>Module Items</th>
         </tr>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["id"] . "</td>
                         <td>" . $row["course_name"] . "</td>
                         <td>" . $row["description"] . "</td>
-                        <td><a href='upload_modules.php?user_id=" . $row["id"] . "'>modules name</a></td>
-                        <td><a href='module_list.php?module_id=" . $row["id"] . "'>list of modules</a></td>
+                        
+                        <td><a class='docu' href='upload_modules.php?user_id=" . $row["id"] . "'>Edit Label</a></td>
+                        <td><a class='docu' href='module_list.php?module_id=" . $row["id"] . "'>Edit Items</a></td>
                     </tr>";
             }
         } else {
@@ -107,6 +112,7 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="../../javascript/a_profile.js"></script> 
     
+    <script src="../../javascript/popup-modal.js"></script>
     <script src="../../javascript/script.js"></script> 
 </body>
 </html>
