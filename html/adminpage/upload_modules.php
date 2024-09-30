@@ -98,9 +98,6 @@ $conn->close();
 
 <div class="upl-container">
     <form method="post" action="your-action-url"> <!-- Specify your action URL here -->
-        <table class="table table-borderless">
-            <thead>
-                <tr>
                     <th>List of Modules</th>
                 </tr>
             </thead>

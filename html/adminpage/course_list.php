@@ -108,6 +108,29 @@ $result = $conn->query($sql);
     </table>
     </div>
 
+    <div class="modal fade" id="moduleModal" tabindex="-1" aria-labelledby="moduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moduleModalLabel">List of Modules</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="your-action-url"> 
+                    <label>List of Modules</label>
+                    <?php for ($i = 1; $i <= $module_count; $i++): ?>
+                        <input class="form-control upl-input" type="text" id="module_name_<?php echo $i; ?>" 
+                        name="module_name_<?php echo $i; ?>" placeholder="Module <?php echo $i; ?>" required>
+                    <?php endfor; ?>
+                    <input class="btn btn-primary mt-3" type="submit" value="Save Modules">
+                </form>
+                <a class="docu mt-3" href='upload_modules.php?user_id=<?php echo $row["id"]; ?>'>Edit Label</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="../../javascript/a_profile.js"></script> 
