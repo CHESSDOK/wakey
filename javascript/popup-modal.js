@@ -32,7 +32,7 @@ window.addEventListener('click', function(event) {
 
     // Get modal and button elements for viewing profile
     const profileModal = document.getElementById('profileModal');
-    const closeProfileBtn = document.querySelector('.closeBtn');
+    const closepBtn = document.querySelector('.closeBtn');
 
     // Open profile modal and load data via AJAX
     $(document).on('click', '.openProfileBtn', function(e) {
@@ -51,7 +51,7 @@ window.addEventListener('click', function(event) {
     });
 
     // Close profile modal when 'x' is clicked
-    closeProfileBtn.addEventListener('click', function() {
+    closepBtn.addEventListener('click', function() {
         profileModal.style.display = 'none';
     });
 
@@ -61,3 +61,4 @@ window.addEventListener('click', function(event) {
             profileModal.style.display = 'none';
         }
     });
+

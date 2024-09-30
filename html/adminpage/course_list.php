@@ -11,10 +11,11 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Admin - course List</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
 
@@ -95,8 +96,8 @@ $result = $conn->query($sql);
                 echo "<tr>
                         <td>" . $row["course_name"] . "</td>
                         <td>" . $row["description"] . "</td>
-                        
-                        <td><a class='docu' href='upload_modules.php?user_id=" . $row["id"] . "'>Edit Label</a></td>
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn'
+                                    data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?module_id=" . $row["id"] . "'>Edit Items</a></td>
                     </tr>";
             }
@@ -108,11 +109,28 @@ $result = $conn->query($sql);
     </table>
     </div>
 
+
+    
+<!-- Modal for Viewing Applicant Profile -->
+<div id="moduleModal" class="modal">
+    <div class="modal-content">
+        <span class="closeBtn">&times;</span>
+        <h2>Applicant Profile</h2>
+        <div id="uploadModuleContent">
+            <!-- Profile details will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../javascript/admin_modal.js"></script>
     <script src="../../javascript/a_profile.js"></script> 
-    
-    <script src="../../javascript/popup-modal.js"></script>
     <script src="../../javascript/script.js"></script> 
+
+    <script>
+
+    </script>
 </body>
 </html>
