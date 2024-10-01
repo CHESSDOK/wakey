@@ -121,9 +121,8 @@
             </div>
         </div>
 
-
     <script>  const surveyModal = document.getElementById('surveyModal');
-        const closeModuleBtn = document.querySelector('.closeBtn'); survey Questions
+        const closeModuleBtn = document.querySelector('.closeBtn');
         // Open profile modal and load data via AJAX
         $(document).on('click', '.openSurveyBtn', function(e) {
             e.preventDefault();
