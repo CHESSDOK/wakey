@@ -1,26 +1,30 @@
 <?php
-include 'conn_db.php';  // Database connection
+    include 'conn_db.php';  // Database connection
 
-// Insert survey question
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $questions = $_POST['question'];
+    // Insert survey question
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $questions = $_POST['question'];
+        $category = $_POST['category'];
 
-    // Prepared statement for security
-    $stmt = $conn->prepare("INSERT INTO survey_form (question) VALUES (?)");
-    $stmt->bind_param("s", $questions);
+        // Prepared statement for security
+        $stmt = $conn->prepare("INSERT INTO survey_form (question, category) VALUES (?, ?)");
+        $stmt->bind_param("ss", $questions, $category);
 
-    if ($stmt->execute() === TRUE) {
-        header("Location: create_survey.php");
-        exit();  // Important to stop further script execution after redirect
-    } else {
-        echo "Error: " . $stmt->error;
+        if ($stmt->execute() === TRUE) {
+            header("Location: create_survey.php");
+            exit();  // Important to stop further script execution after redirect
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
     }
-    $stmt->close();
-}
 
-// Fetch existing survey questions
-$sql_new = "SELECT * FROM survey_form";
-$result = $conn->query($sql_new);
+    // Fetch existing survey questions
+    $sql_new = "SELECT * FROM survey_form ORDER BY category";
+    $result = $conn->query($sql_new);
+
+    // Initialize variable to track the current category
+    $current_category = '';
 ?>
 <html lang="en">
 <head>
@@ -38,33 +42,38 @@ $result = $conn->query($sql_new);
     <form action="create_survey.php" method="POST">
         <label for="question">Survey Question</label>
         <input type="text" name="question" value="Enter survey Questions">
+        <input type="text" name="category" value="question category">
         <input type="submit" value="submit">
     </form>
 
     <table border="1">
-        <tr>
-            <th>Form ID</th>
-            <th>Question</th>
-            <th></th>
-        </tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <form action='update_survey.php' method='POST'>
-                        <input type='hidden' name='id' value='" . $row["id"] . "'>
-                        <td>" . $row["id"] . "</td>
-                        <td><input type='text' name='question' value='" . $row["question"] . "'></td>
-                        <td><input type='submit' value='update'></td>
-                        </form>
-                    </tr>";
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Check if we are in a new category
+            if ($current_category != $row['category']) {
+                // If it's a new category, print it as a header
+                echo "<tr><td colspan='3'><strong>Category: " . $row['category'] . "</strong></td></tr>";
+                // Update current category tracker
+                $current_category = $row['category'];
             }
-        } else {
-            echo "<tr><td colspan='3'>No survey found</td></tr>";
-        }
-        ?>
 
-    </table>
+            // Print each question under its category
+            echo "<tr>
+                    <form action='update_survey.php' method='POST'>
+                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                    <td>" . $row["id"] . "</td>
+                    <td><input type='text' name='question' value='" . $row["question"] . "'></td>
+                    <td><input type='text' name='category' value='" . $row["category"] . "'></td>
+                    <td><input type='submit' value='Update'></td>
+                    </form>
+                </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='3'>No survey found</td></tr>";
+    }
+    ?>
+</table>
 <!-- ####################################################### ANTHOTER TABLE ###################################################################### -->
 <table border="1">
     <tr>
@@ -114,7 +123,7 @@ $result = $conn->query($sql_new);
 
 
     <script>  const surveyModal = document.getElementById('surveyModal');
-        const closeModuleBtn = document.querySelector('.closeBtn');
+        const closeModuleBtn = document.querySelector('.closeBtn'); survey Questions
         // Open profile modal and load data via AJAX
         $(document).on('click', '.openSurveyBtn', function(e) {
             e.preventDefault();

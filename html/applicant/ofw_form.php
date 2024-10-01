@@ -122,51 +122,65 @@ if (!$row) {
 
     <form action='../../php/applicant/survey_reponse.php' method='POST'>
 <?php
-    $sql = "SELECT * FROM survey_form";
+    $sql = "SELECT * FROM survey_form ORDER BY category";
     $result = $conn->query($sql);
+    
+    // Initialize variable to track the current category
+    $current_category = '';
 
     if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            // Fetch the user's previous response for the current survey question
-            $survey_id = $row['id'];
-            $response_sql = "SELECT reponse FROM survey_reponse WHERE user_id = $userId AND survey_id = $survey_id";
-            $response_result = $conn->query($response_sql);
-            $previous_response = '';
-
-            if ($response_result->num_rows > 0) {
-                $response_row = $response_result->fetch_assoc();
-                $previous_response = $response_row['reponse'];  // Get the previous response if it exists
-            }
-
-            echo "<tr'>
-                    <td>". $row["question"] . "</td>
-                      <input type='hidden' name='survey_ids[]' value='".$row['id']."'>
-                      <input type='hidden' name='user_id' value='".$userId."'>
-                    <td>
-                      <div class='form-check d-flex justify-content-center'>
-                        <input class='form-check-input' type='radio' name='response".$row['id']."' value='Never' " . ($previous_response == 'Never' ? 'checked' : '') . ">
-                      </div>
-                    </td>
-                    <td >
-                      <div class='form-check d-flex justify-content-center'>
-                        <input class='form-check-input' type='radio' name='response".$row['id']."' value='Often' " . ($previous_response == 'Often' ? 'checked' : '') . ">
-                      </div>
-                    </td>
-                    <td>
-                      <div class='form-check d-flex justify-content-center'>
-                        <input class='form-check-input' type='radio' name='response".$row['id']."' value='Sometimes' " . ($previous_response == 'Sometimes' ? 'checked' : '') . ">
-                      </div></td>
-                    <td>
-                      <div class='form-check d-flex justify-content-center'>
-                        <input class='form-check-input' type='radio' name='response".$row['id']."' value='Always' " . ($previous_response == 'Always' ? 'checked' : '') . ">
-                      </div>
-                    </td>
-                  </tr>";
-        }
-    } else {
-        echo "<tr><td colspan='5'>No questions found</td></tr>";
-    }
-?> 
+      while($row = $result->fetch_assoc()) {
+          // Fetch the user's previous response for the current survey question
+          $survey_id = $row['id'];
+          $response_sql = "SELECT reponse FROM survey_reponse WHERE user_id = $userId AND survey_id = $survey_id";
+          $response_result = $conn->query($response_sql);
+          $previous_response = '';
+  
+          // Get the previous response if it exists
+          if ($response_result->num_rows > 0) {
+              $response_row = $response_result->fetch_assoc();
+              $previous_response = $response_row['reponse'];
+          }
+  
+          // Check if we are in a new category
+          if ($current_category != $row['category']) {
+              // If it's a new category, print it as a heading row
+              echo "<tr><td colspan='5'><strong>Category: " . $row['category'] . "</strong></td></tr>";
+              // Update current category tracker
+              $current_category = $row['category'];
+          }
+  
+          // Print the survey question with radio button options
+          echo "<tr>
+                  <td>" . $row["question"] . "</td>
+                  <input type='hidden' name='survey_ids[]' value='" . $row['id'] . "'>
+                  <input type='hidden' name='user_id' value='" . $userId . "'>
+                  <td>
+                    <div class='form-check d-flex justify-content-center'>
+                      <input class='form-check-input' type='radio' name='response" . $row['id'] . "' value='Never' " . ($previous_response == 'Never' ? 'checked' : '') . ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class='form-check d-flex justify-content-center'>
+                      <input class='form-check-input' type='radio' name='response" . $row['id'] . "' value='Often' " . ($previous_response == 'Often' ? 'checked' : '') . ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class='form-check d-flex justify-content-center'>
+                      <input class='form-check-input' type='radio' name='response" . $row['id'] . "' value='Sometimes' " . ($previous_response == 'Sometimes' ? 'checked' : '') . ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class='form-check d-flex justify-content-center'>
+                      <input class='form-check-input' type='radio' name='response" . $row['id'] . "' value='Always' " . ($previous_response == 'Always' ? 'checked' : '') . ">
+                    </div>
+                  </td>
+                </tr>";
+      }
+  } else {
+      echo "<tr><td colspan='5'>No questions found</td></tr>";
+  }
+  ?>
 
 <tr>      
     <td>

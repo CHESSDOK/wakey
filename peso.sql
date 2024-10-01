@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2024 at 12:31 PM
+-- Generation Time: Oct 01, 2024 at 12:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -102,7 +102,9 @@ CREATE TABLE `applicant_profile` (
 
 INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `country`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
 (8, 25, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7a9dcefbc2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 27, 'marklawrencemercado8@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(10, 27, 'marklawrencemercado8@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 28, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 29, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,9 +126,21 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
-(8, 25, 8, NULL, 'accepted', 'backend dev'),
+(8, 25, 8, NULL, NULL, 'backend dev'),
 (9, 25, 10, NULL, 'accepted', 'system Administration'),
-(10, 25, 9, NULL, 'accepted', 'front end');
+(10, 25, 9, NULL, 'accepted', 'front end'),
+(13, 28, 10, NULL, 'accepted', 'system Administration'),
+(14, 28, 8, NULL, 'accepted', 'backend dev'),
+(15, 28, 9, NULL, 'accepted', 'front end'),
+(16, 28, 9, NULL, 'accepted', 'front end'),
+(17, 28, 1, NULL, 'accepted', 'Laborer'),
+(18, 27, 1, NULL, 'accepted', 'Laborer'),
+(19, 27, 4, NULL, 'accepted', 'electrician'),
+(20, 27, 8, NULL, 'accepted', 'backend dev'),
+(21, 27, 8, NULL, 'accepted', 'backend dev'),
+(22, 27, 9, NULL, 'accepted', 'front end'),
+(23, 29, 9, NULL, 'accepted', 'front end'),
+(24, 28, 8, NULL, 'pending', 'backend dev');
 
 -- --------------------------------------------------------
 
@@ -149,7 +163,13 @@ CREATE TABLE `cases` (
 --
 
 INSERT INTO `cases` (`id`, `user_id`, `title`, `description`, `file`, `status`, `created_at`) VALUES
-(3, 1, 'stalking', 'following everywhere', '../uploads/LSPU-LB CCS - Participant Certificates.pdf', 'filed', '2024-09-07 07:56:16');
+(3, 1, 'stalking', 'following everywhere', '../uploads/LSPU-LB CCS - Participant Certificates.pdf', 'filed', '2024-09-07 07:56:16'),
+(4, 2, 'physical abuse', 'fawfaesfreafgre', NULL, 'filed', '2024-09-29 12:54:36'),
+(5, 1, 'stalking', 'rwefdw3fwdfer', NULL, 'filed', '2024-09-29 12:54:36'),
+(6, 3, 'little pay', 'gfsrgsergsfdg', NULL, 'filed', '2024-09-29 12:56:45'),
+(7, 1, 'little pay', 'sadgfsdargs', NULL, 'filed', '2024-09-29 12:56:45'),
+(8, 4, 'little pay', 'fasdafawe', NULL, 'filed', '2024-09-29 12:56:45'),
+(9, 5, 'little pay', 'fawefasdfwaeaa', NULL, 'filed', '2024-09-29 12:56:45');
 
 -- --------------------------------------------------------
 
@@ -304,7 +324,7 @@ CREATE TABLE `interview` (
 --
 
 INSERT INTO `interview` (`id`, `user_id`, `Job_id`, `sched_date`, `sched_time`, `interview`, `meeting`, `is_read`) VALUES
-(1, 14, 9, '2024-10-03', '08:00:00', 'FacetoFace', '123sdfd3aws4fsewrf3w4', 1),
+(1, 14, 9, '2024-10-03', '08:00:00', 'FacetoFace', '123sdfd3aws4fsewrf3w4', 0),
 (2, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0),
 (3, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0),
 (4, 25, 10, '2024-10-02', '18:16:00', 'online', '', 0);
@@ -334,11 +354,11 @@ CREATE TABLE `job_postings` (
 --
 
 INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `requirment`, `work_location`, `remarks`, `date_posted`, `is_active`) VALUES
-(1, 1, 'Laborer', 'construction worker', '', 12, '', '', '', '2024-09-22', 1),
-(4, 1, 'electrician', 'fix electrical', '', 50, '', '', '', '2024-08-30', 1),
+(1, 1, 'Laborer', 'construction worker', '', 11, '', '', '', '2024-09-30', 1),
+(4, 1, 'electrician', 'fix electrical', '', 2, '', '', '', '2024-09-30', 1),
 (8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 2, '', '', '', '2024-09-28', 1),
-(9, 1, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 11, '', '', '', '2024-09-21', 1),
-(10, 1, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 1, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 1);
+(9, 1, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 0, '', '', '', '2024-09-30', 0),
+(10, 1, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 0, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 0);
 
 -- --------------------------------------------------------
 
@@ -394,7 +414,13 @@ INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
 (9, 5, 'Introduction to Digital Marketing'),
 (10, 5, 'Search Engine Optimization (SEO)'),
 (11, 5, ' Social Media Marketing'),
-(12, 4, 'Frying');
+(12, 4, 'Frying'),
+(13, 2, 'dfe'),
+(14, 2, 'dsaadw'),
+(15, 2, 'wfd3we'),
+(16, 1, 'dfe'),
+(17, 1, 'fgdf'),
+(18, 1, 'asdas');
 
 -- --------------------------------------------------------
 
@@ -423,7 +449,14 @@ INSERT INTO `module_content` (`id`, `description`, `video`, `file_path`, `module
 (6, 'how to grill', 'https://www.youtube.com/watch?v=NoZJYcNcbUA', 'uploads/PESO.pdf', 7),
 (8, 'Introduction To Digital Marketing', 'https://www.youtube.com/watch?v=ZVuHLPl69mM', 'uploads/diskette.png', 9),
 (9, 'Search Engine Optimization (SEO)', 'https://www.youtube.com/watch?v=xsVTqzratPs', 'uploads/diskette.png', 10),
-(10, 'FRIED', 'https://www.youtube.com/watch?v=nqwvvmzfWDA', 'uploads/diskette.png', 12);
+(10, 'FRIED', 'https://www.youtube.com/watch?v=nqwvvmzfWDA', 'uploads/diskette.png', 12),
+(11, 'sdfweaf', 'https://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVk', 'uploads/Application-Form.pdf', 18),
+(12, 'jack', 'https://www.youtube.com/watch?v=QdJPIylB7TA', 'uploads/Application Form6.pdf', 18),
+(13, 'jack', 'https://www.youtube.com/watch?v=QdJPIylB7TA', 'uploads/Application Form6.pdf', 18),
+(14, 'jack', 'https://www.youtube.com/watch?v=QdJPIylB7TA', 'uploads/Application Form6.pdf', 16),
+(15, 'hahaha', 'https://www.youtube.com/watch?v=kSNOF7vNplM&t=278s', 'uploads/Application Form6.pdf', 18),
+(16, 'sdfweaf', 'https://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVk', 'uploads/Application-Form.pdf', 17),
+(17, 'jack', 'https://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVkhttps://www.youtube.com/watch?v=NfTvrL99dVk', 'uploads/Application-Form.pdf', 17);
 
 -- --------------------------------------------------------
 
@@ -578,7 +611,19 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (131, 14, 'What type of batter is typically used in tempura frying?', ' A batter made with milk', 'A batter made with yeast', 'A heavy batter made with breadcrumbs', 'A light, airy batter made with flour, water, and egg', 'd', 1),
 (132, 14, 'Which oil is least suitable for frying due to its low smoke point?', 'Peanut oil', 'Extra virgin olive oil', 'Vegetable oil', 'Corn oil', 'b', 1),
 (133, 14, 'What is the main role of a thermometer in frying?', ' To cook food faster', 'To make oil boil', 'To ensure oil is at the correct temperature', 'To cool the oil', 'c', 1),
-(134, 14, 'Why is frying at the right temperature important?', 'To ensure food cooks evenly and doesn’t absorb too much oil', 'o burn the food', 'To cook the food faster', 'To make the food dry', 'a', 1);
+(134, 14, 'Why is frying at the right temperature important?', 'To ensure food cooks evenly and doesn’t absorb too much oil', 'o burn the food', 'To cook the food faster', 'To make the food dry', 'a', 1),
+(135, 15, 'fhndfrthd', 's', 'd', 'f', 'hg', 'd', 1),
+(136, 15, '34f4esefsfdg', 's', 'd', 'f', 'g', 'a', 1),
+(137, 15, 'fhndfrthd', 's', 'd', 'f', 'hg', 'd', 1),
+(138, 15, '34f4esefsfdg', 's', 'd', 'f', 'g', 'a', 1),
+(139, 15, 'fhndfrthd', 's', 'd', 'f', 'hg', 'd', 1),
+(140, 15, '34f4esefsfdg', 's', 'd', 'f', 'g', 'a', 1),
+(141, 16, 'sdf', 's', 'd', 'f', 'hg', 'd', 1),
+(142, 20, 'fhndfrthd', 's', 'qd', 'sdf', 'sd', 'c', 1),
+(143, 22, 'fhndfrthd', 's', 'qd', 'f', 'sd', 'c', 1),
+(144, 26, 'fhndfrthd', 'sd', 'qd', 'fgd', 'xz', 'c', 1),
+(145, 27, 'sadfawef', 's', 'v', 'x', 'z', 'c', 1),
+(146, 27, 'sadfawef', 's', 'v', 'x', 'z', 'c', 1);
 
 -- --------------------------------------------------------
 
@@ -609,7 +654,20 @@ INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`,
 (10, 9, 'Intro To Digital Marketing', 1, 0, 5, 'Introduction To Digital Marketing', '2024-09-26 12:51:38'),
 (11, 10, 'Search Engine Optimization', 2, 0, 5, 'quiz', '2024-09-26 12:56:12'),
 (12, 11, 'Social Media Marketing', 2, 0, 5, 'Quiz/Exam', '2024-09-26 14:57:30'),
-(14, 12, 'How To Fry', 1, 0, 40, 'QUIZ', '2024-09-26 16:03:36');
+(14, 12, 'How To Fry', 1, 0, 40, 'QUIZ', '2024-09-26 16:03:36'),
+(15, 0, 'Randomm', 1, 1, 2, 'sdfasfwe', '2024-10-01 09:31:21'),
+(16, 0, 'Randomm', 1, 1, 1, 'szfasd', '2024-10-01 09:42:24'),
+(17, 0, 'Meyekop757', 1, 1, 1, '32zcxf', '2024-10-01 09:43:24'),
+(18, 0, 'Meyekop757', 1, 1, 1, '32zcxf', '2024-10-01 09:44:13'),
+(19, 0, 'Meyekop757', 1, 1, 1, '32zcxf', '2024-10-01 09:46:22'),
+(20, 0, 'Meyekop757', 1, 1, 1, '32zcxf', '2024-10-01 09:48:51'),
+(21, 0, 'Randomm', 1, 1, 1, 'sdfscx ', '2024-10-01 09:50:20'),
+(22, 0, 'Nezuko', 1, 1, 1, 'sdfw', '2024-10-01 09:55:06'),
+(23, 0, 'Nezuko', 1, 1, 1, 'sdfw', '2024-10-01 09:58:44'),
+(24, 0, 'Nezuko', 1, 1, 1, 'sdfw', '2024-10-01 09:58:50'),
+(25, 0, 'Meyokop', 2, 2, 1, 'sdaf', '2024-10-01 09:59:30'),
+(26, 4, 'Nezuko', 2, 2, 1, 'sadfasdfawhgfsdgdrt', '2024-10-01 13:44:11'),
+(27, 5, 'Nezuko', 1, 1, 1, 'sdfasdvczxc vzdfvvzsdf', '2024-10-01 13:46:51');
 
 -- --------------------------------------------------------
 
@@ -635,7 +693,9 @@ CREATE TABLE `register` (
 
 INSERT INTO `register` (`id`, `email`, `username`, `password`, `is_verified`, `otp`, `otp_expiry`, `reset_token`, `reset_token_expiry`) VALUES
 (25, 'mercadomarklawrence55@gmail.com', 'magenta', '$2y$10$TFP.KapyuMoIk0Ca2Fl/AON3iuVR2/XqsC3ewgAf4u2pSpMyHv2Fm', 1, '228351', '2024-09-28 09:09:09', NULL, NULL),
-(27, 'marklawrencemercado8@gmail.com', 'Azure', '$2y$10$kJuH5XOuc7AUoF8vyH8TS.Ap9MAKdFr1Vkubdg83BslKC/3I5lWve', 1, '458613', '2024-09-28 10:25:10', NULL, NULL);
+(27, 'marklawrencemercado8@gmail.com', 'Azure', '$2y$10$kJuH5XOuc7AUoF8vyH8TS.Ap9MAKdFr1Vkubdg83BslKC/3I5lWve', 1, '458613', '2024-09-28 10:25:10', NULL, NULL),
+(28, 'mercadomarklawrence55@gmail.com', 'Mark', '$2y$10$UFvpDK2U7plMIpBDmuaVButXIisDNEUSnXvr8WM92kyeEkh0rEDFO', 1, '420341', '2024-09-29 18:46:07', NULL, NULL),
+(29, 'mercadomarklawrence55@gmail.com', 'Lawrence', '$2y$10$ROqzyQiz60t7B6YiPHZ5Eu7iwLJ/Y4TF3TjRPfPHqrzb88Snkvwe.', 1, '619957', '2024-09-30 15:30:49', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -667,17 +727,19 @@ INSERT INTO `replies` (`id`, `message_id`, `admin_id`, `reply`, `created_at`) VA
 
 CREATE TABLE `survey_form` (
   `id` int(11) NOT NULL,
-  `question` varchar(200) DEFAULT NULL
+  `question` varchar(200) DEFAULT NULL,
+  `category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `survey_form`
 --
 
-INSERT INTO `survey_form` (`id`, `question`) VALUES
-(1, 'workerssssss'),
-(2, 'nerver'),
-(3, 'Enter survey Questions');
+INSERT INTO `survey_form` (`id`, `question`, `category`) VALUES
+(1, 'workerssssss', ''),
+(2, 'nerver', ''),
+(3, 'Enter survey Questions', ''),
+(4, 'bsit', 'tech');
 
 -- --------------------------------------------------------
 
@@ -700,7 +762,10 @@ INSERT INTO `survey_reponse` (`id`, `user_id`, `survey_id`, `reponse`) VALUES
 (12, 14, 1, 'Never'),
 (13, 14, 2, 'Sometimes'),
 (14, 15, 1, 'Never'),
-(15, 15, 2, 'Sometimes');
+(15, 15, 2, 'Sometimes'),
+(16, 28, 1, 'Often'),
+(17, 28, 2, 'Sometimes'),
+(18, 28, 3, 'Often');
 
 -- --------------------------------------------------------
 
@@ -964,19 +1029,19 @@ ALTER TABLE `admin_profile`
 -- AUTO_INCREMENT for table `applicant_profile`
 --
 ALTER TABLE `applicant_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -1030,31 +1095,31 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `module_content`
 --
 ALTER TABLE `module_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `quiz_name`
 --
 ALTER TABLE `quiz_name`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `replies`
@@ -1066,13 +1131,13 @@ ALTER TABLE `replies`
 -- AUTO_INCREMENT for table `survey_form`
 --
 ALTER TABLE `survey_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `survey_reponse`
 --
 ALTER TABLE `survey_reponse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_answers`
