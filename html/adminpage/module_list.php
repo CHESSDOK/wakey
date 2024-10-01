@@ -154,38 +154,50 @@ $result = $conn->query($sql);
             <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
-              <input type="hidden" name="secmodule_id" id="secmoduleId">
-              <input type="hidden" name="seccourse_id" id="seccourseId">
+    <input type="hidden" name="secmodule_id" id="secmoduleId">
+    <input type="hidden" name="seccourse_id" id="seccourseId">
 
-            <table class="table table-borderless tbl_module">
-              <tr>
-                <td>
-                  <label class="title upload-label">EXAM MAKER</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label class="subtitle upload-label">Make questions to challenge the users</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <input type="text" class="input" name="name" placeholder="Enter Exam Title" required>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                        <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
-                        <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
-                        <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
-                        <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
-                
-                </tr>
-                </table>
-                <input type="submit" name="submit" value="generate">
-            </form>
-        </div>
-    </div>
+    <table class="table table-borderless tbl_module">
+        <tr>
+            <td>
+                <label class="subtitle upload-label">Create questions that will challenge the learners.</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Question Title</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Quiz Title" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Tag</label>
+                <input type="text" class="form-control" name="tag" placeholder="Enter a tag for your quiz" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Total Questions</label>
+                <input type="number" class="form-control" name="total" placeholder="Enter total number of questions" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Points per Question</label>
+                <input type="number" class="form-control" name="corr" placeholder="Enter points for each question" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Deduction for Wrong Answer</label>
+                <input type="number" class="form-control" name="wrong" placeholder="Enter deduction for wrong answer" required>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-primary" name="submit" value="Generate">
+    </form>
+   </div>
+  </div>
 
 <!-- content file -->
         <div id="contentModal" class="modal modal-container">

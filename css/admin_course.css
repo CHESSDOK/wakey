@@ -45,6 +45,8 @@
 }
 
 .tbl_module td, .tbl_module th {
+  display: block;
+  text-align: left;
   padding: 5px;
 }
 
