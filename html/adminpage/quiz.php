@@ -22,17 +22,11 @@ $module_id = $_GET['modules_id'];
 
         <div class="form-container">
             <input type="hidden" name="module_id" value="<?php echo $module_id;?>">
-
             <input type="text" class="input" name="name" placeholder="Enter Exam Title" required>
-
             <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
-
             <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
-
             <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
-
             <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
-
         </div>
 
         <button type="submit" name="gen" id="myBtn">GENERATE</button>

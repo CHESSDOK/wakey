@@ -26,6 +26,12 @@ $result = $conn->query($sql_new);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <title>Document</title>
 </head>
 <body>
@@ -84,7 +90,7 @@ $result = $conn->query($sql_new);
             echo "<tr>
                     <td>" . $row['user_id'] . "</td>
                     <td>" . $full_name . "</td>
-                    <td> <a href='user_response.php?user_id=".$row['user_id']."'> check </a> </td>
+                    <td> <a class='docu openSurveyBtn' href='#' data-user-id=".htmlspecialchars($row['user_id'])."> check </a> </td>
                 </tr>";
         }
     } else {
@@ -95,6 +101,49 @@ $result = $conn->query($sql_new);
     $conn->close();
     ?>
 </table>
+
+<!-- employer list -->
+<div id="surveyModal" class="modal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <div id="surveyModuleContent">
+                    <!-- Module content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+
+    <script>  const surveyModal = document.getElementById('surveyModal');
+        const closeModuleBtn = document.querySelector('.closeBtn');
+        // Open profile modal and load data via AJAX
+        $(document).on('click', '.openSurveyBtn', function(e) {
+            e.preventDefault();
+            const userId = $(this).data('user-id');
+
+            $.ajax({
+                url: 'user_response.php',
+                method: 'GET',
+                data: { user_id: userId },
+                success: function(response) {
+                    $('#surveyModuleContent').html(response);
+                    surveyModal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close profile modal when 'x' is clicked
+        closeModuleBtn.addEventListener('click', function() {
+            surveyModal.style.display = 'none';
+        });
+
+        // Close profile modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === surveyModal) {
+                surveyModal.style.display = 'none';
+            }
+        });
+    </script>
+
 
 </body>
 </html>

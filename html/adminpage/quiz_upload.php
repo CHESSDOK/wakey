@@ -1,13 +1,14 @@
 <?php
 include '../../php/conn_db.php';
-if(isset($_POST['gen'])){
-
+if (isset($_POST['submit'])){
+    
     $name = ucwords(strtolower($_POST['name']));
     $total = $_POST['total'];
     $corr = $_POST['corr'];
     $wrong = $_POST['wrong'];
     $tag = $_POST['tag'];
-    $id = $_POST['module_id'];
+    $id = $_POST['secmodule_id'];
+    $course_id = $_POST['seccourse_id'];
 
     // Insert the data into the exam table
     $sql = "INSERT INTO quiz_name(module_id, title, correct_ans, wrong_ans, total, tag, date) VALUES ('$id', '$name', '$corr', '$wrong', '$total', '$tag', NOW())";
@@ -18,7 +19,7 @@ if(isset($_POST['gen'])){
         $last_id = mysqli_insert_id($conn);
 
         // Redirect to question entry page with the last exam ID and total questions
-        header("Location: questions.php?q_id=$last_id&total=$total&module_id=$id");
+        header("Location: questions.php?q_id=$last_id&total=$total&module_id=$id&course_id=$course_id");
         exit();
 
     } else {
@@ -27,5 +28,4 @@ if(isset($_POST['gen'])){
 
     mysqli_close($conn);
 }
-
 ?>

@@ -18,6 +18,8 @@ if (isset($_POST['save'])) {
 
     $m_id = $_POST['mid'];
 
+    $course_id = $_POST['course_id'];
+
 
 
     include_once "../../php/conn_db.php";
@@ -48,7 +50,7 @@ if (isset($_POST['save'])) {
 
 
 
-    header("Location: module_list.php?module_id=".$m_id);
+    header("Location: module_list.php?course_id=$course_id");
 
     exit();
 

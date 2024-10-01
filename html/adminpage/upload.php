@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
     $description = $_POST['desc'];
     $videoLink = $_POST['link'];
     $modules_id = $_POST['mod_id'];
+    $course_id = $_POST['course_id'];
 
     // Directory to upload files
     $uploadDir = "uploads/";
@@ -32,7 +33,7 @@ if (isset($_POST['submit'])) {
                     VALUES ('$modules_id', '$description', '$targetFilePath', '$videoLink')";
 
             if ($conn->query($sql) === TRUE) {
-                echo "File " . htmlspecialchars(basename($filename)) . " has been uploaded and saved to the database.<br>";
+                echo "<script type='text/javascript'> alert('File has been uploaded and saved to the database'); window.location.href='module_list.php?course_id=" . $course_id . "'; </script>";
             } else {
                 echo "Database error: " . $conn->error . "<br>";
             }

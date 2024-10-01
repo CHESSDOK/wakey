@@ -3,8 +3,8 @@ include 'conn_db.php';
 session_start();
 $admin = $_SESSION['username'];
 // Fetch all employers
-$module_id = $_GET['module_id'];
-$sql = "SELECT * FROM modules WHERE course_id = $module_id ";
+$course_id = $_GET['course_id'];
+$sql = "SELECT * FROM modules WHERE course_id = $course_id";
 $result = $conn->query($sql);
 
 ?>
@@ -12,10 +12,14 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Admin - module list</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
@@ -92,25 +96,168 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["module_name"] . "</td>
-                        <td><a class='docu' href='uploadfile.php?modules_id=" . $row["id"] . "'>Upload Video</a></td>
-                        <td><a class='docu' href='quiz.php?modules_id=" . $row["id"] . "'>Quiz Maker</a></td>
-                        <td><a class='docu' href='quiz_list.php?modules_id=" . $row["id"] . "'>Quiz List</a></td>
-                        <td><a class='docu' href='module_content.php?modules_id=" . $row["id"] . "'>Contents</a></td>
+                        <td>" . htmlspecialchars($row['module_name']) . "</td>
+                        <td><a class='docu openFileBtn' href='#' data-module-id=" . htmlspecialchars($row['id']) . "
+                            data-course-id=" . htmlspecialchars($course_id) . ">Upload Video</a></td>
+                        <td><a class='docu openQuizBtn' href='#' data-secmodule-id=" . htmlspecialchars($row['id']) . "
+                            data-seccourse-id=" . htmlspecialchars($course_id) . ">Quiz Maker</a></td>
+                        <td><a class='docu' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "'>Quiz List</a></td>
+                        <td><a class='docu openContentBtn' href='#' data-thirdmodule-id=".htmlspecialchars($row['id']).">Contents</a></td>
                     </tr>";
             }
         } else {
-            echo "<tr><td colspan='4'>No employers found</td></tr>";
+            echo "<tr><td colspan='5'>No modules found</td></tr>";
         }
         $conn->close();
         ?>
     </table>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<!-- upload file -->
+    <div id="fileModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <h2>Upload File & Video</h2>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="mod_id" id="moduleId">
+                <input type="hidden" name="course_id" id="courseId">
+                <label for="des">Description:</label>
+                <input type="text" name="desc" id="desc"> <br>
+                <label for="files">Select files:</label>
+                <input type="file" name="files[]" id="files" multiple> <br>
+                <label for="link">Video:</label>
+                <input type="url" name="link" id="link">
+                <input type="submit" name="submit" value="Upload">
+            </form>
+        </div>
+    </div>
+
+<!-- quiz maker file -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <h2>Quiz Maker</h2>
+            <form class="form" action="quiz_upload.php" method="post">
+
+                <span class="title">EXAM MAKER</span>
+
+                <span class="subtitle">Make questions to challenge the users</span>
+
+                <div class="form-container">
+                    <input type="hidden" name="secmodule_id" id="secmoduleId">
+                    <input type="hidden" name="seccourse_id" id="seccourseId">
+                    <input type="text" class="input" name="name" placeholder="Enter Exam Title" required>
+                    <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
+                    <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
+                    <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
+                    <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
+                </div>
+                <input type="submit" name="submit" value="generate">
+            </form>
+        </div>
+    </div>
+
+<!-- content file -->
+        <div id="contentModal" class="modal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <div id="contentModuleContent">
+                    <!-- Module content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+
+    <script>
+    const filemodal = document.getElementById('fileModal');
+    const quizmodal = document.getElementById('quizModal');
+    const closeBtn = document.querySelector('.closeBtn');
+    const moduleIdField = document.getElementById('moduleId');
+    const courseIdField = document.getElementById('courseId');
+    const secmoduleIdField = document.getElementById('secmoduleId');
+    const seccourseIdField = document.getElementById('seccourseId');
+
+    // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
+    document.addEventListener('click', function(event) {
+        //file
+        if (event.target.classList.contains('openFileBtn')) {
+            const moduleId = event.target.getAttribute('data-module-id');
+            const courseId = event.target.getAttribute('data-course-id');
+            
+            // Set the module ID in the hidden field
+            moduleIdField.value = moduleId;
+            courseIdField.value = courseId;
+
+            // Open the modal
+            filemodal.style.display = 'flex';
+        }
+        //quiz
+        if (event.target.classList.contains('openQuizBtn')) {
+            const secmoduleId = event.target.getAttribute('data-secmodule-id');
+            const seccourseId = event.target.getAttribute('data-seccourse-id');
+            
+            // Set the module ID in the hidden field
+            secmoduleIdField.value = secmoduleId;
+            seccourseIdField.value = seccourseId;
+
+            // Open the modal
+            quizmodal.style.display = 'flex';
+        }
+    });
+
+//cotent module
+    // Close modal when 'x' is clicked
+    closeBtn.addEventListener('click', function() {
+        filemodal.style.display = 'none';
+        quizmodal.style.display = 'none';
+    });
+
+    // Close modal when clicked outside of the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === filemodal) {
+            filemodal.style.display = 'none';
+        }
+        if (event.target === quizmodal) {
+            quizmodal.style.display = 'none';
+        }
+    });
+
+   // Get modal and button elements for viewing profile
+        const contentModal = document.getElementById('contentModal');
+        const closeModuleBtn = document.querySelector('.closeBtn');
+
+        // Open profile modal and load data via AJAX
+        $(document).on('click', '.openContentBtn', function(e) {
+            e.preventDefault();
+            const moduleId = $(this).data('thirdmodule-id');
+
+            $.ajax({
+                url: 'module_content.php',
+                method: 'GET',
+                data: { module_id: moduleId },
+                success: function(response) {
+                    $('#contentModuleContent').html(response);
+                    contentModal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close profile modal when 'x' is clicked
+        closeModuleBtn.addEventListener('click', function() {
+            contentModal.style.display = 'none';
+        });
+
+        // Close profile modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === contentModal) {
+                contentModal.style.display = 'none';
+            }
+        });
+
+        
+    </script>
     <script src="../../javascript/a_profile.js"></script> 
-    
-    <script src="../../javascript/popup-modal.js"></script>
     <script src="../../javascript/script.js"></script> 
+
 </body>
 </html>

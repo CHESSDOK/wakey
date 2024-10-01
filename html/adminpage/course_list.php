@@ -98,8 +98,9 @@ $result = $conn->query($sql);
                         <td>" . $row["description"] . "</td>
                         <td><a href='#' id='moduleBtn'  class='openModuleBtn'
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
-                        <td><a class='docu' href='module_list.php?module_id=" . $row["id"] . "'>Edit Items</a></td>
+                        <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
                     </tr>";
+                    
             }
         } else {
             echo "<tr><td colspan='4'>No employers found</td></tr>";
@@ -112,12 +113,11 @@ $result = $conn->query($sql);
     <div id="moduleModal" class="modal">
     <div class="modal-content">
         <span class="closeBtn">&times;</span>
-        <h2>Applicant Profile</h2>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>
     </div>
-</div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>

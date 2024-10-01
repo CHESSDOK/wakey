@@ -10,13 +10,15 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quiz List</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
+    <title>quiz List</title>
 </head>
 <body>
 
@@ -106,7 +108,10 @@ $result = $conn->query($sql);
                             <td><input class='form-control' type='text' name='total' value='" . $row['total'] . "'></td>
                             <td><input class='btn btn-primary' type='submit' value='Update'></td>
                             </form>
-                            <td><a class='btn btn-primary' href='view_question.php?module_id=" . $m_id . "&q_id=" . $row['id'] . "'>View Quiz</a></td>
+                            <td><a class='btn btn-primary openQuestionBtn' href='#' 
+                                data-quiz-id=".htmlspecialchars($row['id'])."
+                                data-module-id=".htmlspecialchars($m_id ).">View Quiz</a></td>
+                            
                         </tr>";
                 }
             } else {
@@ -118,11 +123,48 @@ $result = $conn->query($sql);
     </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<div id="questionModal" class="modal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <div id="questionModuleContent">
+                    <!-- Module content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+
+    <script>  const questionModal = document.getElementById('questionModal');
+        const closeModuleBtn = document.querySelector('.closeBtn');
+        // Open profile modal and load data via AJAX
+        $(document).on('click', '.openQuestionBtn', function(e) {
+            e.preventDefault();
+            const quizId = $(this).data('quiz-id');
+            const moduleId = $(this).data('module-id');
+
+            $.ajax({
+                url: 'view_question.php',
+                method: 'GET',
+                data: { quiz_id: quizId, module_id: moduleId },
+                success: function(response) {
+                    $('#questionModuleContent').html(response);
+                    questionModal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close profile modal when 'x' is clicked
+        closeModuleBtn.addEventListener('click', function() {
+            questionModal.style.display = 'none';
+        });
+
+        // Close profile modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === questionModal) {
+                questionModal.style.display = 'none';
+            }
+        });
+    </script>
     <script src="../../javascript/a_profile.js"></script> 
-    
-    <script src="../../javascript/popup-modal.js"></script>
     <script src="../../javascript/script.js"></script> 
 </body>
 </html>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Redirect or show a success message
-    echo "<script type='text/javascript'> alert('successful!') ;window.location.href='upload_modules.php?user_id=" . $user_id . "'; </script>";
+    echo "<script type='text/javascript'> alert('successful!') ;window.location.href='course_list.php?user_id=" . $user_id . "'; </script>";
 }
 
 function saveModuleToDatabase($course_id, $module_name) {

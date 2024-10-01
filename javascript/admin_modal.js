@@ -10,7 +10,7 @@
                 $.ajax({
                     url: 'upload_modules.php',
                     method: 'GET',
-                    data: { module_id: moduleId },
+                    data: { module_id: moduleId},
                     success: function(response) {
                         $('#uploadModuleContent').html(response);
                         moduleModal.style.display = 'flex';
@@ -30,3 +30,5 @@
                 }
             });
         
+
+    // Module list for file and video
