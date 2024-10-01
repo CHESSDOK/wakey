@@ -113,7 +113,6 @@ $result = $conn->query($sql);
     <div id="moduleModal" class="modal">
     <div class="modal-content module_container">
         
-        <h2>Applicant Profile</h2>
         <span class="closeBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
