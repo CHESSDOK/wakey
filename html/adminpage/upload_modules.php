@@ -21,6 +21,7 @@ if ($result->num_rows > 0) {
                 
                 <input class='form-control upl-input' type='text' id='module_name_$i' 
                        name='module_name_$i' placeholder='Module $i' required><br>";
+
     }
     echo "
             <input class='btn btn-primary mt-3' type='submit' value='Save Modules'>

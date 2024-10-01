@@ -32,3 +32,19 @@
 .upl-input{
     font-size: 1.5rem;
 }
+
+.module_container{
+  width: auto;
+  max-width: none; 
+}
+
+.tbl_module{
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 0.95rem; 
+  box-shadow: none;
+}
+
+.tbl_module td, .tbl_module th {
+  padding: 5px;
+}

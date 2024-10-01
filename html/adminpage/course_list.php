@@ -84,19 +84,19 @@ $result = $conn->query($sql);
 
 <div class="table-container">
     <table class="table table-borderless table-hover">
-        <tr>
+        <thead>
             <th>Course</th>
             <th>Course Description</th>
             <th>Module Label</th>
             <th>Module Items</th>
-        </tr>
+        </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row["course_name"] . "</td>
                         <td>" . $row["description"] . "</td>
-                        <td><a href='#' id='moduleBtn'  class='openModuleBtn'
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn docu'
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
                     </tr>";
@@ -111,7 +111,9 @@ $result = $conn->query($sql);
     </div>
 
     <div id="moduleModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content module_container">
+        
+        <h2>Applicant Profile</h2>
         <span class="closeBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
@@ -126,8 +128,5 @@ $result = $conn->query($sql);
     <script src="../../javascript/a_profile.js"></script> 
     <script src="../../javascript/script.js"></script> 
 
-    <script>
-
-    </script>
 </body>
 </html>
