@@ -17,9 +17,15 @@
   padding: 20px;
   width: 80%;
   max-width: 600px;
-  background-color: white;
+  background-color: none;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-container .modal-content{
+  width: 100vw;
+  max-width: auto; /* Adjust this value as needed to make the table smaller */
+  margin: 5vh auto; /* Center the table */
 }
 
 .closBtn {
