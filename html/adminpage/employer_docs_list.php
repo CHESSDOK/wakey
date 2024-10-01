@@ -11,22 +11,25 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 echo "
-    <h1> employer list </h1>
-    <table border='1'>
-        <tr>
+    <h2> Employer Documents </h2>
+    <table class='table table-borderless table-hover'>
+        <thead>
             <th>Document Name</th>
-            <th>Document Path</th>
-            <th>Verified</th>
-        </tr>
+            <th>Document File</th>
+            <th>Verification</th>
+            <th>Status</th>
+        </thead>
 
      ";
      if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo "<tr>
                     <td>" . htmlspecialchars($row["document_name"]) . "</td>
-                    <td><a href='" . htmlspecialchars($row["document_path"]) . "' target='_blank'>View Document</a></td>
-                    <td><a href='verify_documents.php?id=" . $row['id'] . " & user_id=". $user_id." '>Verify</a></td>
-                    <td>" . ($row["is_verified"] ? 'Yes' : 'No') . "</td>
+                    <td><a class='docu' href='" . htmlspecialchars($row["document_path"]) . "' target='_blank'>View Document</a></td>
+                    <td><a class='docu' href='verify_documents.php?id=" . $row['id'] . " & user_id=". $user_id." '>Verify</a></td>
+                    <td style='color: " . (htmlspecialchars($row['is_verified']) ? 'green' : 'red') . ";'>" . (htmlspecialchars($row['is_verified']) ? 'Yes' : 'No') . "</td>
+
+
                 </tr>";
         }
     } else {

@@ -19,6 +19,7 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
@@ -114,10 +115,10 @@ $result = $conn->query($sql);
 </div>
 
 <!-- upload file -->
-    <div id="fileModal" class="modal">
+    <div id="fileModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="closeBtn">&times;</span>
-            <h2>Upload File & Video</h2>
+            <span class="btn-close closBtn closeBtn">&times;</span>
+            <h2>Upload Material</h2>
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="mod_id" id="moduleId">
                 <input type="hidden" name="course_id" id="courseId">
@@ -133,9 +134,9 @@ $result = $conn->query($sql);
     </div>
 
 <!-- quiz maker file -->
-    <div id="quizModal" class="modal">
+    <div id="quizModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="seccloseBtn">&times;</span>
+            <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
 
@@ -158,9 +159,9 @@ $result = $conn->query($sql);
     </div>
 
 <!-- content file -->
-        <div id="contentModal" class="modal">
+        <div id="contentModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="thirdcloseBtn">&times;</span>
+                <span class="btn-close closBtn closeBtn">&times;</span>
                 <div id="contentModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>
@@ -208,22 +209,10 @@ $result = $conn->query($sql);
 
     //cotent module
     // Close modal when 'x' is clicked
-        closeBtn.addEventListener('click', function() {
-            filemodal.style.display = 'none';
-        });
-
-        seccloseBtn.addEventListener('click', function() {
-            quizmodal.style.display = 'none';
-        });
-        // Close modal when clicked outside of the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === filemodal) {
-                filemodal.style.display = 'none';
-            }
-            if (event.target === quizmodal) {
-                quizmodal.style.display = 'none';
-            }
-        });
+    closeBtn.addEventListener('click', function() {
+        filemodal.style.display = 'none';
+        quizmodal.style.display = 'none';
+    });
 
    // Get modal and button elements for viewing profile
         const contentModal = document.getElementById('contentModal');
@@ -248,13 +237,6 @@ $result = $conn->query($sql);
         // Close profile modal when 'x' is clicked
         thridcloseModuleBtn.addEventListener('click', function() {
             contentModal.style.display = 'none';
-        });
-
-        // Close profile modal when clicking outside the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === contentModal) {
-                contentModal.style.display = 'none';
-            }
         });
 
         
