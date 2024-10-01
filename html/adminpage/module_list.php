@@ -120,15 +120,30 @@ $result = $conn->query($sql);
             <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Upload Material</h2>
             <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="mod_id" id="moduleId">
-                <input type="hidden" name="course_id" id="courseId">
-                <label for="des">Description:</label>
-                <input type="text" name="desc" id="desc"> <br>
-                <label for="files">Select files:</label>
-                <input type="file" name="files[]" id="files" multiple> <br>
-                <label for="link">Video:</label>
-                <input type="url" name="link" id="link">
-                <input type="submit" name="submit" value="Upload">
+              <input type="hidden" name="mod_id" id="moduleId">
+              <input type="hidden" name="course_id" id="courseId">
+
+                <table class="table table-borderless tbl_module">
+                  <tr>
+                    <td>
+                      <label class="upload-label" for="des">Description:</label>
+                      <textarea class="form-control" type="text" placeholder="Leave a description here" name="desc" id="desc"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <label class="upload-label" for="files">Select files:</label>
+                    <input class="form-control" type="file" name="files[]" id="files" multiple>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <label class="upload-label" for="link">Video:</label>
+                    <input class="form-control" type="url" placeholder="Leave a url here" name="link" id="link">
+                    </td>
+                  </tr>
+                </table>
+            <input class="btn btn-primary" type="submit" name="submit" value="Upload">
             </form>
         </div>
     </div>
@@ -139,20 +154,34 @@ $result = $conn->query($sql);
             <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
+              <input type="hidden" name="secmodule_id" id="secmoduleId">
+              <input type="hidden" name="seccourse_id" id="seccourseId">
 
-                <span class="title">EXAM MAKER</span>
-
-                <span class="subtitle">Make questions to challenge the users</span>
-
-                <div class="form-container">
-                    <input type="hidden" name="secmodule_id" id="secmoduleId">
-                    <input type="hidden" name="seccourse_id" id="seccourseId">
+            <table class="table table-borderless tbl_module">
+              <tr>
+                <td>
+                  <label class="title upload-label">EXAM MAKER</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="subtitle upload-label">Make questions to challenge the users</label>
+                </td>
+              </tr>
+              <tr>
+                <td>
                     <input type="text" class="input" name="name" placeholder="Enter Exam Title" required>
-                    <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
-                    <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
-                    <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
-                    <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
-                </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                        <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
+                        <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
+                        <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
+                        <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
+                
+                </tr>
+                </table>
                 <input type="submit" name="submit" value="generate">
             </form>
         </div>
@@ -169,15 +198,14 @@ $result = $conn->query($sql);
         </div>
 
 
-    <script>
-        const filemodal = document.getElementById('fileModal');
-        const quizmodal = document.getElementById('quizModal');
-        const closeBtn = document.querySelector('.closeBtn');
-        const seccloseBtn = document.querySelector('.seccloseBtn');
-        const moduleIdField = document.getElementById('moduleId');
-        const courseIdField = document.getElementById('courseId');
-        const secmoduleIdField = document.getElementById('secmoduleId');
-        const seccourseIdField = document.getElementById('seccourseId');
+<script>
+    const filemodal = document.getElementById('fileModal');
+    const quizmodal = document.getElementById('quizModal');
+    const closeBtn = document.querySelector('.closeBtn');
+    const moduleIdField = document.getElementById('moduleId');
+    const courseIdField = document.getElementById('courseId');
+    const secmoduleIdField = document.getElementById('secmoduleId');
+    const seccourseIdField = document.getElementById('seccourseId');
 
         // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
         document.addEventListener('click', function(event) {
@@ -214,6 +242,16 @@ $result = $conn->query($sql);
         quizmodal.style.display = 'none';
     });
 
+    // Close modal when clicked outside of the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === filemodal) {
+            filemodal.style.display = 'none';
+        }
+        if (event.target === quizmodal) {
+            quizmodal.style.display = 'none';
+        }
+    });
+
    // Get modal and button elements for viewing profile
         const contentModal = document.getElementById('contentModal');
         const thridcloseModuleBtn = document.querySelector('.thirdcloseBtn');
@@ -239,8 +277,14 @@ $result = $conn->query($sql);
             contentModal.style.display = 'none';
         });
 
-        
+        // Close profile modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === contentModal) {
+                contentModal.style.display = 'none';
+            }
+        });
     </script>
+
     <script src="../../javascript/a_profile.js"></script> 
     <script src="../../javascript/script.js"></script> 
 

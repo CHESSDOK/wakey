@@ -47,3 +47,8 @@
 .tbl_module td, .tbl_module th {
   padding: 5px;
 }
+
+.upload-label{
+  display: block;
+  text-align: left;
+}

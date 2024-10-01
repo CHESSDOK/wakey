@@ -121,8 +121,6 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-
-
     <script>  const employerModal = document.getElementById('employerModal');
         const closeModuleBtn = document.querySelector('.closBtn');
         // Open profile modal and load data via AJAX
