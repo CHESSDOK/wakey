@@ -18,6 +18,7 @@ if ($result->num_rows > 0) {
             <form method='POST' action='save_modules.php' enctype='multipart/form-data'>
             <input type='hidden' name='course_id' value='$course_id'>
             <input type='hidden' name='module_count' value='$module_count'>
+            
             <div class='upl-container'>
             <input class='form-control upl-input' type='text' id='module_name_$i' 
                    name='module_name_$i' placeholder='Module $i' required>

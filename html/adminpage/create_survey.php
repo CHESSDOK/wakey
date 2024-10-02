@@ -30,25 +30,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="../../css/modal-form.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../../css/admin_ofw.css">
+    <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
 <body>
-    <form action="create_survey.php" method="POST">
-        <label for="question">Survey Question</label>
-        <input type="text" name="question" value="Enter survey Questions">
-        <input type="text" name="category" value="question category">
-        <input type="submit" value="submit">
-    </form>
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <img src="../../img/logo_peso.png" alt="Logo">
+        <a href="#"> PESO-lb.ph</a>
+    </div>
 
-    <table border="1">
+    <header>
+      <h1 class="ofw-h1">OFW Survey Creator</h1>
+    </header>
+
+    <div class="profile-icons">
+        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        </div>
+        
+        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+    <?php if (!empty($row['photo'])): ?>
+        <img id="preview" src="../../php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+    <?php else: ?>
+        <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+    <?php endif; ?>
+    </div>
+
+
+    </div>
+
+    <!-- Burger icon -->
+    <div class="burger" id="burgerToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <table class="menu">
+            <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
+                <tr><td><a href="#" class="active nav-link">OFW Cases</a></td></tr>
+            </table>
+        </div>
+    </div>
+</nav>
+
+<nav class="bcrumb-container" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+    <li class="breadcrumb-item"><a href="ofw_case.php" >OFW Cases</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Survey Creator</li>
+  </ol>
+</nav>
+
+<div class="table-containers grid gap-3">
+  <form action="create_survey.php" method="POST">
+    <table class="table table-borderless tbl-question" style="background-color:transparent;">
+      <thead>
+        <th>Survey Question</th>
+      </thead>
+      <tbody class="grid gap-3 row-gap-0">
+        <tr>
+          <td>
+            <input class="form-control" type="text" name="question" placeholder="Enter Survey Question" value="">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="form-control" type="text" name="category" placeholder="Survey Category"  value="">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="btn btn-primary" style="display:flex; position:flex-start;" type="submit" value="Submit">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <table class="table table-borderless table-hover tbl-question ">
     <?php
     if ($result->num_rows > 0) {
+        $current_category = ''; // To track the current category
         while ($row = $result->fetch_assoc()) {
             // Check if we are in a new category
             if ($current_category != $row['category']) {
@@ -62,10 +145,9 @@
             echo "<tr>
                     <form action='update_survey.php' method='POST'>
                     <input type='hidden' name='id' value='" . $row["id"] . "'>
-                    <td>" . $row["id"] . "</td>
-                    <td><input type='text' name='question' value='" . $row["question"] . "'></td>
-                    <td><input type='text' name='category' value='" . $row["category"] . "'></td>
-                    <td><input type='submit' value='Update'></td>
+                    <td><input class='form-control' type='text' name='question' value='" . $row["question"] . "'></td>
+                    <td><input class='form-control' type='text' name='category' value='" . $row["category"] . "'></td>
+                    <td><input class='btn btn-primary mt-2' type='submit' value='Update'></td>
                     </form>
                 </tr>";
         }
@@ -73,7 +155,9 @@
         echo "<tr><td colspan='3'>No survey found</td></tr>";
     }
     ?>
-</table>
+  </table>
+</div>
+
 <!-- ####################################################### ANTHOTER TABLE ###################################################################### -->
 <table border="1">
     <tr>
@@ -152,6 +236,9 @@
         });
     </script>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="../../javascript/a_profile.js"></script>
+    <script src="../../javascript/script.js"></script> 
 </body>
 </html>

@@ -70,7 +70,7 @@ $result = $conn->query($sql);
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="#" class="active nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
             </table>
         </div>
     </div>
@@ -124,9 +124,9 @@ $result = $conn->query($sql);
     </table>
 </div>
 
-<div id="questionModal" class="modal">
+<div id="questionModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="closeBtn">&times;</span>
+                <span class="btn-close closBtn closeBtn">&times;</span>
                 <div id="questionModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>
