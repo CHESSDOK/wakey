@@ -124,9 +124,9 @@ $result = $conn->query($sql);
     </table>
 </div>
 
-<div id="questionModal" class="modal">
+<div id="questionModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="closeBtn">&times;</span>
+                <span class="btn-close closBtn">&times;</span>
                 <div id="questionModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>

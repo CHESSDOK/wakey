@@ -19,6 +19,7 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_course.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
@@ -114,53 +115,94 @@ $result = $conn->query($sql);
 </div>
 
 <!-- upload file -->
-    <div id="fileModal" class="modal">
+    <div id="fileModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="closeBtn">&times;</span>
-            <h2>Upload File & Video</h2>
+            <span class="btn-close closBtn closeBtn">&times;</span>
+            <h2>Upload Material</h2>
             <form action="upload.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="mod_id" id="moduleId">
-                <input type="hidden" name="course_id" id="courseId">
-                <label for="des">Description:</label>
-                <input type="text" name="desc" id="desc"> <br>
-                <label for="files">Select files:</label>
-                <input type="file" name="files[]" id="files" multiple> <br>
-                <label for="link">Video:</label>
-                <input type="url" name="link" id="link">
-                <input type="submit" name="submit" value="Upload">
+              <input type="hidden" name="mod_id" id="moduleId">
+              <input type="hidden" name="course_id" id="courseId">
+
+                <table class="table table-borderless tbl_module">
+                  <tr>
+                    <td>
+                      <label class="upload-label" for="des">Description:</label>
+                      <textarea class="form-control" type="text" placeholder="Leave a description here" name="desc" id="desc"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <label class="upload-label" for="files">Select files:</label>
+                    <input class="form-control" type="file" name="files[]" id="files" multiple>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <label class="upload-label" for="link">Video:</label>
+                    <input class="form-control" type="url" placeholder="Leave a url here" name="link" id="link">
+                    </td>
+                  </tr>
+                </table>
+            <input class="btn btn-primary" type="submit" name="submit" value="Upload">
             </form>
         </div>
     </div>
 
 <!-- quiz maker file -->
-    <div id="quizModal" class="modal">
+    <div id="quizModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="seccloseBtn">&times;</span>
+            <span class="btn-close closBtn seccloseBtn">&times;</span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
+    <input type="hidden" name="secmodule_id" id="secmoduleId">
+    <input type="hidden" name="seccourse_id" id="seccourseId">
 
-                <span class="title">EXAM MAKER</span>
-
-                <span class="subtitle">Make questions to challenge the users</span>
-
-                <div class="form-container">
-                    <input type="hidden" name="secmodule_id" id="secmoduleId">
-                    <input type="hidden" name="seccourse_id" id="seccourseId">
-                    <input type="text" class="input" name="name" placeholder="Enter Exam Title" required>
-                    <input type="number" class="input" name="total" placeholder="Enter total number of questions" required>
-                    <input type="number" class="input" name="corr" placeholder="Enter points for each question" required>
-                    <input type="number" class="input" name="wrong" placeholder="Enter deduction for wrong answer" required>
-                    <input type="text" class="input" name="tag" placeholder="Enter a tag for your exam" required>
-                </div>
-                <input type="submit" name="submit" value="generate">
-            </form>
-        </div>
-    </div>
+    <table class="table table-borderless tbl_module">
+        <tr>
+            <td>
+                <label class="subtitle upload-label">Create questions that will challenge the learners.</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Question Title</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Quiz Title" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Tag</label>
+                <input type="text" class="form-control" name="tag" placeholder="Enter a tag for your quiz" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Total Questions</label>
+                <input type="number" class="form-control" name="total" placeholder="Enter total number of questions" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Points per Question</label>
+                <input type="number" class="form-control" name="corr" placeholder="Enter points for each question" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="upload-label">Deduction for Wrong Answer</label>
+                <input type="number" class="form-control" name="wrong" placeholder="Enter deduction for wrong answer" required>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-primary" name="submit" value="Generate">
+    </form>
+   </div>
+  </div>
 
 <!-- content file -->
-        <div id="contentModal" class="modal">
+        <div id="contentModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="thirdcloseBtn">&times;</span>
+                <span class="closeBtn">&times;</span>
                 <div id="contentModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>
@@ -169,14 +211,13 @@ $result = $conn->query($sql);
 
 
     <script>
-        const filemodal = document.getElementById('fileModal');
-        const quizmodal = document.getElementById('quizModal');
-        const closeBtn = document.querySelector('.closeBtn');
-        const seccloseBtn = document.querySelector('.seccloseBtn');
-        const moduleIdField = document.getElementById('moduleId');
-        const courseIdField = document.getElementById('courseId');
-        const secmoduleIdField = document.getElementById('secmoduleId');
-        const seccourseIdField = document.getElementById('seccourseId');
+    const filemodal = document.getElementById('fileModal');
+    const quizmodal = document.getElementById('quizModal');
+    const closeBtn = document.querySelector('.closeBtn');
+    const moduleIdField = document.getElementById('moduleId');
+    const courseIdField = document.getElementById('courseId');
+    const secmoduleIdField = document.getElementById('secmoduleId');
+    const seccourseIdField = document.getElementById('seccourseId');
 
         // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
         document.addEventListener('click', function(event) {
@@ -256,9 +297,8 @@ $result = $conn->query($sql);
                 contentModal.style.display = 'none';
             }
         });
-
-        
     </script>
+
     <script src="../../javascript/a_profile.js"></script> 
     <script src="../../javascript/script.js"></script> 
 

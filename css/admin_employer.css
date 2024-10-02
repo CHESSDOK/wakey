@@ -6,7 +6,6 @@
 .table {
   border-radius: 20px;
   font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table td, .table th {
@@ -22,3 +21,18 @@
   color: blue;
   text-decoration: underline;
 }
+
+.modal-container .modal-content{
+  width: 100vw;
+  max-width: auto; /* Adjust this value as needed to make the table smaller */
+  margin: 5vh auto; /* Center the table */
+}
+
+.yes {
+  color: green;
+}
+
+.no {
+  color: red;
+}
+

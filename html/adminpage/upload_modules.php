@@ -15,16 +15,17 @@ if ($result->num_rows > 0) {
     echo "<h2>" .$row['course_name']. "  </h2>";
     for ($i = 1; $i <= $module_count; $i++) {
         echo "
-                <form method='POST' action='save_modules.php' enctype='multipart/form-data'>
-                <input type='hidden' name='course_id' value='$course_id'>
-                <input type='hidden' name='module_count' value='$module_count'>
-                
-                <input class='form-control upl-input' type='text' id='module_name_$i' 
-                       name='module_name_$i' placeholder='Module $i' required><br>";
+            <form method='POST' action='save_modules.php' enctype='multipart/form-data'>
+            <input type='hidden' name='course_id' value='$course_id'>
+            <input type='hidden' name='module_count' value='$module_count'>
+            <div class='upl-container'>
+            <input class='form-control upl-input' type='text' id='module_name_$i' 
+                   name='module_name_$i' placeholder='Module $i' required>
+            </div>";
 
     }
     echo "
-            <input class='btn btn-primary mt-3' type='submit' value='Save Modules'>
+            <input class='btn btn-primary mt-2' type='submit' value='Save Modules'>
             </form>
          ";
     

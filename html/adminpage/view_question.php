@@ -6,8 +6,8 @@ $module_id = $_GET['module_id'];
 $sql = "SELECT * FROM question WHERE quiz_id = $q_id";
 $result = $conn->query($sql);
 
-echo "  <h1>  </h1>
-        <table class='table table-borderless table-hover'>
+echo "  <h2>Quiz Items</h2>
+        <table class='table table-borderless table-hover '>
         <thead>
             <th>Question</th>
             <th>Option</th>
