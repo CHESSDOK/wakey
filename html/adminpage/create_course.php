@@ -16,7 +16,7 @@ if ($stmt->execute()) {
     $last_id = $stmt->insert_id;
     $_SESSION['id'] = $last_id;
     $_SESSION['modules'] = $numm;
-    echo "New course created successfully";
+    header("Location: course_list.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

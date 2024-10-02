@@ -101,7 +101,7 @@ $result = $conn->query($sql);
                             data-course-id=" . htmlspecialchars($course_id) . ">Upload Video</a></td>
                         <td><a class='docu openQuizBtn' href='#' data-secmodule-id=" . htmlspecialchars($row['id']) . "
                             data-seccourse-id=" . htmlspecialchars($course_id) . ">Quiz Maker</a></td>
-                        <td><a class='docu' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "'>Quiz List</a></td>
+                        <td><a class='docu' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "&course_id=" . $course_id . "'>Quiz List</a></td>
                         <td><a class='docu openContentBtn' href='#' data-thirdmodule-id=".htmlspecialchars($row['id']).">Contents</a></td>
                     </tr>";
             }
@@ -135,7 +135,7 @@ $result = $conn->query($sql);
 <!-- quiz maker file -->
     <div id="quizModal" class="modal">
         <div class="modal-content">
-            <span class="closeBtn">&times;</span>
+            <span class="seccloseBtn">&times;</span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
 
@@ -160,7 +160,7 @@ $result = $conn->query($sql);
 <!-- content file -->
         <div id="contentModal" class="modal">
             <div class="modal-content">
-                <span class="closeBtn">&times;</span>
+                <span class="thirdcloseBtn">&times;</span>
                 <div id="contentModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>
@@ -169,62 +169,65 @@ $result = $conn->query($sql);
 
 
     <script>
-    const filemodal = document.getElementById('fileModal');
-    const quizmodal = document.getElementById('quizModal');
-    const closeBtn = document.querySelector('.closeBtn');
-    const moduleIdField = document.getElementById('moduleId');
-    const courseIdField = document.getElementById('courseId');
-    const secmoduleIdField = document.getElementById('secmoduleId');
-    const seccourseIdField = document.getElementById('seccourseId');
+        const filemodal = document.getElementById('fileModal');
+        const quizmodal = document.getElementById('quizModal');
+        const closeBtn = document.querySelector('.closeBtn');
+        const seccloseBtn = document.querySelector('.seccloseBtn');
+        const moduleIdField = document.getElementById('moduleId');
+        const courseIdField = document.getElementById('courseId');
+        const secmoduleIdField = document.getElementById('secmoduleId');
+        const seccourseIdField = document.getElementById('seccourseId');
 
-    // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
-    document.addEventListener('click', function(event) {
-        //file
-        if (event.target.classList.contains('openFileBtn')) {
-            const moduleId = event.target.getAttribute('data-module-id');
-            const courseId = event.target.getAttribute('data-course-id');
-            
-            // Set the module ID in the hidden field
-            moduleIdField.value = moduleId;
-            courseIdField.value = courseId;
+        // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
+        document.addEventListener('click', function(event) {
+            //file
+            if (event.target.classList.contains('openFileBtn')) {
+                const moduleId = event.target.getAttribute('data-module-id');
+                const courseId = event.target.getAttribute('data-course-id');
+                
+                // Set the module ID in the hidden field
+                moduleIdField.value = moduleId;
+                courseIdField.value = courseId;
 
-            // Open the modal
-            filemodal.style.display = 'flex';
-        }
-        //quiz
-        if (event.target.classList.contains('openQuizBtn')) {
-            const secmoduleId = event.target.getAttribute('data-secmodule-id');
-            const seccourseId = event.target.getAttribute('data-seccourse-id');
-            
-            // Set the module ID in the hidden field
-            secmoduleIdField.value = secmoduleId;
-            seccourseIdField.value = seccourseId;
+                // Open the modal
+                filemodal.style.display = 'flex';
+            }
+            //quiz
+            if (event.target.classList.contains('openQuizBtn')) {
+                const secmoduleId = event.target.getAttribute('data-secmodule-id');
+                const seccourseId = event.target.getAttribute('data-seccourse-id');
+                
+                // Set the module ID in the hidden field
+                secmoduleIdField.value = secmoduleId;
+                seccourseIdField.value = seccourseId;
 
-            // Open the modal
-            quizmodal.style.display = 'flex';
-        }
-    });
+                // Open the modal
+                quizmodal.style.display = 'flex';
+            }
+        });
 
-//cotent module
+    //cotent module
     // Close modal when 'x' is clicked
-    closeBtn.addEventListener('click', function() {
-        filemodal.style.display = 'none';
-        quizmodal.style.display = 'none';
-    });
-
-    // Close modal when clicked outside of the modal content
-    window.addEventListener('click', function(event) {
-        if (event.target === filemodal) {
+        closeBtn.addEventListener('click', function() {
             filemodal.style.display = 'none';
-        }
-        if (event.target === quizmodal) {
+        });
+
+        seccloseBtn.addEventListener('click', function() {
             quizmodal.style.display = 'none';
-        }
-    });
+        });
+        // Close modal when clicked outside of the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === filemodal) {
+                filemodal.style.display = 'none';
+            }
+            if (event.target === quizmodal) {
+                quizmodal.style.display = 'none';
+            }
+        });
 
    // Get modal and button elements for viewing profile
         const contentModal = document.getElementById('contentModal');
-        const closeModuleBtn = document.querySelector('.closeBtn');
+        const thridcloseModuleBtn = document.querySelector('.thirdcloseBtn');
 
         // Open profile modal and load data via AJAX
         $(document).on('click', '.openContentBtn', function(e) {
@@ -243,7 +246,7 @@ $result = $conn->query($sql);
         });
 
         // Close profile modal when 'x' is clicked
-        closeModuleBtn.addEventListener('click', function() {
+        thridcloseModuleBtn.addEventListener('click', function() {
             contentModal.style.display = 'none';
         });
 

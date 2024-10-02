@@ -83,6 +83,7 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
+    <button id="openCourseBtn">Add Course</button>
     <table class="table table-borderless table-hover">
         <thead>
             <th>Course</th>
@@ -110,10 +111,34 @@ $result = $conn->query($sql);
     </table>
     </div>
 
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="closeBtn">&times;</span>
+            <h2>Course</h2>
+            <form action="create_course.php" method="post">
+                <!-- Text Input for Course -->
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" required><br><br>
+                
+                <!-- Text Input for Description -->
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required><br><br>
+
+                <label for="module_count">Number of Modules:</label>
+                <input type="number" id="module_count" name="module_count" min="1" required><br><br>
+                
+                <!-- Submit Button -->
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+<!-- create module -->
     <div id="moduleModal" class="modal">
     <div class="modal-content module_container">
         
-        <span class="closeBtn">&times;</span>
+        <span class="seccloseBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>

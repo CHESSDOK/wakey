@@ -1,6 +1,7 @@
 <?php
 include_once "../../php/conn_db.php";
 $m_id = $_GET['modules_id'];
+$course_id = $_GET['course_id'];
 $sql = "SELECT * FROM quiz_name WHERE module_id = $m_id ";
 $result = $conn->query($sql);
 ?>
@@ -79,7 +80,7 @@ $result = $conn->query($sql);
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
     <li class="breadcrumb-item"><a href="course_list.php" >Courses</a></li>
-    <li class="breadcrumb-item"><a href="module_list.php?module_id=<?= $row['id']; ?>">Module List</a></li>
+    <li class="breadcrumb-item"><a href="module_list.php?course_id=<?php echo $course_id; ?>">Module List</a></li>
     <li class="breadcrumb-item active" aria-current="page">Quiz List</li>
   </ol>
 </nav>

@@ -1,14 +1,15 @@
 <?php
 session_start();
-require 'conn_db.php';  // Include database connection
+include 'conn_db.php';  // Include database connection
 
 // Check if admin is logged in
 $admin = $_SESSION['username'];
 
 // Fetch all cases
-$sql = "SELECT c.id, a.first_name, c.title, c.status, c.created_at 
-        FROM cases c 
-        JOIN applicant_profile a ON c.user_id = a.id";
+$sql = "SELECT c.*, ap.*
+        FROM cases c
+        JOIN applicant_profile ap ON c.user_id = ap.user_id
+       ";
 $result = $conn->query($sql);
 ?>
 
@@ -18,9 +19,11 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Cases</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
- 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/admin_ofw.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
 </head>
@@ -86,28 +89,41 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
-<a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
-<div class="table-container">
-    <table class="table table-borderless table-hover">
-        <thead>
-            <th>Case ID</th>
-            <th>User</th>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Date Filed</th>
-        </thead>
-        <?php while ($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?php echo $row['id']; ?></td>
-            <td><?php echo $row['first_name']; ?></td>
-            <td><?php echo $row['title']; ?></td>
-            <td><?php echo $row['status']; ?></td>
-            <td><?php echo $row['created_at']; ?></td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
-    
-    </div></div>
+    <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+    <div class="table-container">
+            <table class="table table-borderless table-hover">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>Number</th>
+                        <th>agency</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>status update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    if($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+                            echo "<tr>
+                                <td>".$full_name."</td>
+                                <td>".$row['contact_number']."</td>
+                                <td>".$row['local_agency_name']."</td>
+                                <td>".$row['title']."</td>
+                                <td>".$row['status']."</td>
+                                <td> <a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>update</a> </td>
+                                 </tr>";
+                                } 
+                        } else {
+                            echo "<tr><td colsapn='4'> no case file found";
+                        }
+                         $conn->close();
+                ?>
+            </table>  
+    </div>
+</div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

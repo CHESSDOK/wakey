@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("isss", $userId, $title, $description, $file);
     if ($stmt->execute()) {
         echo "Case filed successfully!";
+        header("Location: ../../html/applicant/submit_case.php");
     } else {
         echo "Error filing case: " . $stmt->error;
     }

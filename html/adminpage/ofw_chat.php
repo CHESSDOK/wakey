@@ -2,56 +2,58 @@
     include 'conn_db.php';
     session_start();
     $admin_Id = $_SESSION['id'];
-
     $message_id = $_GET['message_id'];
-    $sql = "SELECT * FROM messages WHERE id = '$message_id'";
+    $user_id = $_GET['user_id'];
+    $sql = "SELECT m.*, ap.first_name, ap.middle_name, ap.last_name, r.reply, ad.username AS admin_username
+            FROM messages m 
+            JOIN applicant_profile ap ON m.user_id = ap.user_id
+            LEFT JOIN replies r ON m.id = r.message_id
+            LEFT JOIN admin_profile ad ON r.admin_id = ad.id
+            WHERE m.user_id = '$user_id'";  // Make sure to sanitize the input to avoid SQL injection
+
     $result = $conn->query($sql); 
+echo "
+<table class='table table-borderless table-hover'>
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Reply</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+";
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+        $message = $row['message'];
+        $reply = $row['reply'];
+        $admin_username = $row['admin_username'];
+
+        echo "<tr>
+                <td>".$full_name." : ".$message."</td></tr>";
+
+        if (!empty($reply)) {
+            echo "<tr><td>".$admin_username." : ".$reply."</td>";
+        } else {
+            echo "<form action='send_message.php' method='post'>
+                    <input type='hidden' name='message_id' value='".$row['id']."'>
+                    <input type='hidden' name='admin_id' value='".$admin_Id."'>
+                    <td><textarea id='message' name='reply'></textarea> </td> 
+                    <td><input type='submit' value='Send Message'></td>
+                    <input type='submit' value='Send Message'>
+                    </tr>";
+        }
+
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='2'>No messages found</td></tr>";
+}
+echo "</tbody>
+        </table>";
+$conn->close();
+    
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Admin</title>
-    <link rel="stylesheet" href="../../css/ofw.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box">
-           <?php
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $user_sql = "SELECT * FROM register WHERE id = '" . $row["user_id"] . "'";
-                $user_result = $conn->query($user_sql);
-                $user_row = $user_result->fetch_assoc();
-                echo "<h2>Message from " . $user_row["username"] . "</h2>";
-                echo "<p>" . $row["message"] . "</p>";
-                }
-            
-                $sql = "SELECT * FROM replies WHERE message_id = '$message_id'";
-                $result = $conn->query($sql);
-            
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $admin_sql = "SELECT * FROM admin_profile WHERE id = '" . $row["admin_id"] . "'";
-                    $admin_result = $conn->query($admin_sql);
-                    $admin_row = $admin_result->fetch_assoc();
-                    echo "<h2>Reply from " . $admin_row["username"] . "</h2>";
-                    echo "<p>" . $row["reply"] . "</p>";
-                }
-                } else {
-                echo "No replies found.";
-                }
-           ?>
-        </div>
-        <form action="send_message.php" method="post">
-            <input type="numeber" name="admin_id" value="<?php echo $admin_Id ?>">
-            <input type="hidden" name="message_id" value="<?php echo $message_id ?>">
-            <label for="message">Message:</label>
-            <textarea id="message" name="reply"></textarea><br><br>
-            <input type="submit" value="Send Message">
-        </form>
-    </div>
-</body>
-</html>
