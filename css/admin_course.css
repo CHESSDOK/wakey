@@ -25,12 +25,11 @@
 
 /*upload modules*/
 .upl-container {
-    width: 30%;
-    margin: 5vh auto; 
+    width: auto;
 }
 
 .upl-input{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .module_container{
@@ -46,5 +45,12 @@
 }
 
 .tbl_module td, .tbl_module th {
+  display: block;
+  text-align: left;
   padding: 5px;
+}
+
+.upload-label{
+  display: block;
+  text-align: left;
 }

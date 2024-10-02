@@ -62,7 +62,7 @@ $result = $conn->query($sql);
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <table class="menu">
@@ -112,18 +112,17 @@ $result = $conn->query($sql);
 </div>
 
 <!-- employer list -->
-<div id="employerModal" class="modal">
-            <div class="modal-content">
-                <span class="closeBtn">&times;</span>
-                <div id="employersModuleContent">
-                    <!-- Module content will be dynamically loaded here -->
-                </div>
-            </div>
+<div id="employerModal" class="modal modal-container">
+    <div class="modal-content">
+        <span class="btn-close closBtn">&times;</span>
+        <div id="employersModuleContent">
+            <!-- Module content will be dynamically loaded here -->
         </div>
-
+    </div>
+</div>
 
     <script>  const employerModal = document.getElementById('employerModal');
-        const closeModuleBtn = document.querySelector('.closeBtn');
+        const closeModuleBtn = document.querySelector('.closBtn');
         // Open profile modal and load data via AJAX
         $(document).on('click', '.openEmployersBtn', function(e) {
             e.preventDefault();
