@@ -84,10 +84,10 @@ $result = $conn->query($sql);
 <table class="table table-borderless table-hover">
         <thead>
         <tr>
-            <th>id</th>
-            <th>user_info</th>
-            <th>message</th>
-            <th>date</th>
+            <th>ID</th>
+            <th>User_Info</th>
+            <th>Message</th>
+            <th>Date</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -100,9 +100,9 @@ $result = $conn->query($sql);
                         <td>" . $row["user_id"] . "</td>
                         <td>" . $row["created_at"] . "</td>
                         <td><a class='docu' href='ofw_chat.php?user_id=" . $row["user_id"] ."&message_id=".$row["id"]."'>View Chat</a></td>
-                        <td><button id='adminChatBtn'  class='adminChatBtn'
+                        <td><button  id='adminChatBtn'  class='adminChatBtn btn btn-primary'
                                     data-user-id='" . htmlspecialchars($row["user_id"]) . "'
-                                    data-message-id='" . htmlspecialchars($row["id"]) . "'>view profile</button></td>
+                                    data-message-id='" . htmlspecialchars($row["id"]) . "'>View profile</button></td>
                     </tr>";
             }
         } else {
@@ -117,9 +117,9 @@ $result = $conn->query($sql);
     </div>
 
 <!-- ofw chat -->
-    <div id="chatModal" class="modal">
+    <div id="chatModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="closeBtn">&times;</span>
+            <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Applicant Profile</h2>
             <div id="ofwChatContent">
                 <!-- Profile details will be dynamically loaded here -->

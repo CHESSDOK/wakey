@@ -75,7 +75,7 @@ $result = $conn->query($sql);
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
             </table>
         </div>
     </div>
@@ -88,18 +88,30 @@ $result = $conn->query($sql);
   </ol>
 </nav>
 
-<div class="table-container">
-    <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+<div class="table-containers grid gap-3">
+    <table class="table-containrs">
+        <tr>
+            <td>
+                <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
+            </td>
+        </tr>
+    </table>
+
     <div class="table-container">
             <table class="table table-borderless table-hover">
                 <thead>
                     <tr>
-                        <th>name</th>
+                        <th>Name</th>
                         <th>Number</th>
-                        <th>agency</th>
+                        <th>Agency</th>
                         <th>Title</th>
                         <th>Status</th>
-                        <th>status update</th>
+                        <th>Status update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,13 +129,14 @@ $result = $conn->query($sql);
                                  </tr>";
                                 } 
                         } else {
-                            echo "<tr><td colsapn='4'> no case file found";
+                            echo "<tr><td colspan='6'> no case file found</td></tr>";
                         }
                          $conn->close();
                 ?>
+                </tbody>
             </table>  
+        </div>
     </div>
-</div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

@@ -69,7 +69,7 @@ $result = $conn->query($sql);
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="#" class="active nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
             </table>
         </div>
     </div>
@@ -83,7 +83,8 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
-    <button id="openCourseBtn">Add Course</button>
+    <button class="btn btn-primary" id="openCourseBtn">Add Course</button>
+
     <table class="table table-borderless table-hover">
         <thead>
             <th>Course</th>
@@ -111,10 +112,34 @@ $result = $conn->query($sql);
     </table>
     </div>
 
+    <div id="courseModal" class="modal modal-container">
+        <div class="modal-content">
+            <span class="btn-close closBtn closeBtn">&times;</span>
+            <h2>Create a course</h2>
+            <form action="create_course.php" method="post">
+                <!-- Text Input for Course -->
+                <label for="course">Course:</label>
+                <input class="form-control" type="text" id="course" name="course" required>
+                
+                <!-- Text Input for Description -->
+                <label for="description">Description:</label>
+                <input class="form-control" type="text" id="description" name="description" required>
+
+                <label for="module_count">Number of Modules:</label>
+                <input class="form-control" type="number" id="module_count" name="module_count" min="1" required>
+                
+                <!-- Submit Button -->
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+
+<!-- create module -->
     <div id="moduleModal" class="modal modal-container">
     <div class="modal-content">
         
-        <span class="btn-close closBtn closeBtn">&times;</span>
+        <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>
