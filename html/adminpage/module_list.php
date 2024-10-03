@@ -90,19 +90,25 @@ $result = $conn->query($sql);
     <table class="table table-borderless table-hover">
         <thead>
             <th>Module Title</th>
-            <th colspan="4">Actions</th>
+            <th colspan="6">Actions</th>
         </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . htmlspecialchars($row['module_name']) . "</td>
+                        <form method='POST' action='module_update.php'>
+                        <input type='hidden' name='module_id' value='".$row["id"]."'>
+                        <input type='hidden' name='course_id' value='".$course_id."'>
+                        <td><input type='text' name='module_name' value='".$row["module_name"]."'></td>
+                        <td><input type='submit' value='Update'></td>
+                        <td><a href='delete_modules.php?course_id=".$course_id."&module_id=".$row["id"]."'>DELETE</a></td>
                         <td><a class='docu openFileBtn' href='#' data-module-id=" . htmlspecialchars($row['id']) . "
                             data-course-id=" . htmlspecialchars($course_id) . ">Upload Video</a></td>
                         <td><a class='docu openQuizBtn' href='#' data-secmodule-id=" . htmlspecialchars($row['id']) . "
                             data-seccourse-id=" . htmlspecialchars($course_id) . ">Quiz Maker</a></td>
                         <td><a class='docu' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "&course_id=" . $course_id . "'>Quiz List</a></td>
                         <td><a class='docu openContentBtn' href='#' data-thirdmodule-id=".htmlspecialchars($row['id']).">Contents</a></td>
+                        </form>
                     </tr>";
             }
         } else {
@@ -116,7 +122,7 @@ $result = $conn->query($sql);
 <!-- upload file -->
     <div id="fileModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="btn-close closBtn closeBtn">&times;</span>
+            <span class="btn-close closBtn closeBtn"></span>
             <h2>Upload Material</h2>
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="mod_id" id="moduleId">
@@ -150,7 +156,7 @@ $result = $conn->query($sql);
 <!-- quiz maker file -->
     <div id="quizModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
+            <span class="btn-close closBtn closeBtn seccloseBtn"></span>
             <h2>Quiz Maker</h2>
             <form class="form" action="quiz_upload.php" method="post">
             <input type="hidden" name="secmodule_id" id="secmoduleId">
@@ -201,7 +207,7 @@ $result = $conn->query($sql);
 <!-- content file -->
         <div id="contentModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="btn-close closBtn closeBtn thirdcloseBtn">&times;</span>
+                <span class="btn-close closBtn closeBtn thirdcloseBtn"></span>
                 <div id="contentModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>
