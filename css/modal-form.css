@@ -24,7 +24,17 @@
     cursor: pointer;
   }
   
-  
+  .seccloseBtn {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .thirdcloseBtn {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+  }
   /* Style the form inputs */
   input[type="text"],
   input[type="email"] {
