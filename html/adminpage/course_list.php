@@ -105,7 +105,7 @@ $result = $conn->query($sql);
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
                         <td><input type='submit' value='Update'></td>
-                        <td><a href='delete_course.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a href='delete_survey.php?course_id=".$row["id"]."'>DELETE</a></td>
                         </form>
                     </tr>";
                     
