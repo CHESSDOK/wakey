@@ -1,8 +1,8 @@
 <?php
 include_once "../../php/conn_db.php";
-$m_id = $_GET['modules_id'];
+$modules_id = $_GET['modules_id'];
 $course_id = $_GET['course_id'];
-$sql = "SELECT * FROM quiz_name WHERE module_id = $m_id ";
+$sql = "SELECT * FROM quiz_name WHERE module_id = $modules_id ";
 $result = $conn->query($sql);
 ?>
 
@@ -108,10 +108,11 @@ $result = $conn->query($sql);
                             <td><input class='form-control' type='text' name='tag' value='" . $row['tag'] . "'></td>
                             <td><input class='form-control' type='text' name='total' value='" . $row['total'] . "'></td>
                             <td><input class='btn btn-primary' type='submit' value='Update'></td>
+                            <td><a href='delete_quiz.php?course_id=".$course_id."&module_id=".$modules_id."&id=".$row['id']."'>DELETE</a></td>
                             </form>
                             <td><a class='btn btn-primary openQuestionBtn' href='#' 
                                 data-quiz-id=".htmlspecialchars($row['id'])."
-                                data-module-id=".htmlspecialchars($m_id ).">View Quiz</a></td>
+                                data-module-id=".htmlspecialchars($modules_id ).">View Quiz</a></td>
                             
                         </tr>";
                 }
@@ -126,7 +127,7 @@ $result = $conn->query($sql);
 
 <div id="questionModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="btn-close closBtn closeBtn">&times;</span>
+                <span class="btn-close closBtn closeBtn"></span>
                 <div id="questionModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>

@@ -91,16 +91,22 @@ $result = $conn->query($sql);
             <th>Course Description</th>
             <th>Module Label</th>
             <th>Module Items</th>
+            <th>action</th>
         </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>" . $row["course_name"] . "</td>
-                        <td>" . $row["description"] . "</td>
+                        <form method='POST' action='update_course.php'>
+                        <td><input type='hidden' name='course_id' value='".$row["id"]."'></td>
+                        <td><input type='text' name='course_name' value='".$row["course_name"]."'></td>
+                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>
                         <td><a href='#' id='moduleBtn'  class='openModuleBtn docu'
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
+                        <td><input type='submit' value='Update'></td>
+                        <td><a href='delete_course.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        </form>
                     </tr>";
                     
             }
@@ -114,7 +120,7 @@ $result = $conn->query($sql);
 
     <div id="courseModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="btn-close closBtn closeBtn">&times;</span>
+            <span class="btn-close closBtn closeBtn"></span>
             <h2>Create a course</h2>
             <form action="create_course.php" method="post">
                 <!-- Text Input for Course -->
@@ -139,7 +145,7 @@ $result = $conn->query($sql);
     <div id="moduleModal" class="modal modal-container">
     <div class="modal-content">
         
-        <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
+        <span class="btn-close closBtn closeBtn seccloseBtn"></span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>
