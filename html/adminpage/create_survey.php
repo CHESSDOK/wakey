@@ -103,30 +103,30 @@
 </nav>
 
 <div class="table-containers grid gap-3">
-  <form action="create_survey.php" method="POST">
-    <table class="table table-borderless tbl-question" style="background-color:transparent;">
-      <thead>
-        <th>Survey Question</th>
-      </thead>
-      <tbody class="grid gap-3 row-gap-0">
-        <tr>
-          <td>
-            <input class="form-control" type="text" name="question" placeholder="Enter Survey Question" value="">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="form-control" type="text" name="category" placeholder="Survey Category"  value="">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="btn btn-primary" style="display:flex; position:flex-start;" type="submit" value="Submit">
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </form>
+    <form action="create_survey.php" method="POST">
+        <table class="table table-borderless tbl-question" style="background-color:transparent;">
+        <thead>
+            <th>Survey Question</th>
+        </thead>
+        <tbody class="grid gap-3 row-gap-0">
+            <tr>
+            <td>
+                <input class="form-control" type="text" name="question" placeholder="Enter Survey Question" value="">
+            </td>
+            </tr>
+            <tr>
+            <td>
+                <input class="form-control" type="text" name="category" placeholder="Survey Category"  value="">
+            </td>
+            </tr>
+            <tr>
+            <td>
+                <input class="btn btn-primary" style="display:flex; position:flex-start;" type="submit" value="Submit">
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </form>
 
   <table class="table table-borderless table-hover tbl-question ">
     <?php
@@ -148,6 +148,7 @@
                     <td><input class='form-control' type='text' name='question' value='" . $row["question"] . "'></td>
                     <td><input class='form-control' type='text' name='category' value='" . $row["category"] . "'></td>
                     <td><input class='btn btn-primary mt-2' type='submit' value='Update'></td>
+                    <td><a href='delete_survey.php?survey_id=".$row["id"]."'>DELETE</a></td>
                     </form>
                 </tr>";
         }
