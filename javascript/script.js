@@ -24,7 +24,7 @@ $(document).ready(function(){
         content: function() {
             return `
                 <a class="link" href="html/applicant/a_profile.php"  id="emprof">Profile</a><br>
-                <a class="link" href="index.html">Logout</a>
+                <a class="link" href="logout.php">Logout</a>
             `;
         }
     });
@@ -46,7 +46,7 @@ $(document).ready(function(){
         content: function() {
             return `
                 <a class="link" href="employer_profile.php"  id="emprof">Profile</a><br>
-                <a class="link" href="login_employer.html">Logout</a>
+                <a class="link" href="logout.php">Logout</a>
             `;
         }
     });
