@@ -2,8 +2,21 @@
 <html lang="en">
 <?php
 include 'php/conn_db.php';
-session_start();
-$userId = $_SESSION['id'];
+
+function checkSession() {
+  session_start(); // Start the session
+
+  // Check if the session variable 'id' is set
+  if (!isset($_SESSION['id'])) {
+      // Redirect to login page if session not found
+      header("Location: html/login.html");
+      exit();
+  } else {
+      // If session exists, store the session data in a variable
+      return $_SESSION['id'];
+  }
+}
+$userId = checkSession();
 
 $sql = "SELECT * FROM applicant_profile WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
