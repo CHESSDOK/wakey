@@ -1,3 +1,12 @@
+
+.case-file-container
+{
+  border: 1px solid #333;
+  width: 80%;
+  margin: 5vh auto;
+  justify-content: space-between;
+  align-items: start;
+}
 .table-container {
     width: 80%; /* Adjust this value as needed to make the table smaller */
     margin: 5vh auto; /* Center the table */
@@ -22,3 +31,32 @@
     color: blue;
     text-decoration: underline;
   }
+
+  .table-containers {
+    display: flex;
+    justify-content: space-between;
+    margin: 3vh auto;
+  }
+  
+  .table-containers {
+    width: 80%; /* Adjust width as needed */
+  }
+
+  .table-containrs tr{
+    display: flex;
+  }
+  
+  .tbl-question td{
+    padding: 2px;/* Adjust padding to make cells smaller */
+    margin: 0;
+    text-align: left;
+}
+
+.tbl-question {
+  border-radius: 20px;
+  font-size: 1rem; /* Adjust the font size to make the table content smaller */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.tbl-question a {
+  margin: 0; /* Remove margin around the buttons */
+}

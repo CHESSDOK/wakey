@@ -122,6 +122,12 @@ nav {
 	opacity: 1;
 }
 
+.offcanvas-close:hover,
+.offcanvas-close:focus{
+	color: red;
+	background-color: transparent;
+}
+
 .menu td a {
 	font-size: 1.5rem;
 	padding: 10px;

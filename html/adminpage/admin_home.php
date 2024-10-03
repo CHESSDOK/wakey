@@ -9,7 +9,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../../css/style.css">
-  <link rel="stylesheet" href="../../css/notif.css">
 </head>
 <body>
 <nav>
@@ -57,7 +56,6 @@
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="create_survey.php" class="nav-link">OFW Survey</a></td></tr>
                 <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
             </table>
         </div>
