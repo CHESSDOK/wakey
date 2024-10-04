@@ -84,6 +84,7 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
+    <button class="btn btn-primary openJobBtn" id="openJobBtn">Create Job</button>
     <table class="table table-borderless table-hover"> <!-- Add Bootstrap table class -->
         <thead>
             <tr>
@@ -114,14 +115,15 @@ $result = $conn->query($sql);
 <!-- employer list -->
 <div id="employerModal" class="modal modal-container">
     <div class="modal-content">
-        <span class="btn-close closBtn closeBtn ">&times;</span>
+        <span class="btn-close closBtn"></span>
         <div id="employersModuleContent">
             <!-- Module content will be dynamically loaded here -->
         </div>
     </div>
 </div>
 
-    <script>  const employerModal = document.getElementById('employerModal');
+    <script>  
+        const employerModal = document.getElementById('employerModal');
         const closeModuleBtn = document.querySelector('.closBtn');
         // Open profile modal and load data via AJAX
         $(document).on('click', '.openEmployersBtn', function(e) {

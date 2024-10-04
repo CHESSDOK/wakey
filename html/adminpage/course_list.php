@@ -38,11 +38,6 @@ $result = $conn->query($sql);
         </div>
         
         <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
-    <?php if (!empty($row['photo'])): ?>
-        <img id="preview" src="php/applicant/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
-    <?php else: ?>
-        <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
-    <?php endif; ?>
     </div>
 
     </div>
