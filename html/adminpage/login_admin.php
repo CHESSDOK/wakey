@@ -7,11 +7,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin_profile WHERE username='$username'";
+    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+        $sql = "SELECT * FROM admin_profile WHERE BINARY email='$username'";
+    } else {
+        $sql = "SELECT * FROM admin_profile WHERE BINARY username='$username'";
+    }
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $row['id'];

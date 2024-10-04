@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$sql = "SELECT * FROM applicant_profile";
+$sql = "SELECT * FROM applicant_profile WHERE specialization IS NOT NULL";
 $result = $conn->query($sql);
 ?>
 
