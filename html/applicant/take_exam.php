@@ -52,23 +52,7 @@ if (!$row) {
             <img src="../../img/logo_peso.png" alt="Logo">
             <a href="#"> PESO-lb.ph</a>
         </div>
-        <label class="burger" for="burger">
-            <input type="checkbox" id="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <ul class="menu">
-            <li><a href="../../index(applicant).php">Home</a></li>
-            <li><a href="applicant.php" >Applicant</a></li>
-            <li><a href="" class="active">Training</a></li>
-            <li><a href="ofw_home.php">OFW</a></li>
-            <li><a href="../../html/about.php" >About Us</a></li>
-            <li><a href="../../html/contact.php">Contact Us</a></li>
-        </ul>
-        <div class="auth">
-        <button id ="emprof">  <?php echo htmlspecialchars($row['username']); ?> </button>
-        </div>
+
     </nav>
     <header>
         <h1 class="h1">Quiz/Exam</h1>
@@ -83,10 +67,10 @@ if (!$row) {
             echo "<div class='question'>
                 <p>Question {$q_number} :: " . htmlspecialchars($question['question']) . "</p>
                 <input type='hidden' name='questions[]' value='{$question['id']}'>
-                <label><input type='radio' name='answers[{$question['id']}]' value='a'> " . htmlspecialchars($question['option_a']) . "</label><br>
-                <label><input type='radio' name='answers[{$question['id']}]' value='b'> " . htmlspecialchars($question['option_b']) . "</label><br>
-                <label><input type='radio' name='answers[{$question['id']}]' value='c'> " . htmlspecialchars($question['option_c']) . "</label><br>
-                <label><input type='radio' name='answers[{$question['id']}]' value='d'> " . htmlspecialchars($question['option_d']) . "</label><br>
+                <label>A. <input type='radio' name='answers[{$question['id']}]' value='a'> " . htmlspecialchars($question['option_a']) . "</label><br>
+                <label>B. <input type='radio' name='answers[{$question['id']}]' value='b'> " . htmlspecialchars($question['option_b']) . "</label><br>
+                <label>C. <input type='radio' name='answers[{$question['id']}]' value='c'> " . htmlspecialchars($question['option_c']) . "</label><br>
+                <label>D. <input type='radio' name='answers[{$question['id']}]' value='d'> " . htmlspecialchars($question['option_d']) . "</label><br>
             </div>";
             $q_number++;
         }
@@ -95,6 +79,7 @@ if (!$row) {
         <button class="action" type="submit" name="submit">Submit</button>
     </div>
     </form>
+
     <script src="../../javascript/script.js"></script> 
 </body>
 </html>
