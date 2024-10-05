@@ -2,12 +2,12 @@
 include 'conn_db.php';
 
 // Query to get total applications
-$total_sql = "SELECT COUNT(*) AS total_applications FROM applications";
+$total_sql = "SELECT COUNT(DISTINCT applicant_id) AS total_applications FROM applications";
 $result = $conn->query($total_sql);
 $total_applications = $result->fetch_assoc()['total_applications'];
 
 // Query to get hired applications
-$hired_sql = "SELECT COUNT(*) AS hired_applications FROM applications WHERE status = 'accepted'";
+$hired_sql = "SELECT COUNT(DISTINCT applicant_id) AS hired_applications FROM applications WHERE status = 'accepted'";
 $result = $conn->query($hired_sql);
 $hired_applications = $result->fetch_assoc()['hired_applications'];
 

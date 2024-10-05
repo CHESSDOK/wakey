@@ -32,7 +32,7 @@ window.addEventListener('click', function(event) {
 
     // Get modal and button elements for viewing profile
     const profileModal = document.getElementById('profileModal');
-    const closepBtn = document.querySelector('.closeBtn');
+    const closepBtn = document.querySelector('.seccloseBtn');
 
     // Open profile modal and load data via AJAX
     $(document).on('click', '.openProfileBtn', function(e) {
