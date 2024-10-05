@@ -15,12 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO applications (applicant_id, job_posting_id, job) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $id, $job_id, $job);
+    $stmt = $conn->prepare("INSERT INTO applications (applicant_id, job_posting_id, application_date, job) VALUES (?, ?, NOW(), ?)");
+    $stmt->bind_param("iis", $id, $job_id, $job); // Changed to 'iis' since user_id and job_id are integers, job is a string
 
     // Execute the statement
     if ($stmt->execute()) {
         header("Location: ../../html/applicant/applicant.php");
+        exit(); // It's a good practice to exit after header redirection
     } else {
         echo "Error: " . $stmt->error;
     }

@@ -1,47 +1,66 @@
 <?php
-include '../../php/conn_db.php';
-function checkSession() {
-    session_start(); // Start the session
+    include '../../php/conn_db.php';
+    function checkSession() {
+        session_start(); // Start the session
 
-    // Check if the session variable 'id' is set
-    if (!isset($_SESSION['id'])) {
-        // Redirect to login page if session not found
-        header("Location: ../../index.html");
-        exit();
-    } else {
-        // If session exists, store the session data in a variable
-        return $_SESSION['id'];
+        // Check if the session variable 'id' is set
+        if (!isset($_SESSION['id'])) {
+            // Redirect to login page if session not found
+            header("Location: ../../index.html");
+            exit();
+        } else {
+            // If session exists, store the session data in a variable
+            return $_SESSION['id'];
+        }
     }
-}
 
-$adminId = checkSession();
-$jobid = $_GET['job_id'];
+    $userId = checkSession();
+    $jobid = $_GET['job_id'];
 
-// SQL JOIN to fetch applicant details and their applications
-$sql = "SELECT ap.*, a.* 
-        FROM applicant_profile ap
-        JOIN applications a ON ap.user_id = a.applicant_id
-        WHERE a.job_posting_id = ? AND a.status != 'accepted'";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $jobid);
-$stmt->execute();
-$result = $stmt->get_result();
+    // SQL JOIN to fetch applicant details and their applications
+    $sql = "SELECT ap.*, a.* 
+    FROM applicant_profile ap
+    JOIN applications a ON ap.user_id = a.applicant_id
+    WHERE a.job_posting_id = ? AND a.status != 'rejected'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $jobid);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-// Fetch employer profile
-$sql = "SELECT * FROM aa WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $adminId);
-$stmt->execute();
-$res = $stmt->get_result();
+        // Arrays to hold categorized applicants
+        $pending = [];
+        $review = [];
+        $rejected = [];
 
-if (!$res) {
-    die("Invalid query: " . $conn->error); 
-}
+        if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Categorize based on status
+            if ($row['status'] == 'pending') {
+                $pending[] = $row;
+            } elseif ($row['status'] == 'interview') {
+                $review[] = $row;
+            } elseif ($row['status'] == 'accepted') {
+                $rejected[] = $row;
+            }
+        }
+        }
 
-$row = $res->fetch_assoc();
-if (!$row) {
-    die("User not found.");
-}
+
+    // Fetch employer profile
+    $sql = "SELECT * FROM empyers WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if (!$res) {
+        die("Invalid query: " . $conn->error); 
+    }
+
+    $row = $res->fetch_assoc();
+    if (!$row) {
+        die("User not found.");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +77,38 @@ if (!$row) {
     <link rel="stylesheet" href="../../css/modal-form.css">
     <link rel="stylesheet" href="../../css/nav_float.css">
     <link rel="stylesheet" href="../../css/employer.css">
+    <style>
+            .category-container {
+                display: flex;
+                flex-direction: column; /* Align categories and tables vertically */
+                gap: 20px; /* Space between categories */
+            }
+            .category-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Center align headers and tables */
+                width: 100%;
+            }
+            .category-section h3 {
+                margin-bottom: 10px; /* Space between header and table */
+            }
+            table {
+                width: 80%; /* Adjust table width */
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black; /* Add borders to the table */
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            .disabled-link {
+            pointer-events: none; /* Prevents clicking */
+            color: gray; /* Makes it look disabled */
+            text-decoration: none;
+            }
+    </style>
 
 </head>
 <body>
@@ -118,7 +169,7 @@ if (!$row) {
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
-    <li class="breadcrumb-item"><a href="../../html/employer/job_list.php" >Job List</a></li>
+    <li class="breadcrumb-item"><a href="create_job.php" >Job List</a></li>
     <li class="breadcrumb-item active" aria-current="page">Applicants</li>
   </ol>
 </nav>
@@ -128,38 +179,71 @@ if (!$row) {
     </header>
     
     <div class='ep-container'>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Job</th>
-            <th>Actions</th>
-        </tr>
+        <div class="category-container">
         <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                // Construct full name
-                $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+            function display_table($applicants, $status_label) {
+                echo "<h3>$status_label</h3>";
+                echo "<table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Job</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>";
+                
+                if (!empty($applicants)) {
+                    foreach ($applicants as $row) {
+                        $full_name = htmlspecialchars($row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name']);
+                        $status = $row['status'];
 
-                echo "
-                <tr>
-                        <td class='form-label'>" . htmlspecialchars($row["applicant_id"]) . "</td>
-                        <td class='form-label'>" . htmlspecialchars($full_name) . "</td>
-                        <td class='form-label'>" . htmlspecialchars($row["job"]) . "</td>
-                        <td><a href='../../php/employer/application_process.php?id=" . $row['user_id'] . "'>accepted</a></td>
-                        <td><button id='openFormBtn' 
-                                    data-applicant-id=" . htmlspecialchars($row["applicant_id"]) ." 
-                                    data-job-id=" . htmlspecialchars($row["job_posting_id"]) .">interview</button></td>
-                        <td><button id='profileFormBtn'  class='openProfileBtn'
-                                    data-applicant-id='" . htmlspecialchars($row["applicant_id"]) . "'>view profile</button></td>
-                    </tr>";
+                        // Conditionally disable the interview button for "review" or "rejected" status
+                        $interview_button_disabled = ($status == 'interview' || $status == 'accepted') ? 'disabled' : '';
+                        $accept_link_disabled = ($status == 'accepted') ? 'disabled-link' : '';
+                        echo "
+                        <tr>
+                            <td>" . htmlspecialchars($row['applicant_id']) . "</td>
+                            <td>" . htmlspecialchars($full_name) . "</td>
+                            <td>" . htmlspecialchars($row['job']) . "</td>
+                            <td>" . ucfirst($row['status']) . "</td>
+                            <td>
+                                <a href='application_process.php?id= ". htmlspecialchars($row['user_id']). "' 
+                                class='".$accept_link_disabled."'>Accept</a>
+                            </td>
+                            <td>
+                            <a href='application_rejection.php?id=" . htmlspecialchars($row['user_id']) . "'
+                            class='".$accept_link_disabled."'>rejected</a>
+                            </td>
+                            <td>
+                                <button id='openFormBtn' data-applicant-id=" . htmlspecialchars($row["applicant_id"]) ."
+                                data-job-id=" . htmlspecialchars($row["job_posting_id"]) . " $interview_button_disabled>Interview</button>
+                            </td>
+                            <td><button id='profileFormBtn' class='openProfileBtn' data-applicant-id='" . htmlspecialchars($row["applicant_id"]) . "'>View Profile</button></td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No applicants found</td></tr>";
+                }
+            
+                echo "</table>";
             }
-        } else {
-            echo "<tr><td colspan='4'>No applicants found</td></tr>";
-        }
-        $conn->close();
+            
+            // Display each category vertically with centered alignment
+            echo "<div class='category-section'>";
+            display_table($pending, 'Applied applicant');
+            echo "</div>";
+
+            echo "<div class='category-section'>";
+            display_table($review, 'For interview');
+            echo "</div>";
+
+            echo "<div class='category-section'>";
+            display_table($rejected, 'Accepted Applicant');
+            echo "</div>";
+            
+            $conn->close();
         ?>
-    </table>
+        </div>
     </div>
 
 
@@ -167,7 +251,7 @@ if (!$row) {
         <div class="modal-content">
             <span class="closeBtn">&times;</span>
             <h2>Interview</h2>
-            <form action="../../php/employer/interview.php" method="post">
+            <form action="interview.php" method="post">
                 <input type="hidden" id="applicantId" name="applicant_id">
                 <input type="hidden" id="jobid" name="jobid">
                 <label for="date">Date:</label>
@@ -191,7 +275,7 @@ if (!$row) {
 <!-- Modal for Viewing Applicant Profile -->
 <div id="profileModal" class="modal">
     <div class="modal-content">
-        <span class="closeBtn">&times;</span>
+        <span class="seccloseBtn">&times;</span>
         <h2>Applicant Profile</h2>
         <div id="applicantProfileContent">
             <!-- Profile details will be dynamically loaded here -->
@@ -199,7 +283,74 @@ if (!$row) {
     </div>
 </div>
 
-    <script src="../../javascript/popup-modal.js"></script>
+    <script>
+        // Get modal and button elements
+const modal = document.getElementById('formModal');
+const openBtn = document.getElementById('openFormBtn');
+const closeBtn = document.querySelector('.closeBtn');
+const applicantIdField = document.getElementById('applicantId');
+const anotherIdField = document.getElementById('jobid');
+
+// Open modal and set applicant_id in hidden field
+openBtn.addEventListener('click', function() {
+  const applicantId = this.getAttribute('data-applicant-id');
+  const jobid = this.getAttribute('data-job-id');
+  
+  // Set the applicant ID in the hidden field
+  applicantIdField.value = applicantId;
+  anotherIdField.value = jobid;
+
+  // Open the modal
+  modal.style.display = 'flex';
+});
+
+// Close modal when 'x' is clicked
+closeBtn.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
+
+// Close modal when clicked outside of the modal content
+window.addEventListener('click', function(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+    // Get modal and button elements for viewing profile
+    const profileModal = document.getElementById('profileModal');
+    const secclosepBtn = document.querySelector('.seccloseBtn');
+
+    // Open profile modal and load data via AJAX
+    $(document).on('click', '.openProfileBtn', function(e) {
+        e.preventDefault();
+        const applicantId = $(this).data('applicant-id');
+        
+        $.ajax({
+            url: 'fetch_applicant_profile.php',
+            method: 'GET',
+            data: { applicant_id: applicantId },
+            success: function(response) {
+                $('#applicantProfileContent').html(response);
+                profileModal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Close profile modal when 'x' is clicked
+    secclosepBtn.addEventListener('click', function() {
+        profileModal.style.display = 'none';
+    });
+
+    // Close profile modal when clicking outside the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === profileModal) {
+            profileModal.style.display = 'none';
+        }
+    });
+
+
+
+    </script>
     <script>
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');

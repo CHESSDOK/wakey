@@ -1,5 +1,5 @@
 <?php
-include '../../php/conn_db.php';
+include 'conn_db.php';
 
 $applicant_id = $_GET['applicant_id'];
 

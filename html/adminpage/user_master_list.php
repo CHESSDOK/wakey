@@ -5,6 +5,8 @@ include 'conn_db.php';
 $sql = "SELECT 
             (SELECT COUNT(*) FROM applicant_profile) AS total_users,
             (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'accepted') AS accepted_users,
+            (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'rejected') AS rejected_users,
+            (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'interview') AS interview_users,
             (SELECT COUNT(DISTINCT applicant_id) FROM applications WHERE status = 'pending') AS pending_users";
 
 $result = $conn->query($sql);
@@ -13,11 +15,16 @@ $row = $result->fetch_assoc();
 $total_users = $row['total_users'];
 $accepted_users = $row['accepted_users'];
 $pending_users = $row['pending_users'];
+$reject_users = $row['rejected_users'];
+$interview_users = $row['interview_users'];
 
+$total_applicant = $accepted_users + $pending_users + $reject_users + $interview_users; 
 // Calculate percentages
-$accepted_percentage = $accepted_users;
-$pending_percentage = $pending_users;
-$other_percentage =  $total_users - $accepted_users;
+$accepted_percentage = $accepted_users / $total_applicant * 100;
+$pending_percentage = $pending_users / $total_applicant * 100;
+$reject_percentage = $reject_users / $total_applicant * 100;
+$interview_percentage = $interview_users  / $total_applicant * 100;
+$other_percentage =  $total_users - $total_applicant;
 
 // Query to get the accepted users details
 $sql = "SELECT ap.*, a.* 
@@ -38,23 +45,31 @@ $result = $conn->query($sql);
     <h1>applicant record List</h1>
 
     <!-- Pie Chart -->
-    <canvas id="userPieChart" width="150" height="150"></canvas> <!-- Set to 100px by 100px -->
+    <canvas id="userPieChart" width="300" height="300"></canvas> <!-- Set to 100px by 100px -->
     <script>
         var ctx = document.getElementById('userPieChart').getContext('2d');
         var userPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Hired Applicant', 'inactive Applicant', 'Pending Applicant'],
+                labels: ['Hired Applicant', 'Rejected Applicant', 'Pending Applicant', 'For Interview'],
                 datasets: [{
-                    label: 'Nummber of applicant',
-                    data: [<?php echo $accepted_percentage; ?>, <?php echo $other_percentage; ?>, <?php echo $pending_percentage; ?>],
-                    backgroundColor: ['#4CAF50', '#FF6347','#fff'],
+                    label: 'Pecentage',
+                    data: [<?php echo $accepted_percentage; ?>, <?php echo $reject_percentage; ?>, <?php echo $pending_percentage; ?>, <?php echo $interview_percentage; ?>],
+                    backgroundColor: ['#4CAF50', '#FF6347', '#FFCE54', '#5D9CEC'],
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: false, // Disable responsive behavior for fixed size
                 plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                var percentage = tooltipItem.raw.toFixed(1) + '%'; // Round to 2 decimal places
+                                return tooltipItem.label + ': ' + percentage;
+                            }
+                        }
+                    },
                     legend: {
                         display: true
                     }
@@ -62,7 +77,7 @@ $result = $conn->query($sql);
             }
         });
     </script>
-
+    <p><?php echo "total number of inactive user applicant '".$other_percentage."'";?></p>
     <table border="1">
         <tr>
             <th>Name</th>
@@ -88,7 +103,8 @@ $result = $conn->query($sql);
                     </tr>";
             }
         } else {
-            echo "<tr><td colspan='7'>No user found</td></tr>";
+            echo "
+            <tr><td colspan='7'>No user found</td></tr>";
         }
         $conn->close();
         ?>

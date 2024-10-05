@@ -1,6 +1,6 @@
 <?php
 
-include '../conn_db.php'; // Include your MySQLi connection
+include 'conn_db.php'; // Include your MySQLi connection
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_POST['applicant_id'];
     $job_id = $_POST['jobid'];
@@ -21,18 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmtInterview = $conn->prepare($sqlInsertInterview);
         $stmtInterview->bind_param("iissss", $user_id, $job_id, $date, $time, $type, $meeting);
         
-        if ($stmtInterview->execute()) {
-            // Step 3: Update the vacant count in job_postings table
-            $sqlVacant = "UPDATE job_postings SET vacant = vacant - 1 WHERE j_id = ?";
-            $stmtVacant = $conn->prepare($sqlVacant);
-            $stmtVacant->bind_param("i", $job_id);
-            $stmtVacant->execute();
-            $stmtVacant->close();
-
-            header("Location: ../../html/employer/job_list.php");
-        } else {
-            echo "Error inserting interview: " . $stmtInterview->error;
-        }
+        header("Location: applicant_list.php?job_id=$job_id");    
 
         $stmtInterview->close();
     } else {
