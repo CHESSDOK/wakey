@@ -38,6 +38,14 @@ if (isset($_POST['submit'])) {
     }
 
     $currentDate = date("Y-m-d");
+    
+    // Ensure no previous scores are stored for this exam to avoid duplicate entries
+    if ($correct_answers >= 3) {
+        // Update the module status to "passed"
+        $update_module_status_query = "UPDATE modules SET status='passed' WHERE id='$module_id'";
+        mysqli_query($conn, $update_module_status_query);
+    }
+    
     // Ensure no previous scores are stored for this exam to avoid duplicate entries
     $delete_previous_score = "DELETE FROM user_score WHERE user_id='$user_id' AND quiz_id='$q_id'";
     mysqli_query($conn, $delete_previous_score); 
@@ -46,7 +54,7 @@ if (isset($_POST['submit'])) {
                            VALUES ('$user_id', '$q_id', '$score', '$correct_answers', '$wrong_answers', '$currentDate')
                            ON DUPLICATE KEY UPDATE score='$score', correct_answers='$correct_answers', wrong_answers='$wrong_answers', dates='$currentDate'";
     mysqli_query($conn, $insert_score_query);
-
+    
     header("Location: ../../html/applicant/show_res.php?user_id=$user_id&q_id=$q_id&module_id=$module_id");
     exit();
 }
