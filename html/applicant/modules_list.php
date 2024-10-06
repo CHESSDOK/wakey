@@ -16,11 +16,7 @@ function checkSession() {
 }
 
 $userId = checkSession();
-$user_id = $_GET['user_id'];
 $module_id = $_GET['course_id'];
-
-// Check if 'modules_id' exists before using it
-$selected_module_id = isset($_GET['modules_id']) ? $_GET['modules_id'] : null;
 
 // Fetch all modules for the course
 $sql = "SELECT * FROM modules WHERE course_id = ?";
@@ -71,9 +67,6 @@ $previous_module_passed = true; // First module can be accessed
         <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
     <?php endif; ?>
     </div>
-
-
-
     </div>
 
     <!-- Burger icon -->
@@ -82,29 +75,8 @@ $previous_module_passed = true; // First module can be accessed
         <span></span>
         <span></span>
     </div>
-</td>
-</tr>
-</table>
-
-    <!-- Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <table class="menu">
-                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Training</a></td></tr>
-                <tr><td><a href="ofw_home.php" class="nav-link">OFW</a></td></tr>
-                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
-                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
-            </table>
-        </div>
-    </div>
 </nav>
-    
+
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="../../index(applicant).php" >Home</a></li>
@@ -119,22 +91,29 @@ if ($modules_result->num_rows > 0) {
         $current_module_id = $module_row['id'];
 
         // Check if the user has taken any quiz related to this module
-        $stmt = $conn->prepare("SELECT * FROM user_score WHERE user_id = ? AND quiz_id IN (SELECT id FROM quiz_name WHERE module_id = ?)");
+        $stmt = $conn->prepare("SELECT * FROM modules_taken WHERE user_id = ? AND module_id = ?");
         $stmt->bind_param("ii", $userId, $current_module_id);
         $stmt->execute();
-        $score_result = $stmt->get_result();
-        $quiz_score = $score_result->fetch_assoc();
-        
-        // Determine if the user has passed the quiz (Adjust passing score as needed)
-        $passed = ($quiz_score && $quiz_score['score'] >= 3);
-        
-        // Check module status from the database
-        $module_status = $module_row['status']; // Fetch the status of the module
+        $module_status_result = $stmt->get_result();
+        $module_status_row = $module_status_result->fetch_assoc();
+
+        // Determine if the user has passed the module
+        $passed = ($module_status_row && $module_status_row['status'] === 'passed');
+
+        // Update the all_modules_passed check
+        if ($module_status_row) { // Ensure module_status_row is not null
+            if ($module_status_row['status'] !== 'passed') {
+                $all_modules_passed = false; // Set to false if not passed
+            }
+        } else {
+            // If there's no entry for the module in modules_taken, treat it as not passed
+            $all_modules_passed = false; // or handle this case as needed
+        }
 
         // Disable all other modules unless the previous module is passed
         if ($previous_module_passed) {
             // Module is unlocked
-            if ($module_status === 'passed') {
+            if ($passed) {
                 // Module has been passed
                 echo "<table border='1'>
                         <tr>
@@ -154,7 +133,7 @@ if ($modules_result->num_rows > 0) {
                             <td class='num_cell'> <p> " . $module_row["id"] . " </td>
                             <td class='title_cell'> <p> " . $module_row["module_name"] . " </td>
                             <td class='btn_cell'>
-                                <a class='btn' href='module_content.php?user_id=" . $user_id . "&modules_id=" . $module_row["id"] . "&course_id=" . $module_id . "&module_name=" . $module_row["module_name"] . "'>View More <i class='fas fa-chevron-right'></i></a>
+                                <a class='btn' href='module_content.php?user_id=" . $userId . "&modules_id=" . $module_row["id"] . "&course_id=" . $module_id . "&module_name=" . $module_row["module_name"] . "'>View More <i class='fas fa-chevron-right'></i></a>
                             </td>
                         </tr>
                     </table>";
@@ -172,14 +151,10 @@ if ($modules_result->num_rows > 0) {
                     </tr>
                 </table>";
         }
-        
+
         // Update $previous_module_passed based on whether the current module quiz is passed
         $previous_module_passed = $passed;
 
-        // Check if the current module is not passed, set $all_modules_passed to false
-        if ($module_status !== 'passed') {
-            $all_modules_passed = false;
-        }
     }
 
     // After the loop, if all modules are passed, show the print certificate button
@@ -192,7 +167,8 @@ if ($modules_result->num_rows > 0) {
 $conn->close();
 ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

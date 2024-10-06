@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $row['id'];
+            $_SESSION['level'] = $row['admin_level'];
             header("Location: admin_home.php");
         } else {
             echo "Invalid password.";
