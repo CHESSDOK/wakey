@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2024 at 04:34 PM
+-- Generation Time: Oct 06, 2024 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `admin_profile` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `admin_level` int(11) DEFAULT NULL
+  `admin_level` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -40,9 +40,12 @@ CREATE TABLE `admin_profile` (
 --
 
 INSERT INTO `admin_profile` (`id`, `username`, `password`, `email`, `admin_level`) VALUES
-(1, 'Admin', '$2y$10$szZWza9fsLiGXs4evidE7.uc3zwFoQjs/hfwGvw2Vd6lddYLzBuTW', 'mercadomarklawrence55@gmail.com', NULL),
+(1, 'Admin', '$2y$10$szZWza9fsLiGXs4evidE7.uc3zwFoQjs/hfwGvw2Vd6lddYLzBuTW', 'mercadomarklawrence55@gmail.com', 'super_admin'),
 (2, 'jervin123', '$2y$10$bs.kIy4YfXaiSviKhSgXLeis9MBQHvqUMP0PV0pzCGuKxQSNqvqCG', 'jervinguevarra123@gmail.com', NULL),
-(3, 'jerving123', '$2y$10$AvSxZd27fLrwIIFprAJC1eYvMEiZ9zZdW689Uvta6pXcVZQEIl4T6', 'jervinguevarra123@gmail.com', NULL);
+(3, 'jerving123', '$2y$10$AvSxZd27fLrwIIFprAJC1eYvMEiZ9zZdW689Uvta6pXcVZQEIl4T6', 'jervinguevarra123@gmail.com', NULL),
+(4, 'Jima', '$2y$10$DeLy5nNImdzDJT8Q61F8/.2MVCNj9M4lKU2b1H5ONAnUXyocPD/4S', 'bernabegiemer@gmail.com', NULL),
+(5, 'Jima', '$2y$10$x4lMG.vRA1QvU/Hrjg8ire.u5EcgHXwP2UqdQz2R/w9PONLwBcBuK', 'bernabegiemer@gmail.com', NULL),
+(6, 'Azure', '$2y$10$lZyxZFyzc9pIxdNESm9pI.Aaxa80D.zxkls7LcqEl3RCgiRDhsbqu', 'ict1mercado.cdlb@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +105,7 @@ CREATE TABLE `applicant_profile` (
 
 INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `country`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
 (8, 25, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7a9dcefbc2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 27, 'marklawrencemercado8@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 27, 'marklawrencemercado8@gmail.com', 'Jervin', 'De guzman', 'Castalone', NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (11, 28, 'mercadomarklawrence55@gmail.com', 'Mark', 'Mercado', 'Aranda', NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (12, 29, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
@@ -380,30 +383,55 @@ INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`) VALUES
 CREATE TABLE `modules` (
   `id` int(11) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
-  `module_name` varchar(255) NOT NULL,
-  `status` varchar(255) DEFAULT NULL
+  `module_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `modules`
 --
 
-INSERT INTO `modules` (`id`, `course_id`, `module_name`, `status`) VALUES
-(1, 1, 'measurements', 'passed'),
-(2, 1, 'needle & thread', 'passed'),
-(3, 1, 'Cutting', 'passed'),
-(4, 3, 'new1', NULL),
-(5, 3, 'new12', NULL),
-(6, 4, 'Baking', NULL),
-(7, 4, 'Grilling', NULL),
-(9, 5, 'Introduction to Digital Marketing', NULL),
-(10, 5, 'Search Engine Optimization (SEO)', NULL),
-(11, 5, ' Social Media Marketing', NULL),
-(12, 4, 'Frying', NULL),
-(13, 2, 'dfe', NULL),
-(14, 2, 'dsaadw', NULL),
-(15, 2, 'wfd3we', NULL),
-(16, 1, 'Drafting', 'passed');
+INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
+(1, 1, 'measurements'),
+(2, 1, 'needle & thread'),
+(3, 1, 'Cutting'),
+(4, 3, 'new1'),
+(5, 3, 'new12'),
+(6, 4, 'Baking'),
+(7, 4, 'Grilling'),
+(9, 5, 'Introduction to Digital Marketing'),
+(10, 5, 'Search Engine Optimization (SEO)'),
+(11, 5, ' Social Media Marketing'),
+(12, 4, 'Frying'),
+(13, 2, 'dfe'),
+(14, 2, 'dsaadw'),
+(15, 2, 'wfd3we'),
+(16, 1, 'Drafting');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `modules_taken`
+--
+
+CREATE TABLE `modules_taken` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `status` varchar(200) DEFAULT 'fail',
+  `date_taken` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `modules_taken`
+--
+
+INSERT INTO `modules_taken` (`id`, `user_id`, `module_id`, `status`, `date_taken`) VALUES
+(1, 27, 1, 'passed', '2024-10-06'),
+(2, 28, 1, 'passed', '2024-10-06'),
+(6, 28, 2, 'fail', '2024-10-06'),
+(7, 27, 2, 'passed', '2024-10-06'),
+(10, 27, 3, 'passed', '2024-10-06'),
+(11, 27, 16, 'passed', '2024-10-06');
 
 -- --------------------------------------------------------
 
@@ -510,26 +538,6 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (47, 9, 'What is the ideal internal temperature for grilling a medium-rare steak?', ' 120°F (49°C)', ' 140°F (60°C)', ' 130°F (54°C)', ' 160°F (71°C)', 'c', 1),
 (48, 9, 'Which of the following is the best oil to use for greasing the grill to prevent sticking?', 'Coconut oil', ') Butter', 'Vegetable oil', 'Olive oil', 'c', 1),
 (49, 9, ' What is the primary purpose of marinating meat before grilling?', 'To make the meat look better', 'To reduce cooking time', 'To enhance flavor and tenderize the meat', 'To increase the temperature of the grill', 'c', 1),
-(55, 11, 'What does SEO stand for?', 'Search Engine Operation', ' Search Engine Optimization', 'Search Engine Outreach', 'Social Engine Optimization', 'b', 1),
-(56, 11, 'Which of the following is considered an on-page SEO factor?', ' Backlinks', 'Social media shares', ' Content quality', ' Domain authority', 'c', 1),
-(57, 11, 'What is the primary purpose of keyword research in SEO?', ' To determine the best colors for a website', 'To identify what users are searching for', 'To create social media ads', 'To increase website load speed', 'b', 1),
-(58, 11, 'Which of the following is an example of off-page SEO?', 'Optimizing meta tags', 'Improving site speed', 'Building backlinks from other websites', 'Writing high-quality blog content', 'c', 1),
-(59, 11, 'Which tool is commonly used for keyword research?', ' Google Analytics', 'Google Keyword Planner', ' SEMrush', ' Ahrefs', 'b', 1),
-(60, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(61, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(62, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(63, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(64, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(65, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(66, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(67, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(68, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(69, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(70, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(71, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(72, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(73, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(74, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
 (75, 13, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
 (76, 13, 'What is the primary goal of a social media strategy?', 'To create viral content', 'To post as much content as possible', 'To align social media efforts with business objectives', ' To focus only on paid campaigns', 'c', 1),
 (77, 13, 'Which platform is best known for its image and video-centric content?', 'Twitter', ' Instagram', ' LinkedIn', 'Facebook', 'b', 1),
@@ -621,7 +629,19 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (163, 31, 'Which tool is commonly used for creating straight lines when drafting patterns?', 'French curve', 'Ruler', 'Scissors', 'Tape measure', 'b', 1),
 (164, 31, 'What does \"ease\" refer to in garment design?', 'The tightness of a garment', 'The amount of fabric needed for seams', 'The extra fabric allowed for movement and comfort', 'The length of the garment', 'c', 1),
 (165, 31, 'When drawing a garment layout, what should be included?', 'Only the front view of the garment', 'All views, including front, back, and side ', 'Only fabric swatches', 'Only the measurements of the garment', 'b', 1),
-(166, 31, 'Which technique is often used to add flair and movement to a dress design?', 'Gathering', 'Cutting on the fold', 'Creating darts', 'Adding interfacing', 'a', 1);
+(166, 31, 'Which technique is often used to add flair and movement to a dress design?', 'Gathering', 'Cutting on the fold', 'Creating darts', 'Adding interfacing', 'a', 1),
+(172, 37, 'What is the main purpose of Search Engine Optimization (SEO)?', 'To create social media posts', 'To improve a websites ranking on search engines', 'To increase email subscribers', 'To design a website layout', 'b', 1),
+(173, 37, 'Which of the following is a key component of content marketing?', 'Creating infographics for offline marketing', 'Developing valuable and relevant content to attract an audience', 'Sending cold emails', 'Paying for banner ads', 'b', 1),
+(174, 37, 'What does \"PPC\" stand for in digital marketing?', 'Personal Paid Campaigns', 'Pay-Per-Click', 'Public Posting Content', 'Paid Promotional Content', 'b', 1),
+(175, 37, 'Which digital marketing platform is most commonly used for professional networking and B2B marketing?', 'Instagram', 'LinkedIn', 'Snapchat', 'TikTok', 'b', 1),
+(176, 37, 'What is the main goal of social media marketing?', 'To sell physical products directly', 'To engage with the audience and build brand awareness', 'To make videos go viral', 'To increase website bounce rates', 'b', 1),
+(177, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(178, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(179, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(180, 38, 'Which factor is most important for improving a website\'s SEO ranking?', 'Increasing website color variety', 'High-quality, relevant content', 'Paying for ads', 'Using a large number of images', 'b', 1),
+(181, 38, 'What is a \"keyword\" in SEO?', 'A word or phrase that users search for in search engines', 'A type of website plugin', 'A tag used in HTML coding', 'A special offer code for marketing', 'a', 1),
+(182, 38, 'Which SEO technique involves acquiring backlinks from other websites?', 'On-page SEO', 'Keyword stuffing', 'Off-page SEO', 'Page speed optimization', 'c', 1),
+(183, 38, 'What is the purpose of meta descriptions in SEO?', 'To rank higher in paid search results', 'To provide alt text for images', 'To provide a brief summary of the page content in search results', 'To display large amounts of text on a website', 'c', 1);
 
 -- --------------------------------------------------------
 
@@ -648,8 +668,6 @@ INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`,
 (5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41'),
 (6, 6, 'Ingredients Of Baking', 1, 0, 10, 'Quiz/Exam', '2024-09-26 16:01:35'),
 (9, 7, 'Grill', 1, 0, 10, 'How to Grill', '2024-09-26 12:29:00'),
-(11, 10, 'Search Engine Optimization', 2, 0, 5, 'quiz', '2024-09-26 12:56:12'),
-(12, 11, 'Social Media Marketing', 2, 0, 5, 'Quiz/Exam', '2024-09-26 14:57:30'),
 (14, 12, 'How To Fry', 1, 0, 40, 'QUIZ', '2024-09-26 16:03:36'),
 (15, 0, 'Randomm', 1, 1, 2, 'sdfasfwe', '2024-10-01 09:31:21'),
 (16, 0, 'Randomm', 1, 1, 1, 'szfasd', '2024-10-01 09:42:24'),
@@ -667,7 +685,9 @@ INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`,
 (28, 1, 'Taking Measurements', 2, 2, 5, 'accurate measurement will make dress fit perfectly', '2024-10-05 19:12:57'),
 (29, 2, 'Learning Needle And Thread', 2, 2, 5, 'sewing', '2024-10-05 19:18:47'),
 (30, 3, 'Cutting Dress', 2, 2, 5, 'Cutting smoothly ', '2024-10-05 19:27:23'),
-(31, 16, 'Layouts For Dressmaking', 2, 2, 5, 'designing perfect fit', '2024-10-05 19:37:33');
+(31, 16, 'Layouts For Dressmaking', 2, 2, 5, 'designing perfect fit', '2024-10-05 19:37:33'),
+(37, 9, 'Introduction', 2, 2, 5, 'getting started with digital maketing', '2024-10-06 15:23:44'),
+(38, 10, 'Search Engine Optimization (seo)', 2, 2, 5, ' (SEO)', '2024-10-06 15:30:14');
 
 -- --------------------------------------------------------
 
@@ -854,21 +874,41 @@ INSERT INTO `user_answers` (`id`, `user_id`, `question_id`, `quiz_id`, `answer`)
 (497, 28, 159, 30, 'b'),
 (498, 28, 160, 30, 'b'),
 (499, 28, 161, 30, 'a'),
-(505, 28, 147, 28, 'b'),
-(506, 28, 148, 28, 'a'),
-(507, 28, 149, 28, 'b'),
-(508, 28, 150, 28, 'a'),
-(509, 28, 151, 28, 'a'),
-(510, 28, 152, 29, 'c'),
-(511, 28, 153, 29, 'b'),
-(512, 28, 154, 29, 'c'),
-(513, 28, 155, 29, 'b'),
-(514, 28, 156, 29, 'a'),
 (515, 28, 162, 31, 'b'),
 (516, 28, 163, 31, 'b'),
 (517, 28, 164, 31, 'c'),
 (518, 28, 165, 31, 'b'),
-(519, 28, 166, 31, 'a');
+(519, 28, 166, 31, 'a'),
+(525, 28, 147, 28, 'b'),
+(526, 28, 148, 28, 'a'),
+(527, 28, 149, 28, 'b'),
+(528, 28, 150, 28, 'a'),
+(529, 28, 151, 28, 'a'),
+(535, 27, 147, 28, 'b'),
+(536, 27, 148, 28, 'a'),
+(537, 27, 149, 28, 'b'),
+(538, 27, 150, 28, 'a'),
+(539, 27, 151, 28, 'a'),
+(545, 28, 152, 29, 'c'),
+(546, 28, 153, 29, 'b'),
+(547, 28, 154, 29, 'b'),
+(548, 28, 155, 29, 'a'),
+(549, 28, 156, 29, 'b'),
+(565, 27, 152, 29, 'c'),
+(566, 27, 153, 29, 'b'),
+(567, 27, 154, 29, 'c'),
+(568, 27, 155, 29, 'b'),
+(569, 27, 156, 29, 'a'),
+(570, 27, 157, 30, 'b'),
+(571, 27, 158, 30, 'b'),
+(572, 27, 159, 30, 'b'),
+(573, 27, 160, 30, 'a'),
+(574, 27, 161, 30, 'b'),
+(580, 27, 162, 31, 'b'),
+(581, 27, 163, 31, 'b'),
+(582, 27, 164, 31, 'c'),
+(583, 27, 165, 31, 'b'),
+(584, 27, 166, 31, 'b');
 
 -- --------------------------------------------------------
 
@@ -902,9 +942,13 @@ INSERT INTO `user_score` (`id`, `user_id`, `quiz_id`, `score`, `correct_answers`
 (45, 28, 0, 0, 0, 0, '2024-10-04 16:00:00'),
 (46, 28, 11, 1, 1, 4, '2024-10-04 16:00:00'),
 (49, 28, 30, 3, 3, 2, '2024-10-04 16:00:00'),
-(51, 28, 28, 5, 5, 0, '2024-10-04 16:00:00'),
-(52, 28, 29, 5, 5, 0, '2024-10-04 16:00:00'),
-(53, 28, 31, 5, 5, 0, '2024-10-04 16:00:00');
+(53, 28, 31, 5, 5, 0, '2024-10-04 16:00:00'),
+(55, 28, 28, 5, 5, 0, '2024-10-05 16:00:00'),
+(57, 27, 28, 5, 5, 0, '2024-10-05 16:00:00'),
+(59, 28, 29, 2, 2, 3, '2024-10-05 16:00:00'),
+(63, 27, 29, 5, 5, 0, '2024-10-05 16:00:00'),
+(64, 27, 30, 3, 3, 2, '2024-10-05 16:00:00'),
+(66, 27, 31, 4, 4, 1, '2024-10-05 16:00:00');
 
 --
 -- Indexes for dumped tables
@@ -994,6 +1038,12 @@ ALTER TABLE `modules`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `modules_taken`
+--
+ALTER TABLE `modules_taken`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
 -- Indexes for table `module_content`
 --
 ALTER TABLE `module_content`
@@ -1055,7 +1105,7 @@ ALTER TABLE `user_score`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `applicant_profile`
@@ -1130,6 +1180,12 @@ ALTER TABLE `modules`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `modules_taken`
+--
+ALTER TABLE `modules_taken`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `module_content`
 --
 ALTER TABLE `module_content`
@@ -1139,13 +1195,13 @@ ALTER TABLE `module_content`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `quiz_name`
 --
 ALTER TABLE `quiz_name`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `register`
@@ -1175,13 +1231,13 @@ ALTER TABLE `survey_reponse`
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=585;
 
 --
 -- AUTO_INCREMENT for table `user_score`
 --
 ALTER TABLE `user_score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
