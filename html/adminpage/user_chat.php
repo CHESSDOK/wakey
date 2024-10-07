@@ -1,6 +1,12 @@
 <?php
-include_once "../../php/conn_db.php";
-$sql = "SELECT * FROM messages GROUP BY user_id";
+include 'conn_db.php';
+$sql = "SELECT m.id, m.user_id, m.message, m.created_at, 
+        CONCAT(ap.first_name, ' ', IFNULL(ap.middle_name, ''), ' ', ap.last_name) AS full_name
+        FROM messages m
+        INNER JOIN applicant_profile ap ON m.user_id = ap.user_id
+        ORDER BY m.created_at DESC";
+
+
 $result = $conn->query($sql);
 ?>
 
@@ -86,7 +92,6 @@ $result = $conn->query($sql);
         <tr>
             <th>ID</th>
             <th>User_Info</th>
-            <th>Message</th>
             <th>Date</th>
             <th>Action</th>
         </tr>
@@ -97,12 +102,12 @@ $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <td>" . $row["id"] . "</td>
-                        <td>" . $row["user_id"] . "</td>
+                        <td>" . $row["full_name"] . "</td>
                         <td>" . $row["created_at"] . "</td>
-                        <td><a class='docu' href='ofw_chat.php?user_id=" . $row["user_id"] ."&message_id=".$row["id"]."'>View Chat</a></td>
+                        <td> <a href='ofw_chat.php?user_id=".$row['user_id']."&message_id=".$row['id']."'> view </a></td>
                         <td><button  id='adminChatBtn'  class='adminChatBtn btn btn-primary'
                                     data-user-id='" . htmlspecialchars($row["user_id"]) . "'
-                                    data-message-id='" . htmlspecialchars($row["id"]) . "'>View profile</button></td>
+                                    data-message-id='" . htmlspecialchars($row["id"]) . "'>View Chat</button></td>
                     </tr>";
             }
         } else {
@@ -120,7 +125,6 @@ $result = $conn->query($sql);
     <div id="chatModal" class="modal modal-container">
         <div class="modal-content">
             <span class="btn-close closBtn closeBtn">&times;</span>
-            <h2>Applicant Profile</h2>
             <div id="ofwChatContent">
                 <!-- Profile details will be dynamically loaded here -->
             </div>
