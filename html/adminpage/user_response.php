@@ -13,12 +13,12 @@ $sql_new1 = "SELECT survey_reponse.survey_id,
 $result_new = $conn->query($sql_new1);
 
 echo "
-        <h1> User survey reponses </h1>
-        <table border='1'>
-    <tr>
-        <th>question</th>
-        <th>response</th>
-    </tr>
+        <h3> User survey reponses </h3>
+        <table class='table table-borderless table-hover'>
+    <thead>
+        <th>Survey Question</th>
+        <th>Response</th>
+    </thead>
 
      ";
 
