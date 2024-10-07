@@ -8,19 +8,34 @@
   align-items: start;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+}
+
 .table-container {
     width: 80%; /* Adjust this value as needed to make the table smaller */
     margin: 5vh auto; /* Center the table */
 }
+.table-container-ofw-case{
+  width: 80%;
+  margin: auto;
+}
 
 .table {
   border-radius: 20px;
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px;
   font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table td, .table th {
-    padding: 0.5rem; /* Adjust padding to make cells smaller */
+    background-color: transparent;
+    padding: auto; /* Adjust padding to make cells smaller */
+    margin: auto;
     text-align: center;
 }
 
