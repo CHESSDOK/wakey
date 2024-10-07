@@ -86,7 +86,7 @@ $result = $conn->query($sql);
   </ol>
 </nav>
 
-<div class="table-container">
+<div class="table-containers">
 <table class="table table-borderless table-hover">
         <thead>
         <tr>

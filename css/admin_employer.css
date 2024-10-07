@@ -1,28 +1,32 @@
 .table-container {
-    width: 80%; /* Adjust this value as needed to make the table smaller */
-    margin: 5vh auto; /* Center the table */
+  width: 80%; /* Adjust this value as needed to make the table smaller */
+  margin: 5vh auto; /* Center the table */
+  display: flex; /* Use flexbox */
+  align-items: flex-start; /* Align items to the start */
+  justify-content: space-between; /* Space between button and table */
 }
 
 .table {
   border-radius: 20px;
   font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
+  margin-left: 20px; /* Add space between button and table */
 }
 
 .table td, .table th {
-    padding: 0.5rem; /* Adjust padding to make cells smaller */
-    text-align: center;
+  padding: 0.5rem; /* Adjust padding to make cells smaller */
+  text-align: center;
 }
 
-.docu{
+.docu {
   text-decoration: none;
 }
 
-.docu:hover{
+.docu:hover {
   color: blue;
   text-decoration: underline;
 }
 
-.modal-container .modal-content{
+.modal-container .modal-content {
   width: 100vw;
   max-width: auto; /* Adjust this value as needed to make the table smaller */
   margin: 5vh auto; /* Center the table */
@@ -35,4 +39,3 @@
 .no {
   color: red;
 }
-

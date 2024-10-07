@@ -85,33 +85,41 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-container">
-    <button class="btn btn-primary openJobBtn" id="openJobBtn">Create Job</button>
-    <table class="table table-borderless table-hover"> <!-- Add Bootstrap table class -->
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Documents</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>" . $row["username"] . "</td>
-                            <td>" . $row["email"] . "</td>
-                            <td><a class='docu openEmployersBtn' href='#' data-employer-id=".htmlspecialchars($row['id']).">View Documents</a></td>
-                        </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>No employers found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </tbody>
-    </table>
+    <div class="row align-items-start">
+        <div class="col-auto">
+            <button class="btn btn-primary openJobBtn" id="openJobBtn">Create Job</button>
+        </div>
+        <div class="col">
+            <table class="table table-borderless table-hover"> <!-- Add Bootstrap table class -->
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Documents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                    <td>" . htmlspecialchars($row["username"]) . "</td>
+                                    <td>" . htmlspecialchars($row["email"]) . "</td>
+                                    <td><a class='docu openEmployersBtn' href='#' data-employer-id=".htmlspecialchars($row['id']).">View Documents</a></td>
+                                </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='3'>No employers found</td></tr>";
+                    }
+                    $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+
 
 <!-- employer list -->
 <div id="employerModal" class="modal modal-container">

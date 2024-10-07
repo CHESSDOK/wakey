@@ -95,81 +95,89 @@ $result = $conn->query($sql);
         <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
     </div>
 
-    <div class="table-container-ofw-case">
-        <table class="table table-borderless table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Number</th>
-                    <th>Agency</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Status update</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                if($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
-                        echo "<tr>
-                            <td>".$full_name."</td>
-                            <td>".$row['contact_number']."</td>
-                            <td>".$row['local_agency_name']."</td>
-                            <td>".$row['title']."</td>
-                            <td>".$row['status']."</td>
-                            <td> <a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>update</a> </td>
-                             </tr>";
-                    } 
-                } else {
-                    echo "<tr><td colspan='6'> no case file found</td></tr>";
-                }
-            ?>
-            </tbody>
-        </table>  
+    <div class="table-wrapper">
+        <div class="table-container-ofw-case">
+            <table class="table table-borderless table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Agency</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Status update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    if($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+                            echo "<tr>
+                                <td>".$full_name."</td>
+                                <td>".$row['contact_number']."</td>
+                                <td>".$row['local_agency_name']."</td>
+                                <td>".$row['title']."</td>
+                                <td>".$row['status']."</td>
+                                <td> <a class='btn btn-success' href='#'>update</a> </td>
+                                 </tr>";
+                        } 
+                    } else {
+                        echo "<tr><td colspan='6'> no case file found</td></tr>";
+                    }
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- New table with user response data -->
+        <div class="user-table-container">
+          <div class="table-container-ofw-case">
+            <table class="table table-borderless table-hover">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Full Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    $sql_new1 = "SELECT survey_reponse.user_id, 
+                                    MAX(applicant_profile.first_name) AS first_name, 
+                                    MAX(applicant_profile.middle_name) AS middle_name, 
+                                    MAX(applicant_profile.last_name) AS last_name
+                                FROM survey_reponse
+                                INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
+                                GROUP BY survey_reponse.user_id";
+                    $result_new = $conn->query($sql_new1);
+
+                    if ($result_new->num_rows > 0) {
+                        while ($row = $result_new->fetch_assoc()) {
+                            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+                            echo "<tr>
+                                    <td>" . $row['user_id'] . "</td>
+                                    <td>" . $full_name . "</td>
+                                    <td> <a class='btn btn-primary openSurveyBtn' href='#' data-user-id=".htmlspecialchars($row['user_id'])."> check </a> </td>
+                                </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='2'>No users found</td></tr>";
+                    }
+
+                    $conn->close();
+                ?>
+                </tbody>
+            </table>
+        </div>
+      </div>
     </div>
 </div>
-<!-- ####################################################### answer checking ###################################################################### -->
-<table border="1">
-    <tr>
-        <th>User ID</th>
-        <th>Full Name</th>
-    </tr>
-    <?php
-    // Fetch unique user response data (grouped by user_id)
-    $sql_new1 = "SELECT survey_reponse.user_id, 
-                    MAX(applicant_profile.first_name) AS first_name, 
-                    MAX(applicant_profile.middle_name) AS middle_name, 
-                    MAX(applicant_profile.last_name) AS last_name
-             FROM survey_reponse
-             INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
-             GROUP BY survey_reponse.user_id";
-              // Ensures only unique user_id
-
-    $result_new = $conn->query($sql_new1);
-
-    if ($result_new->num_rows > 0) {
-        while ($row = $result_new->fetch_assoc()) {
-            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
-            echo "<tr>
-                    <td>" . $row['user_id'] . "</td>
-                    <td>" . $full_name . "</td>
-                    <td> <a class='docu openSurveyBtn' href='#' data-user-id=".htmlspecialchars($row['user_id'])."> check </a> </td>
-                </tr>";
-        }
-    } else {
-        echo "<tr><td colspan='2'>No users found</td></tr>";
-    }
-
-    // Close connection at the very end of the script
-    $conn->close();
-    ?>
-</table>
 
 <!-- employer list -->
-<div id="surveyModal" class="modal">
+<div id="surveyModal" class="modal modal-container">
             <div class="modal-content">
-                <span class="closeBtn">&times;</span>
+                <span class="btn-close closBtn closeBtn">&times;</span>
                 <div id="surveyModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>

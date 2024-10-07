@@ -1,78 +1,69 @@
-
-.case-file-container
-{
-  border: 1px solid #333;
-  width: 80%;
+.table-containers {
+  display: flex;
+  justify-content:center;
+  align-items: flex-start;
   margin: 5vh auto;
-  justify-content: space-between;
-  align-items: start;
+  width: 80%;
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
   gap: 1rem; 
+  width: auto;
+  margin-right: 10px; 
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: space-between;
+  gap: 15px;
+  width: auto; 
+  margin-left: 0; 
+  align-items: stretch; 
 }
 
 .table-container {
-    width: 80%; /* Adjust this value as needed to make the table smaller */
-    margin: 5vh auto; /* Center the table */
-}
-.table-container-ofw-case{
-  width: 80%;
-  margin: auto;
+  width: 100%; 
 }
 
 .table {
   border-radius: 20px;
   background-color: #fff;
   padding: 15px;
-  margin: 15px;
-  font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
+  margin: 0; 
+  font-size: 0.95rem;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table td, .table th {
-    background-color: transparent;
-    padding: auto; /* Adjust padding to make cells smaller */
-    margin: auto;
-    text-align: center;
+  background-color: transparent;
+  padding: auto;
+  margin: auto;
+  text-align: center;
 }
 
-.docu{
-    text-decoration: none;
-  }
-  
-  .docu:hover{
-    color: blue;
-    text-decoration: underline;
-  }
+.docu {
+  text-decoration: none;
+}
 
-  .table-containers {
-    display: flex;
-    justify-content: space-between;
-    margin: 3vh auto;
-  }
-  
-  .table-containers {
-    width: 80%; /* Adjust width as needed */
-  }
+.docu:hover {
+  color: blue;
+  text-decoration: underline;
+}
 
-  .table-containrs tr{
-    display: flex;
-  }
-  
-  .tbl-question td{
-    padding: 2px;/* Adjust padding to make cells smaller */
-    margin: 0;
-    text-align: left;
+.tbl-question td {
+  padding: 2px; 
+  margin: 0;
+  text-align: left;
 }
 
 .tbl-question {
   border-radius: 20px;
-  font-size: 1rem; /* Adjust the font size to make the table content smaller */
+  font-size: 1rem; 
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .tbl-question a {
-  margin: 0; /* Remove margin around the buttons */
+  margin: 0; 
 }
