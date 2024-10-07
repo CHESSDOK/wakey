@@ -28,6 +28,12 @@
   margin: 5vh auto; /* Center the table */
 }
 
+.modal-container-upload .modal-content{
+  width: 40vw;
+  max-width: auto; /* Adjust this value as needed to make the table smaller */
+  margin: 5vh auto; /* Center the table */
+}
+
 .closBtn {
   position: absolute;
   top: 0;
@@ -61,12 +67,12 @@
   
   .seccloseBtn {
     float: right;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
   }
 
   .thirdcloseBtn {
     float: right;
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
   }
