@@ -139,7 +139,6 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
                 echo "<table>
                         <tr>
                             <td class='img_cell'><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
-                            <td class='num_cell'> <p> " . $module_row["id"] . " </td>
                             <td class='title_cell'> <p> " . $module_row["module_name"] . " </td>
                             <td class='btn_cell'>
                                 <a class='btn' href='module_content.php?user_id=" . $user_id . "&modules_id=" . $module_row["id"] . "&course_id=" . $module_id . "&module_name=" . $module_row["module_name"] . "'>view more <i class='fas fa-chevron-right'></i></a>
@@ -150,7 +149,7 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
                 // Logic for unlocking and locking modules based on quiz score and progress
                 if ($previous_module_passed || $passed) {
                     // Allow access to this module
-                    echo "<table border='1'>
+                    echo "<table>
                             <tr>
                                 <td class='img_cell'><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
                                 <td class='num_cell'> <p> " . $module_row["id"] . " </td>
@@ -163,7 +162,7 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
                     $previous_module_passed = $passed; // Set if current module passed
                 } else {
                     // Lock this module because the user hasn't passed the previous module
-                    echo "<table border='1'>
+                    echo "<table>
                             <tr>
                                 <td class='img_cell'><img class='icon' src='../../img/file_icon_disabled.png' alt='Logo'></td>
                                 <td class='num_cell'> <p> " . $module_row["id"] . " </td>

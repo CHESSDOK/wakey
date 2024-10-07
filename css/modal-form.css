@@ -10,37 +10,47 @@
   background-color: rgba(0, 0, 0, 0.4); /* Background overlay */
   z-index: 1000;
 }
-  
-  .modal-content {
-    position: relative;
-    margin: 15% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
-    background-color: none;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-container .modal-content{
-    width: 100vw;
-    max-width: auto; /* Adjust this value as needed to make the table smaller */
-    margin: 5vh auto; /* Center the table */
-  }
 
-  .closeBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 30px;
-    font-weight: bold;
-    color: #000;
-    cursor: pointer;
-    background: none;
-    outline: none;
-  }
-  
-  
+.modal-content {
+  position: relative;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  background-color: none;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-container .modal-content{
+  width: 100vw;
+  max-width: auto; /* Adjust this value as needed to make the table smaller */
+  margin: 5vh auto; /* Center the table */
+}
+
+.closBtn {
+  border: 1px solid #333;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  background: none;
+  outline: none;
+}
+
+.closBtn:hover,
+.closBtn:focus,
+.seccloseBtn:hover,
+.seccloseBtn:focus,
+.thirdcloseBtn:hover,
+.thirdcloseBtn:focus {
+  color: red; /* Optional hover effect */
+}
+
+
   /* Style the form inputs */
   input[type="text"],
   input[type="email"] {
@@ -49,6 +59,8 @@
     margin: 5px 0 15px 0;
     box-sizing: border-box;
   }
+  
+
   
   .seccloseBtn {
     float: right;

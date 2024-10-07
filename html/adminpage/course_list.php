@@ -59,12 +59,13 @@ $result = $conn->query($sql);
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <table class="menu">
+            <table class="menu"> 
                 <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="create_job.php" class="nav-link">Post Job</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="#" class="active nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
     </div>
@@ -82,25 +83,24 @@ $result = $conn->query($sql);
 
     <table class="table table-borderless table-hover">
         <thead>
-            <th>Course</th>
             <th>Course Description</th>
             <th>Module Label</th>
-            <th>Module Items</th>
-            <th>action</th>
+            <th colspan="2">Course Actions</th>
+            <th colspan="2">Module Actions</th>
         </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <form method='POST' action='update_course.php'>
-                        <td><input type='hidden' name='course_id' value='".$row["id"]."'></td>
+                        <input type='hidden' name='course_id' value='".$row["id"]."'>
                         <td><input type='text' name='course_name' value='".$row["course_name"]."'></td>
-                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>
-                        <td><a href='#' id='moduleBtn'  class='openModuleBtn docu'
+                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>                        
+                        <td><input class='btn btn-success' type='submit' value='Update'></td>
+                        <td><a class='btn btn-danger' href='delete_survey.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn btn btn-primary '
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
-                        <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
-                        <td><input type='submit' value='Update'></td>
-                        <td><a href='delete_survey.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a class='btn btn-primary' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
                         </form>
                     </tr>";
                     
@@ -115,7 +115,7 @@ $result = $conn->query($sql);
 
     <div id="courseModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="btn-close closBtn closeBtn"></span>
+            <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Create a course</h2>
             <form action="create_course.php" method="post">
                 <!-- Text Input for Course -->
@@ -140,7 +140,7 @@ $result = $conn->query($sql);
     <div id="moduleModal" class="modal modal-container">
     <div class="modal-content">
         
-        <span class="btn-close closBtn closeBtn seccloseBtn"></span>
+    <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>
