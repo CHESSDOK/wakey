@@ -124,13 +124,88 @@ $result = $conn->query($sql);
                 } else {
                     echo "<tr><td colspan='6'> no case file found</td></tr>";
                 }
-                 $conn->close();
             ?>
             </tbody>
         </table>  
     </div>
 </div>
+<!-- ####################################################### answer checking ###################################################################### -->
+<table border="1">
+    <tr>
+        <th>User ID</th>
+        <th>Full Name</th>
+    </tr>
+    <?php
+    // Fetch unique user response data (grouped by user_id)
+    $sql_new1 = "SELECT survey_reponse.user_id, 
+                    MAX(applicant_profile.first_name) AS first_name, 
+                    MAX(applicant_profile.middle_name) AS middle_name, 
+                    MAX(applicant_profile.last_name) AS last_name
+             FROM survey_reponse
+             INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
+             GROUP BY survey_reponse.user_id";
+              // Ensures only unique user_id
 
+    $result_new = $conn->query($sql_new1);
+
+    if ($result_new->num_rows > 0) {
+        while ($row = $result_new->fetch_assoc()) {
+            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+            echo "<tr>
+                    <td>" . $row['user_id'] . "</td>
+                    <td>" . $full_name . "</td>
+                    <td> <a class='docu openSurveyBtn' href='#' data-user-id=".htmlspecialchars($row['user_id'])."> check </a> </td>
+                </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='2'>No users found</td></tr>";
+    }
+
+    // Close connection at the very end of the script
+    $conn->close();
+    ?>
+</table>
+
+<!-- employer list -->
+<div id="surveyModal" class="modal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <div id="surveyModuleContent">
+                    <!-- Module content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+    <script>  const surveyModal = document.getElementById('surveyModal');
+        const closeModuleBtn = document.querySelector('.closeBtn');
+        // Open profile modal and load data via AJAX
+        $(document).on('click', '.openSurveyBtn', function(e) {
+            e.preventDefault();
+            const userId = $(this).data('user-id');
+
+            $.ajax({
+                url: 'user_response.php',
+                method: 'GET',
+                data: { user_id: userId },
+                success: function(response) {
+                    $('#surveyModuleContent').html(response);
+                    surveyModal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close profile modal when 'x' is clicked
+        closeModuleBtn.addEventListener('click', function() {
+            surveyModal.style.display = 'none';
+        });
+
+        // Close profile modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === surveyModal) {
+                surveyModal.style.display = 'none';
+            }
+        });
+    </script>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
