@@ -37,6 +37,7 @@
   max-width: none; 
 }
 
+
 .tbl_module{
   background-color: transparent;
   border-radius: 0;
@@ -53,4 +54,9 @@
 .upload-label{
   display: block;
   text-align: left;
+}
+
+.course-btn{
+  width: 10vw;
+  margin-right: 15px;
 }

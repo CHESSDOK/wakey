@@ -72,10 +72,11 @@ $result = $conn->query($sql);
         <div class="offcanvas-body">
             <table class="menu">
                 <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="create_job.php" class="nav-link">Post Job</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
-                <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
+                <tr><td><a href="#" class="active nav-link">OFW Cases</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
     </div>
@@ -89,18 +90,10 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-containers grid gap-3">
-    <table class="table-containrs">
-        <tr>
-            <td>
-                <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
-            </td>
-        </tr>
-    </table>
+    <div class="button-container">
+        <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+        <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
+    </div>
 
     <div class="table-container">
             <table class="table table-borderless table-hover">
@@ -125,7 +118,7 @@ $result = $conn->query($sql);
                                 <td>".$row['local_agency_name']."</td>
                                 <td>".$row['title']."</td>
                                 <td>".$row['status']."</td>
-                                <td> <a class='docu' href='update_status.php?case_id=" . $row["id"] . "'>update</a> </td>
+                                <td> <a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>update</a> </td>
                                  </tr>";
                                 } 
                         } else {

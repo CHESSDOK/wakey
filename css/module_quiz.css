@@ -1,0 +1,17 @@
+.table-container {
+    width: 50vw; /* Adjust this value as needed to make the table smaller */
+    max-width: auto;
+    margin: auto;
+    background-color: transparent;
+
+}
+
+.table {
+  border-radius: 20px;
+  font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
+}
+
+.table td, .table th {
+    padding: 0.5rem; /* Adjust padding to make cells smaller */
+    text-align: flex-start;
+}

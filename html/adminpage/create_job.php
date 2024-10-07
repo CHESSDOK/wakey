@@ -62,12 +62,13 @@ $result = $conn->query($sql);
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <table class="menu">
-                    <tr><td><a href="../../html/employer/employer_home.php" class="nav-link">Home</a></td></tr>
-                    <tr><td><a href="../../html/employer/job_creat.php" class="nav-link">Post Job</a></td></tr>
-                    <tr><td><a href="#" class="active nav-link">Job List</a></td></tr>
-                    <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
-                    <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
+                    <table class="menu">
+                    <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                    <tr><td><a href="#" class="active nav-link">Post Job</a></td></tr>
+                    <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                    <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
+                    <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
+                    <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
                 </table>
             </div>
         </div>
@@ -89,7 +90,7 @@ $result = $conn->query($sql);
                 <th>Specialization</th>
                 <th>Vacant</th>
                 <th>Status</th>
-                <th colspan="2">Actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -119,7 +120,7 @@ $result = $conn->query($sql);
             $conn->close();
             ?>
         </tbody>
-    </table>
+    </table>    
 </div>
 <button class="btn btn-primary openCourseBtn" id="openCourseBtn">Create Job</button>
 

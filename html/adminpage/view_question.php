@@ -7,7 +7,7 @@ $sql = "SELECT * FROM question WHERE quiz_id = $q_id";
 $result = $conn->query($sql);
 
 echo "  <h2>Quiz Items</h2>
-        <table class='table table-borderless table-hover '>
+        <table class='table table-borderless table-hover'>
         <thead>
             <th>Question</th>
             <th>Option</th>
