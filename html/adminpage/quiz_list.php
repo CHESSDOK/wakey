@@ -93,7 +93,7 @@ $result = $conn->query($sql);
             <th scope="col">Title</th>
             <th scope="col">Tag</th>
             <th scope="col">Total</th>
-            <th colspan="2" scope="col">Actions</th>
+            <th colspan="3" scope="col">Actions</th>
         </tr>
         </thead>
          <tbody>
@@ -107,8 +107,8 @@ $result = $conn->query($sql);
                             <td><input class='form-control' type='text' name='name' value='" . $row['title'] . "'></td>
                             <td><input class='form-control' type='text' name='tag' value='" . $row['tag'] . "'></td>
                             <td><input class='form-control' type='text' name='total' value='" . $row['total'] . "'></td>
-                            <td><input class='btn btn-primary' type='submit' value='Update'></td>
-                            <td><a href='delete_quiz.php?course_id=".$course_id."&module_id=".$modules_id."&id=".$row['id']."'>DELETE</a></td>
+                            <td><input class='btn btn-success' type='submit' value='Update'></td>
+                            <td><a class='btn btn-danger' href='delete_quiz.php?course_id=".$course_id."&module_id=".$modules_id."&id=".$row['id']."'>DELETE</a></td>
                             </form>
                             <td><a class='btn btn-primary openQuestionBtn' href='#' 
                                 data-quiz-id=".htmlspecialchars($row['id'])."
@@ -125,9 +125,9 @@ $result = $conn->query($sql);
     </table>
 </div>
 
-<div id="questionModal" class="modal modal-container">
+<div id="questionModal" class="modal modal-container" >
             <div class="modal-content">
-                <span class="btn-close closBtn closeBtn"></span>
+                <span class="btn-close closBtn closeBtn">&times;</span>
                 <div id="questionModuleContent">
                     <!-- Module content will be dynamically loaded here -->
                 </div>

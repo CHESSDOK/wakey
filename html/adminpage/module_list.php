@@ -100,14 +100,14 @@ $result = $conn->query($sql);
                         <input type='hidden' name='module_id' value='".$row["id"]."'>
                         <input type='hidden' name='course_id' value='".$course_id."'>
                         <td><input type='text' name='module_name' value='".$row["module_name"]."'></td>
-                        <td><input class='btn btn-success' type='submit' value='Update'></td>
-                        <td><a class='btn btn-danger' href='delete_modules.php?course_id=".$course_id."&module_id=".$row["id"]."'>DELETE</a></td>
-                        <td><a class='btn btn-primary openFileBtn' href='#' data-module-id=" . htmlspecialchars($row['id']) . "
+                        <td><input class='btn btn-success mt-2' type='submit' value='Update'></td>
+                        <td><a class='btn btn-danger mt-2' href='delete_modules.php?course_id=".$course_id."&module_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a class='btn btn-primary openFileBtn mt-2' href='#' data-module-id=" . htmlspecialchars($row['id']) . "
                             data-course-id=" . htmlspecialchars($course_id) . ">Upload Video</a></td>
-                        <td><a class='btn btn-primary openQuizBtn' href='#' data-secmodule-id=" . htmlspecialchars($row['id']) . "
+                        <td><a class='btn btn-primary openQuizBtn mt-2' href='#' data-secmodule-id=" . htmlspecialchars($row['id']) . "
                             data-seccourse-id=" . htmlspecialchars($course_id) . ">Quiz Maker</a></td>
-                        <td><a class='btn btn-primary' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "&course_id=" . $course_id . "'>Quiz List</a></td>
-                        <td><a class='btn btn-primary openContentBtn' href='#' data-thirdmodule-id=".htmlspecialchars($row['id']).">Contents</a></td>
+                        <td><a class='btn btn-primary mt-2' href='quiz_list.php?modules_id=" . htmlspecialchars($row['id']) . "&course_id=" . $course_id . "'>Quiz List</a></td>
+                        <td><a class='btn btn-primary openContentBtn mt-2' href='#' data-thirdmodule-id=".htmlspecialchars($row['id']).">Contents</a></td>
                         </form>
                     </tr>";
             }
