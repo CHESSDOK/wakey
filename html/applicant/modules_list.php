@@ -16,11 +16,7 @@ function checkSession() {
 }
 
 $userId = checkSession();
-$user_id = $_GET['user_id'];
 $module_id = $_GET['course_id'];
-
-// Check if 'modules_id' exists before using it
-$selected_module_id = isset($_GET['modules_id']) ? $_GET['modules_id'] : null;
 
 // Fetch all modules for the course
 $sql = "SELECT * FROM modules WHERE course_id = ?";
@@ -29,14 +25,9 @@ $stmt->bind_param("i", $module_id);
 $stmt->execute();
 $modules_result = $stmt->get_result();
 
-// Check if the user has taken any quiz for the course
-$sql = "SELECT COUNT(*) AS quiz_count FROM user_score WHERE user_id = ? AND quiz_id IN (SELECT id FROM quiz_name WHERE module_id IN (SELECT id FROM modules WHERE course_id = ?))";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $userId, $module_id);
-$stmt->execute();
-$quiz_result = $stmt->get_result();
-$quiz_data = $quiz_result->fetch_assoc();
-$has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
+// Variables to track module progress and certificate eligibility
+$all_modules_passed = true; // Assume all modules are passed initially
+$previous_module_passed = true; // First module can be accessed
 
 ?>
 
@@ -76,9 +67,6 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
         <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
     <?php endif; ?>
     </div>
-
-
-
     </div>
 
     <!-- Burger icon -->
@@ -87,29 +75,8 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
         <span></span>
         <span></span>
     </div>
-</td>
-</tr>
-</table>
-
-    <!-- Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <table class="menu">
-                <tr><td><a href="../../index(applicant).php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="applicant.php" class="nav-link">Applicant</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Training</a></td></tr>
-                <tr><td><a href="ofw_home.php" class="nav-link">OFW</a></td></tr>
-                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
-                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
-            </table>
-        </div>
-    </div>
 </nav>
-    
+
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="../../index(applicant).php" >Home</a></li>
@@ -117,31 +84,43 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
     <li class="breadcrumb-item active" aria-current="page">Module</li>
   </ol>
 </nav>
-    <?php
-    if ($modules_result->num_rows > 0) {
-        $previous_module_passed = true; // Assume first module can be accessed
-        while ($module_row = $modules_result->fetch_assoc()) {
-            $current_module_id = $module_row['id'];
-            
-            // Check if the user has taken any quiz related to this module
-            $stmt = $conn->prepare("SELECT * FROM user_score WHERE user_id = ? AND quiz_id IN (SELECT id FROM quiz_name WHERE module_id = ?)");
-            $stmt->bind_param("ii", $userId, $current_module_id);
-            $stmt->execute();
-            $score_result = $stmt->get_result();
-            $quiz_score = $score_result->fetch_assoc();
-            
-            // Determine if the user has passed the quiz
-            $passed = ($quiz_score && $quiz_score['score'] >= 5); // Adjust passing score as needed
-            
-            // If the user hasn't taken any quiz yet, allow all modules to be enabled
-            if (!$has_taken_any_quiz) {
-                // All modules enabled since the user hasn't taken any quiz yet
-                echo "<table>
+
+<?php
+if ($modules_result->num_rows > 0) {
+    while ($module_row = $modules_result->fetch_assoc()) {
+        $current_module_id = $module_row['id'];
+
+        // Check if the user has taken any quiz related to this module
+        $stmt = $conn->prepare("SELECT * FROM modules_taken WHERE user_id = ? AND module_id = ?");
+        $stmt->bind_param("ii", $userId, $current_module_id);
+        $stmt->execute();
+        $module_status_result = $stmt->get_result();
+        $module_status_row = $module_status_result->fetch_assoc();
+
+        // Determine if the user has passed the module
+        $passed = ($module_status_row && $module_status_row['status'] === 'passed');
+
+        // Update the all_modules_passed check
+        if ($module_status_row) { // Ensure module_status_row is not null
+            if ($module_status_row['status'] !== 'passed') {
+                $all_modules_passed = false; // Set to false if not passed
+            }
+        } else {
+            // If there's no entry for the module in modules_taken, treat it as not passed
+            $all_modules_passed = false; // or handle this case as needed
+        }
+
+        // Disable all other modules unless the previous module is passed
+        if ($previous_module_passed) {
+            // Module is unlocked
+            if ($passed) {
+                // Module has been passed
+                echo "<table border='1'>
                         <tr>
                             <td class='img_cell'><img class='icon' src='../../img/file_icon.png' alt='Logo'></td>
                             <td class='title_cell'> <p> " . $module_row["module_name"] . " </td>
                             <td class='btn_cell'>
-                                <a class='btn' href='module_content.php?user_id=" . $user_id . "&modules_id=" . $module_row["id"] . "&course_id=" . $module_id . "&module_name=" . $module_row["module_name"] . "'>view more <i class='fas fa-chevron-right'></i></a>
+                                <a class='btn' style='background-color: grey;' href='#' onclick='return false;'>Passed <i class='fas fa-check'></i></a>
                             </td>
                         </tr>
                     </table>";
@@ -182,10 +161,7 @@ $has_taken_any_quiz = $quiz_data['quiz_count'] > 0;
     $conn->close();
     ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="../../javascript/script.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

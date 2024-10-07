@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2024 at 12:53 PM
+-- Generation Time: Oct 06, 2024 at 01:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `admin_profile` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `admin_level` int(11) DEFAULT NULL
+  `admin_level` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -40,9 +40,12 @@ CREATE TABLE `admin_profile` (
 --
 
 INSERT INTO `admin_profile` (`id`, `username`, `password`, `email`, `admin_level`) VALUES
-(1, 'Admin', '$2y$10$szZWza9fsLiGXs4evidE7.uc3zwFoQjs/hfwGvw2Vd6lddYLzBuTW', 'mercadomarklawrence55@gmail.com', NULL),
+(1, 'Admin', '$2y$10$szZWza9fsLiGXs4evidE7.uc3zwFoQjs/hfwGvw2Vd6lddYLzBuTW', 'mercadomarklawrence55@gmail.com', 'super_admin'),
 (2, 'jervin123', '$2y$10$bs.kIy4YfXaiSviKhSgXLeis9MBQHvqUMP0PV0pzCGuKxQSNqvqCG', 'jervinguevarra123@gmail.com', NULL),
-(3, 'jerving123', '$2y$10$AvSxZd27fLrwIIFprAJC1eYvMEiZ9zZdW689Uvta6pXcVZQEIl4T6', 'jervinguevarra123@gmail.com', NULL);
+(3, 'jerving123', '$2y$10$AvSxZd27fLrwIIFprAJC1eYvMEiZ9zZdW689Uvta6pXcVZQEIl4T6', 'jervinguevarra123@gmail.com', NULL),
+(4, 'Jima', '$2y$10$DeLy5nNImdzDJT8Q61F8/.2MVCNj9M4lKU2b1H5ONAnUXyocPD/4S', 'bernabegiemer@gmail.com', NULL),
+(5, 'Jima', '$2y$10$x4lMG.vRA1QvU/Hrjg8ire.u5EcgHXwP2UqdQz2R/w9PONLwBcBuK', 'bernabegiemer@gmail.com', NULL),
+(6, 'Azure', '$2y$10$lZyxZFyzc9pIxdNESm9pI.Aaxa80D.zxkls7LcqEl3RCgiRDhsbqu', 'ict1mercado.cdlb@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,8 +105,8 @@ CREATE TABLE `applicant_profile` (
 
 INSERT INTO `applicant_profile` (`id`, `user_id`, `email`, `first_name`, `last_name`, `middle_name`, `dob`, `age`, `specialization`, `sex`, `civil_status`, `contact_no`, `photo`, `house_address`, `sss_no`, `pagibig_no`, `philhealth_no`, `passport_no`, `immigration_status`, `spouse_name`, `spouse_contact`, `fathers_name`, `fathers_address`, `mothers_name`, `mothers_address`, `emergency_contact_name`, `next_of_kin_relationship`, `next_of_kin_contact`, `education_level`, `occupation`, `prefix`, `emergency_contact_num`, `income`, `country`, `employment_type`, `employment_form`, `employer_name`, `contact_number`, `employer_address`, `local_agency_name`, `local_agency_address`, `arrival_date`, `dept_date`) VALUES
 (8, 25, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7a9dcefbc2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 27, 'marklawrencemercado8@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 28, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 27, 'marklawrencemercado8@gmail.com', 'Jervin', 'De guzman', 'Castalone', NULL, NULL, NULL, NULL, NULL, NULL, '66f7bc41c6174.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 28, 'mercadomarklawrence55@gmail.com', 'Mark', 'Mercado', 'Aranda', NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (12, 29, 'mercadomarklawrence55@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -126,21 +129,12 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `applicant_id`, `job_posting_id`, `application_date`, `status`, `job`) VALUES
-(8, 25, 8, NULL, NULL, 'backend dev'),
-(9, 25, 10, NULL, 'accepted', 'system Administration'),
-(10, 25, 9, NULL, 'accepted', 'front end'),
-(13, 28, 10, NULL, 'accepted', 'system Administration'),
-(14, 28, 8, NULL, 'accepted', 'backend dev'),
-(15, 28, 9, NULL, 'accepted', 'front end'),
-(16, 28, 9, NULL, 'accepted', 'front end'),
-(17, 28, 1, NULL, 'accepted', 'Laborer'),
-(18, 27, 1, NULL, 'accepted', 'Laborer'),
-(19, 27, 4, NULL, 'accepted', 'electrician'),
-(20, 27, 8, NULL, 'accepted', 'backend dev'),
-(21, 27, 8, NULL, 'accepted', 'backend dev'),
-(22, 27, 9, NULL, 'accepted', 'front end'),
-(23, 29, 9, NULL, 'accepted', 'front end'),
-(24, 28, 8, NULL, 'pending', 'backend dev');
+(32, 28, 8, '2024-10-05', 'accepted', 'backend dev'),
+(33, 28, 4, '2024-10-05', 'accepted', 'electrician'),
+(34, 28, 1, '2024-10-05', 'accepted', 'Laborer'),
+(35, 27, 4, '2024-10-05', 'accepted', 'electrician'),
+(36, 27, 1, '2024-10-05', 'accepted', 'Laborer'),
+(37, 27, 13, '2024-10-05', 'accepted', 'Security Guard');
 
 -- --------------------------------------------------------
 
@@ -154,7 +148,7 @@ CREATE TABLE `cases` (
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `file` varchar(255) DEFAULT NULL,
-  `status` enum('filed','in_review','resolved') DEFAULT 'filed',
+  `status` enum('filed','in_progress','resolved') DEFAULT 'filed',
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -169,7 +163,8 @@ INSERT INTO `cases` (`id`, `user_id`, `title`, `description`, `file`, `status`, 
 (6, 3, 'little pay', 'gfsrgsergsfdg', NULL, 'filed', '2024-09-29 12:56:45'),
 (7, 1, 'little pay', 'sadgfsdargs', NULL, 'filed', '2024-09-29 12:56:45'),
 (8, 4, 'little pay', 'fasdafawe', NULL, 'filed', '2024-09-29 12:56:45'),
-(9, 5, 'little pay', 'fawefasdfwaeaa', NULL, 'filed', '2024-09-29 12:56:45');
+(9, 5, 'little pay', 'fawefasdfwaeaa', NULL, 'filed', '2024-09-29 12:56:45'),
+(11, 28, 'Overwork', 'having too much work and task with pay', '../uploads/1284700.png', 'filed', '2024-10-02 03:41:56');
 
 -- --------------------------------------------------------
 
@@ -215,10 +210,8 @@ CREATE TABLE `courses` (
 
 INSERT INTO `courses` (`id`, `course_name`, `description`, `module_count`) VALUES
 (1, 'Dressmaking', 'sewing', 3),
-(2, 'Programming', 'coding html, php, sql', 3),
-(3, 'new', '123', 2),
-(4, 'Cookery', 'Baking', 1),
-(5, 'Digital Marketing Essentials', 'Master the fundamentals of digital marketing, including SEO, social media strategies, content creation, and paid advertising.', 3);
+(5, 'Digital Marketing Essentials', 'Master the fundamentals of digital marketing, including SEO, social media strategies, content creation, and paid advertising.', 3),
+(6, 'Auto motive', 'Car and Motor workshop', 2);
 
 -- --------------------------------------------------------
 
@@ -241,7 +234,7 @@ CREATE TABLE `employer_documents` (
 
 INSERT INTO `employer_documents` (`id`, `user_id`, `document_name`, `document_path`, `is_verified`, `comment`) VALUES
 (1, 1, 'asdawdawf', 'uploads/a.jpg', 1, NULL),
-(2, 1, 'Widowed', 'uploads/supply.pdf', 0, NULL);
+(2, 1, 'Widowed', 'uploads/supply.pdf', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -324,10 +317,8 @@ CREATE TABLE `interview` (
 --
 
 INSERT INTO `interview` (`id`, `user_id`, `Job_id`, `sched_date`, `sched_time`, `interview`, `meeting`, `is_read`) VALUES
-(1, 14, 9, '2024-10-03', '08:00:00', 'FacetoFace', '123sdfd3aws4fsewrf3w4', 0),
-(2, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0),
-(3, 14, 9, '2024-10-11', '13:20:00', 'online', '', 0),
-(4, 25, 10, '2024-10-02', '18:16:00', 'online', '', 0);
+(6, 27, 1, '2024-10-08', '19:00:00', 'FacetoFace', 'sadwqfdsfsddwq', 0),
+(7, 27, 4, '2024-10-30', '16:08:00', 'FacetoFace', 'sadwqfdsfsddwq', 0);
 
 -- --------------------------------------------------------
 
@@ -337,7 +328,8 @@ INSERT INTO `interview` (`id`, `user_id`, `Job_id`, `sched_date`, `sched_time`, 
 
 CREATE TABLE `job_postings` (
   `j_id` int(11) NOT NULL,
-  `employer_id` int(11) NOT NULL,
+  `employer_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
   `job_title` varchar(100) NOT NULL,
   `job_description` text NOT NULL,
   `specialization` varchar(255) NOT NULL,
@@ -353,12 +345,14 @@ CREATE TABLE `job_postings` (
 -- Dumping data for table `job_postings`
 --
 
-INSERT INTO `job_postings` (`j_id`, `employer_id`, `job_title`, `job_description`, `specialization`, `vacant`, `requirment`, `work_location`, `remarks`, `date_posted`, `is_active`) VALUES
-(1, 1, 'Laborer', 'construction worker', '', 11, '', '', '', '2024-09-30', 1),
-(4, 1, 'electrician', 'fix electrical', '', 2, '', '', '', '2024-09-30', 1),
-(8, 1, 'backend dev', 'database, php, mysql', 'Information and technology', 2, '', '', '', '2024-09-28', 1),
-(9, 1, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 0, '', '', '', '2024-09-30', 0),
-(10, 1, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 0, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 0);
+INSERT INTO `job_postings` (`j_id`, `employer_id`, `admin_id`, `job_title`, `job_description`, `specialization`, `vacant`, `requirment`, `work_location`, `remarks`, `date_posted`, `is_active`) VALUES
+(1, 1, NULL, 'Laborer', 'construction worker', '', 10, '', '', '', '2024-09-30', 1),
+(4, 1, NULL, 'electrician', 'fix electrical', '', 0, '', '', '', '2024-09-30', 0),
+(8, 1, NULL, 'backend dev', 'database, php, mysql', 'Information and technology', 1, '', '', '', '2024-09-28', 1),
+(9, 1, NULL, 'front end', 'dasfesargcvgbbdnnjghtydhdrtfggrt', 'Information and Technology', 0, '', '', '', '2024-09-30', 0),
+(10, 1, NULL, 'system Administration', '-Installing, configuring, maintaining, and securing an organization\'s computer systems and networks.\r\n-Supporting, troubleshooting, and maintaining computer servers and networks.\r\n-Identifying and fixing network issues.\r\n-Updating equipment and software.\r\n-Advising on IT policies and optimizing computer networks.', 'Information and Technology', 0, '-College Graduate\r\n-4yrs of work experience\r\n-can use command line', 'Gotham city, back street', '', '2024-09-23', 0),
+(11, NULL, 1, 'Carpenter', 'Wood crafting and stuff', '', 12, 'Has experience on woodsman ship', 'Bayog', '', '2024-10-04', 1),
+(13, NULL, 1, 'Security Guard', 'Mall Security Guard', '', 2, 'Security Guard License, can work on night shift', 'Olivares plaza, Los Banos', '', '2024-10-04', 1);
 
 -- --------------------------------------------------------
 
@@ -378,14 +372,7 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `message`, `created_at`) VALUES
-(1, 1, 'sadaSfsezcvzsdfcawes', '2024-09-09 01:29:59'),
-(2, 0, 'Hi', '2024-09-18 13:05:27'),
-(3, 0, 'Hi', '2024-09-18 13:05:37'),
-(4, 0, 'hi', '2024-09-18 13:12:48'),
-(5, 14, 'hi', '2024-09-18 13:40:32'),
-(6, 14, 'joke', '2024-09-18 13:43:32'),
-(7, 14, 'bnye', '2024-09-19 06:24:09'),
-(8, 14, 'sdasdsfgsefs', '2024-09-21 04:00:41');
+(13, 28, 'Hi can you please help me financially?', '2024-10-02 09:48:43');
 
 -- --------------------------------------------------------
 
@@ -406,7 +393,7 @@ CREATE TABLE `modules` (
 INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
 (1, 1, 'measurements'),
 (2, 1, 'needle & thread'),
-(3, 1, 'dresses'),
+(3, 1, 'Cutting'),
 (4, 3, 'new1'),
 (5, 3, 'new12'),
 (6, 4, 'Baking'),
@@ -418,9 +405,33 @@ INSERT INTO `modules` (`id`, `course_id`, `module_name`) VALUES
 (13, 2, 'dfe'),
 (14, 2, 'dsaadw'),
 (15, 2, 'wfd3we'),
-(16, 1, 'dfe'),
-(17, 1, 'fgdf'),
-(18, 1, 'asdas');
+(16, 1, 'Drafting');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `modules_taken`
+--
+
+CREATE TABLE `modules_taken` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `status` varchar(200) DEFAULT 'fail',
+  `date_taken` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `modules_taken`
+--
+
+INSERT INTO `modules_taken` (`id`, `user_id`, `module_id`, `status`, `date_taken`) VALUES
+(1, 27, 1, 'passed', '2024-10-06'),
+(2, 28, 1, 'passed', '2024-10-06'),
+(6, 28, 2, 'fail', '2024-10-06'),
+(7, 27, 2, 'passed', '2024-10-06'),
+(10, 27, 3, 'passed', '2024-10-06'),
+(11, 27, 16, 'passed', '2024-10-06');
 
 -- --------------------------------------------------------
 
@@ -527,31 +538,6 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (47, 9, 'What is the ideal internal temperature for grilling a medium-rare steak?', ' 120°F (49°C)', ' 140°F (60°C)', ' 130°F (54°C)', ' 160°F (71°C)', 'c', 1),
 (48, 9, 'Which of the following is the best oil to use for greasing the grill to prevent sticking?', 'Coconut oil', ') Butter', 'Vegetable oil', 'Olive oil', 'c', 1),
 (49, 9, ' What is the primary purpose of marinating meat before grilling?', 'To make the meat look better', 'To reduce cooking time', 'To enhance flavor and tenderize the meat', 'To increase the temperature of the grill', 'c', 1),
-(50, 10, 'What is digital marketing primarily concerned with?', 'Traditional advertising methods', 'Marketing through digital channels', 'Product manufacturingSupply chain management', 'Supply chain management', 'b', 1),
-(51, 10, 'Which of the following is NOT a component of digital marketing?', 'Search Engine Optimization (SEO)', 'Social Media Marketing (SMM)', 'Print advertising', 'Email Marketing', 'c', 1),
-(52, 10, 'What does SEO stand for?', 'Search Engine Optimization', 'Search Enhanced Organization', ' Simple Email Outreach', 'Social Engagement Optimization', 'b', 1),
-(53, 10, 'Which platform is primarily used for B2B marketing?', 'Instagram', 'LinkedIn', 'TikTok', ' Pinterest', 'b', 1),
-(54, 10, 'What is the purpose of content marketing?', 'To sell products directly', 'o create and distribute valuable content', 'To increase ad spending', 'To reduce production costs', 'b', 1),
-(55, 11, 'What does SEO stand for?', 'Search Engine Operation', ' Search Engine Optimization', 'Search Engine Outreach', 'Social Engine Optimization', 'b', 1),
-(56, 11, 'Which of the following is considered an on-page SEO factor?', ' Backlinks', 'Social media shares', ' Content quality', ' Domain authority', 'c', 1),
-(57, 11, 'What is the primary purpose of keyword research in SEO?', ' To determine the best colors for a website', 'To identify what users are searching for', 'To create social media ads', 'To increase website load speed', 'b', 1),
-(58, 11, 'Which of the following is an example of off-page SEO?', 'Optimizing meta tags', 'Improving site speed', 'Building backlinks from other websites', 'Writing high-quality blog content', 'c', 1),
-(59, 11, 'Which tool is commonly used for keyword research?', ' Google Analytics', 'Google Keyword Planner', ' SEMrush', ' Ahrefs', 'b', 1),
-(60, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(61, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(62, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(63, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(64, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(65, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(66, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(67, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(68, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(69, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(70, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(71, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
-(72, 12, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
-(73, 12, 'What is the primary goal of a social media strategy?', 'To create viral content', ' To post as much content as possible', 'To align social media efforts with business objectives', 'To focus only on paid campaigns', 'c', 1),
-(74, 12, 'Which platform is best known for its image and video-centric content?', 'Twitter', 'Instagram', 'LinkedIn', ' Facebook', 'd', 1),
 (75, 13, 'Which social media platform is most commonly used for professional networking?', 'Facebook', ' Instagram', 'LinkedIn', 'Twitter', 'c', 1),
 (76, 13, 'What is the primary goal of a social media strategy?', 'To create viral content', 'To post as much content as possible', 'To align social media efforts with business objectives', ' To focus only on paid campaigns', 'c', 1),
 (77, 13, 'Which platform is best known for its image and video-centric content?', 'Twitter', ' Instagram', ' LinkedIn', 'Facebook', 'b', 1),
@@ -623,7 +609,39 @@ INSERT INTO `question` (`id`, `quiz_id`, `question`, `option_a`, `option_b`, `op
 (143, 22, 'fhndfrthd', 's', 'qd', 'f', 'sd', 'c', 1),
 (144, 26, 'fhndfrthd', 'sd', 'qd', 'fgd', 'xz', 'c', 1),
 (145, 27, 'sadfawef', 's', 'v', 'x', 'z', 'c', 1),
-(146, 27, 'sadfawef', 's', 'v', 'x', 'z', 'c', 1);
+(146, 27, 'sadfawef', 's', 'v', 'x', 'z', 'c', 1),
+(147, 28, 'What is the standard measurement for a full bust?', 'Around the chest, just below the bust', 'Around the fullest part of the bust', 'Around the waistline', 'Around the hips', 'b', 1),
+(148, 28, 'Where should the waist measurement be taken?', 'At the narrowest part of the waist', 'Around the fullest part of the hips', 'Just below the bust', 'At the level of the belly button', 'a', 1),
+(149, 28, 'How do you measure the hip size?', 'Around the narrowest part of the waist', 'Around the fullest part of the hips', 'From the top of the shoulder to the hip', 'From the waist to the ankle', 'b', 1),
+(150, 28, 'What is the correct way to measure the length of a dress?', 'From the top of the shoulder to the floor', ' From the waist to the knee', 'From the bust to the knee', 'From the hip to the ankle', 'a', 1),
+(151, 28, 'How do you measure the shoulder width?', 'From the top of one shoulder to the other', 'Around the fullest part of the bust', 'From the nape of the neck to the hip', 'From the shoulder to the wrist', 'a', 1),
+(152, 29, 'What type of needle is most commonly used for hand sewing?', 'Embroidery needle', 'Tapestry needle', 'Sharps needle', 'Darning needle', 'c', 1),
+(153, 29, 'What does the number on a sewing needle indicate?', 'The type of metal used', 'The thickness of the needle', 'The length of the needle', 'The sharpness of the needle point', 'b', 1),
+(154, 29, 'Which type of thread is most suitable for sewing heavy fabrics like denim?', 'Cotton thread', 'Silk thread', 'Polyester thread', 'Nylon thread', 'c', 1),
+(155, 29, 'What is the main purpose of a ballpoint needle?', 'To sew through thick fabrics', 'To sew knits and stretch fabrics without damaging them', 'To sew delicate fabrics like silk', 'To sew leather and vinyl', 'b', 1),
+(156, 29, 'Which needle size is best for sewing fine, delicate fabrics like silk', 'Size 9 or 10', 'Size 18 or 20', 'Size 14 or 16', 'Size 7 or 8', 'a', 1),
+(157, 30, 'What type of scissors is best for cutting fabric?', 'Kitchen scissors', 'Dressmaker’s shears', 'Paper scissors', 'Embroidery scissors', 'b', 1),
+(158, 30, 'What is the main purpose of pinking shears?', 'To prevent fabric edges from fraying', 'To cut thick fabrics', 'To create decorative edges', 'To make straight cuts', 'a', 1),
+(159, 30, 'Which cutting tool is ideal for cutting multiple layers of fabric with precision?', 'Regular scissors', 'Rotary cutter', 'Pinking shears', 'Electric scissorsv', 'b', 1),
+(160, 30, 'How should fabric be placed when cutting patterns?', 'On a flat, smooth surface', 'Folded several times', 'Hung on a rack', 'On a bumpy surface', 'a', 1),
+(161, 30, 'What is the correct way to hold fabric shears while cutting?', 'Keep the lower blade flat against the table', ' Lift the fabric in the air', 'Use small snips for large cuts', 'Tilt the scissors at a steep angle', 'a', 1),
+(162, 31, 'What is the primary purpose of a dressmaking pattern?', 'To decorate the fabric', 'To provide a template for cutting fabric pieces', 'To measure the fabric', 'To store sewing tools', 'b', 1),
+(163, 31, 'Which tool is commonly used for creating straight lines when drafting patterns?', 'French curve', 'Ruler', 'Scissors', 'Tape measure', 'b', 1),
+(164, 31, 'What does \"ease\" refer to in garment design?', 'The tightness of a garment', 'The amount of fabric needed for seams', 'The extra fabric allowed for movement and comfort', 'The length of the garment', 'c', 1),
+(165, 31, 'When drawing a garment layout, what should be included?', 'Only the front view of the garment', 'All views, including front, back, and side ', 'Only fabric swatches', 'Only the measurements of the garment', 'b', 1),
+(166, 31, 'Which technique is often used to add flair and movement to a dress design?', 'Gathering', 'Cutting on the fold', 'Creating darts', 'Adding interfacing', 'a', 1),
+(172, 37, 'What is the main purpose of Search Engine Optimization (SEO)?', 'To create social media posts', 'To improve a websites ranking on search engines', 'To increase email subscribers', 'To design a website layout', 'b', 1),
+(173, 37, 'Which of the following is a key component of content marketing?', 'Creating infographics for offline marketing', 'Developing valuable and relevant content to attract an audience', 'Sending cold emails', 'Paying for banner ads', 'b', 1),
+(174, 37, 'What does \"PPC\" stand for in digital marketing?', 'Personal Paid Campaigns', 'Pay-Per-Click', 'Public Posting Content', 'Paid Promotional Content', 'b', 1),
+(175, 37, 'Which digital marketing platform is most commonly used for professional networking and B2B marketing?', 'Instagram', 'LinkedIn', 'Snapchat', 'TikTok', 'b', 1),
+(176, 37, 'What is the main goal of social media marketing?', 'To sell physical products directly', 'To engage with the audience and build brand awareness', 'To make videos go viral', 'To increase website bounce rates', 'b', 1),
+(177, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(178, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(179, 38, 'What does SEO stand for?', 'Social Engagement Optimization', 'Search Engine Optimization', 'Site Enhancement Operations', 'Search Efficiency Optimization', 'b', 1),
+(180, 38, 'Which factor is most important for improving a website\'s SEO ranking?', 'Increasing website color variety', 'High-quality, relevant content', 'Paying for ads', 'Using a large number of images', 'b', 1),
+(181, 38, 'What is a \"keyword\" in SEO?', 'A word or phrase that users search for in search engines', 'A type of website plugin', 'A tag used in HTML coding', 'A special offer code for marketing', 'a', 1),
+(182, 38, 'Which SEO technique involves acquiring backlinks from other websites?', 'On-page SEO', 'Keyword stuffing', 'Off-page SEO', 'Page speed optimization', 'c', 1),
+(183, 38, 'What is the purpose of meta descriptions in SEO?', 'To rank higher in paid search results', 'To provide alt text for images', 'To provide a brief summary of the page content in search results', 'To display large amounts of text on a website', 'c', 1);
 
 -- --------------------------------------------------------
 
@@ -647,13 +665,9 @@ CREATE TABLE `quiz_name` (
 --
 
 INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`, `total`, `tag`, `date`) VALUES
-(4, 1, 'Different Measurements', 1, 1, 3, 'how to measure ', '2024-09-02 13:54:06'),
 (5, 4, 'New', 1, 1, 2, 'how to measure ', '2024-09-02 15:04:41'),
 (6, 6, 'Ingredients Of Baking', 1, 0, 10, 'Quiz/Exam', '2024-09-26 16:01:35'),
 (9, 7, 'Grill', 1, 0, 10, 'How to Grill', '2024-09-26 12:29:00'),
-(10, 9, 'Intro To Digital Marketing', 1, 0, 5, 'Introduction To Digital Marketing', '2024-09-26 12:51:38'),
-(11, 10, 'Search Engine Optimization', 2, 0, 5, 'quiz', '2024-09-26 12:56:12'),
-(12, 11, 'Social Media Marketing', 2, 0, 5, 'Quiz/Exam', '2024-09-26 14:57:30'),
 (14, 12, 'How To Fry', 1, 0, 40, 'QUIZ', '2024-09-26 16:03:36'),
 (15, 0, 'Randomm', 1, 1, 2, 'sdfasfwe', '2024-10-01 09:31:21'),
 (16, 0, 'Randomm', 1, 1, 1, 'szfasd', '2024-10-01 09:42:24'),
@@ -667,7 +681,13 @@ INSERT INTO `quiz_name` (`id`, `module_id`, `title`, `correct_ans`, `wrong_ans`,
 (24, 0, 'Nezuko', 1, 1, 1, 'sdfw', '2024-10-01 09:58:50'),
 (25, 0, 'Meyokop', 2, 2, 1, 'sdaf', '2024-10-01 09:59:30'),
 (26, 4, 'Nezuko', 2, 2, 1, 'sadfasdfawhgfsdgdrt', '2024-10-01 13:44:11'),
-(27, 5, 'Nezuko', 1, 1, 1, 'sdfasdvczxc vzdfvvzsdf', '2024-10-01 13:46:51');
+(27, 5, 'Nezuko', 1, 1, 1, 'sdfasdvczxc vzdfvvzsdf', '2024-10-01 13:46:51'),
+(28, 1, 'Taking Measurements', 2, 2, 5, 'accurate measurement will make dress fit perfectly', '2024-10-05 19:12:57'),
+(29, 2, 'Learning Needle And Thread', 2, 2, 5, 'sewing', '2024-10-05 19:18:47'),
+(30, 3, 'Cutting Dress', 2, 2, 5, 'Cutting smoothly ', '2024-10-05 19:27:23'),
+(31, 16, 'Layouts For Dressmaking', 2, 2, 5, 'designing perfect fit', '2024-10-05 19:37:33'),
+(37, 9, 'Introduction', 2, 2, 5, 'getting started with digital maketing', '2024-10-06 15:23:44'),
+(38, 10, 'Search Engine Optimization (seo)', 2, 2, 5, ' (SEO)', '2024-10-06 15:30:14');
 
 -- --------------------------------------------------------
 
@@ -716,8 +736,9 @@ CREATE TABLE `replies` (
 --
 
 INSERT INTO `replies` (`id`, `message_id`, `admin_id`, `reply`, `created_at`) VALUES
-(1, 1, 1, 'ok', '2024-09-09 02:20:15'),
-(2, 8, 1, 'reply', '2024-09-21 04:01:34');
+(8, 0, 0, 'Okay but please pay the service first', '2024-10-02 09:51:29'),
+(9, 1, 0, 'Okay, but please the service fee of 3000php first', '2024-10-02 09:54:07'),
+(10, 13, 1, 'Yes, but you have to pay the fee of 500php first', '2024-10-02 09:54:49');
 
 -- --------------------------------------------------------
 
@@ -736,10 +757,9 @@ CREATE TABLE `survey_form` (
 --
 
 INSERT INTO `survey_form` (`id`, `question`, `category`) VALUES
-(1, 'workerssssss', ''),
-(2, 'nerver', ''),
-(3, 'Enter survey Questions', ''),
-(4, 'bsit', 'tech');
+(1, 'workerssssss', 'life'),
+(2, 'nerver', 'tech'),
+(3, 'Enter survey Questions', 'tech');
 
 -- --------------------------------------------------------
 
@@ -765,7 +785,8 @@ INSERT INTO `survey_reponse` (`id`, `user_id`, `survey_id`, `reponse`) VALUES
 (15, 15, 2, 'Sometimes'),
 (16, 28, 1, 'Often'),
 (17, 28, 2, 'Sometimes'),
-(18, 28, 3, 'Often');
+(18, 28, 3, 'Always'),
+(19, 28, 4, 'Often');
 
 -- --------------------------------------------------------
 
@@ -842,7 +863,52 @@ INSERT INTO `user_answers` (`id`, `user_id`, `question_id`, `quiz_id`, `answer`)
 (476, 14, 16, 6, 'b'),
 (477, 14, 17, 6, 'b'),
 (478, 14, 18, 6, 'b'),
-(479, 14, 19, 6, 'c');
+(479, 14, 19, 6, 'c'),
+(480, 28, 55, 11, 'a'),
+(481, 28, 56, 11, 'a'),
+(482, 28, 57, 11, 'b'),
+(483, 28, 58, 11, 'a'),
+(484, 28, 59, 11, 'a'),
+(495, 28, 157, 30, 'a'),
+(496, 28, 158, 30, 'a'),
+(497, 28, 159, 30, 'b'),
+(498, 28, 160, 30, 'b'),
+(499, 28, 161, 30, 'a'),
+(515, 28, 162, 31, 'b'),
+(516, 28, 163, 31, 'b'),
+(517, 28, 164, 31, 'c'),
+(518, 28, 165, 31, 'b'),
+(519, 28, 166, 31, 'a'),
+(525, 28, 147, 28, 'b'),
+(526, 28, 148, 28, 'a'),
+(527, 28, 149, 28, 'b'),
+(528, 28, 150, 28, 'a'),
+(529, 28, 151, 28, 'a'),
+(535, 27, 147, 28, 'b'),
+(536, 27, 148, 28, 'a'),
+(537, 27, 149, 28, 'b'),
+(538, 27, 150, 28, 'a'),
+(539, 27, 151, 28, 'a'),
+(545, 28, 152, 29, 'c'),
+(546, 28, 153, 29, 'b'),
+(547, 28, 154, 29, 'b'),
+(548, 28, 155, 29, 'a'),
+(549, 28, 156, 29, 'b'),
+(565, 27, 152, 29, 'c'),
+(566, 27, 153, 29, 'b'),
+(567, 27, 154, 29, 'c'),
+(568, 27, 155, 29, 'b'),
+(569, 27, 156, 29, 'a'),
+(570, 27, 157, 30, 'b'),
+(571, 27, 158, 30, 'b'),
+(572, 27, 159, 30, 'b'),
+(573, 27, 160, 30, 'a'),
+(574, 27, 161, 30, 'b'),
+(580, 27, 162, 31, 'b'),
+(581, 27, 163, 31, 'b'),
+(582, 27, 164, 31, 'c'),
+(583, 27, 165, 31, 'b'),
+(584, 27, 166, 31, 'b');
 
 -- --------------------------------------------------------
 
@@ -872,7 +938,17 @@ INSERT INTO `user_score` (`id`, `user_id`, `quiz_id`, `score`, `correct_answers`
 (40, 14, 14, 4, 4, 36, '2024-09-25 16:00:00'),
 (41, 14, 10, 1, 1, 4, '2024-09-26 16:00:00'),
 (42, 14, 5, 0, 0, 2, '2024-09-26 16:00:00'),
-(44, 14, 6, 7, 7, 3, '2024-09-26 16:00:00');
+(44, 14, 6, 7, 7, 3, '2024-09-26 16:00:00'),
+(45, 28, 0, 0, 0, 0, '2024-10-04 16:00:00'),
+(46, 28, 11, 1, 1, 4, '2024-10-04 16:00:00'),
+(49, 28, 30, 3, 3, 2, '2024-10-04 16:00:00'),
+(53, 28, 31, 5, 5, 0, '2024-10-04 16:00:00'),
+(55, 28, 28, 5, 5, 0, '2024-10-05 16:00:00'),
+(57, 27, 28, 5, 5, 0, '2024-10-05 16:00:00'),
+(59, 28, 29, 2, 2, 3, '2024-10-05 16:00:00'),
+(63, 27, 29, 5, 5, 0, '2024-10-05 16:00:00'),
+(64, 27, 30, 3, 3, 2, '2024-10-05 16:00:00'),
+(66, 27, 31, 4, 4, 1, '2024-10-05 16:00:00');
 
 --
 -- Indexes for dumped tables
@@ -962,6 +1038,12 @@ ALTER TABLE `modules`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `modules_taken`
+--
+ALTER TABLE `modules_taken`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
 -- Indexes for table `module_content`
 --
 ALTER TABLE `module_content`
@@ -1023,7 +1105,7 @@ ALTER TABLE `user_score`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `applicant_profile`
@@ -1035,13 +1117,13 @@ ALTER TABLE `applicant_profile`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `cases`
 --
 ALTER TABLE `cases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
@@ -1053,7 +1135,7 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `employer_documents`
@@ -1077,25 +1159,31 @@ ALTER TABLE `empyers`
 -- AUTO_INCREMENT for table `interview`
 --
 ALTER TABLE `interview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `job_postings`
 --
 ALTER TABLE `job_postings`
-  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `j_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `modules_taken`
+--
+ALTER TABLE `modules_taken`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `module_content`
@@ -1107,13 +1195,13 @@ ALTER TABLE `module_content`
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `quiz_name`
 --
 ALTER TABLE `quiz_name`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `register`
@@ -1125,7 +1213,7 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `replies`
 --
 ALTER TABLE `replies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `survey_form`
@@ -1137,19 +1225,19 @@ ALTER TABLE `survey_form`
 -- AUTO_INCREMENT for table `survey_reponse`
 --
 ALTER TABLE `survey_reponse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_answers`
 --
 ALTER TABLE `user_answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=585;
 
 --
 -- AUTO_INCREMENT for table `user_score`
 --
 ALTER TABLE `user_score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

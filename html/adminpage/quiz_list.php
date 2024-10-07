@@ -1,5 +1,5 @@
 <?php
-include_once "../../php/conn_db.php";
+include 'conn_db.php';
 $modules_id = $_GET['modules_id'];
 $course_id = $_GET['course_id'];
 $sql = "SELECT * FROM quiz_name WHERE module_id = $modules_id ";

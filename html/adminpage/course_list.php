@@ -23,34 +23,34 @@ $result = $conn->query($sql);
 <body>
 
 <nav>
-    <div class="logo">
-        <img src="../../img/logo_peso.png" alt="Logo">
-        <a href="#"> PESO-lb.ph</a>
-    </div>
-
-    <header>
-      <h1 class="ofw-h1">Course List</h1>
-    </header>
-
-    <div class="profile-icons">
-        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
-            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+        <div class="logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
         </div>
-        
-        <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
-    </div>
 
-    </div>
+        <header>
+        <h1 class="ofw-h1">Course List</h1>
+        </header>
 
-    <!-- Burger icon -->
-    <div class="burger" id="burgerToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</td>
-</tr>
-</table>
+        <div class="profile-icons">
+            <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+                <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+            </div>
+            
+            <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
+        </div>
+
+        </div>
+
+        <!-- Burger icon -->
+        <div class="burger" id="burgerToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </td>
+    </tr>
+    </table>
 
     <!-- Offcanvas Menu -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
@@ -71,11 +71,11 @@ $result = $conn->query($sql);
     </div>
 </nav>
 
-<nav class="bcrumb-container" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Courses</li>
-  </ol>
+    <nav class="bcrumb-container" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Courses</li>
+    </ol>
 </nav>
 
 <div class="table-container">
