@@ -104,7 +104,7 @@
 
 <div class="table-containers grid gap-3">
     <form action="create_survey.php" method="POST">
-        <table class="table table-borderless tbl-question" style="background-color:transparent;">
+        <table class="table table-borderless " style="background-color:transparent;">
         <thead>
             <th>Survey Question</th>
         </thead>
@@ -128,7 +128,7 @@
         </table>
     </form>
 
-  <table class="table table-borderless table-hover tbl-question ">
+  <table class="table table-borderless table-hover">
     <?php
     if ($result->num_rows > 0) {
         $current_category = ''; // To track the current category
@@ -136,7 +136,7 @@
             // Check if we are in a new category
             if ($current_category != $row['category']) {
                 // If it's a new category, print it as a header
-                echo "<tr><td colspan='3'><strong>Category: " . $row['category'] . "</strong></td></tr>";
+                echo "<thead><th class='text-start' colspan='4'><strong>Category: " . $row['category'] . "</strong></th></thead>";
                 // Update current category tracker
                 $current_category = $row['category'];
             }
@@ -147,8 +147,8 @@
                     <input type='hidden' name='id' value='" . $row["id"] . "'>
                     <td><input class='form-control' type='text' name='question' value='" . $row["question"] . "'></td>
                     <td><input class='form-control' type='text' name='category' value='" . $row["category"] . "'></td>
-                    <td><input class='btn btn-primary mt-2' type='submit' value='Update'></td>
-                    <td><a href='delete_survey.php?survey_id=".$row["id"]."'>DELETE</a></td>
+                    <td><input class='btn btn-success mt-2' type='submit' value='Update'></td>
+                    <td><a class='btn btn-danger mt-2' href='delete_survey.php?survey_id=".$row["id"]."'>DELETE</a></td>
                     </form>
                 </tr>";
         }
