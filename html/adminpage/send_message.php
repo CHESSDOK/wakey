@@ -6,11 +6,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $message_id = $_POST['message_id'];
   $reply = $_POST['reply'];
 
-  $sql = "INSERT INTO replies (message_id, admin_id, reply) VALUES ('$message_id', '$admin_id', '$reply')";
-  if ($conn->query($sql) === TRUE) {
-    echo "Reply sent successfully!";
+  // Basic validation: Check if the reply is empty
+  if (empty($reply)) {
+    echo "Reply cannot be empty!";
   } else {
-    echo "Error sending reply: " . $conn->error;
+    // Prepare an SQL statement to avoid SQL injection
+    $stmt = $conn->prepare("INSERT INTO replies (message_id, admin_id, reply) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $message_id, $admin_id, $reply); // "iis" means int, int, string
+
+    // Execute the prepared statement
+    if ($stmt->execute()) {
+      echo "Reply sent successfully!";
+    } else {
+      echo "Error sending reply: " . $conn->error;
+    }
+
+    // Close the statement
+    $stmt->close();
   }
 }
+
+$conn->close();
 ?>

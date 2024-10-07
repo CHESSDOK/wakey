@@ -42,8 +42,8 @@ if ($result->num_rows > 0) {
                     <input type='hidden' name='message_id' value='".$row['id']."'>
                     <input type='hidden' name='admin_id' value='".$admin_Id."'>
                     <td><textarea id='message' name='reply'></textarea> </td> 
-                    <td><input type='submit' value='Send Message'></td>
-                    <input type='submit' value='Send Message'>
+                    <td><button type='submit'>Send Message</button></td>
+                    </form>
                     </tr>";
         }
 
