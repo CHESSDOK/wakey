@@ -125,7 +125,7 @@ $result = $conn->query($sql);
                                 <td>".$row['local_agency_name']."</td>
                                 <td>".$row['title']."</td>
                                 <td>".$row['status']."</td>
-                                <td> <a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>update</a> </td>
+                                <td> <a class='docu' href='update_status.php?case_id=" . $row["id"] . "'>update</a> </td>
                                  </tr>";
                                 } 
                         } else {
