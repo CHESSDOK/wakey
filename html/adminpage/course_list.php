@@ -77,8 +77,8 @@ $result = $conn->query($sql);
     </ol>
 </nav>
 
-<div class="table-container">
-    <button class="btn btn-primary" id="openCourseBtn">Add Course</button>
+<div class="table-container d-flex align-items-start">
+    <button class="btn btn-primary course-btn" id="openCourseBtn">Add Course</button>
 
     <table class="table table-borderless table-hover">
         <thead>

@@ -13,13 +13,13 @@
 
 .modal-content {
   position: relative;
-  margin: 15% auto;
+  margin: 20% auto;
+  margin-top: 5%;
   padding: 20px;
   width: 80%;
-  max-width: 600px;
+  max-width: 70vw;
   background-color: none;
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .modal-container .modal-content{
@@ -95,8 +95,6 @@
     margin: 5px 0 15px 0;
     box-sizing: border-box;
   }
-  
-
   
   .seccloseBtn {
     float: right;

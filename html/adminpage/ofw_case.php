@@ -90,18 +90,10 @@ $result = $conn->query($sql);
 </nav>
 
 <div class="table-containers grid gap-3">
-    <table class="table-containrs">
-        <tr>
-            <td>
-                <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
-            </td>
-        </tr>
-    </table>
+    <div class="button-container">
+        <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+        <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
+    </div>
 
     <div class="table-container">
             <table class="table table-borderless table-hover">
@@ -138,6 +130,41 @@ $result = $conn->query($sql);
             </table>  
         </div>
     </div>
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Agency</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Status update</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                if($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
+                        echo "<tr>
+                            <td>".$full_name."</td>
+                            <td>".$row['contact_number']."</td>
+                            <td>".$row['local_agency_name']."</td>
+                            <td>".$row['title']."</td>
+                            <td>".$row['status']."</td>
+                            <td> <a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>update</a> </td>
+                             </tr>";
+                    } 
+                } else {
+                    echo "<tr><td colspan='6'> no case file found</td></tr>";
+                }
+                 $conn->close();
+            ?>
+            </tbody>
+        </table>  
+    </div>
+</div>
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
