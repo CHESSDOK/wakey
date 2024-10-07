@@ -82,21 +82,22 @@ $result = $conn->query($sql);
 
     <table class="table table-borderless table-hover">
         <thead>
-            <th>Course</th>
             <th>Course Description</th>
             <th>Module Label</th>
-            <th>Module Items</th>
-            <th>action</th>
+            <th colspan="2">Course Actions</th>
+            <th colspan="2">Module Actions</th>
         </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
                         <form method='POST' action='update_course.php'>
-                        <td><input type='hidden' name='course_id' value='".$row["id"]."'></td>
+                        <input type='hidden' name='course_id' value='".$row["id"]."'>
                         <td><input type='text' name='course_name' value='".$row["course_name"]."'></td>
-                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>
-                        <td><a href='#' id='moduleBtn'  class='openModuleBtn docu'
+                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>                        
+                        <td><input class='btn btn-success' type='submit' value='Update'></td>
+                        <td><a class='btn btn-danger' href='delete_survey.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn btn btn-primary '
                                     data-module-id='" . htmlspecialchars($row["id"]) . "'>Edit Label</a></td>
                         <td><a class='docu' href='module_list.php?course_id=" . $row["id"] . "'>Edit Items</a></td>
                         <td><a class='docu' href='learner_list.php?course_id=" . $row["id"] . "'>Learners list</a></td>
@@ -116,7 +117,7 @@ $result = $conn->query($sql);
 
     <div id="courseModal" class="modal modal-container">
         <div class="modal-content">
-            <span class="btn-close closBtn closeBtn"></span>
+            <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Create a course</h2>
             <form action="create_course.php" method="post">
                 <!-- Text Input for Course -->
@@ -141,7 +142,7 @@ $result = $conn->query($sql);
     <div id="moduleModal" class="modal modal-container">
     <div class="modal-content">
         
-        <span class="btn-close closBtn closeBtn seccloseBtn"></span>
+    <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
         </div>

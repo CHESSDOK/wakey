@@ -66,11 +66,12 @@ $result = $conn->query($sql);
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-            <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="create_job.php" class="nav-link">Post Job</a></td></tr>
                 <tr><td><a href="#" class="active nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
     </div>
