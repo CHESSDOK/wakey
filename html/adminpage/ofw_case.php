@@ -76,6 +76,7 @@ $result = $conn->query($sql);
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
     </div>
@@ -88,22 +89,33 @@ $result = $conn->query($sql);
   </ol>
 </nav>
 
-<div class="table-containers">
-    <div class="button-container">
-        <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
-        <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
-    </div>
+<div class="table-containers grid gap-3">
+    <table class="table-containrs">
+        <tr>
+            <td>
+                <a class="btn btn-primary" href="user_chat.php">View Inquiries</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn btn-primary" href="create_survey.php">Create Survey</a>
+            </td>
+        </tr>
+    </table>
 
-    <div class="table-wrapper">
-        <div class="table-container-ofw-case">
+<<<<<<< HEAD
+    <div class="table-container">
             <table class="table table-borderless table-hover">
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Name</th>
                         <th>Number</th>
+                        <th>Agency</th>
                         <th>Agency</th>
                         <th>Title</th>
                         <th>Status</th>
+                        <th>Status update</th>
                         <th>Status update</th>
                     </tr>
                 </thead>
@@ -118,47 +130,11 @@ $result = $conn->query($sql);
                                 <td>".$row['local_agency_name']."</td>
                                 <td>".$row['title']."</td>
                                 <td>".$row['status']."</td>
-                                <td> <a class='btn btn-success' href='#'>update</a> </td>
+                                <td> <a class='docu' href='update_status.php?case_id=" . $row["id"] . "'>update</a> </td>
                                  </tr>";
-                        } 
-                    } else {
-                        echo "<tr><td colspan='6'> no case file found</td></tr>";
-                    }
-                ?>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- New table with user response data -->
-        <div class="user-table-container">
-          <div class="table-container-ofw-case">
-            <table class="table table-borderless table-hover">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Full Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                    $sql_new1 = "SELECT survey_reponse.user_id, 
-                                    MAX(applicant_profile.first_name) AS first_name, 
-                                    MAX(applicant_profile.middle_name) AS middle_name, 
-                                    MAX(applicant_profile.last_name) AS last_name
-                                FROM survey_reponse
-                                INNER JOIN applicant_profile ON survey_reponse.user_id = applicant_profile.user_id
-                                GROUP BY survey_reponse.user_id";
-                    $result_new = $conn->query($sql_new1);
-
-                    if ($result_new->num_rows > 0) {
-                        while ($row = $result_new->fetch_assoc()) {
-                            $full_name = $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name'];
-                            echo "<tr>
-                                    <td>" . $row['user_id'] . "</td>
-                                    <td>" . $full_name . "</td>
-                                    <td> <a class='btn btn-primary openSurveyBtn' href='#' data-user-id=".htmlspecialchars($row['user_id'])."> check </a> </td>
-                                </tr>";
+                                } 
+                        } else {
+                            echo "<tr><td colspan='6'> no case file found</td></tr>";
                         }
                     } else {
                         echo "<tr><td colspan='2'>No users found</td></tr>";
@@ -167,52 +143,9 @@ $result = $conn->query($sql);
                     $conn->close();
                 ?>
                 </tbody>
-            </table>
+            </table>  
         </div>
-      </div>
     </div>
-</div>
-
-<!-- employer list -->
-<div id="surveyModal" class="modal modal-container">
-            <div class="modal-content">
-                <span class="btn-close closBtn closeBtn">&times;</span>
-                <div id="surveyModuleContent">
-                    <!-- Module content will be dynamically loaded here -->
-                </div>
-            </div>
-        </div>
-
-    <script>  const surveyModal = document.getElementById('surveyModal');
-        const closeModuleBtn = document.querySelector('.closeBtn');
-        // Open profile modal and load data via AJAX
-        $(document).on('click', '.openSurveyBtn', function(e) {
-            e.preventDefault();
-            const userId = $(this).data('user-id');
-
-            $.ajax({
-                url: 'user_response.php',
-                method: 'GET',
-                data: { user_id: userId },
-                success: function(response) {
-                    $('#surveyModuleContent').html(response);
-                    surveyModal.style.display = 'flex';
-                }
-            });
-        });
-
-        // Close profile modal when 'x' is clicked
-        closeModuleBtn.addEventListener('click', function() {
-            surveyModal.style.display = 'none';
-        });
-
-        // Close profile modal when clicking outside the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === surveyModal) {
-                surveyModal.style.display = 'none';
-            }
-        });
-    </script>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

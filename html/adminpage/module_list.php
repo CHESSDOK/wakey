@@ -215,15 +215,14 @@ $result = $conn->query($sql);
         </div>
 
 
-    <script>
-        const filemodal = document.getElementById('fileModal');
-        const quizmodal = document.getElementById('quizModal');
-        const closeBtn = document.querySelector('.closeBtn');
-        const seccloseBtn = document.querySelector('.seccloseBtn');
-        const moduleIdField = document.getElementById('moduleId');
-        const courseIdField = document.getElementById('courseId');
-        const secmoduleIdField = document.getElementById('secmoduleId');
-        const seccourseIdField = document.getElementById('seccourseId');
+<script>
+    const filemodal = document.getElementById('fileModal');
+    const quizmodal = document.getElementById('quizModal');
+    const closeBtn = document.querySelector('.closeBtn');
+    const moduleIdField = document.getElementById('moduleId');
+    const courseIdField = document.getElementById('courseId');
+    const secmoduleIdField = document.getElementById('secmoduleId');
+    const seccourseIdField = document.getElementById('seccourseId');
 
         // Event delegation: Listen to clicks on the document for elements with the 'openFileBtn' class
         document.addEventListener('click', function(event) {
@@ -255,22 +254,20 @@ $result = $conn->query($sql);
 
     //cotent module
     // Close modal when 'x' is clicked
-        closeBtn.addEventListener('click', function() {
-            filemodal.style.display = 'none';
-        });
+    closeBtn.addEventListener('click', function() {
+        filemodal.style.display = 'none';
+        quizmodal.style.display = 'none';
+    });
 
-        seccloseBtn.addEventListener('click', function() {
+    // Close modal when clicked outside of the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target === filemodal) {
+            filemodal.style.display = 'none';
+        }
+        if (event.target === quizmodal) {
             quizmodal.style.display = 'none';
-        });
-        // Close modal when clicked outside of the modal content
-        window.addEventListener('click', function(event) {
-            if (event.target === filemodal) {
-                filemodal.style.display = 'none';
-            }
-            if (event.target === quizmodal) {
-                quizmodal.style.display = 'none';
-            }
-        });
+        }
+    });
 
    // Get modal and button elements for viewing profile
         const contentModal = document.getElementById('contentModal');
