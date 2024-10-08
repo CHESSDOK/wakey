@@ -31,20 +31,15 @@ if ($result->num_rows > 0) {
         $message = $row['message'];
         $reply = $row['reply'];
         $admin_username = $row['admin_username'];
+        $message_id =  $row['id'];
+
 
         echo "<tr>
                 <td>".$full_name." : ".$message."</td></tr>";
 
         if (!empty($reply)) {
+            
             echo "<tr><td>".$admin_username." : ".$reply."</td>";
-        } else {
-            echo "<form action='send_message.php' method='post'>
-                    <input type='hidden' name='message_id' value='".$row['id']."'>
-                    <input type='hidden' name='admin_id' value='".$admin_Id."'>
-                    <td><textarea id='message' name='reply'></textarea> </td> 
-                    <td><button type='submit'>Send Message</button></td>
-                    </form>
-                    </tr>";
         }
 
         echo "</tr>";
@@ -52,7 +47,14 @@ if ($result->num_rows > 0) {
 } else {
     echo "<tr><td colspan='2'>No messages found</td></tr>";
 }
-echo "</tbody>
+echo "
+                    <form action='send_message.php' method='post'>
+                    <input type='hidden' name='message_id' value='".$message_id ."'>
+                    <input type='hidden' name='admin_id' value='".$admin_Id."'>
+                    <td><textarea id='message' name='reply'></textarea> </td> 
+                    <td><input type='submit' value='Send Message'></td>
+                    </tr>
+        </tbody>
         </table>";
 $conn->close();
     
