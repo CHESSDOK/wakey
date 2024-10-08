@@ -76,6 +76,7 @@ $result = $conn->query($sql);
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="active nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
     </div>
@@ -108,10 +109,13 @@ $result = $conn->query($sql);
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Name</th>
                         <th>Number</th>
+                        <th>Agency</th>
                         <th>Agency</th>
                         <th>Title</th>
                         <th>Status</th>
+                        <th>Status update</th>
                         <th>Status update</th>
                     </tr>
                 </thead>
@@ -132,7 +136,11 @@ $result = $conn->query($sql);
                         } else {
                             echo "<tr><td colspan='6'> no case file found</td></tr>";
                         }
-                         $conn->close();
+                    } else {
+                        echo "<tr><td colspan='2'>No users found</td></tr>";
+                    }
+
+                    $conn->close();
                 ?>
                 </tbody>
             </table>  

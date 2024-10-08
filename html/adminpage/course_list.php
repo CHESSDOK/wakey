@@ -27,7 +27,14 @@ $result = $conn->query($sql);
             <img src="../../img/logo_peso.png" alt="Logo">
             <a href="#"> PESO-lb.ph</a>
         </div>
+        <div class="logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
+        </div>
 
+        <header>
+        <h1 class="ofw-h1">Course List</h1>
+        </header>
         <header>
         <h1 class="ofw-h1">Course List</h1>
         </header>
@@ -39,9 +46,26 @@ $result = $conn->query($sql);
             
             <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
         </div>
-
+        <div class="profile-icons">
+            <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+                <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+            </div>
+            
+            <div class="profile-icon" data-bs-toggle="popover" data-bs-placement="bottom">
         </div>
 
+        </div>
+        </div>
+
+        <!-- Burger icon -->
+        <div class="burger" id="burgerToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </td>
+    </tr>
+    </table>
         <!-- Burger icon -->
         <div class="burger" id="burgerToggle">
             <span></span>
@@ -60,10 +84,13 @@ $result = $conn->query($sql);
         </div>
         <div class="offcanvas-body">
             <table class="menu"> 
+            <table class="menu"> 
                 <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="active nav-link">Course List</a></td></tr>
+                <tr><td><a href="course_list.php" class="active nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
                 <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
             </table>
         </div>
@@ -75,7 +102,15 @@ $result = $conn->query($sql);
         <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Courses</li>
     </ol>
+    <nav class="bcrumb-container" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Courses</li>
+    </ol>
 </nav>
+
+<div class="table-container d-flex align-items-start">
+    <button class="btn btn-primary course-btn" id="openCourseBtn">Add Course</button>
 
 <div class="table-container d-flex align-items-start">
     <button class="btn btn-primary course-btn" id="openCourseBtn">Add Course</button>
@@ -86,11 +121,20 @@ $result = $conn->query($sql);
             <th>Module Label</th>
             <th colspan="2">Course Actions</th>
             <th colspan="2">Module Actions</th>
+            <th colspan="2">Course Actions</th>
+            <th colspan="2">Module Actions</th>
         </thead>
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>
+                        <form method='POST' action='update_course.php'>
+                        <input type='hidden' name='course_id' value='".$row["id"]."'>
+                        <td><input type='text' name='course_name' value='".$row["course_name"]."'></td>
+                        <td><input type='text' name='course_desc' value='".$row["description"]."'></td>                        
+                        <td><input class='btn btn-success' type='submit' value='Update'></td>
+                        <td><a class='btn btn-danger' href='delete_survey.php?course_id=".$row["id"]."'>DELETE</a></td>
+                        <td><a href='#' id='moduleBtn'  class='openModuleBtn btn btn-primary '
                         <form method='POST' action='update_course.php'>
                         <input type='hidden' name='course_id' value='".$row["id"]."'>
                         <td><input type='text' name='course_name' value='".$row["course_name"]."'></td>
@@ -116,22 +160,29 @@ $result = $conn->query($sql);
     </div>
 
     <div id="courseModal" class="modal modal-container">
+    <div id="courseModal" class="modal modal-container">
         <div class="modal-content">
+            <span class="btn-close closBtn closeBtn">&times;</span>
+            <h2>Create a course</h2>
             <span class="btn-close closBtn closeBtn">&times;</span>
             <h2>Create a course</h2>
             <form action="create_course.php" method="post">
                 <!-- Text Input for Course -->
                 <label for="course">Course:</label>
                 <input class="form-control" type="text" id="course" name="course" required>
+                <input class="form-control" type="text" id="course" name="course" required>
                 
                 <!-- Text Input for Description -->
                 <label for="description">Description:</label>
                 <input class="form-control" type="text" id="description" name="description" required>
+                <input class="form-control" type="text" id="description" name="description" required>
 
                 <label for="module_count">Number of Modules:</label>
                 <input class="form-control" type="number" id="module_count" name="module_count" min="1" required>
+                <input class="form-control" type="number" id="module_count" name="module_count" min="1" required>
                 
                 <!-- Submit Button -->
+                <input class="btn btn-primary" type="submit" value="Submit">
                 <input class="btn btn-primary" type="submit" value="Submit">
             </form>
         </div>
@@ -141,7 +192,10 @@ $result = $conn->query($sql);
 <!-- create module -->
     <div id="moduleModal" class="modal modal-container">
     <div class="modal-content">
+    <div id="moduleModal" class="modal modal-container">
+    <div class="modal-content">
         
+    <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
     <span class="btn-close closBtn closeBtn seccloseBtn">&times;</span>
         <div id="uploadModuleContent">
             <!-- Profile details will be dynamically loaded here -->
