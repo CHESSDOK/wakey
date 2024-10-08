@@ -17,7 +17,7 @@ function checkSession() {
 
 $userId = checkSession();
 $module_id = $_GET['course_id'];
-
+$user_id = $_GET['user_id'];
 // Fetch all modules for the course
 $sql = "SELECT * FROM modules WHERE course_id = ?";
 $stmt = $conn->prepare($sql);
