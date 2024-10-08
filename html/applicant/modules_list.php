@@ -17,7 +17,7 @@ function checkSession() {
 
 $userId = checkSession();
 $module_id = $_GET['course_id'];
-
+$user_id = $_GET['user_id'];
 // Fetch all modules for the course
 $sql = "SELECT * FROM modules WHERE course_id = ?";
 $stmt = $conn->prepare($sql);
@@ -155,7 +155,7 @@ if ($modules_result->num_rows > 0) {
                 }
             }
         }
-    } else {
+    } }else {
         echo "<tr><td colspan='4'>No modules found</td></tr>";
     }
     $conn->close();
