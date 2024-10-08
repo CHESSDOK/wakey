@@ -16,7 +16,7 @@ $result = $conn->query($sql);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/modal-form.css"> 
     <link rel="stylesheet" href="../../css/nav_float.css">
-    <link rel="stylesheet" href="../../css/employer.css">
+    <link rel="stylesheet" href="../../css/admin_employer.css">
 </head>
 <body>
 
@@ -27,7 +27,7 @@ $result = $conn->query($sql);
         </div>
 
         <header>
-            <h1 class="h1">Job Posted</h1>
+            <h1 class="h1">Admin Job Posting</h1>
         </header>
 
         <div class="profile-icons">
@@ -64,8 +64,7 @@ $result = $conn->query($sql);
             <div class="offcanvas-body">
                     <table class="menu">
                     <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
-                    <tr><td><a href="#" class="active nav-link">Post Job</a></td></tr>
-                    <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                    <tr><td><a href="employer_list.php" class="active nav-link">Employer List</a></td></tr>
                     <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                     <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
                     <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
@@ -76,57 +75,67 @@ $result = $conn->query($sql);
 
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Job List</li>
+  <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+  <li class="breadcrumb-item"><a href="employer_list.php" >Employer List</a></li>
+  <li class="breadcrumb-item active" aria-current="page">Post Job</li>
   </ol>
 </nav>
-<div class="jl-container">
-    
-    <table class="table table-borderless table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th>Title</th>
-                <th>Job Description</th>
-                <th>Specialization</th>
-                <th>Vacant</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <form action='update_jobs.php' method='post'>
-                                <input type='hidden' name='job_id' value='" . $row['j_id'] . "'>
-                                <td><input type='text' class='form-control' name='jtitle' value='" . $row['job_title'] . "'></td>
-                                <td><input type='text' class='form-control' name='desc' value='" . $row['job_description'] . "'></td>
-                                <td><input type='text' class='form-control' name='spe' value='" . $row['specialization'] . "'></td>
-                                <td><input type='number' class='form-control value-display' name='vacant' value='" . $row['vacant'] . "'></td>
-                                <td><input type='number' class='form-control value-display' name='act' value='" . $row['is_active'] . "'></td>
-                                <td>
-                                    <button type='submit' class='btn btn-primary'>Update</button>
-                                </td>
-                            </form>
-                            <td>
-                                <a href='applicant_list.php?job_id=" . $row['j_id'] . "' class='btn btn-secondary'>Applicant List</a>
-                            </td>
-                        </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='7' class='text-center'>No Job found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </tbody>
-    </table>    
-</div>
-<button class="btn btn-primary openCourseBtn" id="openCourseBtn">Create Job</button>
 
-    <div id="jobModal" class="modal modal-container">
+<div class="table-containers">
+    <div class="row align-items-start">
+        <div class="col-auto">
+            <button class="btn btn-primary openCourseBtn" id="openCourseBtn">Create Job</button>
+        </div>
+        <div class="col">
+            <table class="table table-borderless table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Job Description</th>
+                        <th>Specialization</th>
+                        <th>Vacant</th>
+                        <th>Status</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                    <form action='update_jobs.php' method='post'>
+                                        <input type='hidden' name='job_id' value='" . $row['j_id'] . "'>
+                                        <td><input type='text' class='form-control custom-input-size' name='jtitle' value='" . htmlspecialchars($row['job_title']) . "'></td>
+                                        <td><input type='text' class='form-control custom-input-size' name='desc' value='" . htmlspecialchars($row['job_description']) . "'></td>
+                                        <td><input type='text' class='form-control custom-input-size' name='spe' value='" . htmlspecialchars($row['specialization']) . "'></td>
+                                        <td><input type='number' class='form-control custom-input-size value-display mt-1' name='vacant' value='" . $row['vacant'] . "'></td>
+                                        <td><input type='number' class='form-control custom-input-size value-display mt-1' name='act' value='" . $row['is_active'] . "'></td>
+
+                                        <td>
+                                            <button type='submit' class='btn btn-success custom-input-size mt-1'>Update</button>
+                                        </td>
+                                    </form>
+                                    <td>
+                                        <a href='applicant_list.php?job_id=" . $row['j_id'] . "' class='btn btn-primary custom-input-size mt-1'>Applicants</a>
+                                    </td>
+                                </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6' class='text-center'>No Job found</td></tr>";
+                    }
+                    $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+    <div id="jobModal" class="modal modal-container-upload">
         <div class="modal-content">
-            <span class="btn-close closeBtn"></span>
+            <span class="btn-close closBtn seccloseBtn">&times;</span>
+            <h2>Upload Job Post</h2>
             <div id="uploadJobContent">
                 <!-- Profile details will be dynamically loaded here -->
             </div>

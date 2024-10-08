@@ -48,9 +48,8 @@ $result = $conn->query($sql);
   </ol>
 </nav>
 
-<!-- Table to display chat logs -->
 <div class="table-container">
-    <table class="table table-borderless table-hover">
+<table class="table table-borderless table-hover">
         <thead>
         <tr>
             <th>ID</th>

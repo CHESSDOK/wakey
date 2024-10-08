@@ -1,31 +1,63 @@
-.table-container {
-    width: 80%; /* Adjust this value as needed to make the table smaller */
-    margin: 5vh auto; /* Center the table */
+.table-containers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 5vh auto;
+  width: 80%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center button */
+  gap: 1rem; 
+  margin-top: 10px; /* Add spacing above the button */
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
 }
 
 .table {
   border-radius: 20px;
-  font-size: 0.95rem; /* Adjust the font size to make the table content smaller */
+  background-color: #fff;
+  padding: 15px;
+  margin: 0; 
+  font-size: 0.95rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .table td, .table th {
-    padding: 0.5rem; /* Adjust padding to make cells smaller */
-    text-align: center;
+  background-color: transparent;
+  padding: 10px; /* Adjust padding for better spacing */
+  text-align: center;
 }
 
-.docu{
+.docu {
   text-decoration: none;
 }
 
-.docu:hover{
+.docu:hover {
   color: blue;
   text-decoration: underline;
 }
 
-.modal-container .modal-content{
-  width: 100vw;
-  max-width: auto; /* Adjust this value as needed to make the table smaller */
-  margin: 5vh auto; /* Center the table */
+.tbl-question td {
+  padding: 2px; 
+  margin: 0;
+  text-align: left;
+}
+
+.tbl-question {
+  border-radius: 20px;
+  font-size: 1rem; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tbl-question a {
+  margin: 0; 
 }
 
 .yes {
@@ -36,3 +68,16 @@
   color: red;
 }
 
+/* New classes */
+.job-post-form {
+  display: flex;
+  justify-content: center;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.custom-input-size {
+  height: 45px;
+}

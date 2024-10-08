@@ -67,8 +67,7 @@ $result = $conn->query($sql);
         <div class="offcanvas-body">
             <table class="menu">
                 <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="create_job.php" class="nav-link">Post Job</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Employer List</a></td></tr>
+                <tr><td><a href="employer_list.php" class="active nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
                 <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
@@ -83,40 +82,45 @@ $result = $conn->query($sql);
     <li class="breadcrumb-item active" aria-current="page">Employer List</li>
   </ol>
 </nav>
-
-<div class="table-container">
-    <button class="btn btn-primary openJobBtn" id="openJobBtn">Create Job</button>
-    <table class="table table-borderless table-hover"> <!-- Add Bootstrap table class -->
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Documents</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>" . $row["username"] . "</td>
-                            <td>" . $row["email"] . "</td>
-                            <td><a class='docu openEmployersBtn' href='#' data-employer-id=".htmlspecialchars($row['id']).">View Documents</a></td>
-                        </tr>";
+<div class="table-containers">
+    <div class="button-container">
+        <a href="create_job.php" class="btn btn-primary">Post Job</a>
+    </div>
+    <div class="table-wrapper">
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Documents</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td>" . htmlspecialchars($row["username"]) . "</td>
+                                <td>" . htmlspecialchars($row["email"]) . "</td>
+                                <td><a class='docu openEmployersBtn' href='#' data-employer-id=".htmlspecialchars($row['id']).">View Documents</a></td>
+                            </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>No employers found</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='4'>No employers found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </tbody>
-    </table>
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+
 
 <!-- employer list -->
 <div id="employerModal" class="modal modal-container">
     <div class="modal-content">
-        <span class="btn-close closBtn"></span>
+        <span class="btn-close closBtn">&times;</span>
         <div id="employersModuleContent">
             <!-- Module content will be dynamically loaded here -->
         </div>
