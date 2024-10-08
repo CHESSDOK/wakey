@@ -64,8 +64,7 @@ $result = $conn->query($sql);
             <div class="offcanvas-body">
                     <table class="menu">
                     <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
-                    <tr><td><a href="#" class="active nav-link">Post Job</a></td></tr>
-                    <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                    <tr><td><a href="employer_list.php" class="active nav-link">Employer List</a></td></tr>
                     <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                     <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
                     <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
@@ -106,17 +105,18 @@ $result = $conn->query($sql);
                             echo "<tr>
                                     <form action='update_jobs.php' method='post'>
                                         <input type='hidden' name='job_id' value='" . $row['j_id'] . "'>
-                                        <td><input type='text' class='form-control' name='jtitle' value='" . htmlspecialchars($row['job_title']) . "'></td>
-                                        <td><input type='text' class='form-control' name='desc' value='" . htmlspecialchars($row['job_description']) . "'></td>
-                                        <td><input type='text' class='form-control' name='spe' value='" . htmlspecialchars($row['specialization']) . "'></td>
-                                        <td><input type='number' class='form-control value-display' name='vacant' value='" . $row['vacant'] . "'></td>
-                                        <td><input type='number' class='form-control value-display' name='act' value='" . $row['is_active'] . "'></td>
+                                        <td><input type='text' class='form-control custom-input-size' name='jtitle' value='" . htmlspecialchars($row['job_title']) . "'></td>
+                                        <td><input type='text' class='form-control custom-input-size' name='desc' value='" . htmlspecialchars($row['job_description']) . "'></td>
+                                        <td><input type='text' class='form-control custom-input-size' name='spe' value='" . htmlspecialchars($row['specialization']) . "'></td>
+                                        <td><input type='number' class='form-control custom-input-size value-display mt-1' name='vacant' value='" . $row['vacant'] . "'></td>
+                                        <td><input type='number' class='form-control custom-input-size value-display mt-1' name='act' value='" . $row['is_active'] . "'></td>
+
                                         <td>
-                                            <button type='submit' class='btn btn-success'>Update</button>
+                                            <button type='submit' class='btn btn-success custom-input-size mt-1'>Update</button>
                                         </td>
                                     </form>
                                     <td>
-                                        <a href='applicant_list.php?job_id=" . $row['j_id'] . "' class='btn btn-primary'>Applicants</a>
+                                        <a href='applicant_list.php?job_id=" . $row['j_id'] . "' class='btn btn-primary custom-input-size mt-1'>Applicants</a>
                                     </td>
                                 </tr>";
                         }

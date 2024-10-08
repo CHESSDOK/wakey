@@ -52,23 +52,23 @@ $result = $conn->query($sql);
     </tr>
     </table>
 
-        <!-- Offcanvas Menu -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <table class="menu">
-                    <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
-                    <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
-                    <tr><td><a href="#" class="active nav-link">Course List</a></td></tr>
-                    <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
-                    <tr><td><a href="user_master_list.php" class="nav-link">user list</a></td></tr>
-                </table>
-            </div>
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-    </nav>
+        <div class="offcanvas-body">
+            <table class="menu"> 
+                <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
+                <tr><td><a href="course_list.php" class="active nav-link">Course List</a></td></tr>
+                <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
+                <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
+            </table>
+        </div>
+    </div>
+</nav>
 
     <nav class="bcrumb-container" aria-label="breadcrumb">
     <ol class="breadcrumb">

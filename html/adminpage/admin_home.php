@@ -71,8 +71,7 @@ $admin_level = checkSession();
         </div>
         <div class="offcanvas-body">
             <table class="menu">
-                <tr><td><a href="#" class="active nav-link">Home</a></td></tr>
-                <tr><td><a href="create_job.php" class="nav-link">Post Job</a></td></tr>
+                <tr><td><a href="admin_home.php" class="active nav-link">Home</a></td></tr>
                 <tr><td><a href="employer_list.php" class="nav-link">Employer List</a></td></tr>
                 <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
                 <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>

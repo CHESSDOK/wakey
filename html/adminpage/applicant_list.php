@@ -71,126 +71,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../../css/modal-form.css">
+    <link rel="stylesheet" href="../../css/modal-form.css"> 
     <link rel="stylesheet" href="../../css/nav_float.css">
-    <link rel="stylesheet" href="../../css/employer.css">
-    <style>
-            .category-container {
-                display: flex;
-                flex-direction: column; /* Align categories and tables vertically */
-                gap: 20px; /* Space between categories */
-            }
-            .category-section {
-                display: flex;
-                flex-direction: column;
-                align-items: center; /* Center align headers and tables */
-                width: 100%;
-            }
-            .category-section h3 {
-                margin-bottom: 10px; /* Space between header and table */
-            }
-            table {
-                width: 80%; /* Adjust table width */
-                border-collapse: collapse;
-            }
-            table, th, td {
-                border: 1px solid black; /* Add borders to the table */
-            }
-            th, td {
-                padding: 8px;
-                text-align: left;
-            }
-            .disabled-link {
-            pointer-events: none; /* Prevents clicking */
-            color: gray; /* Makes it look disabled */
-            text-decoration: none;
-            }
-    </style>
+    <link rel="stylesheet" href="../../css/admin_employer.css">
 
 </head>
 <body>
 <!-- Navigation -->
 <nav>
-    <div class="logo">
-        <img src="../../img/logo_peso.png" alt="Logo">
-        <a href="#"> PESO-lb.ph</a>
-    </div>
-
-    <header>
-        <h1 class="h1">Listed Applicants</h1>
-    </header>
-
-    <div class="profile-icons">
-        <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
-            <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
-        </div>
-        
-        <div class="profile-icon-employer" data-bs-toggle="popover" data-bs-placement="bottom">
-          <?php if (!empty($row['photo'])): ?>
-              <img id="preview" src="php/employer/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
-          <?php else: ?>
-              <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
-          <?php endif; ?>
+        <div class="logo">
+            <img src="../../img/logo_peso.png" alt="Logo">
+            <a href="#"> PESO-lb.ph</a>
         </div>
 
-    </div>
+        <header>
+            <h1 class="h1">Applicant Updates</h1>
+        </header>
 
-    <!-- Burger icon -->
-    <div class="burger" id="burgerToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</td>
-</tr>
-</table>
+        <div class="profile-icons">
+            <div class="notif-icon" data-bs-toggle="popover" data-bs-content="#" data-bs-placement="bottom">
+                <img id="#" src="../../img/notif.png" alt="Profile Picture" class="rounded-circle">
+            </div>
+            
+            <div class="profile-icon-employer" data-bs-toggle="popover" data-bs-placement="bottom">
+            <?php if (!empty($row['photo'])): ?>
+                <img id="preview" src="php/employer/images/<?php echo $row['photo']; ?>" alt="Profile Image" class="circular--square">
+            <?php else: ?>
+                <img src="../../img/user-placeholder.png" alt="Profile Picture" class="rounded-circle">
+            <?php endif; ?>
+            </div>
 
-    <!-- Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <table class="menu">
-                <tr><td><a href="../../html/employer/employer_home.php" class="nav-link">Home</a></td></tr>
-                <tr><td><a href="../../html/employer/job_creat.php" class="nav-link">Post Job</a></td></tr>
-                <tr><td><a href="#" class="active nav-link">Job List</a></td></tr>
-                <tr><td><a href="../../html/about.php" class="nav-link">About Us</a></td></tr>
-                <tr><td><a href="../../html/contact.php" class="nav-link">Contact Us</a></td></tr>
-            </table>
+
+        <!-- Burger icon -->
+        <div class="burger" id="burgerToggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </div>
+    </td>
+    </tr>
+    </table>
+
+        <!-- Offcanvas Menu -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                    <table class="menu">
+                    <tr><td><a href="admin_home.php" class="nav-link">Home</a></td></tr>
+                    <tr><td><a href="employer_list.php" class="active nav-link">Employer List</a></td></tr>
+                    <tr><td><a href="course_list.php" class="nav-link">Course List</a></td></tr>
+                    <tr><td><a href="ofw_case.php" class="nav-link">OFW Cases</a></td></tr>
+                    <tr><td><a href="user_master_list.php" class="nav-link">User List</a></td></tr>
+                </table>
+            </div>
+        </div>
 </nav>
 
 <nav class="bcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="../../html/employer/employer_home.php" >Home</a></li>
-    <li class="breadcrumb-item"><a href="create_job.php" >Job List</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Applicants</li>
+  <li class="breadcrumb-item"><a href="admin_home.php" >Home</a></li>
+  <li class="breadcrumb-item"><a href="employer_list.php" >Employer List</a></li>
+  <li class="breadcrumb-item"><a href="create_job.php" >Post Job</a></li>
+  <li class="breadcrumb-item active" aria-current="page">Applicants</li>
   </ol>
 </nav>
-
-    <header>
-        <h1 class="h1"></h1>
-    </header>
-    
-    <div class='ep-container'>
-        <div class="category-container">
+<div class="table-containers">
+    <div class="row align-items-start">
         <?php
             function display_table($applicants, $status_label) {
                 echo "<h3>$status_label</h3>";
-                echo "<table>
-                        <tr>
+                echo "<table class='table table-borderless'>
+                        <thead class='thead-light'>
                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Job</th>
                             <th>Status</th>
                             <th>Actions</th>
-                        </tr>";
+                        </thead>";
                 
                 if (!empty($applicants)) {
                     foreach ($applicants as $row) {
@@ -362,6 +323,9 @@ window.addEventListener('click', function(event) {
     document.getElementById('date').setAttribute('min', currentDate);
     </script>
 
-    <script src="../../javascript/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../javascript/script.js"></script>  
 </body>
 </html>
