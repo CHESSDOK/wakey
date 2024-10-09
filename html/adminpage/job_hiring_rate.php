@@ -34,10 +34,14 @@ $conn->close();
     <p>Hiring Rate: <?php echo round($hiring_rate, 2); ?>%</p>
 </body>
 </html>
-<script>
-    var totalApplications = <?php echo $total_applications; ?>;
-    var hiredApplications = <?php echo $hired_applications; ?>;
-    var hiringRate = (hiredApplications / totalApplications) * 100;
 
-    console.log("Total Hiring Rate: " + hiringRate.toFixed(2) + "%");
-</script>
+<table class="table table-borderless">
+    <thead>
+        <th>Total Job Hiring Rate</th>
+    </thead> 
+    <tbody>
+        <tr><td><p>Total Applications: <?php echo $total_applications; ?></p><td></tr>
+        <tr><td><p>Hired Applications: <?php echo $hired_applications; ?></p><td></tr>
+        <tr><td><p>Hiring Rate: <?php echo round($hiring_rate, 2); ?>%</p><td></tr>
+    </tbody>  
+</table>
